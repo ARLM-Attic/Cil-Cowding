@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
+    <Compile Include="IInstructionNode.cs" />
     <Compile Include="Interfaces\IFonction.cs" />
     <Compile Include="Interfaces\IFrame.cs" />
     <Compile Include="Interfaces\IHeap.cs" />

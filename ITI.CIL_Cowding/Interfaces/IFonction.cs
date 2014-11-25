@@ -16,6 +16,7 @@ namespace ITI.CIL_Cowding
         IVariable GetLocalVariable(String label);
         IVariable SetLocalVariable(IVariable var);
 
+        List<IInstructionNode> GetInstructions();
 
     }
 }

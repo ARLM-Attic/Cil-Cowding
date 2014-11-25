@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public interface IExecutionContext
+    public interface IInstructionNode
     {
-        IStack GetStack();
-        IHeap GetHeap();
-        int GetCurrentLine();
+
+        // Rien pour le moment
 
     }
 }
