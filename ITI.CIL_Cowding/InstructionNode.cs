@@ -14,7 +14,7 @@ namespace ITI.CIL_Cowding
         }
     }
 
-    public class Stloc : InstructionNode
+    public class StlocNode : InstructionNode
     {
 
     }
