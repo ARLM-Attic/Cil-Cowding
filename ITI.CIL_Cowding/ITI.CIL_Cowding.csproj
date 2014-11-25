@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
     <Compile Include="Instruction.cs" />
+    <Compile Include="InstructionNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="Token.cs" />
