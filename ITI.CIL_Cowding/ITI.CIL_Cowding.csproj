@@ -39,17 +39,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyser.cs" />
+    <Compile Include="Instructions\AddNode.cs" />
+    <Compile Include="Instructions\Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
+    <Compile Include="Instructions\DivNode.cs" />
+    <Compile Include="Instructions\MulNode.cs" />
+    <Compile Include="Instructions\NegNode.cs" />
+    <Compile Include="Instructions\OperationNode.cs" />
+    <Compile Include="Instructions\StlocNode.cs" />
+    <Compile Include="Instructions\SubNode.cs" />
     <Compile Include="Interfaces\IInstructionNode.cs" />
     <Compile Include="Interfaces\IFonction.cs" />
     <Compile Include="Interfaces\IFrame.cs" />
     <Compile Include="Interfaces\IHeap.cs" />
     <Compile Include="Interfaces\IExecutionContexte.cs" />
-    <Compile Include="Instruction.cs" />
+    <Compile Include="Instructions\Instruction.cs" />
     <Compile Include="Interfaces\IStack.cs" />
-    <Compile Include="InstructionNode.cs" />
+    <Compile Include="Instructions\InstructionNode.cs" />
     <Compile Include="Interfaces\ITokenizer.cs" />
     <Compile Include="Interfaces\IVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
