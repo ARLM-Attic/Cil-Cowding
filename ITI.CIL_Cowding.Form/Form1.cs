@@ -133,7 +133,7 @@ namespace ITI.CIL_Cowding
             }
 
             // Gestion du moteur d'execution
-            _mytokenizer = new ITokenizer(textBox1.Text);
+            _mytokenizer = new StringTokenizer(textBox1.Text);
             anal = new Analyser(_mytokenizer);
 
 
