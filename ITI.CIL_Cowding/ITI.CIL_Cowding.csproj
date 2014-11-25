@@ -48,6 +48,7 @@
     <Compile Include="Interfaces\IExecutionContexte.cs" />
     <Compile Include="Instruction.cs" />
     <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="ITokenizer.cs" />
     <Compile Include="IVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
