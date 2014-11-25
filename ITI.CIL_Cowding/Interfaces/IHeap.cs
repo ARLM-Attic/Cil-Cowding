@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    interface IStack
+    public interface IHeap
     {
-
 
 
     }
