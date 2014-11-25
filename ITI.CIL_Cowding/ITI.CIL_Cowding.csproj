@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
     <Compile Include="IInstructionNode.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="Interfaces\IExecutionContexte.cs" />
     <Compile Include="Instruction.cs" />
     <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="InstructionNode.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="IVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
