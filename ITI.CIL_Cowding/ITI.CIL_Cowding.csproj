@@ -42,12 +42,12 @@
     <Compile Include="Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
+    <Compile Include="Interfaces\IInstructionNode.cs" />
     <Compile Include="Interfaces\IFonction.cs" />
     <Compile Include="Interfaces\IFrame.cs" />
     <Compile Include="Interfaces\IHeap.cs" />
     <Compile Include="Interfaces\IExecutionContexte.cs" />
     <Compile Include="Instruction.cs" />
-    <Compile Include="Interfaces\IInstructionNode.cs" />
     <Compile Include="Interfaces\IStack.cs" />
     <Compile Include="InstructionNode.cs" />
     <Compile Include="Interfaces\ITokenizer.cs" />
