@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
     <Compile Include="IInstructionNode.cs" />
@@ -49,10 +50,11 @@
     <Compile Include="Instruction.cs" />
 <<<<<<< HEAD
     <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="ITokenizer.cs" />
     <Compile Include="IVariable.cs" />
 =======
-    <Compile Include="ITokenizer.cs" />
->>>>>>> Tokenizer
+    <Compile Include="InstructionNode.cs" />
+>>>>>>> origin/refactoring-analyser
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="Token.cs" />
