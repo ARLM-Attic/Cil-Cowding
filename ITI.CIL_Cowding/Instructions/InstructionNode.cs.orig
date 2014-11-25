@@ -13,7 +13,13 @@ namespace ITI.CIL_Cowding
 
         }
     }
+<<<<<<< HEAD:ITI.CIL_Cowding/Instructions/InstructionNode.cs
+=======
 
+    public class StlocNode : InstructionNode
+    {
         
 
+    }
+>>>>>>> 03d6238868abe6b2e4a29b78d0a83c1f1873b60f:ITI.CIL_Cowding/InstructionNode.cs
 }

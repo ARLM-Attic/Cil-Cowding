@@ -15,9 +15,9 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-		Execution run_programme;
-        private Stack<Variable> stack;
         private CIL_Cowding.Container container;
+        ITokenizer _mytokenizer;
+        Analyser anal;
 
         public Form1()
         {
@@ -116,19 +116,12 @@ namespace ITI.CIL_Cowding
         private void butStepByStep_Click(object sender, EventArgs e)
         {
             
-
+            // Gestion du graphique
             pictureBox1.Refresh();
             textBox1.ReadOnly = true;
 
-			run_programme = new Execution(textBox1.Text);
-			
             g = pictureBox1.CreateGraphics();
             string s = textBox1.Text;
-            
-            Stack<Variable> var = new Stack<Variable>();
-
-            
-
             Font drawFont = new Font("Arial", 10);
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
@@ -137,12 +130,14 @@ namespace ITI.CIL_Cowding
                 butStepByStep.Visible = false;
                 butContinue.Visible = true;
                 butStop.Visible = true;
-              /*  Rectangle drawRect = new Rectangle(x, y, 100, 15);
-                g.FillRectangle(Brushes.Green, x, y, 50, 15);
-                g.DrawString(s, drawFont, drawBrush, drawRect);*/
-                
-                
             }
+
+            // Gestion du moteur d'execution
+            _mytokenizer = new StringTokenizer(textBox1.Text);
+            anal = new Analyser(_mytokenizer);
+
+
+
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
@@ -203,9 +198,9 @@ namespace ITI.CIL_Cowding
         }
 
         private void butContinue_Click(object sender, EventArgs e)
-        {           
-            
-            run_programme.ExecLine();
+        {
+            anal.ParseBody();
+
             UpdateStack();   
         }
 

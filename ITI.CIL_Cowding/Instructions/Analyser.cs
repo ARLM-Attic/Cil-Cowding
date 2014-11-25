@@ -21,7 +21,7 @@ namespace ITI.CIL_Cowding
 
  
 
-        List<InstructionNode> ParseBody()
+        public List<InstructionNode> ParseBody()
         {
             List<InstructionNode> body = new List<InstructionNode>();
 
