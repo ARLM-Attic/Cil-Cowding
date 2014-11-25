@@ -42,16 +42,19 @@
     <Compile Include="Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
-    <Compile Include="Interfaces\IInstructionNode.cs" />
+    <Compile Include="IInstructionNode.cs" />
     <Compile Include="Interfaces\IFonction.cs" />
     <Compile Include="Interfaces\IFrame.cs" />
     <Compile Include="Interfaces\IHeap.cs" />
     <Compile Include="Interfaces\IExecutionContexte.cs" />
     <Compile Include="Instruction.cs" />
+<<<<<<< HEAD
     <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="ITokenizer.cs" />
+    <Compile Include="IVariable.cs" />
+=======
     <Compile Include="InstructionNode.cs" />
-    <Compile Include="Interfaces\ITokenizer.cs" />
-    <Compile Include="Interfaces\IVariable.cs" />
+>>>>>>> origin/refactoring-analyser
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="Token.cs" />
