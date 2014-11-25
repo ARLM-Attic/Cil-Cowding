@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public interface IHeap
+    public interface IFrame
     {
+        IFonction GetFonction();
 
-        // Rien pour le moment, vu que l'on implémente pas encore le Tas
 
     }
 }

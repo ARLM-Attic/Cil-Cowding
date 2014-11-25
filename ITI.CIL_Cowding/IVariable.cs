@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public interface IHeap
+    public interface IVariable
     {
+        // Sait pas trop quoi faire pour le moment
 
-        // Rien pour le moment, vu que l'on implémente pas encore le Tas
+
 
     }
 }

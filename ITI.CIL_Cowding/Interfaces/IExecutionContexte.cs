@@ -8,8 +8,8 @@ namespace ITI.CIL_Cowding
 {
     public interface IExecutionContexte
     {
-        IStack Stack;
-        IHeap Heap;
+        IStack GetStack();
+        IHeap GetHeap();
 
     }
 }
