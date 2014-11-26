@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding.Instructions
 {
-    class LdcNode : InstructionNode
+    public class LdcNode : InstructionNode
     {
         public override void Execute(IExecutionContext ctx)
         {
