@@ -10,7 +10,7 @@ namespace ITI.CIL_Cowding.Instructions
     {
          public override void Execute( IExecutionContext ctx )
          {
-             base.Execute(ctx);
+            
          }
     }
 }

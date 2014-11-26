@@ -8,5 +8,9 @@ namespace ITI.CIL_Cowding
 {
     class CeqNode : InstructionNode
     {
+        public override void Execute(IExecutionContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

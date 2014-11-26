@@ -8,5 +8,9 @@ namespace ITI.CIL_Cowding.Instructions
 {
     class ReadNode : InstructionNode
     {
+        public override void Execute(IExecutionContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

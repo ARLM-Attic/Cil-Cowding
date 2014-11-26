@@ -15,9 +15,7 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-        private CIL_Cowding.Container container;
-        ITokenizer _mytokenizer;
-        Analyser anal;
+
 
         public Form1()
         {
@@ -132,9 +130,6 @@ namespace ITI.CIL_Cowding
                 butStop.Visible = true;
             }
 
-            // Gestion du moteur d'execution
-            _mytokenizer = new StringTokenizer(textBox1.Text);
-            anal = new Analyser(_mytokenizer);
 
 
 
@@ -199,8 +194,6 @@ namespace ITI.CIL_Cowding
 
         private void butContinue_Click(object sender, EventArgs e)
         {
-            anal.ParseBody();
-
             UpdateStack();   
         }
 

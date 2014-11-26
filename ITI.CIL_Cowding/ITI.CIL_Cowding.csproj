@@ -46,7 +46,6 @@
     <Compile Include="Instructions\CgtNode.cs" />
     <Compile Include="Instructions\CltNode.cs" />
     <Compile Include="Instructions\AddNode.cs" />
-    <Compile Include="Instructions\Analyser.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Execution.cs" />
     <Compile Include="Instructions\DivNode.cs" />

@@ -8,5 +8,9 @@ namespace ITI.CIL_Cowding.Instructions
 {
     class SubNode : OperationNode
     {
+        public override void Execute(IExecutionContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -80,10 +80,6 @@ namespace ITI.CIL_Cowding
         /// </summary>
         void ForwardToNextLine();
 
-        /// <summary>
-        /// UTILITY FUNCTION. Allows viewing tokens into a string in parameters.
-        /// </summary>
-        /// <param name="s">The String given.</param>
-        static void DumpTokens(string s);
+
     }
 }

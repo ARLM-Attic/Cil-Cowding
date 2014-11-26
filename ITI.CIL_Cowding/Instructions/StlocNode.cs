@@ -8,6 +8,9 @@ namespace ITI.CIL_Cowding.Instructions
 {
     public class StlocNode : InstructionNode
     {
-
+        public override void Execute(IExecutionContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

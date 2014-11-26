@@ -8,5 +8,9 @@ namespace ITI.CIL_Cowding
 {
     class BrtrueNode : InstructionNode
     {
+        public override void Execute(IExecutionContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

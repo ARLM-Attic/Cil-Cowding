@@ -8,9 +8,9 @@ namespace ITI.CIL_Cowding.Instructions
 {
     public class OperationNode : InstructionNode
     {
-        public override void Execute( IExecutionContext ctx )
+        public override void Execute(IExecutionContext ctx)
         {
-            ctx.GetStack();
+            throw new NotImplementedException();
         }
     }
 }
