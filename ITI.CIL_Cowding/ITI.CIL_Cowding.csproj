@@ -76,7 +76,7 @@
     <Compile Include="Stack.cs" />
     <Compile Include="StringTokenizer.cs" />
     <Compile Include="Token.cs" />
-    <Compile Include="Tokenizer.cs" />
+    <Compile Include="TokenType.cs" />
     <Compile Include="Variable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -63,7 +63,6 @@ namespace ITI.CIL_Cowding
 
         public TokenType GetNextToken()
         {
-
             return _currentToken;
         }
 

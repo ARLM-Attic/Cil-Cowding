@@ -24,8 +24,8 @@ namespace ITI.CIL_Cowding
 			_stack = new CIL_Stack();
             // Verification
             
-            // Tokeniser
-            _code = Tokeniser.Tokenize(file); 
+            // Tokenizer
+            //_code = StringTokenizer.Tokenize(file); 
 
             // Pour la prochaine version, on va analyser la liste d'instruction pour ensuite découper les classes et mettre les methodes et les champs dans les classes
             Console.Clear();

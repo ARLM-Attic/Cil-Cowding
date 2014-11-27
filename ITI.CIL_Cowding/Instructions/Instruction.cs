@@ -29,80 +29,80 @@ namespace ITI.CIL_Cowding
             switch ( _instruction[0].Type )
             {
                 // SWITCH OF THE WALKING DEAD
-                case TokenType.NONE :
+                case TokenType.None:
                     break;
-                case TokenType.VAR :
+                case TokenType.Var:
                     Var();
-			        break;
-                case TokenType.NOP :
+                    break;
+                case TokenType.Nop:
                     // Do nothing
                     break;
-                case TokenType.LDC :
+                case TokenType.Ldc:
                     Ldc();
                     break;
-                case TokenType.LDSTR:
-                    Ldstr();                 
+                case TokenType.Ldstr:
+                    Ldstr();
                     break;
-                case TokenType.STLOC :
+                case TokenType.Stloc:
                     Stloc();
                     break;
-                case TokenType.LDLOC :
+                case TokenType.Ldloc:
                     ldloc();
                     break;
-                case TokenType.CEQ :
+                case TokenType.Ceq:
                     Ceq();
                     break;
-                case TokenType.CGT :
+                case TokenType.Cgt:
                     Cgt();
                     break;
 
-                case TokenType.CLT:
+                case TokenType.Clt:
                     Clt();
                     break;
 
-                case TokenType.NOT :
+                case TokenType.Not:
                     Not();
                     break;
-                case TokenType.OR :
+                case TokenType.Or:
                     Or();
                     break;
-                case TokenType.AND :
+                case TokenType.And:
                     And();
                     break;
-                case TokenType.BRTRUE :
+                case TokenType.Brtrue:
                     return Brtrue();
-                    //break;
-                case TokenType.BRFALSE :
+                //break;
+                case TokenType.Brfalse:
                     return Brfalse();
-                case TokenType.BR:
+                case TokenType.Br:
                     return Br();
-                    //break;
-                case TokenType.ADD :
+                //break;
+                case TokenType.Add:
                     Add();
                     break;
-                case TokenType.MUL :
+                case TokenType.Mul:
                     Mul();
                     break;
-                case TokenType.DIV :
+                case TokenType.Div:
                     Div();
                     break;
-                case TokenType.CONV:
+                case TokenType.Conv:
                     Conv();
                     break;
-                case TokenType.SUB :
+                case TokenType.Sub:
                     Sub();
                     break;
-                case TokenType.NEG :
+                case TokenType.Neg:
                     Neg();
                     break;
-                case TokenType.WRITE :
+                case TokenType.Write:
                     Write();
                     break;
-                case TokenType.READ :
+                case TokenType.Read:
                     Read();
                     break;
                 default:
-                    Console.Out.WriteLine( "F@cking error on _instruction.CurrentToken.Value Switchiz" );
+                    Console.Out.WriteLine("F@cking error on _instruction.CurrentToken.Value Switchiz");
                     break;
             }
             #endregion
@@ -364,10 +364,10 @@ namespace ITI.CIL_Cowding
             VarType VarType_temp;
             switch( _instruction[1].Type )
             {
-                case TokenType.NUMBER :
+                case TokenType.Number :
                     VarType_temp = VarType.Var_Int;
                     break;
-                case TokenType.TEXT :
+                case TokenType.Text :
                     VarType_temp  = VarType.Var_String;
                     break;
                 default :
@@ -385,7 +385,7 @@ namespace ITI.CIL_Cowding
         /// </summary>
         private void Ldc()
         {
-            if (_instruction[1].Type == TokenType.NUMBER)
+            if (_instruction[1].Type == TokenType.Number)
             {
                 CIL_Stack.PushVar( new Variable( VarType.Var_Int, _instruction[1].Data ) );
             }
@@ -452,7 +452,7 @@ namespace ITI.CIL_Cowding
 
             
             Variable tmp = CIL_Stack.PopVar();
-            if (_instruction[1].Type == TokenType.NUMBER)
+            if (_instruction[1].Type == TokenType.Number)
             {
                 tmp.Type = VarType.Var_Int;
 
