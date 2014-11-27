@@ -20,6 +20,18 @@ namespace ITI.CIL_Cowding
         int CurrentColumn { get; }
 
         /// <summary>
+        /// Tests if the current character is a white space.
+        /// </summary>
+        /// <returns>True if if is, False if it's not.</returns>
+        bool IsWhiteSpace { get; }
+
+        /// <summary>
+        /// Tests if we are at the end of the string.
+        /// </summary>
+        /// <returns>True if we are, or false if we're not at the end.</returns>
+        bool IsEnd { get; } 
+
+        /// <summary>
         /// Reads the character and ups the playhead then ("tête de lecture" in french).
         /// </summary>
         /// <returns>The string with the playhead not updated (post inc.)</returns>
@@ -30,18 +42,6 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <returns>The string with the current position.</returns>
         char Peek();
-
-        /// <summary>
-        /// Tests if we are at the end of the string.
-        /// </summary>
-        /// <returns>True if we are, or false if we're not at the end.</returns>
-        bool IsEnd();
-
-        /// <summary>
-        /// Tests if the current character is a white space.
-        /// </summary>
-        /// <returns>True if if is, False if it's not.</returns>
-        bool IsWhiteSpace(char c);
 
         /// <summary>
         /// Tests if the value is an integer.
@@ -79,7 +79,5 @@ namespace ITI.CIL_Cowding
         /// Goes to the next line of the next instruction
         /// </summary>
         void ForwardToNextLine();
-
-
     }
 }

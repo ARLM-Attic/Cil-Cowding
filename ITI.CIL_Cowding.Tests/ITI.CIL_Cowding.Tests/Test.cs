@@ -11,7 +11,7 @@ namespace ITI.CIL_Cowding.Tests
         {
             string word = "add";
             
-            Assert.That();
+            //Assert.That();
 
         }
     }

@@ -74,6 +74,7 @@
     <Compile Include="Instructions\OrNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
+    <Compile Include="StringTokenizer.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Tokenizer.cs" />
     <Compile Include="Variable.cs" />
