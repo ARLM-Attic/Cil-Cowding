@@ -64,6 +64,8 @@ namespace ITI.CIL_Cowding
         /// <returns>Returns true if it's a string</returns>
         bool IsString(out string value);
 
+        bool IsIdentifier(out string id);
+
         /// <summary>
         /// Gets the next Token.
         /// </summary>
@@ -79,5 +81,9 @@ namespace ITI.CIL_Cowding
         /// Goes to the next line of the next instruction
         /// </summary>
         void ForwardToNextLine();
+
+        bool Match(TokenType t);
+
+        bool Match(int expectedValue);
     }
 }

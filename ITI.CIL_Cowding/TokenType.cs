@@ -36,6 +36,8 @@ namespace ITI.CIL_Cowding
         Error,
         Text,
         Function,
+        Class,
+        Identifier,
         EndOfInput
     }
 }

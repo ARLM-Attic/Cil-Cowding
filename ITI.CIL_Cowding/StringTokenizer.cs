@@ -9,6 +9,7 @@ namespace ITI.CIL_Cowding
         int _maxPos;
         int _curLine;
         int _curColumn;
+        double _doubleValue;
         TokenType _currentToken;
 
         public StringTokenizer()
@@ -79,6 +80,29 @@ namespace ITI.CIL_Cowding
         public bool IsString(out string value)
         {
             throw new NotImplementedException();
+        }
+
+        public bool Match( int expectedValue )
+        {
+            if(_currentToken == TokenType.Number && 
+                _doubleValue == Int32.MaxValue && 
+                (int)_doubleValue == expectedValue)
+            {
+                GetNextToken();
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Match(TokenType t)
+        {
+            if(_currentToken == t)
+            {
+                GetNextToken();
+                return true;
+            }
+            return false;
         }
     }
 }
