@@ -74,6 +74,10 @@ namespace ITI.CIL_Cowding
         /// <returns>The token of TokenType type.</returns>
         TokenType GetNextToken();
 
+        
+        // REDOU
+        bool MatchIdentifier(string identifier);
+
         /// <summary>
         /// Ups to the next character
         /// </summary>

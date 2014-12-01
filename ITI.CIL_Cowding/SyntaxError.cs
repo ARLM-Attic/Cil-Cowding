@@ -8,5 +8,12 @@ namespace ITI.CIL_Cowding
 {
     class SyntaxError
     {
+        string _msg;
+
+        public SyntaxError(string msg)
+        {
+            _msg = msg;
+
+        }
     }
 }

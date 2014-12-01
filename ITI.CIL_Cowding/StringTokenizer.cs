@@ -65,7 +65,7 @@ namespace ITI.CIL_Cowding
         }
 
         // Je touche pas à ça, ça fais peur tout ça :/
-        TokenType GetNextToken()
+        public TokenType GetNextToken()
         {
             StringBuilder buffer = new StringBuilder();
             if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
@@ -201,19 +201,26 @@ namespace ITI.CIL_Cowding
             return _currentToken;
         }
 
+
+        // TO DO
+        public bool MatchIdentifier(string identifier)
+        {
+            throw new NotImplementedException();
+        }
+
         // DONE REDOU
         public bool IsIdentifier( out string id)
         {
             bool reponse;
             if (_currentToken == TokenType.String)
             {
-                value = _idOrStringValue;
+                id = _idOrStringValue;
                 reponse = true;
             }
             else
             {
                 reponse = false;
-                value = "";
+                id = "";
             }
 
             GetNextToken();
