@@ -38,6 +38,7 @@ namespace ITI.CIL_Cowding
         Function,
         Class,
         Identifier,
-        EndOfInput
+        EndOfInput,
+        EndOfLine
     }
 }
