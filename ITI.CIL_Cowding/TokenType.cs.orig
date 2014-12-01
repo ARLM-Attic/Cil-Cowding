@@ -37,10 +37,14 @@ namespace ITI.CIL_Cowding
         Function,
         Class,
         Identifier,
+<<<<<<< HEAD
         IsVarType,
         EndOfLine,
         ErrorUnterminatedString,
+        EndOfInput,s
+=======
         EndOfInput,
-        ErrorInvalidUnicodeInString
+        EndOfLine
+>>>>>>> 47599a76db74513a274c887179fabdb3f213fd1a
     }
 }

@@ -64,7 +64,7 @@ namespace ITI.CIL_Cowding
             ++_position;
         }
 
-        public TokenType GetNextToken()
+        TokenType GetNextToken()
         {
             StringBuilder buffer = new StringBuilder();
             if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
@@ -130,41 +130,73 @@ namespace ITI.CIL_Cowding
                     _currentToken = TokenType.Ret; break;
 
                 default:
-                    if (char.IsDigit(c))
                     {
-                        _currentToken = TokenType.Number;
-                        double val = (int)(c - '0');
-                        while (!IsEnd && Char.IsDigit(c))
+                        if (char.IsDigit( c ) )
                         {
-                            val = val * 10 + (int)(c - '0');
-                            Forward();
+                            _currentToken = TokenType.Number;
+                            double val = (int)(c - '0');
+                            while (!IsEnd && Char.IsDigit(c))
+                            {
+                                val = val * 10 + (int)(c - '0');
+                                Forward();
+                            }
+                            _doubleValue = val;
                         }
-                        _doubleValue = val;
-                    }
-                    else if (Char.IsLetter(c) || c == '_')
-                    {
-                        _currentToken = TokenType.Identifier;
-                        buffer.Append(c);
-                        Forward();
-                        while (!IsEnd && (Char.IsLetterOrDigit(c = Peek()) || c == '_'))
+                        else if (Char.IsLetter(c) || c == '_')
                         {
+                            _currentToken = TokenType.Identifier;
                             buffer.Append(c);
                             Forward();
+                            while (!IsEnd && (Char.IsLetterOrDigit(c = Peek()) || c == '_'))
+                            {
+                                buffer.Append(c);
+                                Forward();
+                            }
+                            _idOrStringValue = buffer.ToString();
                         }
-                        _idOrStringValue = buffer.ToString();
-                    }
-                    else if (c == '"')
-                    {
-                        _currentToken = TokenType.String;
-                        c = Read();
-                        while (!IsEnd && c != '"')
+                        else if (c == '"')
                         {
-                            if (IsEnd) _currentToken = TokenType.ErrorUnterminatedString;
-
+                            _currentToken = TokenType.String;
+                            c = Read();
+                            while (!IsEnd && c != '"')
+                            {
+                                if (IsEnd) _currentToken = TokenType.ErrorUnterminatedString;
+                                if(c == '\\')
+                                {
+                                    c = Read();
+                                    if( c != '"')
+                                    {
+                                        if ( IsEnd ) return _currentToken = TokenType.ErrorUnterminatedString;
+                                    }
+                                    if (c == 'r') c = '\r';
+                                    else if (c == 'n') c = '\n';
+                                    else if (c == 't') c = '\t';
+                                    else if (c == 'u')
+                                    {
+                                        c = Read();
+                                        if ( IsEnd ) return _currentToken = TokenType.ErrorUnterminatedString;
+                                        bool atLeastOne = false;
+                                        int val = (int)(c - '0');
+                                        while( !IsEnd && Char.IsDigit( c = Peek () ) )
+                                        {
+                                            atLeastOne = true;
+                                            val = val * 10 + (int)(c - '0');
+                                            Forward();
+                                        }
+                                        if ( !atLeastOne ) return _currentToken = TokenType.ErrorUnterminatedString;
+                                        if (val >= (int)char.MaxValue) return _currentToken = TokenType.ErrorInvalidUnicodeInString;
+                                        c = (char)val;
+                                    }
+                                }
+                            }
+                            buffer.Append( c );
+                            Forward();
+                            _idOrStringValue = buffer.ToString();
                         }
+                        else _currentToken = TokenType.Error;
+                        break;
                     }
-                    break;
-            }
+                 }
             return _currentToken;
         }
 
