@@ -115,7 +115,6 @@ namespace ITI.CIL_Cowding
             }
             #endregion
 
-            
             #region CEQ
             else if (_tokenizer.MatchIdentifier("ceq"))
             {                
