@@ -39,6 +39,8 @@ namespace ITI.CIL_Cowding
         Identifier,
         IsVarType,
         EndOfLine,
+        EndOfInput,
+        EndOfLine
         ErrorUnterminatedString,
         EndOfInput,s
     }

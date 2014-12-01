@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzer.cs" />
     <Compile Include="Instructions\AndNode.cs" />
     <Compile Include="Instructions\BrfalseNode.cs" />
     <Compile Include="Instructions\BrtrueNode.cs" />
