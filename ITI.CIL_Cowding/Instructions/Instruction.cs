@@ -86,9 +86,6 @@ namespace ITI.CIL_Cowding
                 case TokenType.Div:
                     Div();
                     break;
-                case TokenType.Conv:
-                    Conv();
-                    break;
                 case TokenType.Sub:
                     Sub();
                     break;

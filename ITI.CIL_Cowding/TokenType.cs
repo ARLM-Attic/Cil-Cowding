@@ -31,13 +31,15 @@ namespace ITI.CIL_Cowding
         EndOfString,
         Write,
         Read,
-        Conv,
         Ret,
         Error,
         Text,
         Function,
         Class,
         Identifier,
-        EndOfInput
+        IsVarType,
+        EndOfLine,
+        ErrorUnterminatedString,
+        EndOfInput,s
     }
 }
