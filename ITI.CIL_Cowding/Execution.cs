@@ -28,8 +28,8 @@ namespace ITI.CIL_Cowding
             
             // Tokenizer
             _strtk = new StringTokenizer();
-            _anal = new Analyzer();
-            _code = 
+            _anal = new Analyzer(_strtk);
+            
 
             // Pour la prochaine version, on va analyser la liste d'instruction pour ensuite découper les classes et mettre les methodes et les champs dans les classes
             Console.Clear();
@@ -39,10 +39,11 @@ namespace ITI.CIL_Cowding
         
 		
 		public void ExecLine() {
+            /*
             int _index_return=0;
 
             if(++_index < _code.Count) {
-                _index_return = _code[_index].Execute(ctx);
+                _code[_index].Execute(ctx);
             }
             else
             {
@@ -56,7 +57,7 @@ namespace ITI.CIL_Cowding
 			} else {
 				// NOTHING
 			}
-			
+			*/
 			
         }
 
