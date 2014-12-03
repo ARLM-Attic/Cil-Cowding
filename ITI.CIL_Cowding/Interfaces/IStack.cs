@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
     public interface IStack
     {
 
-        Stack<Variable> GetTopFrame ();
+        Stack<IVariable> GetTopFrame ();
 
         IFrame GetLastFrame();
 

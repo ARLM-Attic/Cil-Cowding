@@ -11,11 +11,11 @@ namespace ITI.CIL_Cowding
         protected abstract IValue Operator (IValue value1, IValue value2);
         public override sealed void Execute( IExecutionContext ctx )
         {
-            IValue temp1 = ctx.GetStack().Pop();
-            IValue temp2 = ctx.GetStack().Pop();
+            IValue temp1 = ctx.Stack.Pop();
+            IValue temp2 = ctx.Stack.Pop();
             if ( ( temp1.Type == temp2.Type ) && temp1.Type.IsNumeric )
             {
-                ctx.GetStack().Push( Operator( temp2, temp1 ) ) ;
+                ctx.Stack.Push( Operator( temp2, temp1 ) ) ;
             }
             else
             {

@@ -8,5 +8,13 @@ namespace ITI.CIL_Cowding
 {
     public interface IVariable
     {
+        string Label
+        {
+            get;
+        }
+        Value Value
+        {
+            get;
+        }
     }
 }

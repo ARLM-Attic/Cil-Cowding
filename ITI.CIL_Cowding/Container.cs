@@ -9,11 +9,11 @@ namespace ITI.CIL_Cowding
     public class Container
     {
 		// Fields
-		private Dictionary<String, Variable> _var;
+		private Dictionary<String, IVariable> _var;
 		
 		
 		// Properties
-		public Dictionary<String, Variable> Var 
+		public Dictionary<String, IVariable> Var 
 		{
 			get {return _var;}
 		}
@@ -22,21 +22,21 @@ namespace ITI.CIL_Cowding
 		public Container() 
 		{
 			
-			_var = new Dictionary<String, Variable>();
+			_var = new Dictionary<String, IVariable>();
 		
 		}
 		
 		// Methodes
-		private void CreateVar(Variable var) 
+		private void CreateVar(IVariable var) 
 		{
 			
 			Var.Add(var.Label, var);
 			
 		}
 		
-		public void SetVar(Variable var) 
+		public void SetVar(IVariable var) 
 		{
-			
+		
 			if( Var.ContainsKey(var.Label) ) 
 			{
 				Var[var.Label] = var;
@@ -45,10 +45,10 @@ namespace ITI.CIL_Cowding
 			{
 				CreateVar(var);
 			}
-			
+		
 		}	
 		
-		public Variable GetVar(String label) 
+		public IVariable GetVar(String label) 
 		{
             Variable variablereturn; 
 			if(Var.TryGetValue(label, out variablereturn) ) {
@@ -61,7 +61,7 @@ namespace ITI.CIL_Cowding
 		
 		public bool IsExistVar(String label) 
 		{
-            Variable tmp;
+            IVariable tmp;
 			return Var.TryGetValue(label, out tmp);
 		}
 		

@@ -14,7 +14,7 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
 		Execution run_programme;
-        private Stack<Variable> stack;
+        private Stack<IVariable> stack;
         private CIL_Cowding.Container container;
 
         public Form1()
@@ -125,7 +125,7 @@ namespace ITI.CIL_Cowding
             g = pictureBox1.CreateGraphics();
             string s = richTextBox.Text;
             
-            Stack<Variable> var = new Stack<Variable>();
+            Stack<IVariable> var = new Stack<IVariable>();
 
             
 
