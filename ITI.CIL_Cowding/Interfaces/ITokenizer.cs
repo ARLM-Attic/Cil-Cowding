@@ -23,13 +23,13 @@ namespace ITI.CIL_Cowding
         /// Tests if the current character is a white space.
         /// </summary>
         /// <returns>True if if is, False if it's not.</returns>
-         bool IsWhiteSpace { get; }
+        bool IsWhiteSpace { get; }
 
         /// <summary>
         /// Tests if we are at the end of the string.
         /// </summary>
         /// <returns>True if we are, or false if we're not at the end.</returns>
-        bool IsEnd { get; } 
+        bool IsEnd { get; }
 
 
         /// <summary>
@@ -37,45 +37,36 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="value">value that we test</param>
         /// <returns>Returns true if it's an integer.</returns>
-        bool IsInteger(out int value);
+        bool IsInteger( out int value );
 
-        bool IsVarType(out VarType value);
+        bool IsVarType( ref VarType value );
 
         /// <summary>
         /// Tests if the value is a double.
         /// </summary>
         /// <param name="value">value that we test</param>
         /// <returns>Returns true if it's a double.</returns>
-        
-        bool IsDouble(out double value);
+
+        bool IsDouble( out double value );
 
         /// <summary>
         /// Tests if the value is a string.
         /// </summary>
         /// <param name="value">value that we test</param>
         /// <returns>Returns true if it's a string</returns>
-        bool IsString(out string value);
+        bool IsString( out string value );
 
-        bool IsIdentifier(out string id);
+        bool IsIdentifier( out string id );
 
-        /// <summary>
-        /// Gets the next Token.
-        /// </summary>
-        /// <returns>The token of TokenType type.</returns>
-        TokenType GetNextToken();
-
-        
         // REDOU
-        bool MatchIdentifier(string identifier);
+        bool MatchIdentifier( string identifier );
 
         /// <summary>
         /// Goes to the next line of the next instruction
         /// </summary>
 
-        bool Match(TokenType t);
+        bool Match( TokenType t );
 
-         bool Match(int expectedValue);
-
-         void ForwardToNextLine();
+        void ForwardToNextLine();
     }
 }

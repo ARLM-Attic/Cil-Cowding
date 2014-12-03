@@ -12,6 +12,7 @@ namespace ITI.CIL_Cowding
         int _curColumn;
         double _doubleValue;
         string _idOrStringValue;
+        StringBuilder _buffer;
         TokenType _currentToken;
 
         public StringTokenizer()
@@ -24,14 +25,14 @@ namespace ITI.CIL_Cowding
             get { return _currentToken; }
         }
 
-       public int CurrentLine
+        public int CurrentLine
         {
             get { return _curLine; }
         }
 
         public int CurrentColumn
         {
-            get { return _curColumn;  }
+            get { return _curColumn; }
         }
 
         public bool IsWhiteSpace
@@ -46,8 +47,19 @@ namespace ITI.CIL_Cowding
 
         public void ForwardToNextLine()
         {
-            char c = Read();
-
+            if ( !IsEnd )
+            {
+                char c = Read();
+                while ( c != '\n' )
+                {
+                    Read();
+                }
+                GetNextToken();
+            }
+            else
+            {
+                // NOP
+            }
         }
 
         char Read()
@@ -66,23 +78,23 @@ namespace ITI.CIL_Cowding
         }
 
         // Je touche pas à ça, ça fais peur tout ça :/
-        public TokenType GetNextToken()
+        TokenType GetNextToken()
         {
-            StringBuilder buffer = new StringBuilder();
+            _buffer = new StringBuilder();
             if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
             char c = Read();
-            while(char.IsWhiteSpace(c))
+            while ( char.IsWhiteSpace( c ) )
             {
-                if (IsEnd) return _currentToken = TokenType.EndOfInput;
+                if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
                 c = Read();
             }
-            while(!char.IsWhiteSpace(c))
+            while ( !char.IsWhiteSpace( c ) )
             {
-                buffer.Append( c );
+                _buffer.Append( c );
                 Forward();
             }
 
-            string toAnalyze = buffer.ToString();
+            string toAnalyze = _buffer.ToString();
             #region switch
             switch ( toAnalyze )
             {
@@ -95,7 +107,7 @@ namespace ITI.CIL_Cowding
                 case "ldstr":
                     _currentToken = TokenType.Ldstr; break;
                 case "stloc":
-                     _currentToken = TokenType.Stloc; break;
+                    _currentToken = TokenType.Stloc; break;
                 case "ldloc":
                     _currentToken = TokenType.Ldloc; break;
                 case "ceq":
@@ -133,67 +145,67 @@ namespace ITI.CIL_Cowding
 
                 default:
                     {
-                        if (char.IsDigit( c ) )
+                        if ( char.IsDigit( c ) )
                         {
                             _currentToken = TokenType.Number;
-                            double val = (int)(c - '0');
-                            while (!IsEnd && Char.IsDigit(c))
+                            double val = (int)( c - '0' );
+                            while ( !IsEnd && Char.IsDigit( c ) )
                             {
-                                val = val * 10 + (int)(c - '0');
+                                val = val * 10 + (int)( c - '0' );
                                 Forward();
                             }
                             _doubleValue = val;
                         }
-                        else if (Char.IsLetter(c) || c == '_')
+                        else if ( Char.IsLetter( c ) || c == '_' )
                         {
                             _currentToken = TokenType.Identifier;
-                            buffer.Append(c);
+                            _buffer.Append( c );
                             Forward();
-                            while (!IsEnd && (Char.IsLetterOrDigit(c = Peek()) || c == '_'))
+                            while ( !IsEnd && ( Char.IsLetterOrDigit( c = Peek() ) || c == '_' ) )
                             {
-                                buffer.Append(c);
+                                _buffer.Append( c );
                                 Forward();
                             }
-                            _idOrStringValue = buffer.ToString();
+                            _idOrStringValue = _buffer.ToString();
                         }
-                        else if (c == '"')
+                        else if ( c == '"' )
                         {
                             _currentToken = TokenType.String;
                             c = Read();
-                            while (!IsEnd && c != '"')
+                            while ( !IsEnd && c != '"' )
                             {
-                                if (IsEnd) _currentToken = TokenType.ErrorUnterminatedString;
-                                if(c == '\\')
+                                if ( IsEnd ) _currentToken = TokenType.ErrorUnterminatedString;
+                                if ( c == '\\' )
                                 {
                                     c = Read();
-                                    if( c != '"')
+                                    if ( c != '"' )
                                     {
                                         if ( IsEnd ) return _currentToken = TokenType.ErrorUnterminatedString;
                                     }
-                                    if (c == 'r') c = '\r';
-                                    else if (c == 'n') c = '\n';
-                                    else if (c == 't') c = '\t';
-                                    else if (c == 'u')
+                                    if ( c == 'r' ) c = '\r';
+                                    else if ( c == 'n' ) c = '\n';
+                                    else if ( c == 't' ) c = '\t';
+                                    else if ( c == 'u' )
                                     {
                                         c = Read();
                                         if ( IsEnd ) return _currentToken = TokenType.ErrorUnterminatedString;
                                         bool atLeastOne = false;
-                                        int val = (int)(c - '0');
-                                        while( !IsEnd && Char.IsDigit( c = Peek () ) )
+                                        int val = (int)( c - '0' );
+                                        while ( !IsEnd && Char.IsDigit( c = Peek() ) )
                                         {
                                             atLeastOne = true;
-                                            val = val * 10 + (int)(c - '0');
+                                            val = val * 10 + (int)( c - '0' );
                                             Forward();
                                         }
                                         if ( !atLeastOne ) return _currentToken = TokenType.ErrorUnterminatedString;
-                                        if (val >= (int)char.MaxValue) return _currentToken = TokenType.ErrorInvalidUnicodeInString;
+                                        if ( val >= (int)char.MaxValue ) return _currentToken = TokenType.ErrorInvalidUnicodeInString;
                                         c = (char)val;
                                     }
                                 }
                             }
-                            buffer.Append( c );
+                            _buffer.Append( c );
                             Forward();
-                            _idOrStringValue = buffer.ToString();
+                            _idOrStringValue = _buffer.ToString();
                         }
                         else _currentToken = TokenType.Error;
                         break;
@@ -204,17 +216,16 @@ namespace ITI.CIL_Cowding
         }
 
 
-        // TO DO
-        public bool MatchIdentifier(string identifier)
+        public bool MatchIdentifier( string identifier )
         {
-            throw new NotImplementedException();
+            return identifier == "var";
         }
 
         // DONE REDOU
-        public bool IsIdentifier( out string id)
+        public bool IsIdentifier( out string id )
         {
             bool reponse;
-            if (_currentToken == TokenType.String)
+            if ( _currentToken == TokenType.String )
             {
                 id = _idOrStringValue;
                 reponse = true;
@@ -230,10 +241,10 @@ namespace ITI.CIL_Cowding
         }
 
         // DONE REDOU
-        public bool IsInteger(out int value)
+        public bool IsInteger( out int value )
         {
             bool reponse;
-            if (_currentToken == TokenType.Number)
+            if ( _currentToken == TokenType.Number )
             {
                 value = (int)_doubleValue;
                 reponse = true;
@@ -250,10 +261,10 @@ namespace ITI.CIL_Cowding
         }
 
         // DONE REDOU
-        public bool IsDouble(out double value)
+        public bool IsDouble( out double value )
         {
             bool reponse;
-            if (_currentToken == TokenType.Number)
+            if ( _currentToken == TokenType.Number )
             {
                 value = _doubleValue;
                 reponse = true;
@@ -269,10 +280,10 @@ namespace ITI.CIL_Cowding
         }
 
         // DONE REDOU
-        public bool IsString(out string value)
+        public bool IsString( out string value )
         {
             bool reponse;
-            if (_currentToken == TokenType.String)
+            if ( _currentToken == TokenType.String )
             {
                 value = _idOrStringValue;
                 reponse = true;
@@ -288,30 +299,31 @@ namespace ITI.CIL_Cowding
         }
 
         // TO DO
-        public bool IsVarType(out VarType value)
+        public bool IsVarType( ref VarType value )
         {
-
-            throw new NotImplementedException();
-
-        }
-
-        // ça doit pas virer ça ? // REDOU
-        public bool Match( int expectedValue )
-        {
-            if( _currentToken == TokenType.Number && 
-                _doubleValue == Int32.MaxValue && 
-                (int)_doubleValue == expectedValue )
+            if ( value == VarType.Var_Bool || value == VarType.Var_Int || value == VarType.Var_String )
             {
-                GetNextToken();
                 return true;
             }
             return false;
         }
 
+        //public bool Match( int expectedValue )
+        //{
+        //    if( _currentToken == TokenType.Number && 
+        //        _doubleValue == Int32.MaxValue && 
+        //        (int)_doubleValue == expectedValue )
+        //    {
+        //        GetNextToken();
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
         // DONE
-        public bool Match(TokenType t)
+        public bool Match( TokenType t )
         {
-            if(_currentToken == t)
+            if ( _currentToken == t )
             {
                 GetNextToken();
                 return true;
