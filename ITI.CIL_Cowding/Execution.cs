@@ -27,8 +27,8 @@ namespace ITI.CIL_Cowding
             // Verification
             
             // Tokenizer
-            _strtk = new StringTokenizer(); 
-            _anal = new Analyzer()
+            _strtk = new StringTokenizer();
+            _anal = new Analyzer();
             _code = 
 
             // Pour la prochaine version, on va analyser la liste d'instruction pour ensuite découper les classes et mettre les methodes et les champs dans les classes
