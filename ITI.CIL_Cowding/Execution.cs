@@ -27,7 +27,7 @@ namespace ITI.CIL_Cowding
             // Verification
             
             // Tokenizer
-            _strtk = new StringTokenizer();
+            _strtk = new StringTokenizer(); 
             _anal = new Analyzer()
             _code = 
 
@@ -35,7 +35,7 @@ namespace ITI.CIL_Cowding
             Console.Clear();
 			_index=-1;
 		
-		}
+		} 
         
 		
 		public void ExecLine() {
