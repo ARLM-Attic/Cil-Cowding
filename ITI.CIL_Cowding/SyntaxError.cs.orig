@@ -8,13 +8,16 @@ namespace ITI.CIL_Cowding
 {
     public class SyntaxError
     {
+<<<<<<< HEAD
         public SyntaxError()
         { 
+=======
         string _msg;
 
         public SyntaxError(string msg)
         {
             _msg = msg;
+>>>>>>> origin/Tokenizer_Analyzer
 
         }
     }
