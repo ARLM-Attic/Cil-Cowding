@@ -11,9 +11,12 @@ namespace ITI.CIL_Cowding
     public class Execution
     {
 
-        List<Instruction> _code;
+        List<InstructionNode> _code;
 		int _index;
-		CIL_Stack _stack;
+		//CIL_Stack _stack;
+        IExecutionContext ctx;
+        Analyzer _anal;
+        StringTokenizer _strtk;
 
         // Properties
 
@@ -21,24 +24,25 @@ namespace ITI.CIL_Cowding
         // Constructor
         public Execution(string file)
         {
-			_stack = new CIL_Stack();
             // Verification
             
             // Tokenizer
-            //_code = StringTokenizer.Tokenize(file); 
+            _strtk = new StringTokenizer(); 
+            _anal = new Analyzer()
+            _code = 
 
             // Pour la prochaine version, on va analyser la liste d'instruction pour ensuite découper les classes et mettre les methodes et les champs dans les classes
             Console.Clear();
 			_index=-1;
 		
-		}
+		} 
         
 		
 		public void ExecLine() {
             int _index_return=0;
 
             if(++_index < _code.Count) {
-                _index_return = _code[_index].Execute();
+                _index_return = _code[_index].Execute(ctx);
             }
             else
             {
