@@ -51,7 +51,7 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.IsIdentifier(out varName1)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
-                    body.Add(new StLocNode(varName1));
+                    body.Add(new StlocNode(varName1));
                 }
                 else
                 {
@@ -102,7 +102,7 @@ namespace ITI.CIL_Cowding
                 VarType vartype;
 
                 if (_tokenizer.IsVarType(out vartype)
-                    && _tokenizer.IsLabel(out label)
+                    && _tokenizer.IsIdentifier(out label)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
                     body.Add(new VarNode(vartype, label));
@@ -230,12 +230,12 @@ namespace ITI.CIL_Cowding
             else if (_tokenizer.MatchIdentifier("brtrue"))
             {
                 // VAR
-                Label label;
+                string label;
 
-                if (_tokenizer.IsLabel(out label)
+                if (_tokenizer.IsIdentifier(out label)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
-                    body.Add(new BrTrueNode(label));
+                    body.Add(new BrtrueNode(label));
                 }
                 else
                 {
@@ -249,12 +249,12 @@ namespace ITI.CIL_Cowding
             else if (_tokenizer.MatchIdentifier("brfalse"))
             {
                 // VAR
-                Label label;
+                string label;
 
-                if (_tokenizer.IsLabel(out label)
+                if (_tokenizer.IsIdentifier(out label)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
-                    body.Add(new BrFalseNode(label));
+                    body.Add(new BrfalseNode(label));
                 }
                 else
                 {
@@ -268,9 +268,9 @@ namespace ITI.CIL_Cowding
             else if (_tokenizer.MatchIdentifier("br"))
             {
                 // VAR
-                Label label;
+                string label;
 
-                if (_tokenizer.IsLabel(out label)
+                if (_tokenizer.IsIdentifier(out label)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
                     body.Add(new BrNode(label));

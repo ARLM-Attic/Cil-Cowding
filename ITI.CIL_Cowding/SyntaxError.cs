@@ -10,6 +10,11 @@ namespace ITI.CIL_Cowding
     {
         public SyntaxError()
         { 
+        string _msg;
+
+        public SyntaxError(string msg)
+        {
+            _msg = msg;
 
         }
     }

@@ -65,7 +65,8 @@ namespace ITI.CIL_Cowding
             ++_position;
         }
 
-        TokenType GetNextToken()
+        // Je touche pas à ça, ça fais peur tout ça :/
+        public TokenType GetNextToken()
         {
             StringBuilder buffer = new StringBuilder();
             if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
@@ -202,31 +203,99 @@ namespace ITI.CIL_Cowding
             return _currentToken;
         }
 
+
+        // TO DO
+        public bool MatchIdentifier(string identifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        // DONE REDOU
         public bool IsIdentifier( out string id)
         {
-            throw new NotImplementedException();
+            bool reponse;
+            if (_currentToken == TokenType.String)
+            {
+                id = _idOrStringValue;
+                reponse = true;
+            }
+            else
+            {
+                reponse = false;
+                id = "";
+            }
+
+            GetNextToken();
+            return reponse;
         }
 
+        // DONE REDOU
         public bool IsInteger(out int value)
         {
-            throw new NotImplementedException();
+            bool reponse;
+            if (_currentToken == TokenType.Number)
+            {
+                value = (int)_doubleValue;
+                reponse = true;
+            }
+            else
+            {
+                reponse = false;
+                value = 0;
+            }
+
+            GetNextToken();
+            return reponse;
+
         }
 
+        // DONE REDOU
         public bool IsDouble(out double value)
         {
-            throw new NotImplementedException();
+            bool reponse;
+            if (_currentToken == TokenType.Number)
+            {
+                value = _doubleValue;
+                reponse = true;
+            }
+            else
+            {
+                reponse = false;
+                value = 0;
+            }
+
+            GetNextToken();
+            return reponse;
         }
 
+        // DONE REDOU
         public bool IsString(out string value)
         {
-            throw new NotImplementedException();
+            bool reponse;
+            if (_currentToken == TokenType.String)
+            {
+                value = _idOrStringValue;
+                reponse = true;
+            }
+            else
+            {
+                reponse = false;
+                value = "";
+            }
+
+            GetNextToken();
+            return reponse;
         }
 
+        // TO DO
         public bool IsVarType(out VarType value)
         {
+
             throw new NotImplementedException();
+
         }
 
+        // ça doit pas virer ça ? // REDOU
         public bool Match( int expectedValue )
         {
             if( _currentToken == TokenType.Number && 
@@ -239,6 +308,7 @@ namespace ITI.CIL_Cowding
             return false;
         }
 
+        // DONE
         public bool Match(TokenType t)
         {
             if(_currentToken == t)
