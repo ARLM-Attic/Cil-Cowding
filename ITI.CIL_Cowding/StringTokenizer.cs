@@ -24,7 +24,7 @@ namespace ITI.CIL_Cowding
             get { return _currentToken; }
         }
 
-        public int CurrentLine
+       public int CurrentLine
         {
             get { return _curLine; }
         }
@@ -46,20 +46,21 @@ namespace ITI.CIL_Cowding
 
         public void ForwardToNextLine()
         {
-            throw new NotImplementedException();
+            char c = Read();
+
         }
 
-        public char Read()
+        char Read()
         {
             return _toParse[_position++];
         }
 
-        public char Peek()
+        char Peek()
         {
             return _toParse[_position];
         }
 
-        public void Forward()
+        void Forward()
         {
             ++_position;
         }
@@ -81,8 +82,8 @@ namespace ITI.CIL_Cowding
             }
 
             string toAnalyze = buffer.ToString();
-
-            switch( toAnalyze )
+            #region switch
+            switch ( toAnalyze )
             {
                 case "var":
                     _currentToken = TokenType.Var; break;
@@ -196,7 +197,8 @@ namespace ITI.CIL_Cowding
                         else _currentToken = TokenType.Error;
                         break;
                     }
-                 }
+            }
+            #endregion switch
             return _currentToken;
         }
 

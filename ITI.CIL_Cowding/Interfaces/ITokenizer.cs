@@ -23,7 +23,7 @@ namespace ITI.CIL_Cowding
         /// Tests if the current character is a white space.
         /// </summary>
         /// <returns>True if if is, False if it's not.</returns>
-        bool IsWhiteSpace { get; }
+         bool IsWhiteSpace { get; }
 
         /// <summary>
         /// Tests if we are at the end of the string.
@@ -32,31 +32,20 @@ namespace ITI.CIL_Cowding
         bool IsEnd { get; } 
 
         /// <summary>
-        /// Reads the character and ups the playhead then ("tête de lecture" in french).
-        /// </summary>
-        /// <returns>The string with the playhead not updated (post inc.)</returns>
-        char Read();
-
-        /// <summary>
-        /// Reads the current character under the playhead
-        /// </summary>
-        /// <returns>The string with the current position.</returns>
-        char Peek();
-
-        /// <summary>
         /// Tests if the value is an integer.
         /// </summary>
         /// <param name="value">value that we test</param>
         /// <returns>Returns true if it's an integer.</returns>
-        bool IsInteger(out int value);
+         bool IsInteger(out int value);
 
-        bool IsVarType(out VarType value);
+         bool IsVarType(out VarType value);
 
         /// <summary>
         /// Tests if the value is a double.
         /// </summary>
         /// <param name="value">value that we test</param>
         /// <returns>Returns true if it's a double.</returns>
+        
         bool IsDouble(out double value);
 
         /// <summary>
@@ -64,28 +53,18 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="value">value that we test</param>
         /// <returns>Returns true if it's a string</returns>
-        bool IsString(out string value);
+         bool IsString(out string value);
 
-        bool IsIdentifier(out string id);
-
-        /// <summary>
-        /// Gets the next Token.
-        /// </summary>
-        /// <returns>The token of TokenType type.</returns>
-        TokenType GetNextToken();
-
-        /// <summary>
-        /// Ups to the next character
-        /// </summary>
-        void Forward();
+         bool IsIdentifier(out string id);
 
         /// <summary>
         /// Goes to the next line of the next instruction
         /// </summary>
-        void ForwardToNextLine();
 
-        bool Match(TokenType t);
+         bool Match(TokenType t);
 
-        bool Match(int expectedValue);
+         bool Match(int expectedValue);
+
+         void ForwardToNextLine();
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    class SyntaxError
+    public class SyntaxError
     {
+        public SyntaxError()
+        { 
+
+        }
     }
 }
