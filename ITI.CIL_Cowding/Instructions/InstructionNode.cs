@@ -8,8 +8,7 @@ namespace ITI.CIL_Cowding
 {
     public abstract class InstructionNode
     {
-        public abstract void Execute(IExecutionContext ctx);
-        
+        public abstract void Execute( IExecutionContext ctx );
     }
 
         

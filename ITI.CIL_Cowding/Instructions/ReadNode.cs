@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.CIL_Cowding
+namespace ITI.CIL_Cowding.Instructions
 {
-    class ReadNode : InstructionNode
+    public class ReadNode : InstructionNode
     {
         public override void Execute(IExecutionContext ctx)
         {

@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class NotNode : InstructionNode
+    public interface IValue
     {
-        public override void Execute(IExecutionContext ctx)
+       ICILType Type
         {
-            throw new NotImplementedException();
+            get ;
+            set ;
         }
+
+       Object Data
+        {
+            get ;
+        }
+
     }
 }
+
+
+

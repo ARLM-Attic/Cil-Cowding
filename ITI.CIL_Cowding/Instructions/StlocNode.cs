@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.CIL_Cowding
+namespace ITI.CIL_Cowding.Instructions
 {
     public class StlocNode : InstructionNode
     {
@@ -12,5 +12,6 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
+        // Constructeur 1 param
     }
 }
