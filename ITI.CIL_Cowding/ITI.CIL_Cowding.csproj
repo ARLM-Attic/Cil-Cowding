@@ -45,6 +45,7 @@
     <Compile Include="Instructions\AndNode.cs" />
     <Compile Include="Instructions\BinaryOperatorNode.cs" />
     <Compile Include="Instructions\BrfalseNode.cs" />
+    <Compile Include="Instructions\BrNode.cs" />
     <Compile Include="Instructions\BrtrueNode.cs" />
     <Compile Include="Instructions\CeqNode.cs" />
     <Compile Include="Instructions\CgtNode.cs" />
@@ -59,8 +60,10 @@
     <Compile Include="Instructions\NegNode.cs" />
     <Compile Include="Instructions\NopNode.cs" />
     <Compile Include="Instructions\ReadNode.cs" />
+    <Compile Include="Instructions\RetNode.cs" />
     <Compile Include="Instructions\StlocNode.cs" />
     <Compile Include="Instructions\SubNode.cs" />
+    <Compile Include="Instructions\VarNode.cs" />
     <Compile Include="Instructions\WriteNode.cs" />
     <Compile Include="Interfaces\ICILType.cs" />
     <Compile Include="Interfaces\IInstructionNode.cs" />

@@ -18,7 +18,7 @@ namespace ITI.CIL_Cowding
             get { return _frame; } 
         }
         
-		public static Stack<IVariable> TopFrame
+		public static Stack<Variable> TopFrame
         {
             get { return _topFrame; }
         }
@@ -49,7 +49,7 @@ namespace ITI.CIL_Cowding
 			
 		}
 
-		public static void SetLocalVar(IVariable var) {
+		public static void SetLocalVar(Variable var) {
 			
 			var frame = Stack.LastFrame();
 			frame.SetVar(var);
@@ -72,12 +72,12 @@ namespace ITI.CIL_Cowding
             throw new NotImplementedException();
         }
 
-        public void Push(IVariable var)
+        public void Push(IValue var)
         {
             throw new NotImplementedException();
         }
 
-        public IVariable Pop()
+        public IValue Pop()
         {
             throw new NotImplementedException();
         }

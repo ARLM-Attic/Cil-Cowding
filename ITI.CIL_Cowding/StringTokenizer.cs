@@ -299,7 +299,7 @@ namespace ITI.CIL_Cowding
         }
 
         // TO DO
-        public bool IsVarType(ref CILNetType value)
+        public bool IsVarType(out CILNetType value)
         {
             // REDOU: C'est à changer
             /*

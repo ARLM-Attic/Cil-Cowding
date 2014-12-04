@@ -6,19 +6,17 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class StlocNode : InstructionNode
+    class RetNode : InstructionNode
     {
         string _label;
 
-        public StlocNode(string label)
+        public RetNode(string str)
         {
-            _label = label;
+            _label = str;
         }
-
         public override void Execute(IExecutionContext ctx)
         {
             throw new NotImplementedException();
         }
-        // Constructeur 1 param
     }
 }

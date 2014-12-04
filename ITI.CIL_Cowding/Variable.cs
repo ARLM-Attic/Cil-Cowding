@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    class Variable : IVariable
+    public class Variable : IVariable
     {
         Value _value;
         string _label;

@@ -99,7 +99,7 @@ namespace ITI.CIL_Cowding
             {
                 // VAR
                 string label;
-                VarType vartype;
+                CILNetType vartype;
 
                 if (_tokenizer.IsVarType(out vartype)
                     && _tokenizer.IsIdentifier(out label)
@@ -413,11 +413,12 @@ namespace ITI.CIL_Cowding
             else if (_tokenizer.MatchIdentifier("ret"))
             {
                 // VAR
+                string label;
 
-
-                if (_tokenizer.Match(TokenType.EndOfLine))
+                if (_tokenizer.IsIdentifier(out label)
+                    &&_tokenizer.Match(TokenType.EndOfLine))
                 {
-                    body.Add(new RetNode());
+                    body.Add(new RetNode(label));
                 }
                 else
                 {
@@ -427,7 +428,7 @@ namespace ITI.CIL_Cowding
             }
             #endregion
 
-
+            return body;
         }
 
         private void AddError(string msg) {

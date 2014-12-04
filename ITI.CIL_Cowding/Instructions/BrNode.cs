@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class StlocNode : InstructionNode
+    public class BrNode : InstructionNode
     {
         string _label;
 
-        public StlocNode(string label)
+        public BrNode(string label)
         {
             _label = label;
         }
@@ -19,6 +19,5 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
-        // Constructeur 1 param
     }
 }

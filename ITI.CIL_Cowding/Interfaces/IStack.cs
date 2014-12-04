@@ -13,9 +13,9 @@ namespace ITI.CIL_Cowding
 
         IFrame GetLastFrame();
 
-        void Push(IVariable var);
+        void Push(IValue var);
 
-        IVariable Pop();
+        IValue Pop();
 
         void CallFonction(IFonction fct);
         

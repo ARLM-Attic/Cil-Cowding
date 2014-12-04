@@ -157,8 +157,7 @@ namespace ITI.CIL_Cowding
         {
             int x = 10;
             int y = 300;
-            var container = CIL_Stack.Frame;
-            var stack = CIL_Stack.TopFrame;
+
             Font drawFont = new Font("Arial", 10);
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
