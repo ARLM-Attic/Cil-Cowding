@@ -55,23 +55,43 @@ namespace ITI.CIL_Cowding
 			frame.SetVar(var);
 			
 		}
+
 		
-		public static IVariable Pop() {
-			if(TopFrame.Count == 0) {
-                Console.WriteLine("ERREUR DANS LA STACK");
-                return new Variable(null, "");
-            }
-			return TopFrame.Pop();
-		
-		}
-		
-		public static void Push(IVariable var) {
-		
-			TopFrame.Push(var);
-		
-		}
- 
-		
+       /**
+        * Super Code Redou OTD !
+        * 
+        * **/
+
+        public Stack<IVariable> GetTopFrame()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFrame GetLastFrame()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Push(IVariable var)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IVariable Pop()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CallFonction(IFonction fct)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CloseFonction()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 
 	

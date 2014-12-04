@@ -299,13 +299,18 @@ namespace ITI.CIL_Cowding
         }
 
         // TO DO
-        public bool IsVarType( ref VarType value )
+        public bool IsVarType(ref CILNetType value)
         {
+            // REDOU: C'est à changer
+            /*
             if ( value == VarType.Var_Bool || value == VarType.Var_Int || value == VarType.Var_String )
             {
                 return true;
             }
+             
             return false;
+             */
+            throw new NotImplementedException();
         }
 
         //public bool Match( int expectedValue )
