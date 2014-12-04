@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public interface IExecutionContext
+    public interface IVariable
     {
-        IStack Stack
+        string Label
         {
             get;
         }
-        IHeap Heap
+        Value Value
         {
             get;
         }
-        int CurrentLine();
-
     }
 }

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace ITI.CIL_Cowding
 {
-    class CILNetType : ICILType
+    public class CILNetType : ICILType
     {
         readonly Type _type;
         readonly int _size;

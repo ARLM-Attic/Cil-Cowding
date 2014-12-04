@@ -5,10 +5,20 @@ using System.Text;
 
 namespace ITI.CIL_Cowding
 {
-    public class Variable
+    public class Variable : IVariable
     {
         Value _value;
         string _label;
+
+        public string Label
+        {
+            get { return _label; }
+        }
+
+        public Value Value
+        {
+            get { return _value; }
+        }
 
         public Variable(Value value, string label)
         {

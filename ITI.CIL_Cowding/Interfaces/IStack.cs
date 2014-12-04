@@ -9,13 +9,13 @@ namespace ITI.CIL_Cowding
     public interface IStack
     {
 
-        Stack<Variable> GetTopFrame ();
+        Stack<IVariable> GetTopFrame ();
 
         IFrame GetLastFrame();
 
-        void Push(IVariable var);
+        void Push(IValue var);
 
-        IVariable Pop();
+        IValue Pop();
 
         void CallFonction(IFonction fct);
         

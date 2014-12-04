@@ -36,7 +36,7 @@ namespace ITI.CIL_Cowding
 		
 		public void SetVar(Variable var) 
 		{
-			
+		
 			if( Var.ContainsKey(var.Label) ) 
 			{
 				Var[var.Label] = var;
@@ -45,10 +45,10 @@ namespace ITI.CIL_Cowding
 			{
 				CreateVar(var);
 			}
-			
+		
 		}	
 		
-		public Variable GetVar(String label) 
+		public IVariable GetVar(String label) 
 		{
             Variable variablereturn; 
 			if(Var.TryGetValue(label, out variablereturn) ) {

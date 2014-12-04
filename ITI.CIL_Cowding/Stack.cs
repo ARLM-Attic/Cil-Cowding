@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class CIL_Stack 
+    public class Stack : IStack 
     {
 		// Fields		
         static Container _frame;
@@ -30,15 +30,15 @@ namespace ITI.CIL_Cowding
         }
        
 		// Constructor
-        public CIL_Stack() 
+        public Stack() 
 		{
             _frame = new Container();
             _topFrame = new Stack<Variable>();
 		}
 
 		// Methods
-        public static Variable GetLocalVar(String label) {
-			Container frame = CIL_Stack.LastFrame();
+        public static IVariable GetLocalVar(String label) {
+			Container frame = Stack.LastFrame();
 
 			if(frame.IsExistVar(label)) {
 			
@@ -51,27 +51,47 @@ namespace ITI.CIL_Cowding
 
 		public static void SetLocalVar(Variable var) {
 			
-			var frame = CIL_Stack.LastFrame();
+			var frame = Stack.LastFrame();
 			frame.SetVar(var);
 			
 		}
+
 		
-		public static Variable PopVar() {
-			if(TopFrame.Count == 0) {
-                Console.WriteLine("ERREUR DANS LA STACK");
-                return new Variable(VarType.Var_None, "", "");
-            }
-			return TopFrame.Pop();
-		
-		}
-		
-		public static void PushVar(Variable var) {
-		
-			TopFrame.Push(var);
-		
-		}
- 
-		
+       /**
+        * Super Code Redou OTD !
+        * 
+        * **/
+
+        public Stack<IVariable> GetTopFrame()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFrame GetLastFrame()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Push(IValue var)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IValue Pop()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CallFonction(IFonction fct)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CloseFonction()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 
 	

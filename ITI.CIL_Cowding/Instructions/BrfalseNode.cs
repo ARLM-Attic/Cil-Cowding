@@ -8,6 +8,13 @@ namespace ITI.CIL_Cowding
 {
     public class BrfalseNode : InstructionNode
     {
+        string _label;
+
+        public BrfalseNode(string label)
+        {
+            _label = label;
+        }
+
         public override void Execute(IExecutionContext ctx)
         {
             throw new NotImplementedException();
