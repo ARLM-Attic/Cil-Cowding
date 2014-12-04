@@ -155,6 +155,7 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack()
         {
+            /*
             int x = 10;
             int y = 300;
 
@@ -194,7 +195,7 @@ namespace ITI.CIL_Cowding
                 y -= 80;
             }
             
-
+            */
         }
         #endregion 
 
