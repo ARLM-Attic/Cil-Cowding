@@ -1,23 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
     public class SyntaxError
-    {        
-        string _msg;
-
-        public SyntaxError()
-        {
-
+    {
+        int _line;
+        int _column;
+        string _message;
+        
+        public int Line 
+        { 
+            get { return _line; }
+            private set { _line = value; }
         }
 
-        public SyntaxError(string msg)
+        public int Column 
         {
-            _msg = msg;
+            get { return _column; } 
+            private set { _column = value; } 
+        }
+
+        public string Message 
+        { 
+            get { return _message; }
+            private set { _message = value; }
+        }
+
+        public SyntaxError(ITokenizer t, string msg)
+        {
+            Line = t.CurrentLine;
+            Column = t.CurrentColumn;
+            Message = msg;
         }
     }
 }
+        

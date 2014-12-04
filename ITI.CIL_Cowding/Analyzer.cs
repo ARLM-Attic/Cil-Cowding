@@ -433,7 +433,5 @@ namespace ITI.CIL_Cowding
         private void AddError(string msg) {
             _errors.Add(new SyntaxError(msg));
         }
-
-
     }
 }
