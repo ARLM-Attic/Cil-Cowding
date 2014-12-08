@@ -13,9 +13,8 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-		Execution run_programme;
-        private Stack<IVariable> stack;
-        private CIL_Cowding.Container container;
+
+        private ExecutionContext _ec; 
 
         public Form1()
         {
@@ -116,18 +115,12 @@ namespace ITI.CIL_Cowding
         private void butStepByStep_Click(object sender, EventArgs e)
         {
             
-
+            // Graphique
             pictureBox1.Refresh();
             richTextBox.ReadOnly = true;
-
-			run_programme = new Execution(richTextBox.Text);
 			
             g = pictureBox1.CreateGraphics();
             string s = richTextBox.Text;
-            
-            Stack<IVariable> var = new Stack<IVariable>();
-
-            
 
             Font drawFont = new Font("Arial", 10);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -139,6 +132,12 @@ namespace ITI.CIL_Cowding
                 butStop.Visible = true;               
                 
             }
+
+            // Vraie partie execution
+            _ec = new ExecutionContext();
+
+
+
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
@@ -203,7 +202,6 @@ namespace ITI.CIL_Cowding
         private void butContinue_Click(object sender, EventArgs e)
         {           
             
-            run_programme.ExecLine();
             UpdateStack();   
         }
         #endregion

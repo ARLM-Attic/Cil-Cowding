@@ -42,6 +42,7 @@
     <Compile Include="Analyzer.cs" />
     <Compile Include="CILNetType.cs" />
     <Compile Include="CILTypeManager.cs" />
+    <Compile Include="ExecutionContexte.cs" />
     <Compile Include="Instructions\AndNode.cs" />
     <Compile Include="Instructions\BinaryOperatorNode.cs" />
     <Compile Include="Instructions\BrfalseNode.cs" />
@@ -52,7 +53,6 @@
     <Compile Include="Instructions\CltNode.cs" />
     <Compile Include="Instructions\AddNode.cs" />
     <Compile Include="Container.cs" />
-    <Compile Include="Execution.cs" />
     <Compile Include="Instructions\DivNode.cs" />
     <Compile Include="Instructions\LdcNode.cs" />
     <Compile Include="Instructions\LdstrNode.cs" />
