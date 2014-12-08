@@ -33,6 +33,9 @@ namespace ITI.CIL_Cowding
             _toParse = s;
             _position = startIndex;
             _maxPos = startIndex + count;
+
+            GetNextToken();
+
         }
 
 
@@ -140,8 +143,8 @@ namespace ITI.CIL_Cowding
                     {
                         _currentToken = TokenType.Identifier;
                         _buffer.Append(c);
-                        Forward();
-                        while (!IsEnd && (Char.IsLetterOrDigit(c = Peek()) || c == '_'))
+                        //Forward();
+                        while (!IsEnd && (Char.IsLetterOrDigit( c=Peek() ) || c == '_'))
                         {
                             _buffer.Append(c);
                             Forward();
