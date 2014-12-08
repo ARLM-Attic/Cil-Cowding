@@ -15,10 +15,24 @@ namespace ITI.CIL_Cowding
         StringBuilder _buffer;
         TokenType _currentToken;
 
-        public StringTokenizer()
+        public StringTokenizer(string s)
+            : this(s, 0, s.Length)
         {
-
         }
+
+        public StringTokenizer(string s, int startIndex)
+            : this(s, startIndex, s.Length)
+        {
+        }
+
+        public StringTokenizer(string s, int startIndex, int count)
+        {
+            _currentToken = TokenType.None;
+            _toParse = s;
+            _position = startIndex;
+            _maxPos = startIndex + count;
+        }
+
 
         public TokenType CurrentToken
         {

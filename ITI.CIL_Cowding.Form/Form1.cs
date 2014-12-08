@@ -14,7 +14,10 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
 
-        private ExecutionContext _ec; 
+        private ExecutionContext _ec;
+        private StringTokenizer _strtk;
+        private Analyzer _anal;
+        List<InstructionNode> _tree;
 
         public Form1()
         {
@@ -134,6 +137,12 @@ namespace ITI.CIL_Cowding
             }
 
             // Vraie partie execution
+            // On crée notre Tokenizer avec Analyser
+            _strtk = new StringTokenizer(s);
+            _anal = new Analyzer(_strtk);
+            _tree = _anal.ParseBody();
+
+            // Pas de pré-execution pour le moment.
             _ec = new ExecutionContext();
 
 
@@ -201,7 +210,9 @@ namespace ITI.CIL_Cowding
         #region button Continue
         private void butContinue_Click(object sender, EventArgs e)
         {           
-            
+            // Pour le moment on fait comme ça, mais ça sera changé par la suite.
+            _tree[_ec.CurrentLine].Execute(_ec);
+
             UpdateStack();   
         }
         #endregion

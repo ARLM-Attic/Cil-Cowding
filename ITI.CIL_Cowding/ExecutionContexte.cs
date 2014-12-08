@@ -28,9 +28,9 @@ namespace ITI.CIL_Cowding
             _currentLine = 1;
         }
 
-        public int CurrentLine()
+        public int CurrentLine
         {
-            throw new NotImplementedException();
+            get {return _currentLine;}
         }
 
 

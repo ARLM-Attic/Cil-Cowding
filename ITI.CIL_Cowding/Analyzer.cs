@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-
-    class Analyzer
+    public class Analyzer
     {
 
         ITokenizer _tokenizer;
@@ -18,7 +17,7 @@ namespace ITI.CIL_Cowding
             _tokenizer = tokenizer;
         }
 
-        List<InstructionNode> ParseBody()
+        public List<InstructionNode> ParseBody()
         {
 
             List<InstructionNode> body = new List<InstructionNode>();
