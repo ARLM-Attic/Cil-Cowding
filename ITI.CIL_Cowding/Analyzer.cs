@@ -43,7 +43,7 @@ namespace ITI.CIL_Cowding
             */
 
             #region STLOC
-            if (_tokenizer.MatchIdentifier("stloc"))
+            if (_tokenizer.Match(TokenType.Stloc))
             {
                 string varName1;
 
@@ -61,7 +61,7 @@ namespace ITI.CIL_Cowding
             #endregion STLOC
 
             #region LDC
-            else if (_tokenizer.MatchIdentifier("ldc"))
+            else if (_tokenizer.Match(TokenType.Ldc))
             {
                 int constante;
                 if(_tokenizer.IsInteger(out constante)
@@ -77,7 +77,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region LDSTR
-            else if (_tokenizer.MatchIdentifier("ldstr"))
+            else if (_tokenizer.Match(TokenType.Ldstr))
             {
                 string txt;
                 if (_tokenizer.IsString(out txt)
@@ -94,7 +94,7 @@ namespace ITI.CIL_Cowding
             #endregion
             
             #region VAR
-            else if (_tokenizer.MatchIdentifier("var"))
+            else if (_tokenizer.Match(TokenType.Var))
             {
                 // VAR
                 string label;
@@ -115,7 +115,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region NOP
-            else if (_tokenizer.MatchIdentifier("nop"))
+            else if (_tokenizer.Match(TokenType.Nop))
             {
                 if (_tokenizer.Match(TokenType.EndOfLine))
                 {
@@ -130,7 +130,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region CEQ
-            else if (_tokenizer.MatchIdentifier("ceq"))
+            else if (_tokenizer.Match(TokenType.Ceq))
             {                
 
                 if ( _tokenizer.Match(TokenType.EndOfLine) )
@@ -146,7 +146,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region CGT
-            else if (_tokenizer.MatchIdentifier("cgt"))
+            else if (_tokenizer.Match(TokenType.Cgt))
             {                
 
                 if ( _tokenizer.Match(TokenType.EndOfLine) )
@@ -162,7 +162,7 @@ namespace ITI.CIL_Cowding
             #endregion
             
             #region CLT
-            else if (_tokenizer.MatchIdentifier("clt"))
+            else if (_tokenizer.Match(TokenType.Clt))
             {                
 
                 if ( _tokenizer.Match(TokenType.EndOfLine) )
@@ -178,7 +178,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region NOT
-            else if (_tokenizer.MatchIdentifier("not"))
+            else if (_tokenizer.Match(TokenType.Not))
             {                
 
                 if ( _tokenizer.Match(TokenType.EndOfLine) )
@@ -194,7 +194,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region OR
-            else if (_tokenizer.MatchIdentifier("or"))
+            else if (_tokenizer.Match(TokenType.Or))
             {                
 
                 if ( _tokenizer.Match(TokenType.EndOfLine) )
@@ -210,7 +210,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region AND
-            else if (_tokenizer.MatchIdentifier("and"))
+            else if (_tokenizer.Match(TokenType.And))
             {                
 
                 if ( _tokenizer.Match(TokenType.EndOfLine) )
@@ -226,7 +226,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region BRTRUE
-            else if (_tokenizer.MatchIdentifier("brtrue"))
+            else if (_tokenizer.Match(TokenType.Brtrue))
             {
                 // VAR
                 string label;
@@ -245,7 +245,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region BRFALSE
-            else if (_tokenizer.MatchIdentifier("brfalse"))
+            else if (_tokenizer.Match(TokenType.Brfalse))
             {
                 // VAR
                 string label;
@@ -264,7 +264,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region BR
-            else if (_tokenizer.MatchIdentifier("br"))
+            else if (_tokenizer.Match(TokenType.Br))
             {
                 // VAR
                 string label;
@@ -283,7 +283,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region ADD
-            else if (_tokenizer.MatchIdentifier("add"))
+            else if (_tokenizer.Match(TokenType.Add))
             {
                 // VAR
                 
@@ -301,7 +301,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region MUL
-            else if (_tokenizer.MatchIdentifier("mul"))
+            else if (_tokenizer.Match(TokenType.Mul))
             {
                 // VAR
 
@@ -319,7 +319,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region DIV
-            else if (_tokenizer.MatchIdentifier("div"))
+            else if (_tokenizer.Match(TokenType.Div))
             {
                 // VAR
 
@@ -337,7 +337,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region SUB
-            else if (_tokenizer.MatchIdentifier("sub"))
+            else if (_tokenizer.Match(TokenType.Sub))
             {
                 // VAR
 
@@ -355,7 +355,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region NEG
-            else if (_tokenizer.MatchIdentifier("neg"))
+            else if (_tokenizer.Match(TokenType.Neg))
             {
                 // VAR
 
@@ -373,11 +373,9 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region WRITE
-            else if (_tokenizer.MatchIdentifier("write"))
+            else if (_tokenizer.Match(TokenType.Write))
             {
                 // VAR
-
-
                 if (_tokenizer.Match(TokenType.EndOfLine))
                 {
                     body.Add(new WriteNode());
@@ -391,7 +389,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region READ
-            else if (_tokenizer.MatchIdentifier("read"))
+            else if (_tokenizer.Match(TokenType.Read))
             {
                 // VAR
 
@@ -409,7 +407,7 @@ namespace ITI.CIL_Cowding
             #endregion
 
             #region RET
-            else if (_tokenizer.MatchIdentifier("ret"))
+            else if (_tokenizer.Match(TokenType.Ret))
             {
                 // VAR
                 string label;

@@ -84,7 +84,6 @@
     <Compile Include="Stack.cs" />
     <Compile Include="StringTokenizer.cs" />
     <Compile Include="SyntaxError.cs" />
-    <Compile Include="Token.cs" />
     <Compile Include="TokenType.cs" />
     <Compile Include="Value.cs" />
     <Compile Include="Variable.cs" />
