@@ -74,11 +74,13 @@ namespace ITI.CIL_Cowding
             if ( !IsEnd )
             {
                 char c = Read();
-                while ( c != '\n' && !IsEnd )
+                while ( c != ';' && !IsEnd )
                 {
                     Read();
                 }
-                GetNextToken();
+                if (!IsEnd) { GetNextToken(); }
+                else { }
+                
             }
             else
             {
@@ -129,7 +131,7 @@ namespace ITI.CIL_Cowding
                     {
                         _currentToken = TokenType.Number;
                         double val = (int)(c - '0');
-                        while (!IsEnd && Char.IsDigit(c))
+                        while (!IsEnd && Char.IsDigit(_toParse[_position]))
                         {
                             val = val * 10 + (int)(c - '0');
                             Forward();
