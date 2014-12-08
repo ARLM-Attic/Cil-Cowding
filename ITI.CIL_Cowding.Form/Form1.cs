@@ -211,7 +211,7 @@ namespace ITI.CIL_Cowding
         private void butContinue_Click(object sender, EventArgs e)
         {           
             // Pour le moment on fait comme ça, mais ça sera changé par la suite.
-            _tree[_ec.CurrentLine].Execute(_ec);
+            //_tree[_ec.CurrentLine].Execute(_ec);
 
             UpdateStack();   
         }

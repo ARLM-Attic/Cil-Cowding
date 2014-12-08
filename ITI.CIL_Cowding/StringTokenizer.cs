@@ -74,7 +74,7 @@ namespace ITI.CIL_Cowding
             if ( !IsEnd )
             {
                 char c = Read();
-                while ( c != '\n' )
+                while ( c != '\n' && !IsEnd )
                 {
                     Read();
                 }
