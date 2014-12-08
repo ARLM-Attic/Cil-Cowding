@@ -39,8 +39,6 @@ namespace ITI.CIL_Cowding
         /// <returns>Returns true if it's an integer.</returns>
         bool IsInteger( out int value );
 
-        bool IsVarType(out CILNetType value);
-
         /// <summary>
         /// Tests if the value is a double.
         /// </summary>
