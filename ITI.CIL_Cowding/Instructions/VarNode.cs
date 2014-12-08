@@ -11,7 +11,7 @@ namespace ITI.CIL_Cowding
         Value val;
         string label;
 
-        public VarNode(CILNetType type, string label)
+        public VarNode(string type, string label)
         {
 
         }

@@ -15,13 +15,9 @@ namespace ITI.CIL_Cowding
         StringBuilder _buffer;
         TokenType _currentToken;
 
+<<<<<<< HEAD
         public StringTokenizer( string s )
         : this( s, 0, s.Length )
-        {
-        }
-
-        public StringTokenizer(string s, int startIndex)
-            : this(s, startIndex, s.Length)
         {
         }
 
@@ -31,6 +27,19 @@ namespace ITI.CIL_Cowding
         }
 
         public StringTokenizer( string s, int startIndex, int count )
+=======
+        public StringTokenizer(string s)
+            : this(s, 0, s.Length)
+        {
+        }
+
+        public StringTokenizer(string s, int startIndex)
+            : this(s, startIndex, s.Length)
+        {
+        }
+
+        public StringTokenizer(string s, int startIndex, int count)
+>>>>>>> ExecutionContext
         {
             _currentToken = TokenType.None;
             _toParse = s;
@@ -257,7 +266,6 @@ namespace ITI.CIL_Cowding
             return reponse;
         }
 
-        // DONE REDOU
         public bool IsInteger( out int value )
         {
             bool reponse;
@@ -271,10 +279,8 @@ namespace ITI.CIL_Cowding
                 reponse = false;
                 value = 0;
             }
-
             GetNextToken();
             return reponse;
-
         }
 
         // DONE REDOU

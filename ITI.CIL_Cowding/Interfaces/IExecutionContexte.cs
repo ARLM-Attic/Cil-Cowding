@@ -16,7 +16,10 @@ namespace ITI.CIL_Cowding
         {
             get;
         }
-        int CurrentLine();
+        int CurrentLine
+        {
+            get;
+        }
 
     }
 }
