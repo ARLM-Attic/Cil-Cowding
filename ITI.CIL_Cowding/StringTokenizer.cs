@@ -20,10 +20,12 @@ namespace ITI.CIL_Cowding
         {
         }
 
-        public StringTokenizer( string s, int startIndex )
-        : this( s, startIndex, s.Length )
+        public StringTokenizer(string s, int startIndex)
+            : this(s, startIndex, s.Length)
         {
         }
+
+
 
         public StringTokenizer( string s, int startIndex, int count )
         {
@@ -32,6 +34,7 @@ namespace ITI.CIL_Cowding
             _position = startIndex;
             _maxPos = startIndex + count;
         }
+
 
         public TokenType CurrentToken
         {
@@ -228,6 +231,7 @@ namespace ITI.CIL_Cowding
             }
         }
 
+        // DONE REDOU
         public bool IsInteger( out int value )
         {
             bool reponse;
@@ -241,8 +245,10 @@ namespace ITI.CIL_Cowding
                 reponse = false;
                 value = 0;
             }
+
             GetNextToken();
             return reponse;
+
         }
 
         // DONE REDOU

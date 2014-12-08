@@ -13,9 +13,11 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-		Execution run_programme;
-        private Stack<IVariable> stack;
-        private CIL_Cowding.Container container;
+
+        private ExecutionContext _ec;
+        private StringTokenizer _strtk;
+        private Analyzer _anal;
+        List<InstructionNode> _tree;
 
         public Form1()
         {
@@ -116,18 +118,12 @@ namespace ITI.CIL_Cowding
         private void butStepByStep_Click(object sender, EventArgs e)
         {
             
-
+            // Graphique
             pictureBox1.Refresh();
             richTextBox.ReadOnly = true;
-
-			run_programme = new Execution(richTextBox.Text);
 			
             g = pictureBox1.CreateGraphics();
             string s = richTextBox.Text;
-            
-            Stack<IVariable> var = new Stack<IVariable>();
-
-            
 
             Font drawFont = new Font("Arial", 10);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -139,6 +135,18 @@ namespace ITI.CIL_Cowding
                 butStop.Visible = true;               
                 
             }
+
+            // Vraie partie execution
+            // On crée notre Tokenizer avec Analyser
+            _strtk = new StringTokenizer(s);
+            _anal = new Analyzer(_strtk);
+            _tree = _anal.ParseBody();
+
+            // Pas de pré-execution pour le moment.
+            _ec = new ExecutionContext();
+
+
+
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
@@ -202,8 +210,9 @@ namespace ITI.CIL_Cowding
         #region button Continue
         private void butContinue_Click(object sender, EventArgs e)
         {           
-            
-            run_programme.ExecLine();
+            // Pour le moment on fait comme ça, mais ça sera changé par la suite.
+            _tree[_ec.CurrentLine].Execute(_ec);
+
             UpdateStack();   
         }
         #endregion

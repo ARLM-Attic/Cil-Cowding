@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-
-    class Analyzer
+    public class Analyzer
     {
 
         ITokenizer _tokenizer;
@@ -18,17 +17,18 @@ namespace ITI.CIL_Cowding
             _tokenizer = tokenizer;
         }
 
-        List<InstructionNode> ParseBody()
+        public List<InstructionNode> ParseBody()
         {
 
             List<InstructionNode> body = new List<InstructionNode>();
 
-            /*
+            
+           
             #region TEMPLATE
+            /*
             else if (_tokenizer.MatchIdentifier("XXX"))
             {
                 // VAR
-
                 if (_tokenizer.IsInteger(out constante)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
@@ -40,8 +40,10 @@ namespace ITI.CIL_Cowding
                     _tokenizer.ForwardToNextLine();
                 }
             }
-            #endregion
             */
+            #endregion 
+
+
 
             #region STLOC
             if (_tokenizer.MatchIdentifier("stloc"))
@@ -99,9 +101,9 @@ namespace ITI.CIL_Cowding
             {
                 // VAR
                 string label;
-                CILNetType vartype;
+                string vartype;
 
-                if (_tokenizer.IsVarType(out vartype)
+                if (_tokenizer.IsIdentifier(out vartype)
                     && _tokenizer.IsIdentifier(out label)
                     && _tokenizer.Match(TokenType.EndOfLine))
                 {
@@ -377,8 +379,6 @@ namespace ITI.CIL_Cowding
             else if (_tokenizer.MatchIdentifier("write"))
             {
                 // VAR
-
-
                 if (_tokenizer.Match(TokenType.EndOfLine))
                 {
                     body.Add(new WriteNode());
