@@ -432,6 +432,7 @@ namespace ITI.CIL_Cowding
 
                 else
                 {
+                    AddError("What are you saying ?!");
                     _tokenizer.ForwardToNextLine();
                 }
                 
