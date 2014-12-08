@@ -7,12 +7,16 @@ namespace ITI.CIL_Cowding.Tests
     public class Test
     {
         [Test]
-        public void If_the_token_is_the_right_token()
+        public void if_we_have_the_right_tokens()
         {
-            //string word = "add";
-            
-            //Assert.That();
+            // ARRANGE
+            StringTokenizer st = new StringTokenizer("ret\n");
 
+            // ACT
+           TokenType tk = st.GetNextToken();
+
+            // ASSERT
+            Assert.That( tk, Is.EqualTo( TokenType.Ret ) );
         }
     }
 }

@@ -15,9 +15,22 @@ namespace ITI.CIL_Cowding
         StringBuilder _buffer;
         TokenType _currentToken;
 
-        public StringTokenizer()
+        public StringTokenizer( string s )
+        : this( s, 0, s.Length )
         {
+        }
 
+        public StringTokenizer( string s, int startIndex )
+        : this( s, startIndex, s.Length )
+        {
+        }
+
+        public StringTokenizer( string s, int startIndex, int count )
+        {
+            _currentToken = TokenType.None;
+            _toParse = s;
+            _position = startIndex;
+            _maxPos = startIndex + count;
         }
 
         public TokenType CurrentToken
@@ -77,8 +90,7 @@ namespace ITI.CIL_Cowding
             ++_position;
         }
 
-        // Je touche pas à ça, ça fais peur tout ça :/
-        TokenType GetNextToken()
+        public TokenType GetNextToken()
         {
             _buffer = new StringBuilder();
             if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
@@ -221,7 +233,6 @@ namespace ITI.CIL_Cowding
             return identifier == "var";
         }
 
-        // DONE REDOU
         public bool IsIdentifier( out string id )
         {
             bool reponse;
@@ -240,7 +251,6 @@ namespace ITI.CIL_Cowding
             return reponse;
         }
 
-        // DONE REDOU
         public bool IsInteger( out int value )
         {
             bool reponse;
@@ -254,10 +264,8 @@ namespace ITI.CIL_Cowding
                 reponse = false;
                 value = 0;
             }
-
             GetNextToken();
             return reponse;
-
         }
 
         // DONE REDOU

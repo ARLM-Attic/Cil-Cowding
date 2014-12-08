@@ -26,6 +26,11 @@ namespace ITI.CIL_Cowding
             private set { _message = value; }
         }
 
+        public SyntaxError(string msg)
+        {
+            _message = msg;
+        }
+
         public SyntaxError(ITokenizer t, string msg)
         {
             Line = t.CurrentLine;
