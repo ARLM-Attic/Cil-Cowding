@@ -25,10 +25,7 @@ namespace ITI.CIL_Cowding
         {
         }
 
-        public StringTokenizer( string s, int startIndex )
-        : this( s, startIndex, s.Length )
-        {
-        }
+
 
         public StringTokenizer( string s, int startIndex, int count )
         {
