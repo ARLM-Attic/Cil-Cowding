@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+    /// <summary>
+    /// Add two values, returning a new value
+    /// </summary>
     public class AddNode : BinaryOperatorNode
     {
         protected override IValue Operator( IValue value1, IValue value2 )

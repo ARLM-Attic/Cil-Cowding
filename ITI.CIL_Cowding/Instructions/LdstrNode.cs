@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class LdstrNode : InstructionNode
     {
         private string _str;

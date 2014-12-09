@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class OrNode : BinaryBooleanOperatorNode
     {
         protected override IValue Operator( IValue value1, IValue value2 )

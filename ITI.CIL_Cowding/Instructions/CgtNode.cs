@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CgtNode : BinaryComparatorNode
     {
         protected override IValue Comparator( IValue value1, IValue value2 )
