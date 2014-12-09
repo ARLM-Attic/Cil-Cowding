@@ -8,9 +8,9 @@ namespace ITI.CIL_Cowding
 {
     public class WriteNode : InstructionNode
     {
-        public override void Execute(IExecutionContext ctx)
+        public override void Execute( IExecutionContext ctx )
         {
-            throw new NotImplementedException();
+            Console.WriteLine( ctx.Stack.Pop().Data );
         }
     }
 }

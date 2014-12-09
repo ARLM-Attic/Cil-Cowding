@@ -8,9 +8,10 @@ namespace ITI.CIL_Cowding
 {
     public class ReadNode : InstructionNode
     {
-        public override void Execute(IExecutionContext ctx)
+        public override void Execute( IExecutionContext ctx )
         {
-            throw new NotImplementedException();
+            Console.Write( "Input ==> " );
+            ctx.Stack.Push( new Value( new CILNetType( typeof( int ) ), Console.ReadLine() ) );
         }
     }
 }

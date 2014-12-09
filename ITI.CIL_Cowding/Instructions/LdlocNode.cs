@@ -8,9 +8,14 @@ namespace ITI.CIL_Cowding
 {
     public class LdlocNode : InstructionNode
     {
-        public override void Execute(IExecutionContext ctx)
+        private string _label;
+        public LdlocNode( string label )
         {
-            throw new NotImplementedException();
+            this._label = label;
+        }
+        public override void Execute( IExecutionContext ctx )
+        {
+            ctx.Stack.Push( ctx.Stack.GetLocalVar( this._label ) );
         }
     }
 }

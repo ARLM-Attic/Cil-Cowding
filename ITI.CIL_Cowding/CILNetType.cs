@@ -37,7 +37,66 @@ namespace ITI.CIL_Cowding
                 }
             }
         }
-
+        public bool IsBool()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Boolean;
+        }
+        public bool IsInt32()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Int32;
+        }
+        public bool IsInt16()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Int16;
+        }
+        public bool IsInt64()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Int64;
+        }
+        public bool IsUInt32()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.UInt32;
+        }
+        public bool IsUInt16()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.UInt16;
+        }
+        public bool IsUInt64()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.UInt64;
+        }
+        public bool IsChar()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Char;
+        }
+        public bool IsSByte()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.SByte;
+        }
+        public bool IsByte()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Byte;
+        }
+        public bool IsDouble()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Double;
+        }
+        public bool IsFloat()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Single;
+        }
+        public bool IsDecimal()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.Decimal;
+        }
+        public bool IsDateTime()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.DateTime;
+        }
+        public bool IsString()
+        {
+            return Type.GetTypeCode( this._type ) == TypeCode.String;
+        }
         static int StackSizeOf( Type t )
         {
             if ( !t.IsValueType ) return 4;

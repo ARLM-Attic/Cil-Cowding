@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class AndNode : InstructionNode
+    public class AndNode : BinaryBooleanOperatorNode
     {
-        public override void Execute(IExecutionContext ctx)
+        protected override IValue Operator( IValue value1, IValue value2 )
         {
-            throw new NotImplementedException();
+            IValue result;
+            if ( Convert.ToBoolean( value1.Data ) && Convert.ToBoolean( value2.Data ) )
+            {
+                result = new Value( value1.Type, 1 );
+            }
+            else
+            {
+                result = new Value( value1.Type, 0 );
+            }
+            return result;
         }
     }
 }

@@ -20,7 +20,8 @@ namespace ITI.CIL_Cowding
         void CallFonction(IFonction fct);
         
         void CloseFonction();
-
+        IValue GetLocalVar( string label );
+        void SetLocalVar( IValue var );
 
 
 
