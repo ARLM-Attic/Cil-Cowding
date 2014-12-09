@@ -60,6 +60,7 @@ namespace ITI.CIL_Cowding
                     {
                         AddError("Local variable name expected.");
                         _tokenizer.ForwardToNextLine();
+
                     }
                 }
                 #endregion STLOC
