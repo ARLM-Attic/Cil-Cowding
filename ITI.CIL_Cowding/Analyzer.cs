@@ -183,7 +183,7 @@ namespace ITI.CIL_Cowding
                         && _tokenizer.IsIdentifier(out label)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new VarNode(vartype, label));
+                        fct_content.Add(new VarNode(vartype));
                     }
                     else
                     {

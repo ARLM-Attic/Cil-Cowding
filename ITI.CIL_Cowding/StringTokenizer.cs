@@ -190,6 +190,7 @@ namespace ITI.CIL_Cowding
                     // We look if the thing that we are receiving is a string
                     else if (c == '\"')
                     {
+                        #region String
                         _currentToken = TokenType.String;
                         c = Peek();
                         while (!IsEnd && c != '"')
