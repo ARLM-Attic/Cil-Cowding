@@ -33,7 +33,7 @@ namespace ITI.CIL_Cowding.Tests
         [Test]
         public void skip_comments()
         {
-            StringTokenizer st = new StringTokenizer("// hey this is a comment\nldc 4;");
+            StringTokenizer st = new StringTokenizer("// comment\nldc 4;");
             TokenType tk = st.CurrentToken;
             Assert.That(tk, Is.EqualTo(TokenType.Identifier));
         }

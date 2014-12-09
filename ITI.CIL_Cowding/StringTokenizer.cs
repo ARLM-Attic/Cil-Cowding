@@ -74,13 +74,11 @@ namespace ITI.CIL_Cowding
             if ( !IsEnd )
             {
                 char c = Read();
-                while ( (c != ';' || c != '\n') && !IsEnd )
+                while ( c != ';' || c != '\n' )
                 {
-                    Read();
+                    c = Read();
                 }
-                if (!IsEnd) { GetNextToken(); }
-                else { }
-                
+                if( !IsEnd ) GetNextToken();
             }
             else
             {
@@ -139,10 +137,9 @@ namespace ITI.CIL_Cowding
                 case ',': _currentToken = TokenType.Comma; break;
                 case '/':
                     {
-                        if ( Peek() == '/') // Slash Comments 
+                        if ( !IsEnd && Peek() == '/') // Slash Comments 
                         {
                             ForwardToNextLine(); 
-                            GetNextToken();
                         } 
                         else if( Peek() != '*') // Block Comments
                         {
@@ -155,6 +152,8 @@ namespace ITI.CIL_Cowding
                                 GetNextToken();
                             }
                         }
+                        //GetNextToken();
+
                         break;
                     }
                 default:
