@@ -114,7 +114,7 @@ namespace ITI.CIL_Cowding
                 c = Read();
             }
 
-            switch(c)
+            switch( c )
             {
                 // Terminal chars
                 case '-': _currentToken = TokenType.Minus; break;
@@ -127,6 +127,7 @@ namespace ITI.CIL_Cowding
                 case '.': _currentToken = TokenType.Dot; break;
                 case ':': _currentToken = TokenType.Colon; break;
                 case ';': _currentToken = TokenType.SemiColon; break;
+                case ',': _currentToken = TokenType.Comma; break;
 
                 default:
                     // We look if the thing that we are receiving is a number
@@ -212,7 +213,6 @@ namespace ITI.CIL_Cowding
             return _currentToken;
         }
 
-
         public bool MatchIdentifier( string identifier )
         {
             if( _currentToken == TokenType.Identifier && _idOrStringValue == identifier )
@@ -242,7 +242,6 @@ namespace ITI.CIL_Cowding
             }
         }
 
-        // DONE REDOU
         public bool IsInteger( out int value )
         {
             bool reponse;
@@ -262,7 +261,6 @@ namespace ITI.CIL_Cowding
 
         }
 
-        // DONE REDOU
         public bool IsDouble( out double value )
         {
             bool reponse;
@@ -281,7 +279,6 @@ namespace ITI.CIL_Cowding
             return reponse;
         }
 
-        // DONE REDOU
         public bool IsString( out string value )
         {
             bool reponse;
@@ -300,7 +297,6 @@ namespace ITI.CIL_Cowding
             return reponse;
         }
 
-        // DONE
         public bool Match( TokenType t )
         {
             if ( _currentToken == t )

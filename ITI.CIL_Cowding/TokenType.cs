@@ -17,6 +17,7 @@ namespace ITI.CIL_Cowding
         Colon,              // :
         DoubleColon,        // ::
         SemiColon,          // ;
+        Comma,              // ,
         Number,
         String,
         Error,
