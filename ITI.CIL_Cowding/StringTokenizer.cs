@@ -33,7 +33,7 @@ namespace ITI.CIL_Cowding
             _toParse = s;
             _position = startIndex;
             _maxPos = startIndex + count;
-
+            //init
             GetNextToken();
 
         }
@@ -125,7 +125,16 @@ namespace ITI.CIL_Cowding
                 case '{': _currentToken = TokenType.OpenCurly ; break;
                 case '}': _currentToken = TokenType.ClosedCurly; break;
                 case '.': _currentToken = TokenType.Dot; break;
-                case ':': _currentToken = TokenType.Colon; break;
+                case ':':
+                    {
+                        if( !IsEnd && Peek() == ':' )
+                        {
+                            Forward();
+                            _currentToken = TokenType.DoubleColon;
+                        }
+                        else _currentToken = TokenType.Colon;
+                        break;
+                    }
                 case ';': _currentToken = TokenType.SemiColon; break;
                 case ',': _currentToken = TokenType.Comma; break;
 
@@ -135,6 +144,7 @@ namespace ITI.CIL_Cowding
                     #region Number
 
                     {
+                        #region Number
                         _currentToken = TokenType.Number;
                         double val = (int)(c - '0');
                         while (!IsEnd && Char.IsDigit(_toParse[_position]))
@@ -143,12 +153,13 @@ namespace ITI.CIL_Cowding
                             Forward();
                         }
                         _doubleValue = val;
+                        #endregion number
                     }
-                    #endregion number
                     // Else look if the thing that we are receiving is a letter
                     else if (Char.IsLetter(c) || c == '_')
                     #region Letter
                     {
+                        #region Identifier
                         _currentToken = TokenType.Identifier;
                         _buffer.Append(c);
                         //Forward();
@@ -159,14 +170,14 @@ namespace ITI.CIL_Cowding
                         }
 
                         _idOrStringValue = _buffer.ToString();
-
+                        #endregion
                     }
-                    #endregion Letter
                     // We look if the thing that we are receiving is a string
                     else if (c == '"')
                     #region String
 
                     {
+                        #region String
                         _currentToken = TokenType.String;
                         c = Read();
                         while (!IsEnd && c != '"')
@@ -203,8 +214,8 @@ namespace ITI.CIL_Cowding
                         _buffer.Append(c);
                         Forward();
                         _idOrStringValue = _buffer.ToString();
+                        #endregion String
                     }
-                    #endregion String
                     // Else, Error...
                     else _currentToken = TokenType.Error;
                     break;
