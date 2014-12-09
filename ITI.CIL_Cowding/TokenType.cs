@@ -7,12 +7,16 @@ namespace ITI.CIL_Cowding
         None,
         Var,
         Minus,
-        OpenPar, 
-        ClosedPar,
-        Dot,
-        Colon, 
-        DoubleColon,
-        SemiColon,
+        OpenPar,            // (
+        ClosedPar,          // )
+        OpenBracket,        // [
+        ClosedBracket,      // ]
+        OpenCurly,          // {
+        ClosedCurly,        // }
+        Dot,                // .
+        Colon,              // :
+        DoubleColon,        // ::
+        SemiColon,          // ;
         Number,
         String,
         Error,

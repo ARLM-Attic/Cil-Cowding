@@ -126,8 +126,9 @@ namespace ITI.CIL_Cowding
 
                 default:
                     // We look if the thing that we are receiving is a number
-                    #region Number
                     if (char.IsDigit(c))
+                    #region Number
+
                     {
                         _currentToken = TokenType.Number;
                         double val = (int)(c - '0');
@@ -140,8 +141,8 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion number
                     // Else look if the thing that we are receiving is a letter
-                    #region Letter
                     else if (Char.IsLetter(c) || c == '_')
+                    #region Letter
                     {
                         _currentToken = TokenType.Identifier;
                         _buffer.Append(c);
@@ -157,8 +158,9 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion Letter
                     // We look if the thing that we are receiving is a string
-                    #region String
                     else if (c == '"')
+                    #region String
+
                     {
                         _currentToken = TokenType.String;
                         c = Read();
