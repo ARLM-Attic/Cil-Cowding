@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
     public class CILTypeManager
     {
         readonly Dictionary<string, ICILType> _types;
-
+        private readonly List<string> _namespaces;
         public CILTypeManager()
         {
             _types = new Dictionary<string, ICILType>();
