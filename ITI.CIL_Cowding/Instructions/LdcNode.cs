@@ -8,14 +8,14 @@ namespace ITI.CIL_Cowding
 {
     public class LdcNode : InstructionNode
     {
-        int _val;
-        public LdcNode(int val)
+        private int _val;
+        public LdcNode( int val )
         {
-            _val = val;
+            this._val = val;
         }
-        public override void Execute(IExecutionContext ctx)
+        public override void Execute( IExecutionContext ctx )
         {
-            throw new NotImplementedException();
+            ctx.Stack.Push( new Value( new CILNetType( typeof( int ) ), this._val ) );
         }
     }
 }

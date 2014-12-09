@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class CltNode : InstructionNode
+    public class CltNode : BinaryComparatorNode
     {
-        public override void Execute(IExecutionContext ctx)
+        protected override IValue Comparator( IValue value1, IValue value2 )
         {
-            throw new NotImplementedException();
+            IValue result;
+            if ( (int)value1.Data < (int)value2.Data )
+            {
+                result = new Value( value1.Type, 1 );
+            }
+            else
+            {
+                result = new Value( value1.Type, 0 );
+            }
+            return result;
         }
     }
 }

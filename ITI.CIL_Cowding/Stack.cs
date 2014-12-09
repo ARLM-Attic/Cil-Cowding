@@ -37,7 +37,14 @@ namespace ITI.CIL_Cowding
 		}
 
 		// Methods
-        public static IVariable GetLocalVar(String label) {
+        public IValue GetLocalVar( string label )
+        {
+            return new Value( null, null );
+        }
+        public void SetLocalVar( IValue var )
+        {
+        }
+        public static IVariable GetLocalVare(String label) {
 			Container frame = Stack.LastFrame();
 
 			if(frame.IsExistVar(label)) {

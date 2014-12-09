@@ -6,21 +6,17 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    class VarNode : InstructionNode
+    internal class VarNode : InstructionNode
     {
-        Value val;
-        string label;
-
-        public VarNode(string type, string label)
+        private IValue val;
+        private string label;
+        public VarNode( CILNetType type, string label )
         {
-
+            this.val = new Value( type, null );
         }
-
-        public override void Execute(IExecutionContext ctx)
+        public override void Execute( IExecutionContext ctx )
         {
-            throw new NotImplementedException();
+            ctx.Stack.SetLocalVar( this.val );
         }
-
-
     }
 }

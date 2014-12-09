@@ -28,6 +28,20 @@ namespace ITI.CIL_Cowding
         /// Gets the size of this type in Bytes on the stack (4 for reference types).
         /// </summary>
         int StackSize { get; }
-
+        bool IsBool();
+        bool IsInt32();
+        bool IsInt64();
+        bool IsInt16();
+        bool IsUInt32();
+        bool IsUInt16();
+        bool IsUInt64();
+        bool IsSByte();
+        bool IsByte();
+        bool IsFloat();
+        bool IsDouble();
+        bool IsDecimal();
+        bool IsChar();
+        bool IsDateTime();
+        bool IsString();
     }
 }
