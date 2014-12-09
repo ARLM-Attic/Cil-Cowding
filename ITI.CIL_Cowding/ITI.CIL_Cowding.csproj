@@ -54,10 +54,12 @@
     <Compile Include="Instructions\AddNode.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Instructions\DivNode.cs" />
+    <Compile Include="Instructions\FonctionNode.cs" />
     <Compile Include="Instructions\LdcNode.cs" />
     <Compile Include="Instructions\LdstrNode.cs" />
     <Compile Include="Instructions\MulNode.cs" />
     <Compile Include="Instructions\NegNode.cs" />
+    <Compile Include="Instructions\Node.cs" />
     <Compile Include="Instructions\NopNode.cs" />
     <Compile Include="Instructions\ReadNode.cs" />
     <Compile Include="Instructions\RetNode.cs" />
