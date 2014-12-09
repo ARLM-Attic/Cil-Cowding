@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class FonctionNode : Node
+    public class FunctionNode : Node
     {
         string _nomfct;
         string _typeOfReturn;
@@ -20,7 +20,7 @@ namespace ITI.CIL_Cowding
 
         }
 
-        public FonctionNode(string name, string typereturn, List<InstructionNode> code, List<string> parametres)
+        public FunctionNode(string name, string typereturn, List<InstructionNode> code, List<string> parametres)
         {
             _nomfct = name;
             _typeOfReturn = typereturn;

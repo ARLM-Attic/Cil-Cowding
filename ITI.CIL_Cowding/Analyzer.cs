@@ -18,10 +18,11 @@ namespace ITI.CIL_Cowding
             _errors = new List<SyntaxError>();
         }
 
-        public List<FonctionNode> ParseBody()
+        public List<FunctionNode> ParseBody()
         {
 
-            List<FonctionNode> body = new List<FonctionNode>();
+            List<FunctionNode> methods = new List<FunctionNode>();
+            //List<FieldDeclarartionNode> methods = new List<FieldDeclarartionNode>();
 
             while (!_tokenizer.IsEnd)
             {
@@ -44,62 +45,76 @@ namespace ITI.CIL_Cowding
             */
                 #endregion
 
-                /*
-                 *  DEFINITION D'UNE FONCTION :
-                 *  function int givemeyourage (string,int) {
-                 *  
-                 *  // INSTRUCTION NODES
-                 * 
-                 * }
-                 * */
-
-
-                // Si on trouve une déclaration de fct, 
-                if(_tokenizer.MatchIdentifier("function")) {
-                    string name;
-                    string typeOfReturn;
-                    List<string>parametres = new List<string>();
-
-                    // Si ensuite on a les autres infos et une ouverture de parenthèse
-                    if(_tokenizer.IsIdentifier(out typeOfReturn)
-                        && _tokenizer.IsIdentifier(out name)
-                        && _tokenizer.Match(TokenType.OpenPar)) {
-
-                        // On prend tout les params
-                        while(!_tokenizer.Match(TokenType.ClosedPar)) {
-                            string type_parametre;
-                            if (_tokenizer.IsIdentifier(out type_parametre) ) {
-                                parametres.Add(type_parametre);
-                            }
-                            _tokenizer.Match(TokenType.Comma);
-                        }
-                        if( _tokenizer.Match(TokenType.OpenCurly)) {
-                            FonctionNode fct = new FonctionNode(name, typeOfReturn, ParseFunction(), parametres );
-                            body.Add(fct);
-
-                        } else {
-                            AddError("Arrive pas à commencer la fonction :'(");
-                        }
-
-
-                        }
-                    else
-                    {
-                        AddError("Fct creation plante...");
-                    }
-
-
-                } else {
-
-                    AddError("Function declaration expected.");
-                    _tokenizer.ForwardToNextLine();
+                FunctionNode f = IsFunction();
+                if (f != null) methods.Add(f);
+                else
+                {
+                    //if (HasError) return null;
+                    //FieldDeclarartionNode d = IsFieldDeclaration();
+                    //if (d != null) fields.Add(d);
+                    //else
+                    //{
+                    ///  if (HasError) return null;
+                    //   if( !_tokenizer.Match( TokenType.ClosedCurly ) )
+                    //    {
+                            AddError( "Expected ending }, function or field declaration." );
+                    //}
+                    //}
                 }
                 
             }
-            return body;
+            return methods;
         }
 
-        private List<InstructionNode> ParseFunction()
+
+        FunctionNode IsFunction()
+        {
+            if (!_tokenizer.MatchIdentifier("function")) return null;
+   
+            string name;
+            string typeOfReturn;
+            List<string> parametres = new List<string>();
+
+            // Si ensuite on a les autres infos et une ouverture de parenthèse
+            if (_tokenizer.IsIdentifier(out typeOfReturn)
+                && _tokenizer.IsIdentifier(out name)
+                && _tokenizer.Match(TokenType.OpenPar))
+            {
+
+                // On prend tout les params
+                while (!_tokenizer.Match(TokenType.ClosedPar))
+                {
+                    string type_parametre;
+                    if (_tokenizer.IsIdentifier(out type_parametre))
+                    {
+                        parametres.Add(type_parametre);
+                    }
+                    else
+                    {
+                        AddError("PB !");
+                        return null;
+                    }
+                    _tokenizer.Match(TokenType.Comma);
+                }
+                if (_tokenizer.Match(TokenType.OpenCurly))
+                {
+
+                    FunctionNode fct = new FunctionNode(name, typeOfReturn, ParseFunctionBody(), parametres);
+                    return fct;
+                }
+                else
+                {
+                    AddError("Arrive pas à commencer la fonction :'(");
+                }
+            }
+            else
+            {
+                AddError("Fct creation plante...");
+            }
+            return null;
+        }
+
+        private List<InstructionNode> ParseFunctionBody()
         {
             List<InstructionNode> fct_content = new List<InstructionNode>();
 
@@ -125,7 +140,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion STLOC
                 }
-
                 else if (_tokenizer.MatchIdentifier("ldc"))
                 {
                     #region LDC
@@ -142,9 +156,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("ldstr"))
                 {
                     #region LDSTR
@@ -161,9 +172,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("var"))
                 {
                     #region VAR
@@ -184,9 +192,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("nop"))
                 {
                     #region NOP
@@ -201,9 +206,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("ceq"))
                 {
                     #region CEQ
@@ -219,9 +221,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("cgt"))
                 {
                     #region CGT
@@ -236,9 +235,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("clt"))
                 {
                     #region CLT
@@ -253,9 +249,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("not"))
                 {
                     #region NOT
@@ -271,9 +264,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("or"))
                 {
                     #region OR
@@ -288,9 +278,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("and"))
                 {
                     #region AND
@@ -306,9 +293,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("brtrue"))
                 {
                     #region BRTRUE
@@ -327,9 +311,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
-
                 else if (_tokenizer.MatchIdentifier("brfalse"))
                 {
                     #region BRFALSE
