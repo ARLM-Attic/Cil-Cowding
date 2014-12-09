@@ -169,7 +169,7 @@ namespace ITI.CIL_Cowding
                             Forward();
                         }
                         _doubleValue = val;
-                        #endregion number
+                        #endregion Number
                     }
                     // Else look if the thing that we are receiving is a letter
                     else if (Char.IsLetter(c) || c == '_')
@@ -189,7 +189,6 @@ namespace ITI.CIL_Cowding
                     }
                     // We look if the thing that we are receiving is a string
                     else if (c == '\"')
-                    #region String
                     {
                         _currentToken = TokenType.String;
                         c = Peek();
