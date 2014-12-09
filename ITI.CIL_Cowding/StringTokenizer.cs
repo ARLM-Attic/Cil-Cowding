@@ -120,6 +120,10 @@ namespace ITI.CIL_Cowding
                 case '-': _currentToken = TokenType.Minus; break;
                 case '(': _currentToken = TokenType.OpenPar; break;
                 case ')': _currentToken = TokenType.ClosedPar; break;
+                case '[': _currentToken = TokenType.OpenBracket ; break;
+                case ']': _currentToken = TokenType.ClosedBracket ; break;
+                case '{': _currentToken = TokenType.OpenCurly ; break;
+                case '}': _currentToken = TokenType.ClosedCurly; break;
                 case '.': _currentToken = TokenType.Dot; break;
                 case ':': _currentToken = TokenType.Colon; break;
                 case ';': _currentToken = TokenType.SemiColon; break;
