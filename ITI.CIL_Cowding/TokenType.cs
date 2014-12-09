@@ -20,6 +20,9 @@ namespace ITI.CIL_Cowding
         EndOfLine,
         ErrorUnterminatedString,
         EndOfInput,
-        ErrorInvalidUnicodeInString
+        ErrorInvalidUnicodeInString,
+        Comma,
+        OpenCurly,
+        ClosedCurly
     }
 }
