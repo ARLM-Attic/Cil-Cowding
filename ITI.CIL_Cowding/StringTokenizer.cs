@@ -74,7 +74,7 @@ namespace ITI.CIL_Cowding
             if ( !IsEnd )
             {
                 char c = Read();
-                while ( c != ';' && !IsEnd )
+                while ( (c != ';' || c != '\n') && !IsEnd )
                 {
                     Read();
                 }
@@ -137,12 +137,29 @@ namespace ITI.CIL_Cowding
                     }
                 case ';': _currentToken = TokenType.SemiColon; break;
                 case ',': _currentToken = TokenType.Comma; break;
-
+                case '/':
+                    {
+                        if ( Peek() == '/') // Slash Comments 
+                        {
+                            ForwardToNextLine(); 
+                            GetNextToken();
+                        } 
+                        else if( Peek() != '*') // Block Comments
+                        {
+                            while( !IsEnd && Peek() != '*' )
+                            {
+                                Forward();
+                            }
+                            if ( !IsEnd && Peek() == '/' )
+                            {
+                                GetNextToken();
+                            }
+                        }
+                        break;
+                    }
                 default:
                     // We look if the thing that we are receiving is a number
                     if (char.IsDigit(c))
-                    #region Number
-
                     {
                         #region Number
                         _currentToken = TokenType.Number;
@@ -157,7 +174,6 @@ namespace ITI.CIL_Cowding
                     }
                     // Else look if the thing that we are receiving is a letter
                     else if (Char.IsLetter(c) || c == '_')
-                    #region Letter
                     {
                         #region Identifier
                         _currentToken = TokenType.Identifier;
@@ -170,22 +186,19 @@ namespace ITI.CIL_Cowding
                         }
 
                         _idOrStringValue = _buffer.ToString();
-                        #endregion
+                        #endregion Identifier
                     }
                     // We look if the thing that we are receiving is a string
-                    else if (c == '"')
+                    else if (c == '\"')
                     #region String
-
                     {
-                        #region String
                         _currentToken = TokenType.String;
-                        c = Read();
+                        c = Peek();
                         while (!IsEnd && c != '"')
                         {
                             if ( IsEnd ) _currentToken = TokenType.ErrorUnterminatedString;
                             if (c == '\\')
                             {
-                                c = Read();
                                 if (c != '"')
                                 {
                                     if (IsEnd) return _currentToken = TokenType.ErrorUnterminatedString;
@@ -210,6 +223,8 @@ namespace ITI.CIL_Cowding
                                     c = (char)val;
                                 }
                             }
+                            Forward();
+                            c = Peek();
                         }
                         _buffer.Append(c);
                         Forward();
