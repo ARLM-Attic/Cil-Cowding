@@ -8,19 +8,14 @@ namespace ITI.CIL_Cowding
 {
     public interface IStack
     {
-
-        Stack<IVariable> GetTopFrame ();
-
-        IFrame GetLastFrame();
-
         void Push(IValue var);
 
         IValue Pop();
 
-        void CallFonction(IFonction fct);
+        void CallFunction(IFunction fct);
         
-        void CloseFonction();
-        IValue GetLocalVar( string label );
+        void CloseFunction();
+        IValue GetLocalVar( int index );
         void SetLocalVar( IValue var );
 
 

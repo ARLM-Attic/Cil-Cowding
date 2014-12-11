@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Push num of type int32 onto the stack as int32.
     /// </summary>
-    public class LdstrNode : InstructionNode
+    public class LdcNode : InstructionNode
     {
-        private string _str;
-        public LdstrNode( string str )
+        private int _val;
+        public LdcNode( int val )
         {
-            this._str = str;
+            this._val = val;
         }
         public override void Execute( IExecutionContext ctx )
         {
-            ctx.Stack.Push( new Value( new CILNetType( typeof( string ) ), this._str ) );
+            ctx.Stack.Push( new Value( new CILNetType( typeof( int ) ), this._val ) );
         }
     }
 }

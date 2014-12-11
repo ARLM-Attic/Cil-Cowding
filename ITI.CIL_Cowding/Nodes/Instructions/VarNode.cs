@@ -12,10 +12,10 @@ namespace ITI.CIL_Cowding
     internal class VarNode : InstructionNode
     {
         private IValue val;
-        private string label;
+        private string _type;
         public VarNode( string type )
         {
-            
+            _type = type;
         }
         public override void Execute( IExecutionContext ctx )
         {

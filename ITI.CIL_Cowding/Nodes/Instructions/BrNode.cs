@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Branch to target.
     /// </summary>
-    public class BrfalseNode : InstructionNode
+    public class BrNode : InstructionNode
     {
         string _label;
 
-        public BrfalseNode(string label)
+        public BrNode(string label)
         {
             _label = label;
         }

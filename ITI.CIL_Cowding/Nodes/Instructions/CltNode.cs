@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Push 1 (of type int32) if value2 > value1, else push 0
     /// </summary>
-    public class OrNode : BinaryBooleanOperatorNode
+    public class CltNode : BinaryComparatorNode
     {
-        protected override IValue Operator( IValue value1, IValue value2 )
+        protected override IValue Comparator( IValue value1, IValue value2 )
         {
             IValue result;
-            if ( Convert.ToBoolean( value1.Data ) || Convert.ToBoolean( value2.Data ) )
+            if ( (int)value1.Data < (int)value2.Data )
             {
                 result = new Value( value1.Type, 1 );
             }

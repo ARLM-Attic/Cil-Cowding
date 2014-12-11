@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Multiply values
     /// </summary>
     public class MulNode : BinaryOperatorNode
     {

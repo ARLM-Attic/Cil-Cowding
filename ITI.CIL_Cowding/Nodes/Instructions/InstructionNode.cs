@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public interface IVariable
+    public abstract class InstructionNode : Node
     {
-        string Label
-        {
-            get;
-        }
-        Value Value
-        {
-            get;
-        }
+        public abstract void Execute( IExecutionContext ctx );
     }
+
+        
+
 }

@@ -8,77 +8,55 @@ namespace ITI.CIL_Cowding
 {
     public class Stack : IStack 
     {
-		// Fields		
         static Container _frame;
-        static Stack<Variable> _topFrame;
+        static Stack<IValue> _topFrame;
 
-        // Properties
+        public Stack<IValue> TopFrame
+        {
+            get { return _topFrame; }
+        }
+
+        public Container LastFrame
+        {
+            get { return _frame; }
+        }
+    
         public static Container Frame
         {
             get { return _frame; } 
         }
-        
-		public static Stack<Variable> TopFrame
+
+        public void CallFunction( IFunction fct )
         {
-            get { return _topFrame; }
+            throw new NotImplementedException();
         }
-		
-		private static Container LastFrame() 
-        {
-            // Code pour la V1, ça sera mis à jour par la suite.
-            return _frame;
-        }
-       
-		// Constructor
+
         public Stack() 
 		{
             _frame = new Container();
-            _topFrame = new Stack<Variable>();
+            _topFrame = new Stack<IValue>();
 		}
 
-		// Methods
-        public IValue GetLocalVar( string label )
+        public IValue GetLocalVar( int index )
         {
-            return new Value( null, null );
+            Container frame = LastFrame;
+            return frame.GetVar( index );
         }
         public void SetLocalVar( IValue var )
         {
+            Container frame = LastFrame;
+            frame.SetVar( var );
         }
-        public static IVariable GetLocalVare(String label) {
-			Container frame = Stack.LastFrame();
+        public void CloseFunction()
+        {
+            throw new NotImplementedException();
+        }
 
-			if(frame.IsExistVar(label)) {
-			
-				return frame.GetVar(label);
-			} else {
-				throw new Exception("Erreur GetLocalVar in the container");
-			}
-			
-		}
-
-		public static void SetLocalVar(Variable var) {
-			
-			var frame = Stack.LastFrame();
-			frame.SetVar(var);
-			
-		}
-
-		
+        	
        /**
         * Super Code Redou OTD !
         * 
         * **/
-
-        public Stack<IVariable> GetTopFrame()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IFrame GetLastFrame()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Push(IValue var)
         {
             throw new NotImplementedException();
@@ -89,7 +67,7 @@ namespace ITI.CIL_Cowding
             throw new NotImplementedException();
         }
 
-        public void CallFonction(IFonction fct)
+        public void CallFonction(IFunction fct)
         {
             throw new NotImplementedException();
         }

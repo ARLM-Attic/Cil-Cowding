@@ -8,38 +8,39 @@ namespace ITI.CIL_Cowding
 {
     public class Container
     {
-		// Fields
-		private Dictionary<String, Variable> _var;
-		
-		
-		// Properties
-		public Dictionary<String, Variable> Var 
+		private List<IValue> _localVars;
+
+		public List<IValue> LocalVars
 		{
-			get {return _var;}
+			get {return _localVars;}
 		}
 		
-		// Constructor
 		public Container() 
 		{
-			
-			_var = new Dictionary<String, Variable>();
-		
+			_localVars = new List<IValue>();
 		}
 		
-		// Methodes
-		private void CreateVar(Variable var) 
+		private void CreateVar(IValue var) 
 		{
-			
-			Var.Add(var.Label, var);
-			
+			_localVars.Add(var);
 		}
 		
-		public void SetVar(Variable var) 
+        /// <summary>
+        /// If var don't exist, CreateVar() is called
+        /// </summary>
+        /// <param name="var"></param>
+		public void SetVar(IValue var) 
 		{
-		
-			if( Var.ContainsKey(var.Label) ) 
+            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
+			if( _localVars.Contains(var) )
 			{
-				Var[var.Label] = var;
+                for ( int i = 0 ; i < _localVars.Count ; i++ )
+                {
+                    if ( _localVars[i] == var )
+                    {
+                        _localVars[i] = var; // wtf cerveau
+                    }
+                }
 			} 
 			else 
 			{
@@ -48,25 +49,26 @@ namespace ITI.CIL_Cowding
 		
 		}	
 		
-		public IVariable GetVar(String label) 
+		public IValue GetVar(int index) 
 		{
-            Variable variablereturn; 
-			if(Var.TryGetValue(label, out variablereturn) ) {
-				return variablereturn;
-			} else {
-				throw new Exception("Var dosn't exist...");
-			}
+            return _localVars[index];
+            // gérer l'erreur d'index ? OutOfRangeExeption ? Try Catch ?
             
+            /*if( _localVars.TryGetValue(label, out variablereturn ) ) 
+            {
+				return variablereturn;
+			} else 
+            {
+				throw new Exception("_localVars doesn't exist...");
+			}
+            */
 		}
-		
+		/*
 		public bool IsExistVar(String label) 
 		{
             Variable tmp;
-			return Var.TryGetValue(label, out tmp);
+			return _localVars.TryGetValue(label, out tmp);
 		}
-		
-		
-		
-	
+		*/
     }
 }

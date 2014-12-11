@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public interface IFonction
+    public interface IFunction
     {
         String GetSignature();
         String GetLabel();
         String GetTypeOfReturn();
 
-        void AddLocalVariable(IVariable var);
-        IVariable GetLocalVariable(String label);
-        IVariable SetLocalVariable(IVariable var);
+        void AddLocalVariable(IValue var);
+        IValue GetLocalVariable(int index);
+        IValue SetLocalVariable(IValue var);
 
         //List<IInstructionNode> GetInstructions();
 

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Load local variable of specified index onto stack.
     /// </summary>
-    public class StlocNode : InstructionNode
+    public class LdlocNode : InstructionNode
     {
-        private string _label;
-        public StlocNode( string label )
+        private int _index;
+        public LdlocNode( int index )
         {
-            this._label = label;
+            _index = index;
         }
         public override void Execute( IExecutionContext ctx )
         {
-            ctx.Stack.SetLocalVar( ctx.Stack.Pop() );
+            ctx.Stack.Push( ctx.Stack.GetLocalVar( _index ) );
         }
     }
 }

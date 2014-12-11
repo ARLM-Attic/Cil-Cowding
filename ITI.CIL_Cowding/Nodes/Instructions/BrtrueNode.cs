@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Branch to target if value is non-zero (true).
     /// </summary>
     public class BrtrueNode : InstructionNode
     {

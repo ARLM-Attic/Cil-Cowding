@@ -8,10 +8,10 @@ namespace ITI.CIL_Cowding
 {
     public interface IFrame
     {
-        IFonction GetFonction();
-        IVariable GetVariable(String label);
-        void SetVariable(IVariable var);
-        bool IsExistingVar(String label);
+        IFunction GetFunction();
+        IValue GetVariable(int index);
+        void SetVariable(IValue var);
+        bool IsExistingVar(int index);
         void CloseFonction();
 
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Negate value.
     /// </summary>
     public class NegNode : InstructionNode
     {

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Pop a value from stack into local variable.
     /// </summary>
-    public class LdcNode : InstructionNode
+    public class StlocNode : InstructionNode
     {
-        private int _val;
-        public LdcNode( int val )
+        private string _label;
+        public StlocNode( string label )
         {
-            this._val = val;
+            this._label = label;
         }
         public override void Execute( IExecutionContext ctx )
         {
-            ctx.Stack.Push( new Value( new CILNetType( typeof( int ) ), this._val ) );
+            ctx.Stack.SetLocalVar( ctx.Stack.Pop() );
         }
     }
 }

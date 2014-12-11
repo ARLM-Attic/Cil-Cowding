@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Divide two values to return a quotient or floating-point result.
     /// </summary>
     public class DivNode : BinaryOperatorNode
     {

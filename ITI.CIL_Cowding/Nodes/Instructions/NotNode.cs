@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Bitwise complement (logical not).
     /// </summary>
     public class NotNode : InstructionNode
     {

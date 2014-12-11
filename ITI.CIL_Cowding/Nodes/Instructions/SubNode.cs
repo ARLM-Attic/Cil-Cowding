@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ITI.CIL_Cowding
 {
     /// <summary>
-    /// 
+    /// Subtract value2 from value1, returning a new value.
     /// </summary>
     public class SubNode : BinaryOperatorNode
     {
