@@ -17,7 +17,7 @@ namespace ITI.CIL_Cowding
         private ExecutionContext _ec;
         private StringTokenizer _strtk;
         private Analyzer _anal;
-        List<InstructionNode> _tree;
+        List<FunctionNode> _tree;
 
         public Form1()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-	public abstract class Node
-	{
-	}
+    public abstract class Node
+    {
+    }
 }

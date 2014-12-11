@@ -13,9 +13,9 @@ namespace ITI.CIL_Cowding
     {
         private IValue val;
         private string label;
-        public VarNode( CILNetType type, string label )
+        public VarNode( string type )
         {
-            this.val = new Value( type, null );
+            
         }
         public override void Execute( IExecutionContext ctx )
         {
