@@ -43,6 +43,7 @@
     <Compile Include="CILNetType.cs" />
     <Compile Include="CILTypeManager.cs" />
     <Compile Include="ExecutionContexte.cs" />
+    <Compile Include="Function.cs" />
     <Compile Include="Nodes\Instructions\AndNode.cs" />
     <Compile Include="Nodes\Instructions\BinaryBooleanOperatorNode.cs" />
     <Compile Include="Nodes\Instructions\BinaryComparatorNode.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Nodes\Instructions\LdlocNode.cs" />
     <Compile Include="Nodes\Instructions\NotNode.cs" />
     <Compile Include="Nodes\Instructions\OrNode.cs" />
-    <Compile Include="Pre-ExecutionContext.cs" />
+    <Compile Include="PreExecutionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="StringTokenizer.cs" />

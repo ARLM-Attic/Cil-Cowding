@@ -22,16 +22,16 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
+        public int CurrentLine
+        {
+            get {return _currentLine;}
+        }
         public ExecutionContext()
         {
             _stack = new Stack();
             _currentLine = 1;
         }
 
-        public int CurrentLine
-        {
-            get {return _currentLine;}
-        }
 
 
     }

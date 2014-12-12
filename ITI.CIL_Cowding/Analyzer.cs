@@ -57,7 +57,7 @@ namespace ITI.CIL_Cowding
                     ///  if (HasError) return null;
                     //   if( !_tokenizer.Match( TokenType.ClosedCurly ) )
                     //    {
-                            AddError( "Expected ending }, function or field declaration." );
+                            AddError( "Expected ending , function or field declaration." );
                     //}
                     //}
                 }

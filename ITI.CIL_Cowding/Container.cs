@@ -29,7 +29,7 @@ namespace ITI.CIL_Cowding
         /// If var don't exist, CreateVar() is called
         /// </summary>
         /// <param name="var"></param>
-		public void SetVar(IValue var) 
+		public void SetVar(IValue var)
 		{
             // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
 			if( _localVars.Contains(var) )
