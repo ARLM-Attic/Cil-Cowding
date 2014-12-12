@@ -37,5 +37,21 @@ namespace ITI.CIL_Cowding.Tests
             TokenType tk = st.CurrentToken;
             Assert.That(tk, Is.EqualTo(TokenType.Identifier));
         }
+
+        [Test]
+        public void skip_comments_block()
+        {
+            StringTokenizer st = new StringTokenizer("/* comment */ ldc 4;");
+            TokenType tk = st.CurrentToken;
+            Assert.That(tk, Is.EqualTo(TokenType.Identifier));
+        }
+
+        [Test]
+        public void get_error_of_unterminated_string()
+        {
+            StringTokenizer st = new StringTokenizer("\"cou");
+            TokenType tk = st.CurrentToken;
+            Assert.That(tk, Is.EqualTo(TokenType.ErrorUnterminatedString));
+        }
     }
 }
