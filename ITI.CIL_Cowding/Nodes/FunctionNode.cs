@@ -10,7 +10,7 @@ namespace ITI.CIL_Cowding
     {
         string _nomfct;
         string _typeOfReturn;
-        List<string> _parametres;
+        List<string> _parameters;
         List<InstructionNode> _code;
 
         public void PreExecute(Pre_ExecutionContext pec)
@@ -20,15 +20,15 @@ namespace ITI.CIL_Cowding
 
         }
 
-        public FunctionNode(string name, string typereturn, List<InstructionNode> code, List<string> parametres)
+        public FunctionNode(string name, string typeReturn, List<InstructionNode> code, List<string> parameters)
         {
             _nomfct = name;
-            _typeOfReturn = typereturn;
+            _typeOfReturn = typeReturn;
             _code = code;
-            _parametres = new List<string>();
+            _parameters = new List<string>();
 
-            foreach(var variable in parametres) {
-                _parametres.Add(variable);
+            foreach(var variable in parameters) {
+                _parameters.Add(variable);
             }
 
 
