@@ -11,6 +11,8 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class LdlocNode : InstructionNode
     {
+
+
         private int _index;
         public LdlocNode( int index )
         {
