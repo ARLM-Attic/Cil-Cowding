@@ -35,7 +35,6 @@ namespace ITI.CIL_Cowding
             _maxPos = startIndex + count;
             //init
             GetNextToken();
-
         }
 
 
@@ -73,11 +72,16 @@ namespace ITI.CIL_Cowding
         {
             if ( !IsEnd )
             {
-                char c = Read();
-                while ( c != ';' || c != '\n' )
-                {
+                char c;
+                do {
                     c = Read();
-                }
+                } while( c != '\n' && c != ';' );
+
+                //while ( (c != '\n') || (c != ';' ) ) 
+                //{
+                //    c = Read();
+                //}
+
                 if( !IsEnd ) GetNextToken();
             }
             else
@@ -137,23 +141,30 @@ namespace ITI.CIL_Cowding
                 case ',': _currentToken = TokenType.Comma; break;
                 case '/':
                     {
-                        if ( !IsEnd && Peek() == '/') // Slash Comments 
+                        if (!IsEnd && Peek() == '/') // Slash Comments 
                         {
-                            ForwardToNextLine(); 
-                        } 
-                        else if( Peek() != '*') // Block Comments
+                            #region comments double slash
+                            ForwardToNextLine();
+                            #endregion comments double slash
+                        }
+                        else if (Peek() == '*') // Block Comments
                         {
-                            while( !IsEnd && Peek() != '*' )
+                            #region block comments
+                            Forward();
+                            while (Peek() != '*' && Read() != '/')
                             {
                                 Forward();
                             }
-                            if ( !IsEnd && Peek() == '/' )
+                            if (!IsEnd)
                             {
                                 GetNextToken();
                             }
+                            else
+                            {
+                                // NOP
+                            }
+                            #endregion block comments
                         }
-                        //GetNextToken();
-
                         break;
                     }
                 default:
@@ -222,8 +233,9 @@ namespace ITI.CIL_Cowding
                                     c = (char)val;
                                 }
                             }
-                            Forward();
-                            c = Peek();
+                            c = Read();
+                            if (c == '\"') return _currentToken = TokenType.String;
+                            if (IsEnd) return _currentToken = TokenType.ErrorUnterminatedString;
                         }
                         _buffer.Append(c);
                         Forward();
