@@ -56,7 +56,7 @@
     <Compile Include="Nodes\Instructions\AddNode.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Nodes\Instructions\DivNode.cs" />
-    <Compile Include="Nodes\FonctionNode.cs" />
+    <Compile Include="Nodes\FunctionNode.cs" />
     <Compile Include="Nodes\Instructions\LdcNode.cs" />
     <Compile Include="Nodes\Instructions\LdstrNode.cs" />
     <Compile Include="Nodes\Instructions\MulNode.cs" />

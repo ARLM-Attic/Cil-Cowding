@@ -120,7 +120,6 @@ namespace ITI.CIL_Cowding
 
             while(!_tokenizer.Match(TokenType.ClosedCurly) && !_tokenizer.IsEnd)
             {
-
                 #region BeginOfSuperIfTribu
                 if (_tokenizer.MatchIdentifier("stloc"))
                 {
@@ -510,8 +509,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
                 #endregion BeginOfSuperIfTribu
-
-
             }
 
             return fct_content;
