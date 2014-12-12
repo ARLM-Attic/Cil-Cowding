@@ -509,6 +509,35 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
+
+                else if (_tokenizer.MatchIdentifier("ldloc"))
+                {
+
+                    #region ldloc
+
+                    // VAR
+                    int index;
+
+                    if (_tokenizer.IsInteger(out index)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new LdlocNode(index));
+                    }
+                    else
+                    {
+                        AddError("How can you have an error with LDLOC ??");
+                        _tokenizer.ForwardToNextLine();
+                    }
+
+                    #endregion ldloc
+
+                }
+
+                else
+                {
+                    AddError("Identifiant non reconnu.");
+                    throw new Exception();
+                }
                 #endregion BeginOfSuperIfTribu
 
 
