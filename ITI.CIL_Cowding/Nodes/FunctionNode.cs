@@ -9,15 +9,15 @@ namespace ITI.CIL_Cowding
     public class FunctionNode : Node
     {
         string _namefct;
-        string _typeOfReturn;
+        string _returnType;
         List<string> _parameters;
         List<InstructionNode> _code;
 
 
-        public FunctionNode(string name, string typeReturn, List<InstructionNode> code, List<string> parameters)
+        public FunctionNode(string name, string returnType, List<InstructionNode> code, List<string> parameters)
         {
             _namefct = name;
-            _typeOfReturn = typeReturn;
+            _returnType = returnType;
             _code = code;
             _parameters = new List<string>();
 
@@ -28,18 +28,18 @@ namespace ITI.CIL_Cowding
         }
         public Function PreExecute(PreExecutionContext pec)
         {
-            ICILType typeReturn;
+            ICILType returnType;
             List<IValue> parameters = new List<IValue>();
             List<IValue> locvar = new List<IValue>();
 
 
             // Gestion du type de retour
-            typeReturn = pec.TypeManager.Find(_typeOfReturn);
+            returnType = pec.TypeManager.Find(_returnType);
 
             // Gestion des types de paramètres
             foreach (string str in _parameters)
             {
-                parameters.Add( new Value(pec.TypeManager.Find( _typeOfReturn ), null) );
+                parameters.Add( new Value(pec.TypeManager.Find( str ), null) );
             }
 
             // Gestion des types des locvar
@@ -48,7 +48,7 @@ namespace ITI.CIL_Cowding
                 _code[0].PreExecute(pec);
             }
 
-            return new Function( _namefct, typeReturn, parameters, pec.LocalsVar,  _code );
+            return new Function( _namefct, returnType, parameters, pec.LocalsVar,  _code );
         }
 
     }
