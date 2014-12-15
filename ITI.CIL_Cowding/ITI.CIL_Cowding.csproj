@@ -71,7 +71,6 @@
     <Compile Include="Nodes\Instructions\RetNode.cs" />
     <Compile Include="Nodes\Instructions\StlocNode.cs" />
     <Compile Include="Nodes\Instructions\SubNode.cs" />
-    <Compile Include="Nodes\Instructions\VarNode.cs" />
     <Compile Include="Nodes\Instructions\WriteNode.cs" />
     <Compile Include="Interfaces\ICILType.cs" />
     <Compile Include="Interfaces\IFunction.cs" />
