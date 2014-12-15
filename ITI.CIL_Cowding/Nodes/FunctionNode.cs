@@ -26,7 +26,7 @@ namespace ITI.CIL_Cowding
                 _parameters.Add(variable);
             }
         }
-        public void PreExecute(PreExecutionContext pec)
+        public Function PreExecute(PreExecutionContext pec)
         {
             ICILType typeReturn;
             List<IValue> parameters = new List<IValue>();
@@ -48,7 +48,7 @@ namespace ITI.CIL_Cowding
                 _code[0].PreExecute(pec);
             }
 
-            Function function = new Function( _namefct, typeReturn, parameters, pec.LocalsVar,  _code );
+            return new Function( _namefct, typeReturn, parameters, pec.LocalsVar,  _code );
         }
 
     }

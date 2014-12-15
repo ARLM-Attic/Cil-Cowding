@@ -593,7 +593,6 @@ namespace ITI.CIL_Cowding
                 else
                 {
                     AddError("Identifiant non reconnu.");
-                    throw new Exception();
                 }
                 #endregion BeginOfSuperIfTribu
             }

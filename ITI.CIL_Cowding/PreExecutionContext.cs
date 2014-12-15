@@ -42,19 +42,17 @@ namespace ITI.CIL_Cowding
 
         public List<Function> PreExecut (List<FunctionNode> code)
         {
+            List<Function> mes_fct = new List<Function>();
+
             // On parcourt toutes les fct, et on gère plusieurs choses
             foreach(FunctionNode fct in code) {
                 // On fait le code de la fct
-                fct.PreExecute(this);
-
-
+                mes_fct.Add( fct.PreExecute(this) );
             }
 
-
-            throw new NotImplementedException();
+            return mes_fct;
         }
 
-        // ajouter les variables locales et les passer en parametres aux fonctions
 
     }
 }

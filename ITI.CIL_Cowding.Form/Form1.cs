@@ -18,6 +18,8 @@ namespace ITI.CIL_Cowding
         private StringTokenizer _strtk;
         private Analyzer _anal;
         List<FunctionNode> _tree;
+        private PreExecutionContext _pec;
+        private List<Function> _mes_fct;
 
         public Form1()
         {
@@ -144,6 +146,9 @@ namespace ITI.CIL_Cowding
 
             // Pas de pré-execution pour le moment.
             _ec = new ExecutionContext();
+            _pec = new PreExecutionContext();
+
+            _mes_fct = _pec.PreExecut(_tree);
 
 
 
