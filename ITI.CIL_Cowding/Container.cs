@@ -6,69 +6,99 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+  
     public class Container
     {
 		private List<IValue> _localVars;
+        private List<IValue> _args;
 
 		public List<IValue> LocalVars
 		{
 			get {return _localVars;}
 		}
+        public List<IValue> ArgsVars
+        {
+            get { return _args;}
+        }
+        
 		
 		public Container() 
 		{
 			_localVars = new List<IValue>();
-		}
+            _args = new List<IValue>();
+        }
 		
-		private void CreateVar(IValue var) 
+        /*
+         * GESTION DES VARIABLES LOCALES
+         *  */
+		public void CreateVar(IValue var) 
 		{
 			_localVars.Add(var);
 		}
 		
-        /// <summary>
-        /// If var don't exist, CreateVar() is called
-        /// </summary>
-        /// <param name="var"></param>
-		public void SetVar(IValue var) 
+		public void SetLOCVar(int index, IValue val) 
 		{
             // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-			if( _localVars.Contains(var) )
+			if( _localVars.Contains(val) )
 			{
                 for ( int i = 0 ; i < _localVars.Count ; i++ )
                 {
-                    if ( _localVars[i] == var )
+                    if ( _localVars[i] == val )
                     {
-                        _localVars[i] = var; // wtf cerveau
+                        _localVars[i] = val; // wtf cerveau
                     }
                 }
 			} 
-			else 
-			{
-				CreateVar(var);
-			}
+
+           
+
 		
 		}	
 		
-		public IValue GetVar(int index) 
+		public IValue GetLOCVar(int index) 
 		{
             return _localVars[index];
-            // gérer l'erreur d'index ? OutOfRangeExeption ? Try Catch ?
-            
-            /*if( _localVars.TryGetValue(label, out variablereturn ) ) 
-            {
-				return variablereturn;
-			} else 
-            {
-				throw new Exception("_localVars doesn't exist...");
-			}
-            */
 		}
-		/*
-		public bool IsExistVar(String label) 
-		{
-            Variable tmp;
-			return _localVars.TryGetValue(label, out tmp);
-		}
-		*/
+
+        /*
+         * GESTION DES VARIABLES ARGUMENTS
+         * */
+        public void SetARGVar(int index, IValue val)
+        {
+            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
+            if (_localVars.Contains(val))
+            {
+                for (int i = 0; i < _localVars.Count; i++)
+                {
+                    if (_localVars[i] == val)
+                    {
+                        _localVars[i] = val; // wtf cerveau
+                    }
+                }
+            }
+
+
+
+
+        }
+
+        public IValue GetARGVar(int index)
+        {
+            return _localVars[index];
+        }
+        
+        /* 
+         * Sécurité histoire de savoir si on ne fait pas de la merde
+         * */
+        public bool IsExistVarLOC(int index)
+        {
+            return index <= LocalVars.Count - 1 && index >= 0 ;
+        }
+        
+        public bool IsExistVarARG(int index)
+        {
+            return index <= ArgsVars.Count - 1 && index >=0;
+        }
+		
     }
 }

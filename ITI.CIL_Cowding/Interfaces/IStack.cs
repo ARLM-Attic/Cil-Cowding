@@ -15,8 +15,9 @@ namespace ITI.CIL_Cowding
         void CallFunction(IFunction fct);
         
         void CloseFunction();
-        IValue GetLocalVar( int index );
-        void SetLocalVar( IValue var );
+
+        IValue GetLocalVar(int index);
+        void SetLocalVar( IValue var, int index );
 
 
 

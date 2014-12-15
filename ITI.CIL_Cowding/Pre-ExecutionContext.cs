@@ -8,6 +8,13 @@ namespace ITI.CIL_Cowding
 {
     public class Pre_ExecutionContext
     {
+        Stack _stack;
+
+        public Stack Stack
+        {
+            get { return _stack; }
+        }
+
 
 
     }

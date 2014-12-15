@@ -124,12 +124,12 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.MatchIdentifier("stloc"))
                 {
                     #region STLOC
-                    string varName1;
+                    int index;
 
-                    if (_tokenizer.IsIdentifier(out varName1)
+                    if (_tokenizer.IsInteger(out index)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new StlocNode(varName1));
+                        fct_content.Add(new StlocNode(index));
                     }
                     else
                     {
@@ -329,8 +329,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("br"))
                 {
                     #region BR
@@ -350,8 +348,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("add"))
                 {
                     #region ADD
@@ -369,8 +365,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("mul"))
                 {
@@ -390,8 +384,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("div"))
                 {
                     #region DIV
@@ -409,8 +401,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("sub"))
                 {
@@ -430,8 +420,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("neg"))
                 {
                     #region NEG
@@ -450,8 +438,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("write"))
                 {
                     #region WRITE
@@ -467,8 +453,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("read"))
                 {
@@ -487,8 +471,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("ret"))
                 {
@@ -511,7 +493,6 @@ namespace ITI.CIL_Cowding
 
                 else if (_tokenizer.MatchIdentifier("ldloc"))
                 {
-
                     #region ldloc
 
                     // VAR
@@ -529,7 +510,6 @@ namespace ITI.CIL_Cowding
                     }
 
                     #endregion ldloc
-
                 }
 
                 else
