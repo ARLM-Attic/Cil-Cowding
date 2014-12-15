@@ -121,6 +121,50 @@ namespace ITI.CIL_Cowding
             while(!_tokenizer.Match(TokenType.ClosedCurly) && !_tokenizer.IsEnd)
             {
                 #region BeginOfSuperIfTribu
+                // Gestion des localinit
+                if (_tokenizer.MatchIdentifier("locals_init"))
+                {
+                    #region LOCALS_INIT
+                    List<string> loc_var = new List<string>();
+                    string type;
+                    string tmp;
+
+                    if (_tokenizer.Match(TokenType.OpenPar))
+                    {
+                        
+                        while(!_tokenizer.Match(TokenType.ClosedPar) && !_tokenizer.IsEnd)
+                        {
+                            if (_tokenizer.IsIdentifier(out type)
+                                && _tokenizer.IsIdentifier(out tmp))
+                            {
+
+                                loc_var.Add(type);
+
+                            }
+                            else
+                            {
+                                AddError("Bug au niveau de la déclaration d'un variable");
+                            }
+                            _tokenizer.Match(TokenType.Comma);
+
+                        }
+                        if (_tokenizer.IsEnd)
+                        {
+                            AddError("Ben ... C'est déjà la fin ???");
+                        }
+
+                        fct_content.Add(new LocalsInitNode(loc_var));
+
+                    }
+                    else
+                    {
+                        AddError("Locals Init BUUUG");
+                        _tokenizer.ForwardToNextLine();
+
+                    }
+                    #endregion LOCALS_INIT
+                }
+
                 if (_tokenizer.MatchIdentifier("stloc"))
                 {
                     #region STLOC
