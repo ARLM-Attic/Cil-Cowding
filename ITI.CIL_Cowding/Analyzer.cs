@@ -233,26 +233,7 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-                else if (_tokenizer.MatchIdentifier("var"))
-                {
-                    #region VAR
-                    // VAR
-                    string label;
-                    string vartype;
-
-                    if (_tokenizer.IsIdentifier(out vartype)
-                        && _tokenizer.IsIdentifier(out label)
-                        && _tokenizer.Match(TokenType.SemiColon))
-                    {
-                        fct_content.Add(new VarNode(vartype));
-                    }
-                    else
-                    {
-                        AddError("Can't create the variable");
-                        _tokenizer.ForwardToNextLine();
-                    }
-                    #endregion
-                }
+               
                 else if (_tokenizer.MatchIdentifier("nop"))
                 {
                     #region NOP
