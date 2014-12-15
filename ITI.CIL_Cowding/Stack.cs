@@ -1,62 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
     public class Stack : IStack 
     {
-        static Container _frame;
+        static List<Container> _frame;
         static Stack<IValue> _topFrame;
 
+        /*
+         * PROPERTIES
+         * */
+        // La frame TMP
         public Stack<IValue> TopFrame
         {
             get { return _topFrame; }
         }
-
+        // La frame la plus haute
         public Container LastFrame
         {
-            get { return _frame; }
+            get { return _frame[_frame.Count-1]; }
         }
-    
-        public static Container Frame
+        // Liste des Containers
+        public static List<Container> Frame
         {
             get { return _frame; } 
         }
 
-        public void CallFunction( IFunction fct )
-        {
-            throw new NotImplementedException();
-        }
-
+        // Constructeur
         public Stack() 
 		{
-            _frame = new Container();
+            _frame = new List<Container>();
             _topFrame = new Stack<IValue>();
 		}
 
+
+        /*
+         * GESTION DES VARIABLES AVEC LA FRAME LA PLUS HAUTE
+         * */
         public IValue GetLocalVar( int index )
         {
             Container frame = LastFrame;
-            return frame.GetVar( index );
+            return frame.GetLOCVar( index );
         }
-        public void SetLocalVar( IValue var )
+        
+        public void SetLocalVar( IValue var , int index)
         {
             Container frame = LastFrame;
-            frame.SetVar( var );
+            frame.SetLOCVar( index, var );
         }
-        public void CloseFunction()
+
+        public IValue GetArgVar(int index)
         {
-            throw new NotImplementedException();
+            Container frame = LastFrame;
+            return frame.GetARGVar(index);
+        }
+
+        public void SetArgVar(int index, IValue var)
+        {
+            Container frame = LastFrame;
+            frame.SetARGVar(index, var);
+        }
+
+        public void CreateVar(ICILType type)
+        {
+            LastFrame.CreateVar(new Value(type,null));
         }
 
         	
-       /**
-        * Super Code Redou OTD !
-        * 
-        * **/
+       /*
+        * GESTION DE LA TOP_FRAME POP ET PUSH
+        * */
         public void Push(IValue var)
         {
             throw new NotImplementedException();
@@ -66,16 +80,19 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
-
-        public void CallFonction(IFunction fct)
+        
+        /*
+         * GESTION DE LA CREATION DES FRAMES
+         * */
+        public void CallFunction(IFunction fct)
         {
             throw new NotImplementedException();
         }
-
-        public void CloseFonction()
+        public void CloseFunction()
         {
             throw new NotImplementedException();
         }
+        
 
     }
 

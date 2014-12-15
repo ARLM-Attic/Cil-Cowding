@@ -11,7 +11,6 @@ namespace ITI.CIL_Cowding
     /// </summary>
     internal class VarNode : InstructionNode
     {
-        private IValue val;
         private string _type;
         public VarNode( string type )
         {
@@ -19,7 +18,11 @@ namespace ITI.CIL_Cowding
         }
         public override void Execute( IExecutionContext ctx )
         {
-            ctx.Stack.SetLocalVar( this.val );
+            
+        }
+        public void Pre_Execute(PreExecutionContext pre_ctx) 
+        {
+            //pre_ctx.Stack.CreateVar( _type );
         }
     }
 }
