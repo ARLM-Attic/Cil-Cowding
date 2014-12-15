@@ -28,15 +28,27 @@ namespace ITI.CIL_Cowding
         }
         public void PreExecute(PreExecutionContext pec)
         {
-            ICILType typeReturn = pec.TypeManager.Find(_typeOfReturn);
+            ICILType typeReturn;
+            List<IValue> parameters = new List<IValue>();
+            List<IValue> locvar = new List<IValue>();
 
-            List<ICILType> parameters = new List<ICILType>();
+
+            // Gestion du type de retour
+            typeReturn = pec.TypeManager.Find(_typeOfReturn);
+
+            // Gestion des types de paramètres
             foreach (string str in _parameters)
             {
-                parameters.Add( pec.TypeManager.Find( _typeOfReturn ) );
+                parameters.Add( new Value(pec.TypeManager.Find( _typeOfReturn ), null) );
             }
 
-            Function function = new Function( _namefct, typeReturn, parameters, _code );
+            // Gestion des types des locvar
+            if( _code[0] is LocalsInitNode ) 
+            {
+                _code[0].PreExecute(pec);
+            }
+
+            Function function = new Function( _namefct, typeReturn, parameters, pec.LocalsVar,  _code );
         }
 
     }

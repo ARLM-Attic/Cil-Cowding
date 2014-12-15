@@ -10,6 +10,8 @@ namespace ITI.CIL_Cowding
     {
         List<IValue> _localsVars;
         List<string> _types;
+
+
         public LocalsInitNode(List<string> types)
         {
             _types = types;
@@ -18,14 +20,19 @@ namespace ITI.CIL_Cowding
         }
         public void PreExecute(PreExecutionContext pec)
         {
+            // on créer des values à profusion
             foreach (string str in _types)
             {
                 _localsVars.Add( new Value( pec.TypeManager.Find( str ), null ) );
             }
+
+            pec.LocalsVar = _localsVars;
+
         }
-        public override void Execute( IExecutionContext ctx )
+        public override void Execute(IExecutionContext ctx)
         {
-            throw new NotImplementedException();
+            // ON NE FAIT RIEN
         }
+        
     }
 }

@@ -7,7 +7,8 @@ namespace ITI.CIL_Cowding
     {
         string _nameFct;
         ICILType _typeOfReturn;
-        List<ICILType> _parameters;
+        List<IValue> _parameters;
+        List<IValue> _locVar;
         List<InstructionNode> _code;
         public String Name
         {
@@ -17,12 +18,13 @@ namespace ITI.CIL_Cowding
         {
             get { return _typeOfReturn; }
         }
-        public Function(string nameFct, ICILType typeOfReturn, List<ICILType> parameters, List<InstructionNode> code)
+        public Function(string nameFct, ICILType typeOfReturn, List<IValue> parameters, List<IValue> locVar, List<InstructionNode> code)
         {
             _nameFct = nameFct;
             _typeOfReturn = typeOfReturn;
             _parameters = parameters;
             _code = code;
+            _locVar = locVar;
         }
         public String GetSignature()
         {

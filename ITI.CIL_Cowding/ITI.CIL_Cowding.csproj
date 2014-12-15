@@ -64,7 +64,7 @@
     <Compile Include="Nodes\Instructions\LdstrNode.cs" />
     <Compile Include="Nodes\Instructions\MulNode.cs" />
     <Compile Include="Nodes\Instructions\NegNode.cs" />
-    <Compile Include="Nodes\Instructions\LocalsInitNode.cs" />
+    <Compile Include="Nodes\LocalsInitNode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Instructions\NopNode.cs" />
     <Compile Include="Nodes\Instructions\ReadNode.cs" />

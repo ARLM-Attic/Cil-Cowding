@@ -8,8 +8,16 @@ namespace ITI.CIL_Cowding
 {
     public interface IPreExecutionContext
     {
-        public CILTypeManager TypeManager
+        CILTypeManager TypeManager
         { get; }
+
+        List<IValue> LocalsVar
+        {
+            set;
+            get;
+        }
+
+
 
     }
 }
