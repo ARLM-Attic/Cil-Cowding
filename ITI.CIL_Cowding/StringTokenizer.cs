@@ -25,8 +25,6 @@ namespace ITI.CIL_Cowding
         {
         }
 
-
-
         public StringTokenizer( string s, int startIndex, int count )
         {
             _currentToken = TokenType.None;
@@ -36,7 +34,6 @@ namespace ITI.CIL_Cowding
             //init
             GetNextToken();
         }
-
 
         public TokenType CurrentToken
         {
@@ -234,8 +231,14 @@ namespace ITI.CIL_Cowding
                                 }
                             }
                             c = Read();
-                            if (c == '\"') return _currentToken = TokenType.String;
+                            if (c == '\"')
+                            {
+                                return _currentToken = TokenType.String;
+                            }
                             if (IsEnd) return _currentToken = TokenType.ErrorUnterminatedString;
+
+                            _buffer.Append(c);
+                            _idOrStringValue = _buffer.ToString();
                         }
                         _buffer.Append(c);
                         Forward();

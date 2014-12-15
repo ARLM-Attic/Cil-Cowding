@@ -104,12 +104,12 @@ namespace ITI.CIL_Cowding
                 }
                 else
                 {
-                    AddError("Arrive pas à commencer la fonction :'(");
+                    AddError("Cannot begin function... :("); // COMMENTER EN ANGLAIS PUTAIN KEV
                 }
             }
             else
             {
-                AddError("Fct creation plante...");
+                AddError("Error on Function creation..."); // CF PLUS HAUT
             }
             return null;
         }
@@ -153,8 +153,26 @@ namespace ITI.CIL_Cowding
                         AddError("Ldc need constante value");
                         _tokenizer.ForwardToNextLine();
                     }
-                    #endregion
+                    #endregion LDC
                 }
+
+                else if( _tokenizer.MatchIdentifier( "ldloc" ) )
+                {
+                    #region LDLOC
+                    int index;
+                    if( _tokenizer.IsInteger( out index ) 
+                        && _tokenizer.Match( TokenType.SemiColon ) )
+                    {
+                        fct_content.Add(new LdlocNode( index ) );
+                    }
+                    else
+                    {
+                        AddError( "Something failed with ldloc. This node needs an index." );
+                        _tokenizer.ForwardToNextLine();
+                    }
+                    #endregion LDLOC
+                }
+
                 else if (_tokenizer.MatchIdentifier("ldstr"))
                 {
                     #region LDSTR
@@ -166,7 +184,7 @@ namespace ITI.CIL_Cowding
                     }
                     else
                     {
-                        AddError("Ldc need constante value");
+                        AddError("Ldstr need text as a value.");
                         _tokenizer.ForwardToNextLine();
                     }
                     #endregion
@@ -329,8 +347,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("br"))
                 {
                     #region BR
@@ -350,8 +366,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("add"))
                 {
                     #region ADD
@@ -370,8 +384,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("mul"))
                 {
                     #region MUL
@@ -389,8 +401,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("div"))
                 {
@@ -411,7 +421,6 @@ namespace ITI.CIL_Cowding
                 }
 
 
-
                 else if (_tokenizer.MatchIdentifier("sub"))
                 {
                     #region SUB
@@ -429,8 +438,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("neg"))
                 {
@@ -450,8 +457,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
-
                 else if (_tokenizer.MatchIdentifier("write"))
                 {
                     #region WRITE
@@ -467,8 +472,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-
-
 
                 else if (_tokenizer.MatchIdentifier("read"))
                 {
@@ -488,7 +491,22 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
+                else if( _tokenizer.MatchIdentifier( "call" ) )
+                {
+                    #region CALL
+                    string labelNameFct;
+                    if( _tokenizer.IsIdentifier( out labelNameFct ) &&
+                        _tokenizer.Match( TokenType.SemiColon ) )
+                    {
+                        fct_content.Add(new CallNode( labelNameFct ) );
+                    }
+                    else
+                    {
+                        AddError( "Error : somthing has failed with call." );
+                        _tokenizer.ForwardToNextLine();
+                    }
+                    #endregion CALL
+                }
 
                 else if (_tokenizer.MatchIdentifier("ret"))
                 {

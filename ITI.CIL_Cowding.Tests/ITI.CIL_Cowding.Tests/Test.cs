@@ -15,7 +15,7 @@ namespace ITI.CIL_Cowding.Tests
         }
 
         [Test]
-        public void is_a_identifier_token()
+        public void is_an_identifier_token()
         {
             StringTokenizer st = new StringTokenizer("ldstr");
             TokenType tk = st.CurrentToken;
@@ -28,6 +28,22 @@ namespace ITI.CIL_Cowding.Tests
             StringTokenizer st = new StringTokenizer("\"coucou\"");
             TokenType tk = st.CurrentToken;
             Assert.That( tk, Is.EqualTo( TokenType.String ) );
+        }
+
+        [Test]
+        public void test_if_we_have_the_right_value_of_string()
+        {
+            string s = "\"text\"";
+
+            StringTokenizer st = new StringTokenizer( s );
+            TokenType tk = st.CurrentToken;
+
+            bool value = st.IsString( out s );
+            string valueOfTxt = st.GetValueOfId;
+
+            Assert.That( value, Is.True );
+            Assert.That(valueOfTxt, Is.EqualTo( "text" ) );
+
         }
 
         [Test]
