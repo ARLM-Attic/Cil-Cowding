@@ -6,7 +6,7 @@ namespace ITI.CIL_Cowding
     public class Function : IFunction
     {
         string _nameFct;
-        ICILType _typeOfReturn;
+        ICILType _returnType;
         List<IValue> _parameters;
         List<IValue> _locVar;
         List<InstructionNode> _code;
@@ -14,14 +14,14 @@ namespace ITI.CIL_Cowding
         {
             get { return _nameFct; }
         }
-        public ICILType TypeOfReturn
+        public ICILType ReturnType
         {
-            get { return _typeOfReturn; }
+            get { return _returnType; }
         }
-        public Function(string nameFct, ICILType typeOfReturn, List<IValue> parameters, List<IValue> locVar, List<InstructionNode> code)
+        public Function(string nameFct, ICILType returnType, List<IValue> parameters, List<IValue> locVar, List<InstructionNode> code)
         {
             _nameFct = nameFct;
-            _typeOfReturn = typeOfReturn;
+            _returnType = returnType;
             _parameters = parameters;
             _code = code;
             _locVar = locVar;

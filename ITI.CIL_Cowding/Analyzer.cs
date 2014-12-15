@@ -72,11 +72,11 @@ namespace ITI.CIL_Cowding
             if (!_tokenizer.MatchIdentifier("function")) return null;
    
             string name;
-            string typeOfReturn;
-            List<string> parametres = new List<string>();
+            string returnType;
+            List<string> parameters = new List<string>();
 
             // Si ensuite on a les autres infos et une ouverture de parenthèse
-            if (_tokenizer.IsIdentifier(out typeOfReturn)
+            if (_tokenizer.IsIdentifier(out returnType)
                 && _tokenizer.IsIdentifier(out name)
                 && _tokenizer.Match(TokenType.OpenPar))
             {
@@ -84,10 +84,10 @@ namespace ITI.CIL_Cowding
                 // On prend tout les params
                 while (!_tokenizer.Match(TokenType.ClosedPar))
                 {
-                    string type_parametre;
-                    if (_tokenizer.IsIdentifier(out type_parametre))
+                    string parameterType;
+                    if (_tokenizer.IsIdentifier(out parameterType))
                     {
-                        parametres.Add(type_parametre);
+                        parameters.Add(parameterType);
                     }
                     else
                     {
@@ -99,7 +99,7 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.Match(TokenType.OpenCurly))
                 {
 
-                    FunctionNode fct = new FunctionNode(name, typeOfReturn, ParseFunctionBody(), parametres);
+                    FunctionNode fct = new FunctionNode(name, returnType, ParseFunctionBody(), parameters);
                     return fct;
                 }
                 else

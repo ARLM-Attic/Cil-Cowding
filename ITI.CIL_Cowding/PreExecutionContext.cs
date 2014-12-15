@@ -9,20 +9,20 @@ namespace ITI.CIL_Cowding
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<IValue> _localsvar;
+        List<IValue> _localsVar;
 
         public List<IValue> LocalsVar
         {
-            get {return _localsvar;}
+            get {return _localsVar;}
 
             set {
-                    if(_localsvar != null)
+                    if(_localsVar != null)
                     {
                         throw new Exception("Locals Var déjà fait mon gars ...");
                     }
                     else
                     {
-                        _localsvar = value;
+                        _localsVar = value;
                     }
                 }
         }
@@ -42,15 +42,15 @@ namespace ITI.CIL_Cowding
 
         public List<Function> PreExecut (List<FunctionNode> code)
         {
-            List<Function> mes_fct = new List<Function>();
+            List<Function> myFunctions = new List<Function>();
 
             // On parcourt toutes les fct, et on gère plusieurs choses
             foreach(FunctionNode fct in code) {
                 // On fait le code de la fct
-                mes_fct.Add( fct.PreExecute(this) );
+                myFunctions.Add( fct.PreExecute(this) );
             }
 
-            return mes_fct;
+            return myFunctions;
         }
 
 
