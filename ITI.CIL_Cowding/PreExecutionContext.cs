@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
-    public class PreExecutionContext
+    public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
 
