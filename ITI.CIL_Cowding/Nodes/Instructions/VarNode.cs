@@ -20,9 +20,9 @@ namespace ITI.CIL_Cowding
         {
             
         }
-        public void Pre_Execute(Pre_ExecutionContext pre_ctx) 
+        public void Pre_Execute(PreExecutionContext pre_ctx) 
         {
-            pre_ctx.Stack.CreateVar( _type );
+            //pre_ctx.Stack.CreateVar( _type );
         }
     }
 }

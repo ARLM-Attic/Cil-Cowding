@@ -8,7 +8,6 @@ namespace ITI.CIL_Cowding
         static List<Container> _frame;
         static Stack<IValue> _topFrame;
 
-
         /*
          * PROPERTIES
          * */
@@ -85,7 +84,7 @@ namespace ITI.CIL_Cowding
         /*
          * GESTION DE LA CREATION DES FRAMES
          * */
-        public void CallFonction(IFunction fct)
+        public void CallFunction(IFunction fct)
         {
             throw new NotImplementedException();
         }
