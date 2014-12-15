@@ -37,6 +37,7 @@ namespace ITI.CIL_Cowding
                 }
             }
         }
+        #region IsThatType
         public bool IsBool()
         {
             return Type.GetTypeCode( this._type ) == TypeCode.Boolean;
@@ -97,6 +98,7 @@ namespace ITI.CIL_Cowding
         {
             return Type.GetTypeCode( this._type ) == TypeCode.String;
         }
+        #endregion
         static int StackSizeOf( Type t )
         {
             if ( !t.IsValueType ) return 4;

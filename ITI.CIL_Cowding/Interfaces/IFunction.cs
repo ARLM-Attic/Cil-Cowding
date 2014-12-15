@@ -9,8 +9,6 @@ namespace ITI.CIL_Cowding
     public interface IFunction
     {
         String GetSignature();
-        String GetLabel();
-        String GetTypeOfReturn();
 
         void AddLocalVariable(IValue var);
         IValue GetLocalVariable(int index);

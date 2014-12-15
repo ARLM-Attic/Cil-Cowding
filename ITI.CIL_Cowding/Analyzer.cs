@@ -57,7 +57,7 @@ namespace ITI.CIL_Cowding
                     ///  if (HasError) return null;
                     //   if( !_tokenizer.Match( TokenType.ClosedCurly ) )
                     //    {
-                            AddError( "Expected ending }, function or field declaration." );
+                            AddError( "Expected ending , function or field declaration." );
                     //}
                     //}
                 }
@@ -124,12 +124,12 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.MatchIdentifier("stloc"))
                 {
                     #region STLOC
-                    string varName1;
+                    int index;
 
-                    if (_tokenizer.IsIdentifier(out varName1)
+                    if (_tokenizer.IsInteger(out index)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new StlocNode(varName1));
+                        fct_content.Add(new StlocNode(index));
                     }
                     else
                     {
@@ -420,7 +420,6 @@ namespace ITI.CIL_Cowding
                     #endregion
                 }
 
-
                 else if (_tokenizer.MatchIdentifier("sub"))
                 {
                     #region SUB
@@ -507,7 +506,6 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion CALL
                 }
-
                 else if (_tokenizer.MatchIdentifier("ret"))
                 {
                     #region RET
@@ -525,6 +523,33 @@ namespace ITI.CIL_Cowding
                         _tokenizer.ForwardToNextLine();
                     }
                     #endregion
+                }
+
+                else if (_tokenizer.MatchIdentifier("ldloc"))
+                {
+                    #region ldloc
+
+                    // VAR
+                    int index;
+
+                    if (_tokenizer.IsInteger(out index)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new LdlocNode(index));
+                    }
+                    else
+                    {
+                        AddError("How can you have an error with LDLOC ??");
+                        _tokenizer.ForwardToNextLine();
+                    }
+
+                    #endregion ldloc
+                }
+
+                else
+                {
+                    AddError("Identifiant non reconnu.");
+                    throw new Exception();
                 }
                 #endregion BeginOfSuperIfTribu
             }

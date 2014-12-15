@@ -11,14 +11,15 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class StlocNode : InstructionNode
     {
-        private string _label;
-        public StlocNode( string label )
+       
+        private int _index;
+        public StlocNode( int index )
         {
-            this._label = label;
+            _index = index;
         }
         public override void Execute( IExecutionContext ctx )
         {
-            ctx.Stack.SetLocalVar( ctx.Stack.Pop() );
+            ctx.Stack.SetLocalVar( ctx.Stack.Pop(), _index );
         }
     }
 }
