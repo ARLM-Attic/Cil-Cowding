@@ -8,26 +8,30 @@ namespace ITI.CIL_Cowding
         static List<Container> _frame;
         static Stack<IValue> _topFrame;
 
-        /*
-         * PROPERTIES
-         * */
+        #region Properties
         // La frame TMP
         public Stack<IValue> TopFrame
         {
             get { return _topFrame; }
         }
-        // La frame la plus haute
+        /// <summary>
+        /// Get the highest frame
+        /// </summary>
         public Container LastFrame
         {
             get { return _frame[_frame.Count-1]; }
         }
-        // Liste des Containers
+        /// <summary>
+        /// Get Containers list ( all frames)
+        /// </summary>
         public static List<Container> Frame
         {
             get { return _frame; } 
         }
-
-        // Constructeur
+        #endregion
+        /// <summary>
+        /// Create a call stack.
+        /// </summary>
         public Stack() 
 		{
             _frame = new List<Container>();
@@ -35,9 +39,7 @@ namespace ITI.CIL_Cowding
 		}
 
 
-        /*
-         * GESTION DES VARIABLES AVEC LA FRAME LA PLUS HAUTE
-         * */
+        #region Variables managment with highest frame
         public IValue GetLocalVar( int index )
         {
             Container frame = LastFrame;
@@ -49,7 +51,12 @@ namespace ITI.CIL_Cowding
             Container frame = LastFrame;
             frame.SetLOCVar( index, var );
         }
-
+        public void CreateVar( ICILType type )
+        {
+            LastFrame.CreateVar( new Value( type, null ) );
+        }
+        #endregion
+        #region Arguments managment with hihgest frame
         public IValue GetArgVar(int index)
         {
             Container frame = LastFrame;
@@ -61,16 +68,8 @@ namespace ITI.CIL_Cowding
             Container frame = LastFrame;
             frame.SetARGVar(index, var);
         }
-
-        public void CreateVar(ICILType type)
-        {
-            LastFrame.CreateVar(new Value(type,null));
-        }
-
-        	
-       /*
-        * GESTION DE LA TOP_FRAME POP ET PUSH
-        * */
+        #endregion
+        #region Pop and Push managment on top frame
         public void Push(IValue var)
         {
             throw new NotImplementedException();
@@ -80,10 +79,8 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
-        
-        /*
-         * GESTION DE LA CREATION DES FRAMES
-         * */
+        #endregion
+        #region Frames creation managment
         public void CallFunction(IFunction fct)
         {
             throw new NotImplementedException();
@@ -92,7 +89,7 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
-        
+        #endregion
 
     }
 
