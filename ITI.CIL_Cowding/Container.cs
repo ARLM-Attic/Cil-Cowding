@@ -27,6 +27,9 @@ namespace ITI.CIL_Cowding
         {
             get { return _fct; }
         }
+        
+
+        // Ici, à un moment, ça va péter.
         public InstructionNode CurrentInstruction
         {
             get { return Fct.Code[_currentInstruction++]; }
@@ -42,25 +45,13 @@ namespace ITI.CIL_Cowding
 
         
         #region LocManagment
-        public void SetLOCVar(int index, IValue val) 
+        // Pas de sécurité sur l'index pour le moment
+        public void SetLOCVar(int index, Object val) 
 		{
-            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-			if( _localVars.Contains(val) )
-			{
-                for ( int i = 0 ; i < _localVars.Count ; i++ )
-                {
-                    if ( _localVars[i] == val )
-                    {
-                        _localVars[i] = val; // wtf cerveau
-                    }
-                }
-			} 
+            _localVars[index].Data = val;         
+		}
 
-           
-
-		
-		}	
-		
+        // Pas de sécurité sur l'index pour le moment
 		public IValue GetLOCVar(int index) 
 		{
             return _localVars[index];
@@ -69,28 +60,16 @@ namespace ITI.CIL_Cowding
 
 
         #region ArgManagment
-        public void SetARGVar(int index, IValue val)
+        // Pas de sécurité sur l'index pour le moment
+        public void SetARGVar(int index, Object val)
         {
-            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-            if (_localVars.Contains(val))
-            {
-                for (int i = 0; i < _localVars.Count; i++)
-                {
-                    if (_localVars[i] == val)
-                    {
-                        _localVars[i] = val; // wtf cerveau
-                    }
-                }
-            }
-
-
-
-
+             _args[index].Data = val; // wtf cerveau
+                    
         }
-
+        // Pas de sécurité sur l'index pour le moment
         public IValue GetARGVar(int index)
         {
-            return _localVars[index];
+            return _args[index];
         }
         #endregion
         

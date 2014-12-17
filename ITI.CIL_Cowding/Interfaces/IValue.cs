@@ -11,9 +11,10 @@ namespace ITI.CIL_Cowding
         }
 
        Object Data
-        {
-            get ;
-        }
+       {
+           get;
+           set;
+       }
 
     }
 }

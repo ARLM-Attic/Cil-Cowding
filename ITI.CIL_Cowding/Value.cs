@@ -16,6 +16,7 @@ namespace ITI.CIL_Cowding
 		public Object Data
         {
             get { return _data; }
+            set { _data = value; }
         }
 
         public Value( ICILType vartype, Object data )
@@ -23,5 +24,7 @@ namespace ITI.CIL_Cowding
             _type = vartype;
             _data = data;
         }
+
+        
     }
 }
