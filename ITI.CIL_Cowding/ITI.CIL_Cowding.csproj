@@ -42,6 +42,7 @@
     <Compile Include="Analyzer.cs" />
     <Compile Include="CILNetType.cs" />
     <Compile Include="CILTypeManager.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="ExecutionContext.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="Interfaces\IEngine.cs" />

@@ -8,9 +8,11 @@ namespace ITI.CIL_Cowding.Interfaces
 {
     public interface IEngine
     {
+        event EventHandler SourceCodeChanged;
+
         string SourceCode {get; set;}
 
-        bool IsRunning { get; }
+        //bool IsRunning { get; }
 
         void Start();
 

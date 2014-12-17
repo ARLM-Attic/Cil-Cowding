@@ -43,44 +43,45 @@ namespace ITI.CIL_Cowding
             }
         }
 
-        public bool IsRunning
-        {
-            get { return _strTok != null; }
-        }
+        //public bool IsRunning
+        //{
+        //    get { return _strTok != null && _analyzer != null; }
+        //}
 
         public void Start()
         {
+            IStack stack;
             List<Function> fct = new List<Function>();
 
-            // Initialise
             _strTok = new StringTokenizer(_sourceCode);
             _analyzer = new Analyzer(_strTok);
             _tree = _analyzer.ParseBody();
-            PreExecutionContext pec = new PreExecutionContext();
+            fct = _pec.PreExecut(_tree);
 
-            
-            /* List<FunctionNode> _tree
-             * StringTok = sourceCode
-            
-             * Analyser(stk_tk).ParseBody;
-             * PreExecution(_tree); -> AST List<Function>
-             * Execution (AST)
-            */
+            // Manque execution de List<Function> fct
         }
 
         public void NextInstruction()
         {
             /*
-             * ExecutionContext.NextLine();
-             * 
-             * 
+             *  Méthode annexe "NextLine()" à définir dans ExecutionContext.cs 
              */
+        
+            // ExecutionContext ec = new ExecutionContext();
+            // ec.NextInstruction();
+        }
+
+        public void CanRun()
+        {
 
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            _strTok = null;
+            _analyzer = null;
+            _tree = null;
+            _sourceCode = "";
         }
 
         public IStack GetStack(IExecutionContext iec)
