@@ -5,7 +5,7 @@ namespace ITI.CIL_Cowding
 {
     public class Stack : IStack 
     {
-        Stack<Container> _frame;
+        List<Container> _frame;
         Stack<IValue> _topFrame;
         
 
@@ -105,7 +105,7 @@ namespace ITI.CIL_Cowding
 
             // Paramètres, que l'on trouve sur la stack
             do{
-                parameters.Push(TopFrame.Pop());
+                parameters.Add(TopFrame.Pop());
             }while(TopFrame.Count >= 0);
 
             _frame.Add(new Container(locvars, parameters, fct));
