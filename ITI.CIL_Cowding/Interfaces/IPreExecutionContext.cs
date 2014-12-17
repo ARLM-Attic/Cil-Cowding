@@ -8,7 +8,7 @@ namespace ITI.CIL_Cowding
         CILTypeManager TypeManager
         { get; }
 
-        List<IValue> LocalsVar
+        List<ICILType> LocalsVar
         {
             set;
             get;

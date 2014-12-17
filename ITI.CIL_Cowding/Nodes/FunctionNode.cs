@@ -26,8 +26,8 @@ namespace ITI.CIL_Cowding
         public Function PreExecute(PreExecutionContext pec)
         {
             ICILType returnType;
-            List<IValue> parameters = new List<IValue>();
-            List<IValue> locvar = new List<IValue>();
+            List<ICILType> parameters = new List<ICILType>();
+            List<ICILType> locvar = new List<ICILType>();
 
 
             // Gestion du type de retour
@@ -36,7 +36,7 @@ namespace ITI.CIL_Cowding
             // Gestion des types de paramètres
             foreach (string str in _parameters)
             {
-                parameters.Add( new Value(pec.TypeManager.Find( str ), null) );
+                parameters.Add( pec.TypeManager.Find( str ) );
             }
 
             // Gestion des types des locvar

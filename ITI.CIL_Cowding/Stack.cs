@@ -5,8 +5,9 @@ namespace ITI.CIL_Cowding
 {
     public class Stack : IStack 
     {
-        static List<Container> _frame;
-        static Stack<IValue> _topFrame;
+        List<Container> _frame;
+        Stack<IValue> _topFrame;
+        
 
         #region Properties
         // La frame TMP
@@ -24,7 +25,7 @@ namespace ITI.CIL_Cowding
         /// <summary>
         /// Get Containers list ( all frames)
         /// </summary>
-        public static List<Container> Frame
+        public List<Container> Frame
         {
             get { return _frame; } 
         }
@@ -51,11 +52,11 @@ namespace ITI.CIL_Cowding
             Container frame = LastFrame;
             frame.SetLOCVar( index, var );
         }
-        public void CreateVar( ICILType type )
-        {
-            LastFrame.CreateVar( new Value( type, null ) );
-        }
+        
         #endregion
+        
+
+
         #region Arguments managment with hihgest frame
         public IValue GetArgVar(int index)
         {
@@ -69,26 +70,55 @@ namespace ITI.CIL_Cowding
             frame.SetARGVar(index, var);
         }
         #endregion
+       
+
+
         #region Pop and Push managment on top frame
         public void Push(IValue var)
         {
-            throw new NotImplementedException();
+            _topFrame.Push(var);
+            // C'est tout ?
         }
 
         public IValue Pop()
         {
-            throw new NotImplementedException();
+            return _topFrame.Pop();
         }
         #endregion
-        #region Frames creation managment
+        
+
+
+        #region Frames managment
+        
         public void CallFunction(IFunction fct)
         {
-            throw new NotImplementedException();
+            List<IValue> locvars = new List<IValue>();
+            List<IValue> parameters = new List<IValue>();
+
+
+            // On créer tout ce qu'il faut pour faire un container
+            // Variables locales, que l'on trouve dans la définition de la fct
+            foreach(var locvar in fct.LocVar) 
+            {
+                locvars.Add(new Value(locvar , null));
+            }
+
+            // Paramètres, que l'on trouve sur la stack
+            do{
+                parameters.Add(TopFrame.Pop());
+            }while(TopFrame.Count >= 0);
+
+            _frame.Add(new Container(locvars, parameters, fct));
+
+
         }
+        
         public void CloseFunction()
         {
-            throw new NotImplementedException();
+            _frame.RemoveAt(_frame.Count - 1);
+            // C'est uniquement ça nan ? 
         }
+        
         #endregion
 
     }

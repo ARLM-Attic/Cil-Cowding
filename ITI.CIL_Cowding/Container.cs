@@ -11,6 +11,9 @@ namespace ITI.CIL_Cowding
     {
 		private List<IValue> _localVars;
         private List<IValue> _args;
+        private IFunction _fct;
+        private int _currentInstruction;
+
 
 		public List<IValue> LocalVars
 		{
@@ -20,23 +23,26 @@ namespace ITI.CIL_Cowding
         {
             get { return _args;}
         }
-        
-		
-		public Container() 
-		{
-			_localVars = new List<IValue>();
-            _args = new List<IValue>();
+        public IFunction Fct
+        {
+            get { return _fct; }
         }
-		
-        /*
-         * GESTION DES VARIABLES LOCALES
-         *  */
-		public void CreateVar(IValue var) 
+        public InstructionNode CurrentInstruction
+        {
+            get { return Fct.Code[_currentInstruction++]; }
+        }
+
+		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference) 
 		{
-			_localVars.Add(var);
-		}
-		
-		public void SetLOCVar(int index, IValue val) 
+			_localVars = locvar;
+            _args = args;
+            _fct = fct_reference;
+            _currentInstruction = 0;
+        }
+
+        
+        #region LocManagment
+        public void SetLOCVar(int index, IValue val) 
 		{
             // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
 			if( _localVars.Contains(val) )
@@ -59,10 +65,10 @@ namespace ITI.CIL_Cowding
 		{
             return _localVars[index];
 		}
+        #endregion
 
-        /*
-         * GESTION DES VARIABLES ARGUMENTS
-         * */
+
+        #region ArgManagment
         public void SetARGVar(int index, IValue val)
         {
             // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
@@ -86,10 +92,10 @@ namespace ITI.CIL_Cowding
         {
             return _localVars[index];
         }
+        #endregion
         
-        /* 
-         * Sécurité histoire de savoir si on ne fait pas de la merde
-         * */
+
+        #region IsExist ?
         public bool IsExistVarLOC(int index)
         {
             return index <= LocalVars.Count - 1 && index >= 0 ;
@@ -99,6 +105,6 @@ namespace ITI.CIL_Cowding
         {
             return index <= ArgsVars.Count - 1 && index >=0;
         }
-		
+        #endregion
     }
 }

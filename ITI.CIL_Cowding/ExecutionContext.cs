@@ -9,7 +9,6 @@ namespace ITI.CIL_Cowding
     public class ExecutionContext : IExecutionContext
     {
         Stack _stack;
-        int _currentLine;
 
 
         public IStack Stack
@@ -22,17 +21,17 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-        public int CurrentLine
-        {
-            get {return _currentLine;}
-        }
         public ExecutionContext()
         {
             _stack = new Stack();
-            _currentLine = 1;
+
         }
 
+        public void NextInstruction() {
 
+            _stack.LastFrame.CurrentInstruction.Execute(this);
+            
+        }
 
     }
 }

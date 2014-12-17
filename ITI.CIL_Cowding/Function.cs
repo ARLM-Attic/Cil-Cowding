@@ -5,11 +5,15 @@ namespace ITI.CIL_Cowding
 {
     public class Function : IFunction
     {
+        #region Fields
         string _nameFct;
         ICILType _returnType;
-        List<IValue> _parameters;
-        List<IValue> _locVar;
+        List<ICILType> _parameters;
+        List<ICILType> _locVar;
         List<InstructionNode> _code;
+        #endregion
+
+        #region Properties
         public String Name
         {
             get { return _nameFct; }
@@ -18,7 +22,20 @@ namespace ITI.CIL_Cowding
         {
             get { return _returnType; }
         }
-        public Function(string nameFct, ICILType returnType, List<IValue> parameters, List<IValue> locVar, List<InstructionNode> code)
+
+        public List<ICILType> LocVar
+        {
+            get { return _locVar; }
+        }
+        #endregion
+
+        public List<InstructionNode> Code
+        {
+            get { return _code; }
+        }
+
+        #region Constructor
+        public Function(string nameFct, ICILType returnType, List<ICILType> parameters, List<ICILType> locVar, List<InstructionNode> code)
         {
             _nameFct = nameFct;
             _returnType = returnType;
@@ -26,6 +43,9 @@ namespace ITI.CIL_Cowding
             _code = code;
             _locVar = locVar;
         }
+        #endregion
+
+        #region Methodes
         public String GetSignature()
         {
             throw new NotImplementedException();
@@ -43,9 +63,8 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
+        #endregion
+
     }
 }
 
-
-
-// lol je fais du 6sharp
