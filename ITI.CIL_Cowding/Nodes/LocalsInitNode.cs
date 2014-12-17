@@ -15,7 +15,7 @@ namespace ITI.CIL_Cowding
             _localsVars = new List<IValue>();
            
         }
-        public void PreExecute(PreExecutionContext pec)
+        public override void PreExecute(IPreExecutionContext pec)
         {
             // on créer des values à profusion
             foreach (string str in _types)

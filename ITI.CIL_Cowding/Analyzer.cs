@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+
     public class Analyzer
     {
 
@@ -65,7 +66,6 @@ namespace ITI.CIL_Cowding
             }
             return methods;
         }
-
 
         FunctionNode IsFunction()
         {
@@ -165,7 +165,7 @@ namespace ITI.CIL_Cowding
                     #endregion LOCALS_INIT
                 }
 
-                if (_tokenizer.MatchIdentifier("stloc"))
+                else if (_tokenizer.MatchIdentifier("stloc"))
                 {
                     #region STLOC
                     int index;
@@ -584,5 +584,7 @@ namespace ITI.CIL_Cowding
         private void AddError(string msg) {
             _errors.Add(new SyntaxError(msg));
         }
+
     }
+
 }

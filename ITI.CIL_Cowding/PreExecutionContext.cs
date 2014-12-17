@@ -16,14 +16,7 @@ namespace ITI.CIL_Cowding
             get {return _localsVar;}
 
             set {
-                    if(_localsVar != null)
-                    {
-                        throw new Exception("Locals variables already created. You are not suppose to see this error.");
-                    }
-                    else
-                    {
-                        _localsVar = value;
-                    }
+                        _localsVar = value;   
                 }
         }
 
@@ -35,7 +28,7 @@ namespace ITI.CIL_Cowding
         public PreExecutionContext()
         {
             _typeManager = new CILTypeManager();
-
+            _localsVar = new List<IValue>();
 
 
         }
