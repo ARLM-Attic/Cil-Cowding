@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
+
     public class Analyzer
     {
 
@@ -66,17 +67,16 @@ namespace ITI.CIL_Cowding
             return methods;
         }
 
-
         FunctionNode IsFunction()
         {
             if (!_tokenizer.MatchIdentifier("function")) return null;
    
             string name;
-            string typeOfReturn;
-            List<string> parametres = new List<string>();
+            string returnType;
+            List<string> parameters = new List<string>();
 
             // Si ensuite on a les autres infos et une ouverture de parenthèse
-            if (_tokenizer.IsIdentifier(out typeOfReturn)
+            if (_tokenizer.IsIdentifier(out returnType)
                 && _tokenizer.IsIdentifier(out name)
                 && _tokenizer.Match(TokenType.OpenPar))
             {
@@ -84,10 +84,10 @@ namespace ITI.CIL_Cowding
                 // On prend tout les params
                 while (!_tokenizer.Match(TokenType.ClosedPar))
                 {
-                    string type_parametre;
-                    if (_tokenizer.IsIdentifier(out type_parametre))
+                    string parameterType;
+                    if (_tokenizer.IsIdentifier(out parameterType))
                     {
-                        parametres.Add(type_parametre);
+                        parameters.Add(parameterType);
                     }
                     else
                     {
@@ -99,7 +99,7 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.Match(TokenType.OpenCurly))
                 {
 
-                    FunctionNode fct = new FunctionNode(name, typeOfReturn, ParseFunctionBody(), parametres);
+                    FunctionNode fct = new FunctionNode(name, returnType, ParseFunctionBody(), parameters);
                     return fct;
                 }
                 else
@@ -121,7 +121,51 @@ namespace ITI.CIL_Cowding
             while(!_tokenizer.Match(TokenType.ClosedCurly) && !_tokenizer.IsEnd)
             {
                 #region BeginOfSuperIfTribu
-                if (_tokenizer.MatchIdentifier("stloc"))
+                // Gestion des localinit
+                if (_tokenizer.MatchIdentifier("locals_init"))
+                {
+                    #region LOCALS_INIT
+                    List<string> loc_var = new List<string>();
+                    string type;
+                    string tmp;
+
+                    if (_tokenizer.Match(TokenType.OpenPar))
+                    {
+                        
+                        while(!_tokenizer.Match(TokenType.ClosedPar) && !_tokenizer.IsEnd)
+                        {
+                            if (_tokenizer.IsIdentifier(out type)
+                                && _tokenizer.IsIdentifier(out tmp))
+                            {
+
+                                loc_var.Add(type);
+
+                            }
+                            else
+                            {
+                                AddError("Bug au niveau de la déclaration d'un variable");
+                            }
+                            _tokenizer.Match(TokenType.Comma);
+
+                        }
+                        if (_tokenizer.IsEnd)
+                        {
+                            AddError("Ben ... C'est déjà la fin ???");
+                        }
+
+                        fct_content.Add(new LocalsInitNode(loc_var));
+
+                    }
+                    else
+                    {
+                        AddError("Locals Init BUUUG");
+                        _tokenizer.ForwardToNextLine();
+
+                    }
+                    #endregion LOCALS_INIT
+                }
+
+                else if (_tokenizer.MatchIdentifier("stloc"))
                 {
                     #region STLOC
                     int index;
@@ -189,26 +233,7 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion
                 }
-                else if (_tokenizer.MatchIdentifier("var"))
-                {
-                    #region VAR
-                    // VAR
-                    string label;
-                    string vartype;
-
-                    if (_tokenizer.IsIdentifier(out vartype)
-                        && _tokenizer.IsIdentifier(out label)
-                        && _tokenizer.Match(TokenType.SemiColon))
-                    {
-                        fct_content.Add(new VarNode(vartype));
-                    }
-                    else
-                    {
-                        AddError("Can't create the variable");
-                        _tokenizer.ForwardToNextLine();
-                    }
-                    #endregion
-                }
+               
                 else if (_tokenizer.MatchIdentifier("nop"))
                 {
                     #region NOP
@@ -549,7 +574,6 @@ namespace ITI.CIL_Cowding
                 else
                 {
                     AddError("Identifiant non reconnu.");
-                    throw new Exception();
                 }
                 #endregion BeginOfSuperIfTribu
             }
@@ -560,5 +584,7 @@ namespace ITI.CIL_Cowding
         private void AddError(string msg) {
             _errors.Add(new SyntaxError(msg));
         }
+
     }
+
 }

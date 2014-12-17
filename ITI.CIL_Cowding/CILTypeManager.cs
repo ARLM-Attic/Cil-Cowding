@@ -13,7 +13,10 @@ namespace ITI.CIL_Cowding
         public CILTypeManager()
         {
             _types = new Dictionary<string, ICILType>();
+            _namespaces = new List<string>();
+            this.AddUsing("System");
 
+            Add( new CILNetType(typeof(void)), "void");
             Add( new CILNetType( typeof( Int32 ) ), "int" );
             Add( new CILNetType( typeof( UInt32 ) ), "uint" );
             Add( new CILNetType( typeof( Int64 ) ), "long" );
@@ -28,7 +31,7 @@ namespace ITI.CIL_Cowding
             Add( new CILNetType( typeof( DateTime ) ) );
             Add( new CILNetType( typeof( Guid ) ) );
             Add( new CILNetType( typeof( char ) ) );
-            Add( new CILNetType( typeof( string ) ) );
+            Add( new CILNetType( typeof( string ) ), "string" );
         }
         public void AddUsing( string nameSpace )
         {

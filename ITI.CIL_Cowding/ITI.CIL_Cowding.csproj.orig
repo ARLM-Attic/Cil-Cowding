@@ -42,12 +42,13 @@
     <Compile Include="Analyzer.cs" />
     <Compile Include="CILNetType.cs" />
     <Compile Include="CILTypeManager.cs" />
-    <Compile Include="ExecutionContexte.cs" />
-<<<<<<< HEAD
-    <Compile Include="Nodes\Instructions\CallNode.cs" />
-=======
+    <Compile Include="ExecutionContext.cs" />
     <Compile Include="Function.cs" />
->>>>>>> e0f6322aa2c36d068c73202cd1a1f22b0a6c04c5
+<<<<<<< HEAD
+    <Compile Include="Interfaces\IPreExecutionContext.cs" />
+=======
+    <Compile Include="Nodes\Instructions\CallNode.cs" />
+>>>>>>> 17a51ff307d34a4d04ef6be9cc28fe345b411244
     <Compile Include="Nodes\Instructions\AndNode.cs" />
     <Compile Include="Nodes\Instructions\BinaryBooleanOperatorNode.cs" />
     <Compile Include="Nodes\Instructions\BinaryComparatorNode.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Nodes\Instructions\LdstrNode.cs" />
     <Compile Include="Nodes\Instructions\MulNode.cs" />
     <Compile Include="Nodes\Instructions\NegNode.cs" />
+    <Compile Include="Nodes\Instructions\LocalsInitNode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Instructions\NopNode.cs" />
     <Compile Include="Nodes\Instructions\ReadNode.cs" />
@@ -78,7 +80,7 @@
     <Compile Include="Interfaces\IFunction.cs" />
     <Compile Include="Interfaces\IFrame.cs" />
     <Compile Include="Interfaces\IHeap.cs" />
-    <Compile Include="Interfaces\IExecutionContexte.cs" />
+    <Compile Include="Interfaces\IExecutionContext.cs" />
     <Compile Include="Interfaces\IStack.cs" />
     <Compile Include="Nodes\Instructions\InstructionNode.cs" />
     <Compile Include="Interfaces\ITokenizer.cs" />
