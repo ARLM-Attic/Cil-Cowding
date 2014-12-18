@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
     public class ExecutionContext : IExecutionContext
     {
         Stack _stack;
-        List<Function> _code;
+        List<IFunction> _code;
 
         public IStack Stack
         {
@@ -21,7 +21,7 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-        public ExecutionContext(List<Function>code)
+        public ExecutionContext(List<IFunction>code)
         {
 
             _stack = new Stack();

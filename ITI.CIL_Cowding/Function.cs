@@ -27,12 +27,12 @@ namespace ITI.CIL_Cowding
         {
             get { return _locVar; }
         }
-        #endregion
 
         public List<InstructionNode> Code
         {
             get { return _code; }
         }
+        #endregion
 
         #region Constructor
         public Function(string nameFct, ICILType returnType, List<ICILType> parameters, List<ICILType> locVar, List<InstructionNode> code)

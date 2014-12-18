@@ -9,13 +9,16 @@ namespace ITI.CIL_Cowding
   
     public class Container
     {
-		private List<IValue> _localVars;
+        #region Fields
+        private List<IValue> _localVars;
         private List<IValue> _args;
         private IFunction _fct;
         private int _currentInstruction;
+        int _currentLine;
+        #endregion
 
-
-		public List<IValue> LocalVars
+        #region Properties
+        public List<IValue> LocalVars
 		{
 			get {return _localVars;}
 		}
@@ -28,12 +31,12 @@ namespace ITI.CIL_Cowding
             get { return _fct; }
         }
         
-
         // Ici, à un moment, ça va péter.
         public InstructionNode CurrentInstruction
         {
             get { return Fct.Code[_currentInstruction++]; }
         }
+        #endregion
 
 		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference) 
 		{
@@ -43,8 +46,19 @@ namespace ITI.CIL_Cowding
             _currentInstruction = 0;
         }
 
-        
-        #region LocManagment
+        #region CurrentLine managment
+        public void NextLine()
+        {
+            _currentLine++;
+        }
+        public void Branch( int label )
+        {
+            _currentLine = label;
+        }
+        #endregion
+
+
+        #region Locals variables managment
         // Pas de sécurité sur l'index pour le moment
         public void SetLOCVar(int index, Object val) 
 		{

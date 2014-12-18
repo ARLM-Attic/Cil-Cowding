@@ -45,7 +45,6 @@ namespace ITI.CIL_Cowding
             }
             */
                 #endregion
-
                 FunctionNode f = IsFunction();
                 if (f != null) methods.Add(f);
                 else
@@ -570,6 +569,21 @@ namespace ITI.CIL_Cowding
 
                     #endregion ldloc
                 }
+                else if (_tokenizer.MatchIdentifier("#"))
+                {
+                    string label;
+
+                    if ( _tokenizer.IsIdentifier( out label )
+                        && _tokenizer.Match( TokenType.SemiColon ) )
+                    {
+                        fct_content.Add( new LabelNode( new KeyValuePair<string, int>( label, _tokenizer.CurrentLine ) ) );
+                    }
+                    else
+                    {
+                        AddError( "Error on label declaration" );
+                        _tokenizer.ForwardToNextLine();
+                    }
+                }
 
                 else
                 {
@@ -581,7 +595,8 @@ namespace ITI.CIL_Cowding
             return fct_content;
         }
 
-        private void AddError(string msg) {
+        private void AddError(string msg)
+        { // Putain d'Égyptien
             _errors.Add(new SyntaxError(msg));
         }
 

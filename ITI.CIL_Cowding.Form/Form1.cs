@@ -14,12 +14,12 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
 
-        private ExecutionContext _ec;
+        private IExecutionContext _ec;
         private StringTokenizer _strtk;
         private Analyzer _anal;
         List<FunctionNode> _tree;
-        private PreExecutionContext _pec;
-        private List<Function> _mes_fct;
+        private IPreExecutionContext _pec;
+        private List<IFunction> _mes_fct;
 
         public Form1()
         {

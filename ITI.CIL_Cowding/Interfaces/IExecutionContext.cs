@@ -12,7 +12,7 @@ namespace ITI.CIL_Cowding
         {
             get;
         }
-        
 
+        void NextInstruction();
     }
 }

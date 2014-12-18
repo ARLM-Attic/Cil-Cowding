@@ -5,7 +5,14 @@ namespace ITI.CIL_Cowding
 {
     public interface IFunction
     {
-        String GetSignature();
+        string Name
+        {
+            get;
+        }
+        ICILType ReturnType
+        {
+            get;
+        }
         List<ICILType> LocVar
         {
             get;
@@ -15,6 +22,7 @@ namespace ITI.CIL_Cowding
             get;
         }
 
+        string GetSignature();
         void AddLocalVariable(IValue var);
         IValue GetLocalVariable(int index);
         IValue SetLocalVariable(IValue var);

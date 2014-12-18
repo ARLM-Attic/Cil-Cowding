@@ -10,7 +10,10 @@ namespace ITI.CIL_Cowding
         List<string> _parameters;
         List<InstructionNode> _code;
 
-
+        public string Name
+        {
+            get { return _namefct; }
+        }
         public FunctionNode(string name, string returnType, List<InstructionNode> code, List<string> parameters)
         {
             _namefct = name;

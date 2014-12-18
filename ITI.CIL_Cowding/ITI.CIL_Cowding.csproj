@@ -64,6 +64,7 @@
     <Compile Include="Nodes\Instructions\LdstrNode.cs" />
     <Compile Include="Nodes\Instructions\MulNode.cs" />
     <Compile Include="Nodes\Instructions\NegNode.cs" />
+    <Compile Include="Nodes\Instructions\LabelNode.cs" />
     <Compile Include="Nodes\LocalsInitNode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Instructions\NopNode.cs" />
@@ -78,7 +79,7 @@
     <Compile Include="Interfaces\IHeap.cs" />
     <Compile Include="Interfaces\IExecutionContext.cs" />
     <Compile Include="Interfaces\IStack.cs" />
-    <Compile Include="Nodes\Instructions\InstructionNode.cs" />
+    <Compile Include="Nodes\InstructionNode.cs" />
     <Compile Include="Interfaces\ITokenizer.cs" />
     <Compile Include="Interfaces\IValue.cs" />
     <Compile Include="Nodes\Instructions\LdlocNode.cs" />
