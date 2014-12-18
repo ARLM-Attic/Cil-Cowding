@@ -104,11 +104,14 @@ namespace ITI.CIL_Cowding
             }
 
             // Paramètres, que l'on trouve sur la stack
-            do{
-                parameters.Add(TopFrame.Pop());
-            }while(TopFrame.Count >= 0);
+            while(TopFrame.Count > 0) {
 
+                parameters.Add(TopFrame.Pop());
+
+            }            
+            
             _frame.Add(new Container(locvars, parameters, fct));
+
 
 
         }

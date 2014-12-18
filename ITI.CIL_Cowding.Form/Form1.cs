@@ -145,10 +145,11 @@ namespace ITI.CIL_Cowding
             _tree = _anal.ParseBody();
 
             // Pas de pré-execution pour le moment.
-            _ec = new ExecutionContext();
             _pec = new PreExecutionContext();
 
             _mes_fct = _pec.PreExecut(_tree);
+
+            _ec = new ExecutionContext(_mes_fct);
 
 
 
@@ -217,7 +218,7 @@ namespace ITI.CIL_Cowding
         {           
             // Pour le moment on fait comme ça, mais ça sera changé par la suite.
             //_tree[_ec.CurrentLine].Execute(_ec);
-
+            _ec.NextInstruction();
             UpdateStack();   
         }
         #endregion
