@@ -536,10 +536,9 @@ namespace ITI.CIL_Cowding
                     // VAR
                     string label;
 
-                    if (_tokenizer.IsIdentifier(out label)
-                        && _tokenizer.Match(TokenType.SemiColon))
+                    if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new RetNode(label));
+                        fct_content.Add(new RetNode());
                     }
                     else
                     {

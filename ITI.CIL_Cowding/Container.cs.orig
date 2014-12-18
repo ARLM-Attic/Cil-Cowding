@@ -9,10 +9,20 @@ namespace ITI.CIL_Cowding
   
     public class Container
     {
-		private List<IValue> _localVars;
+        #region Fields
+        private List<IValue> _localVars;
         private List<IValue> _args;
+        private IFunction _fct;
+        private int _currentInstruction;
+<<<<<<< HEAD
+        int _currentLine;
+        #endregion
+=======
+        private IStack _stack;
+>>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
 
-		public List<IValue> LocalVars
+        #region Properties
+        public List<IValue> LocalVars
 		{
 			get {return _localVars;}
 		}
@@ -20,76 +30,70 @@ namespace ITI.CIL_Cowding
         {
             get { return _args;}
         }
-        
-		
-		public Container() 
-		{
-			_localVars = new List<IValue>();
-            _args = new List<IValue>();
+        public IFunction Fct
+        {
+            get { return _fct; }
         }
-		
-        /*
-         * GESTION DES VARIABLES LOCALES
-         *  */
-		public void CreateVar(IValue var) 
+        
+        // Ici, à un moment, ça va péter.
+        public InstructionNode CurrentInstruction
+        {
+            get { return Fct.Code[_currentInstruction];  }
+        }
+        #endregion
+
+		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference, IStack stack) 
 		{
-			_localVars.Add(var);
+			_localVars = locvar;
+            _args = args;
+            _fct = fct_reference;
+            _currentInstruction = 0;
+             _stack = stack;
+        }
+
+        #region CurrentLine managment
+        public void NextLine()
+        {
+            _currentLine++;
+        }
+        public void Branch( int label )
+        {
+            _currentLine = label;
+        }
+        #endregion
+
+
+        #region Locals variables managment
+        // Pas de sécurité sur l'index pour le moment
+        public void SetLOCVar(int index, Object val) 
+		{
+            _localVars[index].Data = val;         
 		}
-		
-		public void SetLOCVar(int index, IValue val) 
-		{
-            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-			if( _localVars.Contains(val) )
-			{
-                for ( int i = 0 ; i < _localVars.Count ; i++ )
-                {
-                    if ( _localVars[i] == val )
-                    {
-                        _localVars[i] = val; // wtf cerveau
-                    }
-                }
-			} 
 
-           
-
-		
-		}	
-		
+        // Pas de sécurité sur l'index pour le moment
 		public IValue GetLOCVar(int index) 
 		{
             return _localVars[index];
 		}
+        #endregion
 
-        /*
-         * GESTION DES VARIABLES ARGUMENTS
-         * */
-        public void SetARGVar(int index, IValue val)
+
+        #region ArgManagment
+        // Pas de sécurité sur l'index pour le moment
+        public void SetARGVar(int index, Object val)
         {
-            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-            if (_localVars.Contains(val))
-            {
-                for (int i = 0; i < _localVars.Count; i++)
-                {
-                    if (_localVars[i] == val)
-                    {
-                        _localVars[i] = val; // wtf cerveau
-                    }
-                }
-            }
-
-
-
-
+             _args[index].Data = val; // wtf cerveau
+                    
         }
-
+        // Pas de sécurité sur l'index pour le moment
         public IValue GetARGVar(int index)
         {
-            return _localVars[index];
+            return _args[index];
         }
+        #endregion
         
-        /* 
-         * Sécurité histoire de savoir si on ne fait pas de la merde
-         * */
+
+        #region IsExist ?
         public bool IsExistVarLOC(int index)
         {
             return index <= LocalVars.Count - 1 && index >= 0 ;
@@ -99,6 +103,17 @@ namespace ITI.CIL_Cowding
         {
             return index <= ArgsVars.Count - 1 && index >=0;
         }
-		
+        #endregion
+
+
+        public void NextInstruction()
+        {
+            _currentInstruction++;
+
+            if (_currentInstruction >= Fct.Code.Count)
+            {
+                _stack.CloseFunction();
+            }
+        }
     }
 }

@@ -23,8 +23,13 @@ namespace ITI.CIL_Cowding
         }
         List<IFunction> PreExecut( List<FunctionNode> code );
 
+<<<<<<< HEAD
         void AddLabel( KeyValuePair<string, int> label );
+=======
         Function SearchFunction(string nomFct);
+
+
         void AddError(string p);
+>>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
     }
 }

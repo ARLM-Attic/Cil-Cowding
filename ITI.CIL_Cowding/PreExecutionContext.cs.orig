@@ -6,11 +6,10 @@ namespace ITI.CIL_Cowding
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<Function> _mes_fct;
+<<<<<<< HEAD
+        List<ICILType> _localsVar;
         List<SyntaxError> _errors;
         Dictionary<string, int> _labels;
-        List<string> _errors;
-        List<ICILType> _locvar;
 
         #region Properties
         public Dictionary<string,int> Labels
@@ -21,6 +20,11 @@ namespace ITI.CIL_Cowding
         {
             get { return _errors; }
         }
+=======
+        List<Function> _mes_fct;
+        List<string> _errors;
+        List<ICILType> _locvar;
+>>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
 
         public List<ICILType> LocalsVar
         {
@@ -36,10 +40,14 @@ namespace ITI.CIL_Cowding
         public PreExecutionContext()
         {
             _typeManager = new CILTypeManager();
-            _mes_fct = new List<Function>();
+<<<<<<< HEAD
+            _localsVar = new List<ICILType>();
             _errors = new List<SyntaxError>();
+=======
+            _mes_fct = new List<Function>();
             _errors = new List<string>();
             _locvar = new List<ICILType>();
+>>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
         }
 
         /// <summary>
@@ -75,6 +83,25 @@ namespace ITI.CIL_Cowding
             return myFunctions;
         }
 
+<<<<<<< HEAD
+        private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
+        {
+            foreach ( IFunction functionForName in myFunctions )
+            {
+                if ( functionForName.Name == function.Name )
+                {
+                    AddError( "Function " + function.Name + " already exist" );
+                    return false;
+                }
+            }
+            return true;
+            
+        }
+        private void AddError( string msg )
+        {
+            _errors.Add( new SyntaxError( msg ) );
+        }
+=======
         public Function SearchFunction(string nomFct)
         {
                 
@@ -95,23 +122,7 @@ namespace ITI.CIL_Cowding
             _errors.Add(msg);
         }
 
-        private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
-        {
-            foreach ( IFunction functionForName in myFunctions )
-            {
-                if ( functionForName.Name == function.Name )
-                {
-                    AddError( "Function " + function.Name + " already exist" );
-                    return false;
-                }
-            }
-            return true;
-            
-        }
-        private void AddError( string msg )
-        {
-            _errors.Add( new SyntaxError( msg ) );
-        }
+>>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
 
         public void AddLabel(KeyValuePair<string,int> label)
         {
