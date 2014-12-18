@@ -16,10 +16,12 @@ namespace ITI.CIL_Cowding
         StringTokenizer _strTok;    
         Analyzer _analyzer;
         List<FunctionNode> _tree;
+        List<Function> _code;
 
         // Execution
         PreExecutionContext _pec;
         IExecutionContext _ctx;
+        ExecutionContext _ec;
         
         // Gestion du code source
         public event EventHandler SourceCodeChanged;
@@ -50,25 +52,16 @@ namespace ITI.CIL_Cowding
 
         public void Start()
         {
-            List<Function> fct = new List<Function>();
-
             _strTok = new StringTokenizer(_sourceCode);
             _analyzer = new Analyzer(_strTok);
             _tree = _analyzer.ParseBody();
-            fct = _pec.PreExecut(_tree);
-
-            // Manque execution de List<Function> fct
+            _code = _pec.PreExecut(_tree);
         }
 
         public void NextInstruction()
         {
-            ExecutionContext ec = new ExecutionContext();
-            ec.NextInstruction();
-        }
-
-        public void CanRun()
-        {
-
+            _ec = new ExecutionContext(_code);
+            _ec.NextInstruction();
         }
 
         public void Stop()
