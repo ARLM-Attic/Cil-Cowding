@@ -6,10 +6,10 @@ namespace ITI.CIL_Cowding
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<Function> _mes_fct;
+        List<IFunction> _mes_fct;
         List<SyntaxError> _errors;
         Dictionary<string, int> _labels;
-        List<string> _errors;
+        //List<string> _errors;
         List<ICILType> _locvar;
 
         #region Properties
@@ -36,9 +36,9 @@ namespace ITI.CIL_Cowding
         public PreExecutionContext()
         {
             _typeManager = new CILTypeManager();
-            _mes_fct = new List<Function>();
+            _mes_fct = new List<IFunction>();
             _errors = new List<SyntaxError>();
-            _errors = new List<string>();
+          //  _errors = new List<string>();
             _locvar = new List<ICILType>();
         }
 
@@ -90,11 +90,11 @@ namespace ITI.CIL_Cowding
             return null;
         }
 
-        public void AddError(string msg)
+       /* public void AddError(string msg)
         {
             _errors.Add(msg);
         }
-
+        */
         private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
         {
             foreach ( IFunction functionForName in myFunctions )
@@ -112,7 +112,7 @@ namespace ITI.CIL_Cowding
         {
             _errors.Add( new SyntaxError( msg ) );
         }
-
+        
         public void AddLabel(KeyValuePair<string,int> label)
         {
             _labels.Add( label.Key, label.Value );

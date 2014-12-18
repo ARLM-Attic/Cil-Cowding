@@ -25,6 +25,5 @@ namespace ITI.CIL_Cowding
 
         void AddLabel( KeyValuePair<string, int> label );
         Function SearchFunction(string nomFct);
-        void AddError(string p);
     }
 }
