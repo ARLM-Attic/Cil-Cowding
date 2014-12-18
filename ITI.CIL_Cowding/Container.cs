@@ -13,6 +13,7 @@ namespace ITI.CIL_Cowding
         private List<IValue> _args;
         private IFunction _fct;
         private int _currentInstruction;
+        private IStack _stack;
 
 
 		public List<IValue> LocalVars
@@ -32,15 +33,16 @@ namespace ITI.CIL_Cowding
         // Ici, à un moment, ça va péter.
         public InstructionNode CurrentInstruction
         {
-            get { return Fct.Code[_currentInstruction++]; }
+            get { return Fct.Code[_currentInstruction];  }
         }
 
-		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference) 
+		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference, IStack stack) 
 		{
 			_localVars = locvar;
             _args = args;
             _fct = fct_reference;
             _currentInstruction = 0;
+             _stack = stack;
         }
 
         
@@ -85,5 +87,16 @@ namespace ITI.CIL_Cowding
             return index <= ArgsVars.Count - 1 && index >=0;
         }
         #endregion
+
+
+        public void NextInstruction()
+        {
+            _currentInstruction++;
+
+            if (_currentInstruction >= Fct.Code.Count)
+            {
+                _stack.CloseFunction();
+            }
+        }
     }
 }

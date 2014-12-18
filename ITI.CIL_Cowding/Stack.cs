@@ -20,7 +20,11 @@ namespace ITI.CIL_Cowding
         /// </summary>
         public Container LastFrame
         {
-            get { return _frame[_frame.Count-1]; }
+            get 
+            {
+                if (_frame.Count == 0) { return null; }
+                return _frame[_frame.Count-1]; 
+            }
         }
         /// <summary>
         /// Get Containers list ( all frames)
@@ -110,7 +114,7 @@ namespace ITI.CIL_Cowding
 
             }            
             
-            _frame.Add(new Container(locvars, parameters, fct));
+            _frame.Add(new Container(locvars, parameters, fct, this));
 
 
 
@@ -118,6 +122,9 @@ namespace ITI.CIL_Cowding
         
         public void CloseFunction()
         {
+            if(_frame.Count -1 < 0) {
+                throw new NotImplementedException("Là on doit finir le programme :D");
+            }
             _frame.RemoveAt(_frame.Count - 1);
             // C'est uniquement ça nan ? 
         }

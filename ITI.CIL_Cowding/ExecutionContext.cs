@@ -34,8 +34,18 @@ namespace ITI.CIL_Cowding
         }
 
         public void NextInstruction() {
+            
+            InstructionNode IN = _stack.LastFrame.CurrentInstruction;
 
-            _stack.LastFrame.CurrentInstruction.Execute(this);
+            if (IN == null) { throw new NotImplementedException("Il faut gérer la fin du programme"); }
+
+            else { IN.Execute(this); }
+            // On passe à l'instruction suivante
+            if(_stack.LastFrame == null) {
+                throw new Exception("Le soft ne gère pas encore la fin d'un programme");
+            } else {
+                _stack.LastFrame.NextInstruction();
+            }
             
         }
 
