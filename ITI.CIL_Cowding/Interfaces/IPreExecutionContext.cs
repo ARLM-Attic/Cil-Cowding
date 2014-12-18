@@ -14,7 +14,9 @@ namespace ITI.CIL_Cowding
             get;
         }
 
+        Function SearchFunction(string nomFct);
 
 
+        void AddError(string p);
     }
 }

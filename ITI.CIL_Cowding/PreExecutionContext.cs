@@ -6,20 +6,15 @@ namespace ITI.CIL_Cowding
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<ICILType> _localsVar;
+        List<Function> _mes_fct;
+        List<string> _errors;
+        List<ICILType> _locvar;
 
-        /// <summary>
-        /// Get or Set locals variables in the current context.
-        /// </summary>
         public List<ICILType> LocalsVar
         {
-            get {return _localsVar;}
-
-            set {
-                        _localsVar = value;   
-                }
+            get { return _locvar; }
+            set { _locvar = value; }
         }
-
 
         public CILTypeManager TypeManager
         {
@@ -28,9 +23,9 @@ namespace ITI.CIL_Cowding
         public PreExecutionContext()
         {
             _typeManager = new CILTypeManager();
-            _localsVar = new List<ICILType>();
-
-
+            _mes_fct = new List<Function>();
+            _errors = new List<string>();
+            _locvar = new List<ICILType>();
         }
 
         /// <summary>
@@ -47,7 +42,40 @@ namespace ITI.CIL_Cowding
                 myFunctions.Add( function.PreExecute(this) );
             }
 
+            // Là on a nos fct, donc on le case dans la var
+            _mes_fct = myFunctions;
+
+            // on parcourt toutes nos fct et on pré-exécute tous les noeuds
+            foreach (Function fct in myFunctions)
+            {
+                foreach (InstructionNode IN in fct.Code)
+                {
+                    IN.PreExecute(this);
+                }
+                
+            }
+
             return myFunctions;
+        }
+
+        public Function SearchFunction(string nomFct)
+        {
+                
+            foreach(Function fct in _mes_fct) {
+                    
+                if(fct.Name == nomFct) {
+                    return fct;
+                }
+
+            }
+
+            AddError("Function not found.");
+            return null;
+        }
+
+        public void AddError(string msg)
+        {
+            _errors.Add(msg);
         }
 
 
