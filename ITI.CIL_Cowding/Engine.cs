@@ -50,7 +50,6 @@ namespace ITI.CIL_Cowding
 
         public void Start()
         {
-            IStack stack;
             List<Function> fct = new List<Function>();
 
             _strTok = new StringTokenizer(_sourceCode);
@@ -63,12 +62,8 @@ namespace ITI.CIL_Cowding
 
         public void NextInstruction()
         {
-            /*
-             *  Méthode annexe "NextLine()" à définir dans ExecutionContext.cs 
-             */
-        
-            // ExecutionContext ec = new ExecutionContext();
-            // ec.NextInstruction();
+            ExecutionContext ec = new ExecutionContext();
+            ec.NextInstruction();
         }
 
         public void CanRun()

@@ -9,8 +9,7 @@ namespace ITI.CIL_Cowding
     public class ExecutionContext : IExecutionContext
     {
         Stack _stack;
-        int _currentLine;
-
+        List<Function> _code;
 
         public IStack Stack
         {
@@ -22,17 +21,24 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-        public int CurrentLine
+        public ExecutionContext(List<Function> code)
         {
-            get {return _currentLine;}
-        }
-        public ExecutionContext()
-        {
+
             _stack = new Stack();
-            _currentLine = 1;
+
+            // Initialisation du code
+            _code = code;
+            // Pour le moment on ne lance que la première fct, mais après on lancera la fct Main
+            _stack.CallFunction(_code[0]);
+
         }
 
+        public void NextInstruction()
+        {
 
+            _stack.LastFrame.CurrentInstruction.Execute(this);
+
+        }
 
     }
 }
