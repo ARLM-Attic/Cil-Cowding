@@ -15,11 +15,9 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
 
         private IExecutionContext _ec;
-        private StringTokenizer _strtk;
-        private Analyzer _anal;
-        List<FunctionNode> _tree;
         private IPreExecutionContext _pec;
         private List<IFunction> _mes_fct;
+        private Engine engine;
 
         public Form1()
         {
@@ -119,7 +117,9 @@ namespace ITI.CIL_Cowding
         #region button step by step 
         private void butStepByStep_Click(object sender, EventArgs e)
         {
-            
+            engine = new Engine();
+            engine.Start();
+
             // Graphique
             pictureBox1.Refresh();
             richTextBox.ReadOnly = true;
@@ -137,21 +137,7 @@ namespace ITI.CIL_Cowding
                 butStop.Visible = true;               
                 
             }
-
-            // Vraie partie execution
-            // On crée notre Tokenizer avec Analyser
-            _strtk = new StringTokenizer(s);
-            _anal = new Analyzer(_strtk);
-            _tree = _anal.ParseBody();
-
-            // Pas de pré-execution pour le moment.
-            _pec = new PreExecutionContext();
-
-            _mes_fct = _pec.PreExecut(_tree);
-
             _ec = new ExecutionContext(_mes_fct);
-
-
 
         }
 
@@ -218,7 +204,7 @@ namespace ITI.CIL_Cowding
         {           
             // Pour le moment on fait comme ça, mais ça sera changé par la suite.
             //_tree[_ec.CurrentLine].Execute(_ec);
-            _ec.NextInstruction();
+
             UpdateStack();   
         }
         #endregion
@@ -226,6 +212,7 @@ namespace ITI.CIL_Cowding
         #region Stop
         private void butStop_Click(object sender, EventArgs e)
         {
+            engine.Stop();
             butStepByStep.Visible = true;
             butContinue.Visible = false;
             butStop.Visible = false;
