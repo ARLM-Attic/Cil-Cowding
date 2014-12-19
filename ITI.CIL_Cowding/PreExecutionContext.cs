@@ -8,15 +8,12 @@ namespace ITI.CIL_Cowding
         CILTypeManager _typeManager;
         List<IFunction> _mes_fct;
         List<SyntaxError> _errors;
-        Dictionary<string, int> _labels;
-        //List<string> _errors;
         List<ICILType> _locvar;
+        Function _currentfct;
+        int _lineInstruction;
 
         #region Properties
-        public Dictionary<string,int> Labels
-        {
-            get { return _labels; }
-        }
+       
         public List<SyntaxError> Errors
         {
             get { return _errors; }
@@ -32,6 +29,17 @@ namespace ITI.CIL_Cowding
         {
             get { return _typeManager; }
         }
+
+        public Function CurrentFunction
+        {
+            get { return _currentfct; }
+        }
+
+        public int CurrentLineInstruction
+        {
+            get { return _lineInstruction; }
+        }
+        
         #endregion
         public PreExecutionContext()
         {
@@ -49,13 +57,18 @@ namespace ITI.CIL_Cowding
         /// <returns>List of functions ready to execute.</returns>
         public List<IFunction> PreExecut (List<FunctionNode> code)
         {
+            
             List<IFunction> myFunctions = new List<IFunction>();
 
             foreach(FunctionNode function in code)
             {
-                if ( IsSingleFunction(myFunctions, function) )
+                if (IsSingleFunction(myFunctions, function))
                 {
-                    myFunctions.Add( function.PreExecute( this ) );
+                    myFunctions.Add(function.PreExecute(this));
+                }
+                else
+                {
+                        // ON en fait rien, c'est déjà géré dans IsSingleFct
                 }
             }
 
@@ -65,9 +78,13 @@ namespace ITI.CIL_Cowding
             // on parcourt toutes nos fct et on pré-exécute tous les noeuds
             foreach (Function fct in myFunctions)
             {
+                _lineInstruction = 0;
+
+                _currentfct = fct;
                 foreach (InstructionNode IN in fct.Code)
                 {
                     IN.PreExecute(this);
+                    _lineInstruction++;
                 }
                 
             }
@@ -90,13 +107,9 @@ namespace ITI.CIL_Cowding
             return null;
         }
 
-       /* public void AddError(string msg)
-        {
-            _errors.Add(msg);
-        }
-        */
         private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
         {
+
             foreach ( IFunction functionForName in myFunctions )
             {
                 if ( functionForName.Name == function.Name )
@@ -105,40 +118,19 @@ namespace ITI.CIL_Cowding
                     return false;
                 }
             }
+
             return true;
             
         }
+        
         private void AddError( string msg )
         {
             _errors.Add( new SyntaxError( msg ) );
         }
-        
-        public void AddLabel(KeyValuePair<string,int> label)
-        {
-            _labels.Add( label.Key, label.Value );
-        }
+
+       
+
     }
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Moi j'aime bien tout ce qui est exellent !

@@ -5,10 +5,7 @@ namespace ITI.CIL_Cowding
 {
     public interface IPreExecutionContext
     {
-        Dictionary<string, int> Labels
-        {
-            get;
-        }
+        
         List<SyntaxError> Errors
         {
             get;
@@ -21,9 +18,20 @@ namespace ITI.CIL_Cowding
             set;
             get;
         }
+
+        Function CurrentFunction
+        {
+            get;
+        }
+
+        int CurrentLineInstruction
+        {
+            get;
+        }
+
+
         List<IFunction> PreExecut( List<FunctionNode> code );
 
-        void AddLabel( KeyValuePair<string, int> label );
         Function SearchFunction(string nomFct);
     }
 }

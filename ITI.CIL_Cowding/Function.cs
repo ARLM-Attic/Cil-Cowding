@@ -11,6 +11,7 @@ namespace ITI.CIL_Cowding
         List<ICILType> _parameters;
         List<ICILType> _locVar;
         List<InstructionNode> _code;
+        Dictionary<string, int> _labels;
         #endregion
 
         #region Properties
@@ -32,6 +33,8 @@ namespace ITI.CIL_Cowding
         {
             get { return _code; }
         }
+
+        
         #endregion
 
         #region Constructor
@@ -42,6 +45,7 @@ namespace ITI.CIL_Cowding
             _parameters = parameters;
             _code = code;
             _locVar = locVar;
+            _labels = new Dictionary<string, int>();
         }
         #endregion
 
@@ -63,7 +67,23 @@ namespace ITI.CIL_Cowding
         {
             throw new NotImplementedException();
         }
+
+        public void AddLabel(string label,int index )
+        {
+            _labels.Add(label, index);
+        }
+
+        public int GetIndexLabel(string label)
+        {
+            int index;
+            _labels.TryGetValue(label, out index);
+            return index;
+
+        }
+
         #endregion
+
+
 
     }
 }

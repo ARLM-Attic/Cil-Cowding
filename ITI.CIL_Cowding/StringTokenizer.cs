@@ -164,6 +164,7 @@ namespace ITI.CIL_Cowding
                         }
                         break;
                     }
+                case '#': _currentToken = TokenType.HashTag; break;
                 default:
                     // We look if the thing that we are receiving is a number
                     if (char.IsDigit(c))

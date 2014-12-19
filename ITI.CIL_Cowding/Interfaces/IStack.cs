@@ -14,6 +14,10 @@ namespace ITI.CIL_Cowding
 
         IValue GetLocalVar(int index);
         void SetLocalVar( IValue var, int index );
+        Container LastFrame
+        {
+            get;
+        }
 
 
 

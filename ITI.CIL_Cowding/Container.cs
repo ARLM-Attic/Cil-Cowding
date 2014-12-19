@@ -37,6 +37,7 @@ namespace ITI.CIL_Cowding
         {
             get { return Fct.Code[_currentInstruction];  }
         }
+
         #endregion
 
 		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference, IStack stack) 
@@ -112,5 +113,12 @@ namespace ITI.CIL_Cowding
                 _stack.CloseFunction();
             }
         }
+
+        public void SetCurrentInstruction(int index)
+        {
+
+            _currentInstruction = index;
+        }
+        
     }
 }

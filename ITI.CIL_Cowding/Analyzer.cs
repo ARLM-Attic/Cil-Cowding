@@ -568,14 +568,13 @@ namespace ITI.CIL_Cowding
 
                     #endregion ldloc
                 }
-                else if (_tokenizer.MatchIdentifier("#"))
+                else if (_tokenizer.Match(TokenType.HashTag))
                 {
                     string label;
 
-                    if ( _tokenizer.IsIdentifier( out label )
-                        && _tokenizer.Match( TokenType.SemiColon ) )
+                    if ( _tokenizer.IsIdentifier( out label ) )
                     {
-                        fct_content.Add( new LabelNode( new KeyValuePair<string, int>( label, _tokenizer.CurrentLine ) ) );
+                        fct_content.Add( new LabelNode( label ) );
                     }
                     else
                     {
