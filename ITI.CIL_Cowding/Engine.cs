@@ -32,6 +32,11 @@ namespace ITI.CIL_Cowding
             _sourceCode = "";
         }
 
+        public List<Function> GetFunctionsList
+        {
+            get { return _code; }
+        }
+
         public string SourceCode
         {
             get { return _sourceCode; }
@@ -50,10 +55,12 @@ namespace ITI.CIL_Cowding
         //    get { return _strTok != null && _analyzer != null; }
         //}
 
-        public void Start()
+        public void Start(string s)
         {
-            _strTok = new StringTokenizer(_sourceCode);
+            _pec = new PreExecutionContext();
+            _strTok = new StringTokenizer(s);
             _analyzer = new Analyzer(_strTok);
+
             _tree = _analyzer.ParseBody();
             _code = _pec.PreExecut(_tree);
         }

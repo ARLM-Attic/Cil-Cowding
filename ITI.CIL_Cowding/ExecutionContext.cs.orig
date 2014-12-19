@@ -21,7 +21,11 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
+<<<<<<< HEAD
         public ExecutionContext(List<Function> code)
+=======
+        public ExecutionContext(List<Function>code)
+>>>>>>> Executor_Engine
         {
 
             _stack = new Stack();
@@ -33,14 +37,19 @@ namespace ITI.CIL_Cowding
 
         }
 
+<<<<<<< HEAD
         public void NextInstruction()
         {
-            {
 
-                _stack.LastFrame.CurrentInstruction.Execute(this);
+            _stack.LastFrame.CurrentInstruction.Execute(this);
 
-            }
+=======
+        public void NextInstruction() {
 
+            _stack.LastFrame.CurrentInstruction.Execute(this);
+            
+>>>>>>> Executor_Engine
         }
+
     }
 }

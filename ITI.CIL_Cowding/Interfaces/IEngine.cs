@@ -14,7 +14,7 @@ namespace ITI.CIL_Cowding.Interfaces
 
         //bool IsRunning { get; }
 
-        void Start();
+        void Start(string s);
 
         void NextInstruction();
 

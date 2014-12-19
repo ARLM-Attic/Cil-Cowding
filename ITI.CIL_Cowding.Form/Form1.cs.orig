@@ -17,12 +17,12 @@ namespace ITI.CIL_Cowding
         private ExecutionContext _ec;
         private PreExecutionContext _pec;
         private List<Function> _mes_fct;
-        private Engine engine = new Engine();
-
+        private Engine engine;
 
         public Form1()
         {
             InitializeComponent();
+
         }
 
         #region Quit
@@ -115,18 +115,17 @@ namespace ITI.CIL_Cowding
         #endregion
 
         #region button step by step 
-
         private void butStepByStep_Click(object sender, EventArgs e)
         {
+            engine = new Engine();
+            engine.Start();
 
             // Graphique
             pictureBox1.Refresh();
             richTextBox.ReadOnly = true;
 			
             g = pictureBox1.CreateGraphics();
-
             string s = richTextBox.Text;
-            engine.Start(s);
 
             Font drawFont = new Font("Arial", 10);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -138,9 +137,25 @@ namespace ITI.CIL_Cowding
                 butStop.Visible = true;               
                 
             }
-            _mes_fct = engine.GetFunctionsList;
+<<<<<<< HEAD
+=======
+
+            // Vraie partie execution
+            // On crée notre Tokenizer avec Analyser
+            _strtk = new StringTokenizer(s);
+            _anal = new Analyzer(_strtk);
+            _tree = _anal.ParseBody();
+
+            // Pas de pré-execution pour le moment.
+            _pec = new PreExecutionContext();
+
+            _mes_fct = _pec.PreExecut(_tree);
+
             _ec = new ExecutionContext(_mes_fct);
 
+
+
+>>>>>>> Executor_Engine
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
