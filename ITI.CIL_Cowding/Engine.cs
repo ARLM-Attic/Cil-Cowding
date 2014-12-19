@@ -94,9 +94,5 @@ namespace ITI.CIL_Cowding
         {
             return _ctx.Stack;
         }
-
-        
-
-
     }
 }

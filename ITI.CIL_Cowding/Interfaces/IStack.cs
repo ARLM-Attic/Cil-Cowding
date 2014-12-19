@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 namespace ITI.CIL_Cowding
 {
@@ -13,13 +15,17 @@ namespace ITI.CIL_Cowding
         void CloseFunction();
 
         IValue GetLocalVar(int index);
+
         void SetLocalVar( IValue var, int index );
+
         Container LastFrame
         {
             get;
         }
 
-
-
+        List<Container> Frame
+        { 
+            get; 
+        }
     }
 }

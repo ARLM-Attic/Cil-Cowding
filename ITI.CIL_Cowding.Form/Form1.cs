@@ -14,9 +14,10 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
 
+        private List<Container> _content;
+        private IValue _ivl;
+
         private IEngine engine = new Engine();
-
-
         public Form1()
         {
             InitializeComponent();
@@ -118,7 +119,7 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack(IStack stack)
         {
-            /*
+           
             int x = 10;
             int y = 300;
 
@@ -126,12 +127,25 @@ namespace ITI.CIL_Cowding
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
             pictureBox1.Refresh();
+            string message = "";          
+           
+           foreach(var _content in stack.Frame )
+           {
+                Rectangle drawRect = new Rectangle(x, y, 500, 50);
+                g.FillRectangle(Brushes.Green, x, y, 500, 50);
+                message = _content.Fct.Name.ToString();
+                message += " " + _content.Fct.ReturnType;
+                g.DrawString(message, drawFont, drawBrush, drawRect);
 
+                y -= 80;
+           }
+
+
+            /*
             // Dessin de la frame
             foreach (KeyValuePair<String, Variable> Var in container.Var)
             {
-                Rectangle drawRect = new Rectangle(x, y, 500, 50);
-                g.FillRectangle(Brushes.Green, x, y, 500, 50);
+                
 
                 // ecrire les infos de la variable en cours
                 String message = Var.Value.Type.ToString() + " " + Var.Value.Data.ToString() +" "+ Var.Value.Label.ToString();
