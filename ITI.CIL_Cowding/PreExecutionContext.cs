@@ -6,12 +6,12 @@ namespace ITI.CIL_Cowding
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<IValue> _localsVar;
+        List<ICILType> _localsVar;
 
         /// <summary>
         /// Get or Set locals variables in the current context.
         /// </summary>
-        public List<IValue> LocalsVar
+        public List<ICILType> LocalsVar
         {
             get {return _localsVar;}
 
@@ -28,7 +28,7 @@ namespace ITI.CIL_Cowding
         public PreExecutionContext()
         {
             _typeManager = new CILTypeManager();
-            _localsVar = new List<IValue>();
+            _localsVar = new List<ICILType>();
 
 
         }

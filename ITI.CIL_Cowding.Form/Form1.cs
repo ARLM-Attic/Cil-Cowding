@@ -137,6 +137,8 @@ namespace ITI.CIL_Cowding
                 butStop.Visible = true;               
                 
             }
+            _ec = new ExecutionContext(_mes_fct);
+
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
@@ -202,7 +204,7 @@ namespace ITI.CIL_Cowding
         {           
             // Pour le moment on fait comme ça, mais ça sera changé par la suite.
             //_tree[_ec.CurrentLine].Execute(_ec);
-
+            _ec.NextInstruction();
             UpdateStack();   
         }
         #endregion

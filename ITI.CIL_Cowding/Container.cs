@@ -11,6 +11,9 @@ namespace ITI.CIL_Cowding
     {
 		private List<IValue> _localVars;
         private List<IValue> _args;
+        private IFunction _fct;
+        private int _currentInstruction;
+
 
 		public List<IValue> LocalVars
 		{
@@ -20,76 +23,58 @@ namespace ITI.CIL_Cowding
         {
             get { return _args;}
         }
-        
-		
-		public Container() 
-		{
-			_localVars = new List<IValue>();
-            _args = new List<IValue>();
+        public IFunction Fct
+        {
+            get { return _fct; }
         }
-		
-        /*
-         * GESTION DES VARIABLES LOCALES
-         *  */
-		public void CreateVar(IValue var) 
+        
+
+        // Ici, à un moment, ça va péter.
+        public InstructionNode CurrentInstruction
+        {
+            get { return Fct.Code[_currentInstruction++]; }
+        }
+
+		public Container(List<IValue>locvar, List<IValue>args, IFunction fct_reference) 
 		{
-			_localVars.Add(var);
+			_localVars = locvar;
+            _args = args;
+            _fct = fct_reference;
+            _currentInstruction = 0;
+        }
+
+        
+        #region LocManagment
+        // Pas de sécurité sur l'index pour le moment
+        public void SetLOCVar(int index, Object val) 
+		{
+            _localVars[index].Data = val;         
 		}
-		
-		public void SetLOCVar(int index, IValue val) 
-		{
-            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-			if( _localVars.Contains(val) )
-			{
-                for ( int i = 0 ; i < _localVars.Count ; i++ )
-                {
-                    if ( _localVars[i] == val )
-                    {
-                        _localVars[i] = val; // wtf cerveau
-                    }
-                }
-			} 
 
-           
-
-		
-		}	
-		
+        // Pas de sécurité sur l'index pour le moment
 		public IValue GetLOCVar(int index) 
 		{
             return _localVars[index];
 		}
+        #endregion
 
-        /*
-         * GESTION DES VARIABLES ARGUMENTS
-         * */
-        public void SetARGVar(int index, IValue val)
+
+        #region ArgManagment
+        // Pas de sécurité sur l'index pour le moment
+        public void SetARGVar(int index, Object val)
         {
-            // faut ajouter l'index en fait /!\/!\/!\/!\/!\/!\/!\/!\/!\
-            if (_localVars.Contains(val))
-            {
-                for (int i = 0; i < _localVars.Count; i++)
-                {
-                    if (_localVars[i] == val)
-                    {
-                        _localVars[i] = val; // wtf cerveau
-                    }
-                }
-            }
-
-
-
-
+             _args[index].Data = val; // wtf cerveau
+                    
         }
-
+        // Pas de sécurité sur l'index pour le moment
         public IValue GetARGVar(int index)
         {
-            return _localVars[index];
+            return _args[index];
         }
+        #endregion
         
-        /* 
-         * Sécurité histoire de savoir si on ne fait pas de la merde
-         * */
+
+        #region IsExist ?
         public bool IsExistVarLOC(int index)
         {
             return index <= LocalVars.Count - 1 && index >= 0 ;
@@ -99,6 +84,6 @@ namespace ITI.CIL_Cowding
         {
             return index <= ArgsVars.Count - 1 && index >=0;
         }
-		
+        #endregion
     }
 }

@@ -33,7 +33,7 @@ namespace ITI.CIL_Cowding
 
         }
 
-        public void NextInstruction()
+        public void NextInstruction() {
         {
 
             _stack.LastFrame.CurrentInstruction.Execute(this);
