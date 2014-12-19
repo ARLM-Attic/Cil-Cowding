@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
     public class ExecutionContext : IExecutionContext
     {
         Stack _stack;
-        List<IFunction> _code;
+        List<Function> _code;
 
         public IStack Stack
         {
@@ -21,7 +21,11 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-        public ExecutionContext(List<IFunction>code)
+<<<<<<< HEAD
+        public ExecutionContext(List<Function> code)
+=======
+        public ExecutionContext(List<Function>code)
+>>>>>>> Executor_Engine
         {
 
             _stack = new Stack();
@@ -33,22 +37,19 @@ namespace ITI.CIL_Cowding
 
         }
 
+<<<<<<< HEAD
+        public void NextInstruction()
+        {
+
+            _stack.LastFrame.CurrentInstruction.Execute(this);
+
+=======
+        public void NextInstruction() {
+
+            _stack.LastFrame.CurrentInstruction.Execute(this);
             
-            InstructionNode IN = _stack.LastFrame.CurrentInstruction;
-
-            if (IN == null) { throw new NotImplementedException("Il faut gérer la fin du programme"); }
-            {
-
-            else { IN.Execute(this); }
-            // On passe à l'instruction suivante
-            if(_stack.LastFrame == null) {
-                throw new Exception("Le soft ne gère pas encore la fin d'un programme");
-            } else {
-                _stack.LastFrame.NextInstruction();
-            }
-            
-            }
-
+>>>>>>> Executor_Engine
         }
+
     }
 }
