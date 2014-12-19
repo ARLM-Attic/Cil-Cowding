@@ -1,5 +1,4 @@
-﻿using ITI.CIL_Cowding.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,12 +15,11 @@ namespace ITI.CIL_Cowding
         StringTokenizer _strTok;    
         Analyzer _analyzer;
         List<FunctionNode> _tree;
-        List<Function> _code;
+        List<IFunction> _code;
 
         // Execution
-        PreExecutionContext _pec;
+        IPreExecutionContext _pec;
         IExecutionContext _ctx;
-        ExecutionContext _ec;
         
         // Gestion du code source
         public event EventHandler SourceCodeChanged;
@@ -30,58 +28,75 @@ namespace ITI.CIL_Cowding
         public Engine()
         {
             _sourceCode = "";
+            // Init SourceCodeChanged
         }
 
-        public List<Function> GetFunctionsList
+        /*Normalement ça vire
+         * 
+        public List<IFunction> GetFunctionsList
         {
             get { return _code; }
         }
 
+         * */
+        
         public string SourceCode
         {
             get { return _sourceCode; }
+
             set 
             {
+                // CODE TMP
+                _sourceCode = value;
+
+                /*
+                // On réagit à l'event SourceCodeChanged
                 if( _sourceCode != value )
                 {
                     _sourceCode = value;
                     if( SourceCodeChanged != null ) SourceCodeChanged( this, EventArgs.Empty );
                 }
+                 * */
             }
         }
 
-        //public bool IsRunning
-        //{
-        //    get { return _strTok != null && _analyzer != null; }
-        //}
-
-        public void Start(string s)
+        public void Start()
         {
-            _pec = new PreExecutionContext();
-            _strTok = new StringTokenizer(s);
+            
+            _strTok = new StringTokenizer(_sourceCode);
             _analyzer = new Analyzer(_strTok);
-
             _tree = _analyzer.ParseBody();
+
+            _pec = new PreExecutionContext();
             _code = _pec.PreExecut(_tree);
+
+            _ctx = new ExecutionContext(_code);
         }
 
         public void NextInstruction()
         {
-            _ec = new ExecutionContext(_code);
-            _ec.NextInstruction();
+            bool tmp = _ctx.NextInstruction();
+            if (!tmp) Stop();
         }
 
         public void Stop()
         {
+
             _strTok = null;
             _analyzer = null;
             _tree = null;
-            _sourceCode = "";
+
+            // Là on pète un event END_RUNNING
+
         }
 
-        public IStack GetStack(IExecutionContext iec)
+        public IStack GetStack()
         {
-            return iec.Stack;
+            return _ctx.Stack;
         }
+
+        
+
+
     }
 }

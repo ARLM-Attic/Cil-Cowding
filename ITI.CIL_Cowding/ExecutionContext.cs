@@ -11,6 +11,7 @@ namespace ITI.CIL_Cowding
         Stack _stack;
         List<IFunction> _code;
 
+
         public IStack Stack
         {
             get { return _stack; }
@@ -34,21 +35,29 @@ namespace ITI.CIL_Cowding
         }
 
             
-            InstructionNode IN = _stack.LastFrame.CurrentInstruction;
+        public bool NextInstruction () {
 
-            if (IN == null) { throw new NotImplementedException("Il faut gérer la fin du programme"); }
+            if (_stack.LastFrame == null)
             {
+                return false;
+            }
+            InstructionNode IN = _stack.LastFrame.CurrentInstruction;
+            IN.Execute(this); 
 
-            else { IN.Execute(this); }
             // On passe à l'instruction suivante
-            if(_stack.LastFrame == null) {
-                throw new Exception("Le soft ne gère pas encore la fin d'un programme");
-            } else {
+            if(_stack.LastFrame == null) 
+            {
+                return false ;
+            } 
+            else 
+            {
                 _stack.LastFrame.NextInstruction();
             }
-            
-            }
 
+
+            return true;
+            
         }
+
     }
 }

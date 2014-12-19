@@ -13,13 +13,13 @@ namespace ITI.CIL_Cowding
             get;
         }
 <<<<<<< HEAD
+=======
         //int CurrentLine
         //{
         //    get;
         //}
-=======
-        
->>>>>>> Executor_Engine
+>>>>>>> origin/Engine
 
+        void NextInstruction();
     }
 }

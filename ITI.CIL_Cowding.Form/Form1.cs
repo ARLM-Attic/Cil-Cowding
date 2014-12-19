@@ -14,12 +14,8 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
 
-        private IExecutionContext _ec;
-        private StringTokenizer _strtk;
-        private Analyzer _anal;
-        private Engine engine = new Engine();
+        private IEngine engine = new Engine();
 
-        private List<IFunction> _mes_fct;
 
         public Form1()
         {
@@ -115,48 +111,12 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
-        #region button step by step 
-
-        private void butStepByStep_Click(object sender, EventArgs e)
-        {
-            
-            // Graphique
-            pictureBox1.Refresh();
-            richTextBox.ReadOnly = true;
-			
-            g = pictureBox1.CreateGraphics();
-
-            string s = richTextBox.Text;
-            engine.Start(s);
-
-            Font drawFont = new Font("Arial", 10);
-            SolidBrush drawBrush = new SolidBrush(Color.White);
-
-            if (richTextBox.Text != "")
-            {
-                butStepByStep.Visible = false;
-                butContinue.Visible = true;
-                butStop.Visible = true;               
-                
-            }
-            _mes_fct = engine.GetFunctionsList;
-            _ec = new ExecutionContext(_mes_fct);
-
-        }
-
-        private void butStartAll_Click(object sender, EventArgs e)
-        {
-            
-            //butStop.Visible = true;
-            
-        }
-
         /// <summary>
         /// Update the stack
         /// </summary>
         /// <param name="container"></param>
         /// <param name="stack"></param>
-        public void UpdateStack()
+        public void UpdateStack(IStack stack)
         {
             /*
             int x = 10;
@@ -200,19 +160,50 @@ namespace ITI.CIL_Cowding
             
             */
         }
-        #endregion 
 
-        #region button Continue
+        #region ButtonManagment
+
+        private void butStepByStep_Click(object sender, EventArgs e)
+        {
+
+            // Graphique
+            pictureBox1.Refresh();
+            richTextBox.ReadOnly = true;
+
+            g = pictureBox1.CreateGraphics();
+
+            Font drawFont = new Font("Arial", 10);
+            SolidBrush drawBrush = new SolidBrush(Color.White);
+
+            if (richTextBox.Text != "")
+            {
+                butStepByStep.Visible = false;
+                butContinue.Visible = true;
+                butStop.Visible = true;
+
+            }
+
+            // Lancement du moteur 
+            engine.SourceCode = richTextBox.Text;
+            engine.Start();
+
+        }
+
+        private void butStartAll_Click(object sender, EventArgs e)
+        {
+
+            //butStop.Visible = true;
+
+        }
+
         private void butContinue_Click(object sender, EventArgs e)
         {           
-            // Pour le moment on fait comme ça, mais ça sera changé par la suite.
-            //_tree[_ec.CurrentLine].Execute(_ec);
-            _ec.NextInstruction();
-            UpdateStack();   
+            // On lance la prochaine instruction à faire
+            engine.NextInstruction();
+            // Et MaJ de la Stack
+            UpdateStack(engine.GetStack());   
         }
-        #endregion
-
-        #region Stop
+        
         private void butStop_Click(object sender, EventArgs e)
         {
             butStepByStep.Visible = true;
@@ -220,7 +211,8 @@ namespace ITI.CIL_Cowding
             butStop.Visible = false;
             richTextBox.ReadOnly = false;
         }
-        #endregion
+        
+        #endregion ButtonManagment
 
         #region Draw lines number
         private void DrawLines(Graphics g, int firstLine)
@@ -296,6 +288,8 @@ namespace ITI.CIL_Cowding
         }
 
         #endregion
+    
+    
     }
        
 }

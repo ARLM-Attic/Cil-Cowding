@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.CIL_Cowding.Interfaces
+namespace ITI.CIL_Cowding
 {
     public interface IEngine
     {
@@ -14,12 +14,13 @@ namespace ITI.CIL_Cowding.Interfaces
 
         //bool IsRunning { get; }
 
-        void Start(string s);
+        void Start();
 
         void NextInstruction();
 
         void Stop();
 
-        IStack GetStack(IExecutionContext iec);
+        IStack GetStack();
+
     }
 }
