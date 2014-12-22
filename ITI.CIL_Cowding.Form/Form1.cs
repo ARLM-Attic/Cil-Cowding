@@ -190,7 +190,7 @@ namespace ITI.CIL_Cowding
 
             // Graphique
             pictureBox1.Refresh();
-            richTextBox.ReadOnly = true;
+            richTextBox.Enabled = false;
 
             g = pictureBox1.CreateGraphics();
 
@@ -234,7 +234,7 @@ namespace ITI.CIL_Cowding
             butStepByStep.Visible = true;
             butContinue.Visible = false;
             butStop.Visible = false;
-            richTextBox.ReadOnly = false;
+            richTextBox.Enabled = true;
         }
         
         #endregion ButtonManagment

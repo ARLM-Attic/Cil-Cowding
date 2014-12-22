@@ -27,6 +27,7 @@ namespace ITI.CIL_Cowding
                 return _frame[_frame.Count-1]; 
             }
         }
+
         /// <summary>
         /// Get Containers list ( all frames)
         /// </summary>

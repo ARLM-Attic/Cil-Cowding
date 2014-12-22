@@ -34,6 +34,5 @@ namespace ITI.CIL_Cowding
         int GetIndexLabel(string label);
 
         //List<IInstructionNode> GetInstructions();
-
     }
 }
