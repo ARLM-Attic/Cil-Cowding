@@ -19,6 +19,8 @@ namespace ITI.CIL_Cowding
             get;
         }
 
+        IValue GetArgVar(int index);
+        void SetArgVar(int index, IValue var);
 
 
     }

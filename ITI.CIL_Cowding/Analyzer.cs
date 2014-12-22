@@ -554,6 +554,46 @@ namespace ITI.CIL_Cowding
 
                     #endregion ldloc
                 }
+                else if (_tokenizer.MatchIdentifier("ldarg"))
+                {
+                    #region ldarg
+
+                    // VAR
+                    int index;
+
+                    if (_tokenizer.IsInteger(out index)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new LdargNode(index));
+                    }
+                    else
+                    {
+                        AddError("How can you have an error with LDARG ??");
+                        _tokenizer.ForwardToNextLine();
+                    }
+
+                    #endregion ldarg
+                }
+                else if (_tokenizer.MatchIdentifier("starg"))
+                {
+                    #region starg
+
+                    // VAR
+                    int index;
+
+                    if (_tokenizer.IsInteger(out index)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new StargNode(index));
+                    }
+                    else
+                    {
+                        AddError("How can you have an error with starg ??");
+                        _tokenizer.ForwardToNextLine();
+                    }
+
+                    #endregion starg
+                }
                 else if (_tokenizer.Match(TokenType.HashTag))
                 {
                     string label;
