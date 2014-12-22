@@ -17,7 +17,7 @@ namespace ITI.CIL_Cowding
         {
             get;
         }
-        public List<ICILType> ArgVar
+        List<ICILType> ArgVar
         {
             get;
         }

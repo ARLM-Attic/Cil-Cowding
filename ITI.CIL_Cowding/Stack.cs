@@ -114,22 +114,31 @@ namespace ITI.CIL_Cowding
             // Paramètres, que l'on trouve sur la stack
             int i = 0;
 
-            while(TopFrame.Count > 0) {
+            while(i < fct_param.Count-1) {
+
                 // On choppe le paramètre
                 IValue tmp;
-                tmp = TopFrame.Pop();
+
+                try
+                {
+                    tmp = TopFrame.Pop();
+                }
+                catch (Exception e)
+                {
+                    _engine.ClashError(new RunTimeError(_engine, "Pas assez de paramètre"));
+                    return;
+                }
                 // On regarde si le type correspond avec celui de la fct
-                if (tmp.Type == fct_param[i])
+                if (tmp.Type.FullName == fct_param[i].FullName)
                 {
                     parameters.Add(tmp);
 
                 }
                 else
                 {
-                    _engine.AddError("Mon gars, tu te chie dessus avec les paramètres.");
+                    _engine.ClashError(new RunTimeError(_engine, "Error with type params") );
                 }
-
-
+                i++;
             }            
             
             _frame.Add(new Container(locvars, parameters, fct, this));
