@@ -65,6 +65,11 @@ namespace ITI.CIL_Cowding
                 }
                 
             }
+            if ( _errors.Count >= 1)
+            {
+                _engine.ClashError( _errors );
+            }
+            
             return methods;
         }
 
@@ -572,6 +577,7 @@ namespace ITI.CIL_Cowding
                 }
                 else if (_tokenizer.Match(TokenType.HashTag))
                 {
+                    #region Label
                     string label;
 
                     if ( _tokenizer.IsIdentifier( out label ) )
@@ -583,6 +589,7 @@ namespace ITI.CIL_Cowding
                         AddError( "Error on label declaration" );
                         _tokenizer.ForwardToNextLine();
                     }
+                    #endregion
                 }
 
                 else
@@ -596,8 +603,10 @@ namespace ITI.CIL_Cowding
         }
 
         private void AddError(string msg)
-        { // Putain d'Égyptien
+        {
             _errors.Add( new SyntaxError( _engine, msg ) );
+            _tokenizer.ForwardToNextLine();
+            
         }
 
     }

@@ -16,6 +16,7 @@ namespace ITI.CIL_Cowding
         Analyzer _analyzer;
         List<FunctionNode> _tree;
         List<IFunction> _code;
+        List<IError> _syntaxErrors;
 
         // Execution
         IPreExecutionContext _pec;
@@ -28,13 +29,13 @@ namespace ITI.CIL_Cowding
         public Engine()
         {
             _sourceCode = "";
+            _syntaxErrors = new List<IError>();
             // Init SourceCodeChanged
         }
         
-        public bool IsRunning {
-            
+        public bool IsRunning 
+        {
             get { return _analyzer != null;}
-            
         }
 
         public string SourceCode
@@ -57,29 +58,39 @@ namespace ITI.CIL_Cowding
             }
         }
 
-        public void Start()
+        public int Start()
         {
-            
-            _strTok = new StringTokenizer(_sourceCode);
-            _analyzer = new Analyzer(_strTok, this);
+
+            _strTok = new StringTokenizer( _sourceCode );
+            _analyzer = new Analyzer( _strTok, this );
             _tree = _analyzer.ParseBody();
 
-            _pec = new PreExecutionContext(this);
-            _code = _pec.PreExecut(_tree);
+            if (_syntaxErrors.Count >= 1)
+            {
+                return -1;
+            }
+            else
+            {
+                _pec = new PreExecutionContext( this );
+                _code = _pec.PreExecut( _tree );
 
-            _ctx = new ExecutionContext(_code, this);
+                _ctx = new ExecutionContext( _code, this );
+                return 0;
+            }
+
         }
 
         public void NextInstruction()
         {
             // CODE TMP
-            if(IsRunning) {
+            if ( IsRunning )
+            {
                 bool tmp = _ctx.NextInstruction();
-                if (!tmp) Stop();
+                if ( !tmp ) Stop();
             }
             else
             {
-                Console.WriteLine("Calme toi mon gars, ça tourne plus");
+                Console.WriteLine( "Calme toi mon gars, ça tourne plus" );
 
             }
             
@@ -106,6 +117,7 @@ namespace ITI.CIL_Cowding
         }
         public void ClashError(List<IError> errors)
         {
+            _syntaxErrors = errors;
             foreach (IError error in errors)
             {
                 error.Write();

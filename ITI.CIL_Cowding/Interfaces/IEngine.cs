@@ -14,12 +14,13 @@ namespace ITI.CIL_Cowding
 
         bool IsRunning { get; }
 
-        void Start();
+        int Start();
 
         void NextInstruction();
 
         void Stop();
         void ClashError(IError error);
+        void ClashError( List<IError> error );
 
         IStack GetStack();
 

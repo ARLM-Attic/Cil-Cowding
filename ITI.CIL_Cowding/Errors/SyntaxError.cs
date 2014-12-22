@@ -33,7 +33,7 @@ namespace ITI.CIL_Cowding
         {
             _data = new Object();
             _stackTrace = "";
-            engine.ClashError(this);
+            //engine.ClashError(this);
         }
         public SyntaxError(IEngine engine, string message)
             : this(engine)
