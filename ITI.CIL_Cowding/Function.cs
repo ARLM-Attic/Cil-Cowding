@@ -5,6 +5,7 @@ namespace ITI.CIL_Cowding
 {
     public class Function : IFunction
     {
+
         #region Fields
         string _nameFct;
         ICILType _returnType;
@@ -32,6 +33,11 @@ namespace ITI.CIL_Cowding
         public List<InstructionNode> Code
         {
             get { return _code; }
+        }
+
+        public List<ICILType> ArgVar
+        {
+            get { return _parameters; }
         }
 
         
@@ -82,8 +88,6 @@ namespace ITI.CIL_Cowding
         }
 
         #endregion
-
-
 
     }
 }

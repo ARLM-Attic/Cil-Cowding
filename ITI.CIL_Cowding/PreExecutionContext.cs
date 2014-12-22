@@ -64,7 +64,7 @@ namespace ITI.CIL_Cowding
 
             foreach(FunctionNode function in code)
             {
-                if (IsSingleFunction(myFunctions, function))
+                if (IsSingleFunction(myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
                 {
                     myFunctions.Add(function.PreExecute(this));
                 }

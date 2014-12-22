@@ -7,6 +7,7 @@ namespace ITI.CIL_Cowding
     {
         List<Container> _frame;
         Stack<IValue> _topFrame;
+        IEngine _engine;
         
 
         #region Properties
@@ -37,10 +38,11 @@ namespace ITI.CIL_Cowding
         /// <summary>
         /// Create a call stack.
         /// </summary>
-        public Stack() 
+        public Stack(IEngine engine) 
 		{
             _frame = new List<Container>();
             _topFrame = new Stack<IValue>();
+            _engine = engine;
 		}
 
 
@@ -99,6 +101,8 @@ namespace ITI.CIL_Cowding
             List<IValue> locvars = new List<IValue>();
             List<IValue> parameters = new List<IValue>();
 
+            List<ICILType> fct_param = fct.ArgVar;
+
 
             // On créer tout ce qu'il faut pour faire un container
             // Variables locales, que l'on trouve dans la définition de la fct
@@ -108,10 +112,33 @@ namespace ITI.CIL_Cowding
             }
 
             // Paramètres, que l'on trouve sur la stack
-            while(TopFrame.Count > 0) {
+            int i = 0;
 
-                parameters.Add(TopFrame.Pop());
+            while(i < fct_param.Count) {
 
+                // On choppe le paramètre
+                IValue tmp;
+
+                try
+                {
+                    tmp = TopFrame.Pop();
+                }
+                catch (Exception e)
+                {
+                    _engine.ClashError(new RunTimeError(_engine, "Pas assez de paramètre"));
+                    return;
+                }
+                // On regarde si le type correspond avec celui de la fct
+                if (tmp.Type.FullName == fct_param[i].FullName)
+                {
+                    parameters.Add(tmp);
+
+                }
+                else
+                {
+                    _engine.ClashError(new RunTimeError(_engine, "Error with type params") );
+                }
+                i++;
             }            
             
             _frame.Add(new Container(locvars, parameters, fct, this));
