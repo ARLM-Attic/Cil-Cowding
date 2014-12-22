@@ -133,7 +133,7 @@ namespace ITI.CIL_Cowding
                             }
                             else
                             {
-                                AddError("Bug au niveau de la déclaration d'un variable");
+                                AddError("Bug au niveau de la déclaration d'une variable");
                             }
                             _tokenizer.Match(TokenType.Comma);
 
