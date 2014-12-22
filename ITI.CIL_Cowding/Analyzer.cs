@@ -11,12 +11,14 @@ namespace ITI.CIL_Cowding
     {
 
         ITokenizer _tokenizer;
-        List<SyntaxError> _errors;
+        List<IError> _errors;
+        IEngine _engine;
 
-        public Analyzer(ITokenizer tokenizer)
+        public Analyzer(ITokenizer tokenizer, IEngine engine)
         {
             _tokenizer = tokenizer;
-            _errors = new List<SyntaxError>();
+            _errors = new List<IError>();
+            _engine = engine;
         }
 
         public List<FunctionNode> ParseBody()
@@ -595,7 +597,7 @@ namespace ITI.CIL_Cowding
 
         private void AddError(string msg)
         { // Putain d'Égyptien
-            _errors.Add(new SyntaxError(msg));
+            _errors.Add( new SyntaxError( _engine, msg ) );
         }
 
     }

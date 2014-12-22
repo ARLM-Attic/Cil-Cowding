@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
@@ -11,6 +8,7 @@ namespace ITI.CIL_Cowding
         Stack _stack;
         List<IFunction> _code;
         IEngine _engine;
+        IError _error;
 
 
         public IStack Stack
@@ -43,11 +41,10 @@ namespace ITI.CIL_Cowding
             {
                 return false;
             }
-            InstructionNode IN = _stack.LastFrame.CurrentInstruction;
-            IN.Execute(this); 
+           _stack.LastFrame.CurrentInstruction.Execute(this);
 
-            // On passe à l'instruction suivante
-            if(_stack.LastFrame == null) 
+            // On passe à l'instruction suivante si on n'a pas d'erreur
+            if(_error != null || _stack.LastFrame == null) 
             {
                 return false ;
             } 
@@ -55,11 +52,14 @@ namespace ITI.CIL_Cowding
             {
                 _stack.LastFrame.NextInstruction();
             }
-
-
             return true;
-            
         }
 
+        public void AddError( string msg )
+        {
+            _error  = new RunTimeError(_engine, msg);
+            _engine.ClashError(_error);
+            
+        }
     }
 }

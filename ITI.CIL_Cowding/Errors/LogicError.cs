@@ -23,16 +23,16 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
-        public LogicError()
+        public LogicError(IEngine engine)
         {
             _message = "";
             _data = new Object();
             _stackTrace = "";
             _line = 0;
         }
-        public LogicError(string message)
+        public LogicError( IEngine engine, string message )
+            :this(engine)
         {
-            _message = message;
             _data = new Object();
             _stackTrace = "";
             _line = 0;
