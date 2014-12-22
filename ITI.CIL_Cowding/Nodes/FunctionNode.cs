@@ -76,3 +76,5 @@ namespace ITI.CIL_Cowding
 
 
 //La faute aux cassos si Apple se fait des couilles en poil de titanium.
+
+// La faute à Aymeric si les commentaires sont complètement pourris ! ... Mais en même temps il a pas tord ...

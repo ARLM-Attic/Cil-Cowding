@@ -10,7 +10,7 @@ namespace ITI.CIL_Cowding
         public override void Execute( IExecutionContext ctx )
         {
             IValue temp = ctx.Stack.Pop();
-            if ( temp.Type.IsBool() )
+            if ( temp.Type.IsInt32() && ( (int)temp.Data == 0 || (int)temp.Data == 1 ) )
             {
                 if ( !Convert.ToBoolean( temp.Data ) )
                 {
@@ -20,6 +20,10 @@ namespace ITI.CIL_Cowding
                 {
                     ctx.Stack.Push( new Value( temp.Type, 0 ) );
                 }
+            }
+            else
+            {
+                ctx.AddError("Incorrect type on not operator");
             }
         }
     }

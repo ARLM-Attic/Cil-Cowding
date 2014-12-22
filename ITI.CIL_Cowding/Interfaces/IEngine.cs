@@ -12,13 +12,15 @@ namespace ITI.CIL_Cowding
 
         string SourceCode {get; set;}
 
-        //bool IsRunning { get; }
+        bool IsRunning { get; }
 
-        void Start();
+        int Start();
 
         void NextInstruction();
 
         void Stop();
+        void ClashError(IError error);
+        void ClashError( List<IError> error );
 
         IStack GetStack();
 

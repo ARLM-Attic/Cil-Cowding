@@ -7,14 +7,15 @@ namespace ITI.CIL_Cowding
     {
         CILTypeManager _typeManager;
         List<IFunction> _mes_fct;
-        List<SyntaxError> _errors;
+        List<IError> _errors;
         List<ICILType> _locvar;
         Function _currentfct;
         int _lineInstruction;
+        IEngine _engine;
 
         #region Properties
        
-        public List<SyntaxError> Errors
+        public List<IError> Errors
         {
             get { return _errors; }
         }
@@ -41,11 +42,12 @@ namespace ITI.CIL_Cowding
         }
         
         #endregion
-        public PreExecutionContext()
+        public PreExecutionContext(IEngine engine)
         {
+            _engine = engine;
             _typeManager = new CILTypeManager();
             _mes_fct = new List<IFunction>();
-            _errors = new List<SyntaxError>();
+            _errors = new List<IError>();
           //  _errors = new List<string>();
             _locvar = new List<ICILType>();
         }
@@ -62,7 +64,7 @@ namespace ITI.CIL_Cowding
 
             foreach(FunctionNode function in code)
             {
-                if (IsSingleFunction(myFunctions, function))
+                if (IsSingleFunction(myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
                 {
                     myFunctions.Add(function.PreExecute(this));
                 }
@@ -125,7 +127,7 @@ namespace ITI.CIL_Cowding
         
         private void AddError( string msg )
         {
-            _errors.Add( new SyntaxError( msg ) );
+            _errors.Add( new SyntaxError( _engine, msg ) );
         }
 
        

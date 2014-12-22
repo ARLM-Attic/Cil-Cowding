@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
         {
             IValue temp = ctx.Stack.Pop();
             IValue temp2 = ctx.Stack.Pop();
-            if ( temp.Type == temp2.Type && temp.Type.IsBool() )
+            if ( temp.Type.FullName == temp2.Type.FullName )
             {
                 ctx.Stack.Push( this.Operator( temp2, temp ) );
             }

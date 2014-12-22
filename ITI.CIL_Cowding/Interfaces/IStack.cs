@@ -23,8 +23,8 @@ namespace ITI.CIL_Cowding
             get;
         }
 
-        List<Container> Frame
-        { 
+        IValue GetArgVar(int index);
+        void SetArgVar(int index, IValue var);
             get; 
         }
 

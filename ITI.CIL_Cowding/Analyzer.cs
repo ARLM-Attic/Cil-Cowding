@@ -11,12 +11,14 @@ namespace ITI.CIL_Cowding
     {
 
         ITokenizer _tokenizer;
-        List<SyntaxError> _errors;
+        List<IError> _errors;
+        IEngine _engine;
 
-        public Analyzer(ITokenizer tokenizer)
+        public Analyzer(ITokenizer tokenizer, IEngine engine)
         {
             _tokenizer = tokenizer;
-            _errors = new List<SyntaxError>();
+            _errors = new List<IError>();
+            _engine = engine;
         }
 
         public List<FunctionNode> ParseBody()
@@ -27,24 +29,7 @@ namespace ITI.CIL_Cowding
 
             while (!_tokenizer.IsEnd)
             {
-                #region TEMPLATE
-                /*
-            else if (_tokenizer.MatchIdentifier("XXX"))
-            {
-                // VAR
-                if (_tokenizer.IsInteger(out constante)
-                    && _tokenizer.Match(TokenType.EndOfLine))
-                {
-                    body.Add(new XXXNode(var));
-                }
-                else
-                {
-                    AddError("Error message");
-                    _tokenizer.ForwardToNextLine();
-                }
-            }
-            */
-                #endregion
+
                 FunctionNode f = IsFunction();
                 if (f != null) methods.Add(f);
                 else
@@ -63,6 +48,11 @@ namespace ITI.CIL_Cowding
                 }
                 
             }
+            if ( _errors.Count >= 1)
+            {
+                _engine.ClashError( _errors );
+            }
+            
             return methods;
         }
 
@@ -84,7 +74,8 @@ namespace ITI.CIL_Cowding
                 while (!_tokenizer.Match(TokenType.ClosedPar))
                 {
                     string parameterType;
-                    if (_tokenizer.IsIdentifier(out parameterType))
+                    string osef;
+                    if (_tokenizer.IsIdentifier(out parameterType) && _tokenizer.IsIdentifier(out osef))
                     {
                         parameters.Add(parameterType);
                     }
@@ -103,12 +94,12 @@ namespace ITI.CIL_Cowding
                 }
                 else
                 {
-                    AddError("Cannot begin function... :("); // COMMENTER EN ANGLAIS PUTAIN KEV
+                    AddError("Cannot begin function... :("); 
                 }
             }
             else
             {
-                AddError("Error on Function creation..."); // CF PLUS HAUT
+                AddError("Error on Function creation..."); 
             }
             return null;
         }
@@ -568,8 +559,49 @@ namespace ITI.CIL_Cowding
 
                     #endregion ldloc
                 }
+                else if (_tokenizer.MatchIdentifier("ldarg"))
+                {
+                    #region ldarg
+
+                    // VAR
+                    int index;
+
+                    if (_tokenizer.IsInteger(out index)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new LdargNode(index));
+                    }
+                    else
+                    {
+                        AddError("How can you have an error with LDARG ??");
+                        _tokenizer.ForwardToNextLine();
+                    }
+
+                    #endregion ldarg
+                }
+                else if (_tokenizer.MatchIdentifier("starg"))
+                {
+                    #region starg
+
+                    // VAR
+                    int index;
+
+                    if (_tokenizer.IsInteger(out index)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new StargNode(index));
+                    }
+                    else
+                    {
+                        AddError("How can you have an error with starg ??");
+                        _tokenizer.ForwardToNextLine();
+                    }
+
+                    #endregion starg
+                }
                 else if (_tokenizer.Match(TokenType.HashTag))
                 {
+                    #region Label
                     string label;
 
                     if ( _tokenizer.IsIdentifier( out label ) )
@@ -581,6 +613,7 @@ namespace ITI.CIL_Cowding
                         AddError( "Error on label declaration" );
                         _tokenizer.ForwardToNextLine();
                     }
+                    #endregion
                 }
 
                 else
@@ -594,8 +627,10 @@ namespace ITI.CIL_Cowding
         }
 
         private void AddError(string msg)
-        { // Putain d'Égyptien
-            _errors.Add(new SyntaxError(msg));
+        {
+            _errors.Add( new SyntaxError( _engine, msg ) );
+            _tokenizer.ForwardToNextLine();
+            
         }
 
     }

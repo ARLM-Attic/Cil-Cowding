@@ -223,7 +223,10 @@ namespace ITI.CIL_Cowding
             // On lance la prochaine instruction à faire
             engine.NextInstruction();
             // Et MaJ de la Stack
-            UpdateStack(engine.GetStack());   
+            if (engine.IsRunning)
+            {
+                UpdateStack(engine.GetStack());   
+            }
         }
         
         private void butStop_Click(object sender, EventArgs e)

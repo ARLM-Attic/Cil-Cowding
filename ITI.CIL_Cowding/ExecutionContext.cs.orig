@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ITI.CIL_Cowding
 {
@@ -10,6 +7,12 @@ namespace ITI.CIL_Cowding
     {
         Stack _stack;
         List<IFunction> _code;
+        IEngine _engine;
+<<<<<<< HEAD
+=======
+        IError _error;
+>>>>>>> Executor_Engine
+
 
         public IStack Stack
         {
@@ -21,14 +24,15 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-<<<<<<< HEAD
-        public ExecutionContext(List<IFunction>code)
-=======
-        public ExecutionContext(List<Function> code)
->>>>>>> origin/Engine
+        public ExecutionContext(List<IFunction>code, IEngine engine)
         {
 
+<<<<<<< HEAD
+            _stack = new Stack(engine);
+=======
             _stack = new Stack();
+>>>>>>> Executor_Engine
+            _engine = engine;
 
             // Initialisation du code
             _code = code;
@@ -37,32 +41,32 @@ namespace ITI.CIL_Cowding
 
         }
 
-<<<<<<< HEAD
-        public void NextInstruction() {
             
-            InstructionNode IN = _stack.LastFrame.CurrentInstruction;
+        public bool NextInstruction () {
 
-            if (IN == null) { throw new NotImplementedException("Il faut gérer la fin du programme"); }
+            if (_stack.LastFrame == null)
+            {
+                return false;
+            }
+           _stack.LastFrame.CurrentInstruction.Execute(this);
 
-            else { IN.Execute(this); }
-            // On passe à l'instruction suivante
-            if(_stack.LastFrame == null) {
-                throw new Exception("Le soft ne gère pas encore la fin d'un programme");
-            } else {
+            // On passe à l'instruction suivante si on n'a pas d'erreur
+            if(_error != null || _stack.LastFrame == null) 
+            {
+                return false ;
+            } 
+            else 
+            {
                 _stack.LastFrame.NextInstruction();
             }
-            
+            return true;
         }
-=======
-        public void NextInstruction()
+
+        public void AddError( string msg )
         {
-            {
-
-                _stack.LastFrame.CurrentInstruction.Execute(this);
-
-            }
->>>>>>> origin/Engine
-
+            _error  = new RunTimeError(_engine, msg);
+            _engine.ClashError(_error);
+            
         }
     }
 }

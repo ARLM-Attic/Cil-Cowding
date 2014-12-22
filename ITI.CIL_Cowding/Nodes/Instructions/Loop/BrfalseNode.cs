@@ -16,7 +16,16 @@ namespace ITI.CIL_Cowding
 
         public override void Execute(IExecutionContext ctx)
         {
-            throw new NotImplementedException();
+            IValue temp = ctx.Stack.Pop();
+            if ( temp.Type.IsInt32() && (int)temp.Data == 0 )
+            {
+                int index = ctx.Stack.LastFrame.Fct.GetIndexLabel( _label );
+                ctx.Stack.LastFrame.SetCurrentInstruction( index );
+            }
+            else
+            {
+                //error
+            }
         }
     }
 }

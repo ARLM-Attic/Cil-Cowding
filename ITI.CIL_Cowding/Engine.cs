@@ -16,6 +16,7 @@ namespace ITI.CIL_Cowding
         Analyzer _analyzer;
         List<FunctionNode> _tree;
         List<IFunction> _code;
+        List<IError> _syntaxErrors;
 
         // Execution
         IPreExecutionContext _pec;
@@ -28,18 +29,15 @@ namespace ITI.CIL_Cowding
         public Engine()
         {
             _sourceCode = "";
+            _syntaxErrors = new List<IError>();
             // Init SourceCodeChanged
         }
-
-        /*Normalement ça vire
-         * 
-        public List<IFunction> GetFunctionsList
+        
+        public bool IsRunning 
         {
-            get { return _code; }
+            get { return _analyzer != null;}
         }
 
-         * */
-        
         public string SourceCode
         {
             get { return _sourceCode; }
@@ -60,23 +58,43 @@ namespace ITI.CIL_Cowding
             }
         }
 
-        public void Start()
+        public int Start()
         {
-            
-            _strTok = new StringTokenizer(_sourceCode);
-            _analyzer = new Analyzer(_strTok);
+
+            _strTok = new StringTokenizer( _sourceCode );
+            _analyzer = new Analyzer( _strTok, this );
             _tree = _analyzer.ParseBody();
 
-            _pec = new PreExecutionContext();
-            _code = _pec.PreExecut(_tree);
+            if (_syntaxErrors.Count >= 1)
+            {
+                return -1;
+            }
+            else
+            {
+                _pec = new PreExecutionContext( this );
+                _code = _pec.PreExecut( _tree );
 
-            _ctx = new ExecutionContext(_code);
+                _ctx = new ExecutionContext( _code, this );
+                return 0;
+            }
+
         }
 
         public void NextInstruction()
         {
-            bool tmp = _ctx.NextInstruction();
-            if (!tmp) Stop();
+            // CODE TMP
+            if ( IsRunning )
+            {
+                bool tmp = _ctx.NextInstruction();
+                if ( !tmp ) Stop();
+            }
+            else
+            {
+                Console.WriteLine( "Calme toi mon gars, ça tourne plus" );
+
+            }
+            
+
         }
 
         public void Stop()
@@ -85,9 +103,27 @@ namespace ITI.CIL_Cowding
             _strTok = null;
             _analyzer = null;
             _tree = null;
+            _ctx = null;
+            _pec = null;
 
             // Là on pète un event END_RUNNING
 
+        }
+
+        public void ClashError(IError error)
+        {
+            error.Write();
+            Stop();
+        }
+        public void ClashError(List<IError> errors)
+        {
+            _syntaxErrors = errors;
+            foreach (IError error in errors)
+            {
+                error.Write();
+            }
+
+            Stop();
         }
 
         public IStack GetStack()
