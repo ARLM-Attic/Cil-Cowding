@@ -6,7 +6,7 @@ namespace ITI.CIL_Cowding
     public interface IPreExecutionContext
     {
         
-        List<SyntaxError> Errors
+        List<IError> Errors
         {
             get;
         }

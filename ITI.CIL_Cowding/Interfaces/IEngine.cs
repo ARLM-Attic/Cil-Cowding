@@ -19,6 +19,7 @@ namespace ITI.CIL_Cowding
         void NextInstruction();
 
         void Stop();
+        void ClashError(IError error);
 
         IStack GetStack();
 

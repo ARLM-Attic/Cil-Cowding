@@ -64,13 +64,13 @@ namespace ITI.CIL_Cowding
         {
             
             _strTok = new StringTokenizer(_sourceCode);
-            _analyzer = new Analyzer(_strTok);
+            _analyzer = new Analyzer(_strTok, this);
             _tree = _analyzer.ParseBody();
 
-            _pec = new PreExecutionContext();
+            _pec = new PreExecutionContext(this);
             _code = _pec.PreExecut(_tree);
 
-            _ctx = new ExecutionContext(_code);
+            _ctx = new ExecutionContext(_code, this);
         }
 
         public void NextInstruction()
@@ -88,6 +88,12 @@ namespace ITI.CIL_Cowding
 
             // Là on pète un event END_RUNNING
 
+        }
+
+        public void ClashError(IError error)
+        {
+            error.Write();
+            Stop();
         }
 
         public IStack GetStack()

@@ -23,19 +23,17 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
-        public RunTimeError()
+        public RunTimeError(IEngine engine)
         {
-            _message = "";
             _data = new Object();
             _stackTrace = "";
             _line = 0;
+            engine.ClashError( this );
         }
-        public RunTimeError(string message)
+        public RunTimeError( IEngine engine, string message )
+            : this(engine)
         {
             _message = message;
-            _data = new Object();
-            _stackTrace = "";
-            _line = 0;
         }
 
         public override string ToString()

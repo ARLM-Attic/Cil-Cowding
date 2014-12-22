@@ -29,27 +29,23 @@ namespace ITI.CIL_Cowding
         #endregion
     
 
-        public SyntaxError()
+        public SyntaxError(IEngine engine)
         {
-            _message = "";
             _data = new Object();
             _stackTrace = "";
-            _line = 0;
+            engine.ClashError(this);
         }
-        public SyntaxError(string message)
+        public SyntaxError(IEngine engine, string message)
+            : this(engine)
         {
             _message = message;
-            _data = new Object();
-            _stackTrace = "";
-            _line = 0;
+
         }
 
-        public SyntaxError(ITokenizer t, string message)
+        public SyntaxError( IEngine engine, ITokenizer t, string message )
+            :this(engine, message)
         {
             _line = t.CurrentLine;
-            _message = message;
-            _data = new Object();
-            _stackTrace = "";
         }
         public void Write()
         {
