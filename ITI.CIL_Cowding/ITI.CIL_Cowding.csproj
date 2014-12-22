@@ -50,6 +50,8 @@
     <Compile Include="Function.cs" />
     <Compile Include="Interfaces\IEngine.cs" />
     <Compile Include="Interfaces\IPreExecutionContext.cs" />
+    <Compile Include="Nodes\Instructions\Argument\LdargNode.cs" />
+    <Compile Include="Nodes\Instructions\Argument\StargNode.cs" />
     <Compile Include="Nodes\Instructions\Function\CallNode.cs" />
     <Compile Include="Nodes\Instructions\BooleanOperator\BinaryBooleanOperator\AndNode.cs" />
     <Compile Include="Nodes\Instructions\BooleanOperator\BinaryBooleanOperator\BinaryBooleanOperatorNode.cs" />

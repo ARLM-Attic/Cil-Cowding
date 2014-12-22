@@ -17,6 +17,11 @@ namespace ITI.CIL_Cowding
         {
             get;
         }
+        List<ICILType> ArgVar
+        {
+            get;
+        }
+
         List<InstructionNode> Code
         {
             get;

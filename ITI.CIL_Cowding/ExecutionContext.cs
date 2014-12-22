@@ -24,7 +24,7 @@ namespace ITI.CIL_Cowding
         public ExecutionContext(List<IFunction>code, IEngine engine)
         {
 
-            _stack = new Stack();
+            _stack = new Stack(engine);
             _engine = engine;
 
             // Initialisation du code
