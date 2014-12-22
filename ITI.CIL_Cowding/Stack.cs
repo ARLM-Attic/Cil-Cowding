@@ -114,7 +114,7 @@ namespace ITI.CIL_Cowding
             // Paramètres, que l'on trouve sur la stack
             int i = 0;
 
-            while(i < fct_param.Count-1) {
+            while(i < fct_param.Count) {
 
                 // On choppe le paramètre
                 IValue tmp;

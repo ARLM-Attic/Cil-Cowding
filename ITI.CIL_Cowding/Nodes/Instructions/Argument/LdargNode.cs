@@ -8,7 +8,6 @@ namespace ITI.CIL_Cowding
     public class LdargNode : InstructionNode
     {
 
-
         private int _index;
         public LdargNode(int index)
         {
