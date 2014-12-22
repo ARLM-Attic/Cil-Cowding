@@ -34,8 +34,6 @@ namespace ITI.CIL_Cowding
         {
             get { return _code; }
         }
-
-        
         #endregion
 
         #region Constructor

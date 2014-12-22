@@ -13,11 +13,12 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-
         private List<Container> _content;
+        private List<ICILType> _ict;
         private IValue _ivl;
-
+        private PreExecutionContext _pec;
         private IEngine engine = new Engine();
+
         public Form1()
         {
             InitializeComponent();
@@ -127,19 +128,26 @@ namespace ITI.CIL_Cowding
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
             pictureBox1.Refresh();
-            string message = "";          
+            string message = "";
            
            foreach(var _content in stack.Frame )
            {
-                Rectangle drawRect = new Rectangle(x, y, 500, 50);
-                g.FillRectangle(Brushes.Green, x, y, 500, 50);
-                message = _content.Fct.Name.ToString();
-                message += " " + _content.Fct.ReturnType;
-                g.DrawString(message, drawFont, drawBrush, drawRect);
+               Rectangle drawRect = new Rectangle(x, y, 500, 50);
+               g.FillRectangle(Brushes.Green, x, y, 500, 50);
+               message = "Call function \"" + _content.Fct.Name.ToString() + " \"\n Return type : " + _content.Fct.ReturnType.FullName;
+               g.DrawString(message, drawFont, drawBrush, drawRect);
+               y -= 80;
 
-                y -= 80;
+               
            }
 
+            foreach(var frame in stack.TopFrame)
+            {
+                Rectangle drawRect = new Rectangle(x, y, 500, 50);
+                g.FillRectangle(Brushes.DarkRed, x, y, 500, 50);
+                message = "Push " + frame.Type.NetType.Name.ToString() + " \"" + frame.Data.ToString() + "\"";
+                g.DrawString(message, drawFont, drawBrush, drawRect);
+            }
 
             /*
             // Dessin de la frame

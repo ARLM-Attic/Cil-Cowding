@@ -27,5 +27,7 @@ namespace ITI.CIL_Cowding
         { 
             get; 
         }
+
+        Stack<IValue> TopFrame { get; }
     }
 }
