@@ -8,7 +8,7 @@ namespace ITI.CIL_Cowding
         Stack _stack;
         List<IFunction> _code;
         IEngine _engine;
-        List<IError> _errors;
+        IError _error;
 
 
         public IStack Stack
@@ -26,7 +26,6 @@ namespace ITI.CIL_Cowding
 
             _stack = new Stack();
             _engine = engine;
-            _errors = new List<IError>();
 
             // Initialisation du code
             _code = code;
@@ -44,8 +43,8 @@ namespace ITI.CIL_Cowding
             }
            _stack.LastFrame.CurrentInstruction.Execute(this);
 
-            // On passe à l'instruction suivante
-            if(_stack.LastFrame == null) 
+            // On passe à l'instruction suivante si on n'a pas d'erreur
+            if(_error != null || _stack.LastFrame == null) 
             {
                 return false ;
             } 
@@ -57,8 +56,10 @@ namespace ITI.CIL_Cowding
         }
 
         public void AddError( string msg )
-        { 
-            _errors.Add( new RunTimeError( _engine, msg ) );
+        {
+            _error  = new RunTimeError(_engine, msg);
+            _engine.ClashError(_error);
+            
         }
     }
 }

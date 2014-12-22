@@ -28,7 +28,6 @@ namespace ITI.CIL_Cowding
             _data = new Object();
             _stackTrace = "";
             _line = 0;
-            engine.ClashError( this );
         }
         public RunTimeError( IEngine engine, string message )
             : this(engine)

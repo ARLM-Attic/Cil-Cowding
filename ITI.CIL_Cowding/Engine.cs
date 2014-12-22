@@ -30,16 +30,13 @@ namespace ITI.CIL_Cowding
             _sourceCode = "";
             // Init SourceCodeChanged
         }
-
-        /*Normalement ça vire
-         * 
-        public List<IFunction> GetFunctionsList
-        {
-            get { return _code; }
+        
+        public bool IsRunning {
+            
+            get { return _analyzer != null;}
+            
         }
 
-         * */
-        
         public string SourceCode
         {
             get { return _sourceCode; }
@@ -75,8 +72,18 @@ namespace ITI.CIL_Cowding
 
         public void NextInstruction()
         {
-            bool tmp = _ctx.NextInstruction();
-            if (!tmp) Stop();
+            // CODE TMP
+            if(IsRunning) {
+                bool tmp = _ctx.NextInstruction();
+                if (!tmp) Stop();
+            }
+            else
+            {
+                Console.WriteLine("Calme toi mon gars, ça tourne plus");
+
+            }
+            
+
         }
 
         public void Stop()
@@ -85,6 +92,8 @@ namespace ITI.CIL_Cowding
             _strTok = null;
             _analyzer = null;
             _tree = null;
+            _ctx = null;
+            _pec = null;
 
             // Là on pète un event END_RUNNING
 
@@ -93,6 +102,15 @@ namespace ITI.CIL_Cowding
         public void ClashError(IError error)
         {
             error.Write();
+            Stop();
+        }
+        public void ClashError(List<IError> errors)
+        {
+            foreach (IError error in errors)
+            {
+                error.Write();
+            }
+
             Stop();
         }
 

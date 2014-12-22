@@ -12,7 +12,7 @@ namespace ITI.CIL_Cowding
 
         string SourceCode {get; set;}
 
-        //bool IsRunning { get; }
+        bool IsRunning { get; }
 
         void Start();
 
