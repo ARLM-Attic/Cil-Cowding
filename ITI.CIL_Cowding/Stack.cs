@@ -73,7 +73,7 @@ namespace ITI.CIL_Cowding
         public void SetArgVar(int index, IValue var)
         {
             LastFrame.SetARGVar(index, var);
-            frame.SetARGVar(index, var.Data);
+            LastFrame.SetARGVar(index, var.Data);
         }
         #endregion
        
