@@ -85,7 +85,14 @@ namespace ITI.CIL_Cowding
                 _currentfct = fct;
                 foreach (InstructionNode IN in fct.Code)
                 {
-                    IN.PreExecute(this);
+                    if(IN is LocalsInitNode) {
+                    }
+                    else
+                    {
+                        IN.PreExecute(this);
+
+
+                    }
                     _lineInstruction++;
                 }
                 

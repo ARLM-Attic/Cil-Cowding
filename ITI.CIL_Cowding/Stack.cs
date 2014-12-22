@@ -56,7 +56,7 @@ namespace ITI.CIL_Cowding
         public void SetLocalVar( IValue var , int index)
         {
             Container frame = LastFrame;
-            frame.SetLOCVar( index, var );
+            frame.SetLOCVar( index, var.Data );
         }
         
         #endregion
@@ -73,7 +73,7 @@ namespace ITI.CIL_Cowding
         public void SetArgVar(int index, IValue var)
         {
             Container frame = LastFrame;
-            frame.SetARGVar(index, var);
+            frame.SetARGVar(index, var.Data);
         }
         #endregion
        
