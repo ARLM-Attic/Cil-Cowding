@@ -10,6 +10,7 @@ namespace ITI.CIL_Cowding
     {
         Stack _stack;
         List<IFunction> _code;
+        IEngine _engine;
 
 
         public IStack Stack
@@ -22,10 +23,11 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-        public ExecutionContext(List<IFunction>code)
+        public ExecutionContext(List<IFunction>code, IEngine engine)
         {
 
-            _stack = new Stack();
+            _stack = new Stack(engine);
+            _engine = engine;
 
             // Initialisation du code
             _code = code;
