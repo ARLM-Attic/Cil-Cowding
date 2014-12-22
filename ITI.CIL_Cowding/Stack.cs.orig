@@ -72,8 +72,12 @@ namespace ITI.CIL_Cowding
 
         public void SetArgVar(int index, IValue var)
         {
+<<<<<<< HEAD
             LastFrame.SetARGVar(index, var);
+=======
+            Container frame = LastFrame;
             frame.SetARGVar(index, var.Data);
+>>>>>>> 77544d7bca1ec1d722c564a8a9d4c02f8e00dde4
         }
         #endregion
        
