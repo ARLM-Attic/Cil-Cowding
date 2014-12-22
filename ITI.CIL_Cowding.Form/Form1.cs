@@ -134,12 +134,13 @@ namespace ITI.CIL_Cowding
            {
                Rectangle drawRect = new Rectangle(x, y, 500, 50);
                g.FillRectangle(Brushes.Green, x, y, 500, 50);
-               message = "Call function \"" + _content.Fct.Name.ToString() + " \"\n Return type : " + _content.Fct.ReturnType.FullName;
+               message = "Call function \"" + _content.Fct.Name.ToString() + "\"\n Return type : " + _content.Fct.ReturnType.FullName;
                g.DrawString(message, drawFont, drawBrush, drawRect);
                y -= 80;
 
-               
            }
+
+           
 
             foreach(var frame in stack.TopFrame)
             {
