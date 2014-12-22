@@ -9,13 +9,13 @@ namespace ITI.CIL_Cowding
         {
             IValue temp1 = ctx.Stack.Pop();
             IValue temp2 = ctx.Stack.Pop();
-            if ( ( temp1.Type == temp2.Type ) && temp1.Type.IsNumeric )
+            if ( ( temp1.Type.FullName == temp2.Type.FullName ) && temp1.Type.IsNumeric )
             {
                 ctx.Stack.Push( Operator( temp2, temp1 ) ) ;
             }
             else
             {
-                //error
+                ctx.AddError("Two numeric values excepted for Binary Operation")
             }
             
         }

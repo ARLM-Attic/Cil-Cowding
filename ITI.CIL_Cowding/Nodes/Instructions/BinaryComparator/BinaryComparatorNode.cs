@@ -9,9 +9,13 @@ namespace ITI.CIL_Cowding
         {
             IValue temp = ctx.Stack.Pop();
             IValue temp2 = ctx.Stack.Pop();
-            if ( temp.Type == temp2.Type && temp.Type.IsInt32() )
+            if ( temp.Type.FullName == temp2.Type.FullName && temp.Type.IsInt32() )
             {
                 ctx.Stack.Push( this.Comparator( temp2, temp ) );
+            }
+            else
+            {
+                ctx.AddError( "Incorrect type on Comparator. Two integers excepted." );
             }
         }
     }

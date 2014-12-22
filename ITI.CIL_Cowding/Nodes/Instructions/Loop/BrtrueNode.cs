@@ -16,14 +16,21 @@ namespace ITI.CIL_Cowding
         public override void Execute(IExecutionContext ctx)
         {
             IValue temp = ctx.Stack.Pop();
-            if ( temp.Type.IsInt32() && (int)temp.Data == 1 ) // Pay attention, int atm, bool for next
+            if ( temp.Type.IsInt32() && ( (int)temp.Data == 0 || (int)temp.Data == 1 ) )
             {
-                int index = ctx.Stack.LastFrame.Fct.GetIndexLabel( _label );
-                ctx.Stack.LastFrame.SetCurrentInstruction( index );
+                if ( (int)temp.Data == 1 )// Pay attention, int atm, bool for next
+                {
+                    int index = ctx.Stack.LastFrame.Fct.GetIndexLabel( _label );
+                    ctx.Stack.LastFrame.SetCurrentInstruction( index );
+                }
+                else if ( (int)temp.Data == 0 )
+                {
+                    // don't branch
+                }
             }
             else
             {
-                //error
+                ctx.AddError( "Brtrue expect a boolean, 0 or 1." );
             }
         }
     }

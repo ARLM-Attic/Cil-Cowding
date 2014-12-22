@@ -9,9 +9,13 @@ namespace ITI.CIL_Cowding
         {
             IValue temp = ctx.Stack.Pop();
             IValue temp2 = ctx.Stack.Pop();
-            if ( temp.Type.FullName == temp2.Type.FullName )
+            if ( temp.Type.FullName == temp2.Type.FullName && ( (int)temp.Data == 0 || (int)temp.Data == 1 ) && ( (int)temp2.Data == 0 || (int)temp2.Data == 1 ) )
             {
                 ctx.Stack.Push( this.Operator( temp2, temp ) );
+            }
+            else
+            {
+                ctx.AddError("Incorrect type on Binary Boolean Operator. Two booleans excepted.");
             }
         }
     }

@@ -90,7 +90,7 @@ namespace ITI.CIL_Cowding
             }
             else
             {
-                Console.WriteLine( "Calme toi mon gars, ça tourne plus" );
+                Console.WriteLine( "Calme toi mon gars, ça tourne plus OO OMGGGGGGGG Ooooo" );
 
             }
             

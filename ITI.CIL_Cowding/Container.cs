@@ -80,7 +80,7 @@ namespace ITI.CIL_Cowding
         // Pas de sécurité sur l'index pour le moment
         public void SetARGVar(int index, Object val)
         {
-             _args[index].Data = val; // wtf cerveau
+             _args[index].Data = val;
                     
         }
         // Pas de sécurité sur l'index pour le moment
