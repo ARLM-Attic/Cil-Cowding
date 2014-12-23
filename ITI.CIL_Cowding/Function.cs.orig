@@ -35,11 +35,16 @@ namespace ITI.CIL_Cowding
         {
             get { return _code; }
         }
+<<<<<<< HEAD
+=======
+
         public List<ICILType> ArgVar
         {
             get { return _parameters; }
         }
 
+        
+>>>>>>> origin/Executor_Engine
         #endregion
 
         #region Constructor

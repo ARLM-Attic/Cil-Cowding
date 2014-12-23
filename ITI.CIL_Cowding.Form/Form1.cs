@@ -13,9 +13,11 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics g;
         private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-
+        private List<Container> _content;
+        private List<ICILType> _ict;
+        private IValue _ivl;
+        private PreExecutionContext _pec;
         private IEngine engine = new Engine();
-
 
         public Form1()
         {
@@ -118,20 +120,65 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack(IStack stack)
         {
-            /*
+           
             int x = 10;
             int y = 300;
 
-            Font drawFont = new Font("Arial", 10);
+            Font drawFont = new Font("Arial",7);
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
             pictureBox1.Refresh();
+            string message = "";
+          
+           foreach(Container plouf in stack.Frame )
+           {
+               // Nom de la fct toussa sisi la famille
+               Rectangle drawRect = new Rectangle(x, y, 500, 50);
+               g.FillRectangle(Brushes.Green, x, y, 500, 50);
+               message = "Function \"" + plouf.Fct.Name.ToString() + "\" Return type : " + plouf.Fct.ReturnType.FullName+"\n";
 
+               // On affiche les arguments
+               message += "Arguments : \n";
+               int i = 0;
+               foreach(IValue valeur in plouf.ArgsVars) {
+
+                   message += "["+i+"] : "+valeur.Type.FullName+ " " + valeur.Data+"\n";
+
+                   i++;
+               }
+
+               // On affiche les variables locales
+               message += "Variables Locales : \n";
+               i = 0;
+               foreach (IValue valeur in plouf.LocalVars)
+               {
+
+                   message += "[" + i + "] : " + valeur.Type.FullName + " " + valeur.Data + "\n";
+
+                   i++;
+               }
+
+
+               g.DrawString(message, drawFont, drawBrush, drawRect);
+               y -= 80;
+
+           }
+
+           
+            // Dessin de la TopFrame
+            foreach(var frame in stack.TopFrame)
+            {
+                Rectangle drawRect = new Rectangle(x, y, 500, 50);
+                g.FillRectangle(Brushes.DarkRed, x, y, 500, 50);
+                message = "" + frame.Type.FullName + " \"" + frame.Data.ToString() + "\"\n";
+                g.DrawString(message, drawFont, drawBrush, drawRect);
+            }
+
+            /*
             // Dessin de la frame
             foreach (KeyValuePair<String, Variable> Var in container.Var)
             {
-                Rectangle drawRect = new Rectangle(x, y, 500, 50);
-                g.FillRectangle(Brushes.Green, x, y, 500, 50);
+                
 
                 // ecrire les infos de la variable en cours
                 String message = Var.Value.Type.ToString() + " " + Var.Value.Data.ToString() +" "+ Var.Value.Label.ToString();
@@ -168,7 +215,7 @@ namespace ITI.CIL_Cowding
 
             // Graphique
             pictureBox1.Refresh();
-            richTextBox.ReadOnly = true;
+            richTextBox.Enabled = false;
 
             g = pictureBox1.CreateGraphics();
 
@@ -212,7 +259,7 @@ namespace ITI.CIL_Cowding
             butStepByStep.Visible = true;
             butContinue.Visible = false;
             butStop.Visible = false;
-            richTextBox.ReadOnly = false;
+            richTextBox.Enabled = true;
         }
         
         #endregion ButtonManagment

@@ -23,11 +23,16 @@ namespace ITI.CIL_Cowding
             get;
         }
 
+<<<<<<< HEAD
+        List<Container> Frame
+        { 
+            get; 
+        }
+=======
         IValue GetArgVar(int index);
         void SetArgVar(int index, IValue var);
+>>>>>>> origin/Executor_Engine
 
         Stack<IValue> TopFrame { get; }
-        List<Container> Frame { get; }
-
     }
 }
