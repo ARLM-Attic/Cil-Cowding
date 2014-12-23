@@ -124,17 +124,17 @@ namespace ITI.CIL_Cowding
             int x = 10;
             int y = 300;
 
-            Font drawFont = new Font("Arial",7);
+            Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
             pictureBox1.Refresh();
             string message = "";
+            int ligne = 20;     // PX
           
            foreach(Container plouf in stack.Frame )
            {
                // Nom de la fct toussa sisi la famille
-               Rectangle drawRect = new Rectangle(x, y, 500, 50);
-               g.FillRectangle(Brushes.Green, x, y, 500, 50);
+               
                message = "Function \"" + plouf.Fct.Name.ToString() + "\" Return type : " + plouf.Fct.ReturnType.FullName+"\n";
 
                // On affiche les arguments
@@ -159,11 +159,20 @@ namespace ITI.CIL_Cowding
                }
 
 
+               // On compte le nb de '\n'
+               int nb_ligne=1;
+               foreach(var c in message) {
+                   if(c== '\n') nb_ligne ++; 
+               }
+               var taille_fenetre = ligne * nb_ligne;
+
+               Rectangle drawRect = new Rectangle(x, y, 500, taille_fenetre);
+               g.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
+
                g.DrawString(message, drawFont, drawBrush, drawRect);
-               y -= 80;
+               y -= taille_fenetre+50;
 
            }
-
            
             // Dessin de la TopFrame
             foreach(var frame in stack.TopFrame)
@@ -174,38 +183,7 @@ namespace ITI.CIL_Cowding
                 g.DrawString(message, drawFont, drawBrush, drawRect);
             }
 
-            /*
-            // Dessin de la frame
-            foreach (KeyValuePair<String, Variable> Var in container.Var)
-            {
-                
 
-                // ecrire les infos de la variable en cours
-                String message = Var.Value.Type.ToString() + " " + Var.Value.Data.ToString() +" "+ Var.Value.Label.ToString();
-
-                g.DrawString( message, drawFont, drawBrush, drawRect);
-
-                y -= 80;
-            }
-
-            // Dessin de la Top Frame
-            var tmp = stack.ToArray();
-            Array.Reverse(tmp);
-
-            foreach (var Var in tmp)
-            {
-                Rectangle drawRect = new Rectangle(x, y, 500, 50);
-                g.FillRectangle(Brushes.DarkRed, x, y, 500, 50);
-                
-                // ecrire les infos de la variable en cours
-                String message = Var.Type.ToString() + " " + Var.Data.ToString();
-                g.DrawString(message, drawFont, drawBrush, drawRect);
-
-
-                y -= 80;
-            }
-            
-            */
         }
 
         #region ButtonManagment

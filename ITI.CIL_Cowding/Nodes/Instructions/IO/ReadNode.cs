@@ -9,8 +9,35 @@ namespace ITI.CIL_Cowding
     {
         public override void Execute( IExecutionContext ctx )
         {
-            Console.Write( "Input ==> " );
-            ctx.Stack.Push( new Value( new CILNetType( typeof( string ) ), Console.ReadLine() ) );
+            Console.Write("Input ==> ");
+            string read = Console.ReadLine();
+            object toint;
+            CILNetType type;
+            Value value;
+
+            try {
+
+                toint = Int32.Parse(read);
+                type = new CILNetType(typeof (int));
+
+            } catch {
+
+                type = new CILNetType(typeof(string));
+                toint = null;
+
+            }
+            
+
+            if(toint == null) {
+
+                value = new Value(type, read);
+            }
+            else
+            {
+                value = new Value(type, toint);
+            }
+
+            ctx.Stack.Push( value );
         }
     }
 }
