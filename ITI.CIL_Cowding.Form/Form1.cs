@@ -122,7 +122,7 @@ namespace ITI.CIL_Cowding
         {
            
             int x = 10;
-            int y = 300;
+            int y = 600;
 
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -175,13 +175,23 @@ namespace ITI.CIL_Cowding
            }
            
             // Dessin de la TopFrame
+           message = "";
+
             foreach(var frame in stack.TopFrame)
             {
-                Rectangle drawRect = new Rectangle(x, y, 500, 50);
-                g.FillRectangle(Brushes.DarkRed, x, y, 500, 50);
-                message = "" + frame.Type.FullName + " \"" + frame.Data.ToString() + "\"\n";
-                g.DrawString(message, drawFont, drawBrush, drawRect);
+                message += "" + frame.Type.FullName + " '" + frame.Data.ToString() + " '\n";
             }
+
+            int nb_ligne_ = 1;
+            foreach (var c in message)
+            {
+                if (c == '\n') nb_ligne_++;
+            }
+            var taille_fenetre_ = ligne * nb_ligne_;
+
+            Rectangle drawRect_ = new Rectangle(x, y, 500, taille_fenetre_);
+            g.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
+            g.DrawString(message, drawFont, drawBrush, drawRect_);
 
 
         }

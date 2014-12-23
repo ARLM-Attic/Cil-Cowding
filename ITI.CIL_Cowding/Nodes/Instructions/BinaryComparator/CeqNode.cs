@@ -10,7 +10,7 @@ namespace ITI.CIL_Cowding
         protected override IValue Comparator( IValue value1, IValue value2 )
         {
             IValue result;
-            if ( value1.Data == value2.Data )
+            if ( value1.Data.ToString() == value2.Data.ToString() )
             {
                 result = new Value( value1.Type, 1 );
             }
