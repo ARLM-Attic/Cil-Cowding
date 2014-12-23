@@ -209,6 +209,7 @@ namespace ITI.CIL_Cowding
             }
 
             // Lancement du moteur 
+            Console.Clear();
             engine.SourceCode = richTextBox.Text;
             engine.Start();
 
