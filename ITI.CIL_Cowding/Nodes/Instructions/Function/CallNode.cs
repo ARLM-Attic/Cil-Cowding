@@ -4,27 +4,28 @@ namespace ITI.CIL_Cowding
 {
     public class CallNode : InstructionNode
     {
-        // Fields
+        string _name;
+        Function toCall;
 
-        string _label;
-        Function fct_a_appeller;
-
-
-        public CallNode(string label)
+        /// <summary>
+        /// Call method, described by name
+        /// </summary>
+        /// <param name="name">Function name</param>
+        public CallNode(string name)
         {
-            _label = label;
+            _name = name;
         }
 
         public override void PreExecute(IPreExecutionContext pec)
         {
-            
-            fct_a_appeller = pec.SearchFunction(_label);
+
+            toCall = pec.SearchFunction( _name );
 
         }
 
         public override void Execute(IExecutionContext ctx)
         {
-            ctx.Stack.CallFunction(fct_a_appeller);
+            ctx.Stack.CallFunction(toCall);
         }
     }
 }

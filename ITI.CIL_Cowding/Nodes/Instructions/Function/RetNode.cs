@@ -7,11 +7,6 @@ namespace ITI.CIL_Cowding
     /// </summary>
     class RetNode : InstructionNode
     {
-
-        public RetNode()
-        {
-           
-        }
         public override void Execute(IExecutionContext ctx)
         {
             ctx.Stack.CloseFunction();

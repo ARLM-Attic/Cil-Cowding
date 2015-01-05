@@ -54,7 +54,7 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
-        #region Methodes
+        #region Methods
         public String GetSignature()
         {
             throw new NotImplementedException();
