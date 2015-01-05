@@ -1,30 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace ITI.CIL_Cowding
 {
+
+    public enum FunctionScope
+    {
+        Internal,
+        External, 
+        None
+    }
+
     public class CallNode : InstructionNode
     {
         // Fields
 
-        string _label;
-        Function fct_a_appeller;
-
-
-        public CallNode(string label)
+        List<string> _labels;
+        Function _fctToCall;
+        Object _externFunction;
+        
+        public CallNode(List<string> label)
         {
-            _label = label;
+            _labels = label;
+            _externFunction = null;
+            _fctToCall = null;
         }
 
         public override void PreExecute(IPreExecutionContext pec)
         {
-            
-            fct_a_appeller = pec.SearchFunction(_label);
+            Object function;
+            FunctionScope fcs = pec.SearchFunction(_labels, out function);
+            if( fcs == FunctionScope.External )
+            {
 
+            }
+            else if( fcs == FunctionScope.Internal )
+            {
+
+            }
+            else
+            {
+                pec.AddError( "Error : Function not found." );
+            }
         }
 
         public override void Execute(IExecutionContext ctx)
         {
-            ctx.Stack.CallFunction(fct_a_appeller);
+            ctx.Stack.CallFunction(_fctToCall);
         }
     }
 }

@@ -25,9 +25,25 @@ namespace ITI.CIL_Cowding.Tests
         [Test]
         public void is_a_string_token()
         {
-            StringTokenizer st = new StringTokenizer("\"coucou\"");
-            TokenType tk = st.CurrentToken;
-            Assert.That( tk, Is.EqualTo( TokenType.String ) );
+            StringTokenizer st = new StringTokenizer("\"\"coucou\"\"");
+            string strToCp;
+            // ""
+            Assert.That(st.IsString(out strToCp));
+            Assert.That(strToCp, Is.EqualTo(""));
+            // coucou
+            Assert.That(st.MatchIdentifier("coucou"));
+            // "" 
+            Assert.That(st.IsString(out strToCp) && strToCp == "");
+        }
+
+        [Test]
+        public void is_the_right_string()
+        {
+            StringTokenizer st = new StringTokenizer(@" ""cou""cou"" ");
+            string str;
+            Assert.That(st.IsString(out str));
+            Assert.That(str, Is.EqualTo(@"cou""cou"));
+
         }
 
         [Test]

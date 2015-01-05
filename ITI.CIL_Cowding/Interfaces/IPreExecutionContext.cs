@@ -32,6 +32,8 @@ namespace ITI.CIL_Cowding
 
         List<IFunction> PreExecut( List<FunctionNode> code );
 
-        Function SearchFunction(string nomFct);
+        FunctionScope SearchFunction(List<string> labels, out Object function);
+
+        void AddError(string p);
     }
 }

@@ -508,17 +508,28 @@ namespace ITI.CIL_Cowding
                 else if( _tokenizer.MatchIdentifier( "call" ) )
                 {
                     #region CALL
-                    string labelNameFct;
-                    if( _tokenizer.IsIdentifier( out labelNameFct ) &&
-                        _tokenizer.Match( TokenType.SemiColon ) )
+                    bool error = false;
+                    string identifier = "";
+                    List<string> identifiers = new List<string>();
+
+                    while(!_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new CallNode( labelNameFct ) );
+                        if( _tokenizer.IsIdentifier( out identifier ) )
+                        {
+                            identifiers.Add(identifier);
+                        }
+                        else
+                        {
+                            AddError( "Error on identifier." );
+                            error = true;
+                        }
+                        _tokenizer.Match(TokenType.Dot);
                     }
-                    else
+                    if( error == false )
                     {
-                        AddError( "Error : somthing has failed with call." );
-                        _tokenizer.ForwardToNextLine();
+                        fct_content.Add( new CallNode( identifiers ) );
                     }
+
                     #endregion CALL
                 }
                 else if (_tokenizer.MatchIdentifier("ret"))

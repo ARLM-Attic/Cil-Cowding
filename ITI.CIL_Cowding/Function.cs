@@ -83,11 +83,8 @@ namespace ITI.CIL_Cowding
             int index;
             _labels.TryGetValue(label, out index);
             return index;
-
         }
-
         #endregion
-
     }
 }
 

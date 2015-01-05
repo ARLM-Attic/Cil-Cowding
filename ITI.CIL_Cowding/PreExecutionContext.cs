@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace ITI.CIL_Cowding
 {
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<IFunction> _mes_fct;
+        List<IFunction> _myFct;
         List<IError> _errors;
         List<ICILType> _locvar;
         Function _currentfct;
@@ -46,7 +47,7 @@ namespace ITI.CIL_Cowding
         {
             _engine = engine;
             _typeManager = new CILTypeManager();
-            _mes_fct = new List<IFunction>();
+            _myFct = new List<IFunction>();
             _errors = new List<IError>();
           //  _errors = new List<string>();
             _locvar = new List<ICILType>();
@@ -57,9 +58,9 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="code">All the source code, therefore the list of function node.</param>
         /// <returns>List of functions ready to execute.</returns>
+  
         public List<IFunction> PreExecut (List<FunctionNode> code)
         {
-            
             List<IFunction> myFunctions = new List<IFunction>();
 
             foreach(FunctionNode function in code)
@@ -75,7 +76,7 @@ namespace ITI.CIL_Cowding
             }
 
             // Là on a nos fct, donc on le case dans la var
-            _mes_fct = myFunctions;
+            _myFct = myFunctions;
 
             // on parcourt toutes nos fct et on pré-exécute tous les noeuds
             foreach (Function fct in myFunctions)
@@ -90,35 +91,55 @@ namespace ITI.CIL_Cowding
                     else
                     {
                         IN.PreExecute(this);
-
-
                     }
                     _lineInstruction++;
                 }
-                
             }
-
             return myFunctions;
         }
 
-        public Function SearchFunction(string nomFct)
+        public FunctionScope SearchFunction(List<string> labels, out Object function)
         {
-                
-            foreach(Function fct in _mes_fct) {
-                    
-                if(fct.Name == nomFct) {
-                    return fct;
-                }
+            // We looking for a function at home
+            // On ne gère pas les classes internes (pour le moment).
 
+            if( labels.Count == 1 ) 
+            {
+                foreach(Function fct in _myFct) 
+                {
+                    if(fct.Name == labels[0]) 
+                    {
+                        function = fct;
+                        return FunctionScope.Internal;
+                    }
+                }
+            }
+            
+            // We looking for a function which is not at home
+
+            string nameType = "";
+            for(int i = 0; i < labels.Count-2; i++)
+            {
+                nameType += labels[i];
             }
 
-            AddError("Function not found.");
-            return null;
+            Type type = Type.GetType(nameType);
+
+            if (nameType != null)
+            {
+                function = type;
+                return FunctionScope.External;
+            }
+            else
+            {
+                AddError("Function not found.");
+                function = null;
+                return FunctionScope.None;
+            }
         }
 
         private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
         {
-
             foreach ( IFunction functionForName in myFunctions )
             {
                 if ( functionForName.Name == function.Name )
@@ -127,12 +148,10 @@ namespace ITI.CIL_Cowding
                     return false;
                 }
             }
-
             return true;
-            
         }
         
-        private void AddError( string msg )
+        public void AddError( string msg )
         {
             _errors.Add( new SyntaxError( _engine, msg ) );
         }
