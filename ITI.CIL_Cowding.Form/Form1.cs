@@ -11,13 +11,17 @@ namespace ITI.CIL_Cowding
 {
     public partial class Form1 : Form
     {
-        private System.Drawing.Graphics g;
-        private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-        private List<Container> _content;
+        private System.Drawing.Graphics _stackGraphics;
+        //private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
+       /* private List<Container> _content;
         private List<ICILType> _ict;
         private IValue _ivl;
-        private PreExecutionContext _pec;
+        private PreExecutionContext _pec;*/
         private IEngine engine = new Engine();
+        StringWriter _stringWriter;
+        StringReader _stringReader;
+        string _leTrucALire;
+
 
         public Form1()
         {
@@ -113,6 +117,23 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
+        public void UpdateConsole()
+        {
+            System.Drawing.Graphics consoleGraphics = pictureBox2.CreateGraphics();
+            Font drawFont = new Font( "Arial", 12 );
+            SolidBrush drawBrush = new SolidBrush( Color.Black );
+
+            
+            
+           // Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
+            consoleGraphics.DrawString( _stringWriter.ToString(), drawFont, drawBrush, 0, 10 );
+
+
+
+            
+            
+        }
+
         /// <summary>
         /// Update the stack
         /// </summary>
@@ -120,7 +141,6 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack(IStack stack)
         {
-           
             int x = 10;
             int y = 600;
 
@@ -167,9 +187,9 @@ namespace ITI.CIL_Cowding
                var taille_fenetre = ligne * nb_ligne;
 
                Rectangle drawRect = new Rectangle(x, y, 500, taille_fenetre);
-               g.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
+               _stackGraphics.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
 
-               g.DrawString(message, drawFont, drawBrush, drawRect);
+               _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect);
                y -= taille_fenetre+50;
 
            }
@@ -190,8 +210,8 @@ namespace ITI.CIL_Cowding
             var taille_fenetre_ = ligne * nb_ligne_;
 
             Rectangle drawRect_ = new Rectangle(x, y, 500, taille_fenetre_);
-            g.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
-            g.DrawString(message, drawFont, drawBrush, drawRect_);
+            _stackGraphics.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
+            _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect_);
 
 
         }
@@ -200,12 +220,24 @@ namespace ITI.CIL_Cowding
 
         private void butStepByStep_Click(object sender, EventArgs e)
         {
+            _stringWriter = new StringWriter();
+            Console.SetOut( _stringWriter );
+
+            _leTrucALire = "2";
+            Input b = new Input();
+            b.ShowDialog();
+            _leTrucALire = b.Text;
+            Console.WriteLine( _leTrucALire );
+
+            _stringReader = new StringReader( _leTrucALire );
+            Console.SetIn( _stringReader );
+
 
             // Graphique
             pictureBox1.Refresh();
             richTextBox.Enabled = false;
 
-            g = pictureBox1.CreateGraphics();
+            _stackGraphics = pictureBox1.CreateGraphics();
 
             Font drawFont = new Font("Arial", 10);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -219,9 +251,10 @@ namespace ITI.CIL_Cowding
             }
 
             // Lancement du moteur 
-            Console.Clear();
+            pictureBox2.Refresh(); 
             engine.SourceCode = richTextBox.Text;
             engine.Start();
+
 
         }
 
@@ -239,8 +272,10 @@ namespace ITI.CIL_Cowding
             // Et MaJ de la Stack
             if (engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());   
+                UpdateStack( engine.GetStack() );
             }
+            UpdateConsole();
+
         }
         
         private void butStop_Click(object sender, EventArgs e)
