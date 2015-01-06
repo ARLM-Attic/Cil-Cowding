@@ -12,11 +12,6 @@ namespace ITI.CIL_Cowding
     public partial class Form1 : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        //private System.Drawing.Pen pen1 = new System.Drawing.Pen(Brushes.Green, 2F);
-       /* private List<Container> _content;
-        private List<ICILType> _ict;
-        private IValue _ivl;
-        private PreExecutionContext _pec;*/
         private IEngine engine = new Engine();
         StringWriter _stringWriter;
         StringReader _stringReader;
