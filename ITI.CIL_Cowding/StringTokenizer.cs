@@ -7,9 +7,9 @@ namespace ITI.CIL_Cowding
     {
         string _toParse;
         int _position;
-        int _maxPos;
-        int _curLine;
-        int _curColumn;
+        int _maxPosition;
+        int _currentLine;
+        int _currentColumn;
         double _doubleValue;
         string _idOrStringValue;
         StringBuilder _buffer;
@@ -30,7 +30,7 @@ namespace ITI.CIL_Cowding
             _currentToken = TokenType.None;
             _toParse = s;
             _position = startIndex;
-            _maxPos = startIndex + count;
+            _maxPosition = startIndex + count;
             //init
             GetNextToken();
         }
@@ -42,7 +42,7 @@ namespace ITI.CIL_Cowding
 
         public int CurrentLine
         {
-            get { return _curLine; }
+            get { return _currentLine; }
         }
 
         public string GetValueOfId
@@ -52,7 +52,7 @@ namespace ITI.CIL_Cowding
 
         public int CurrentColumn
         {
-            get { return _curColumn; }
+            get { return _currentColumn; }
         }
 
         public bool IsWhiteSpace
@@ -62,7 +62,7 @@ namespace ITI.CIL_Cowding
 
         public bool IsEnd
         {
-            get { return _position >= _maxPos; }
+            get { return _position >= _maxPosition; }
         }
 
         public void ForwardToNextLine()

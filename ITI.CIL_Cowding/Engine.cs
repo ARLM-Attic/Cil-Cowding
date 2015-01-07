@@ -80,18 +80,20 @@ namespace ITI.CIL_Cowding
 
         }
 
-        public void NextInstruction()
+        public bool NextInstruction()
         {
-            // CODE TMP
             if ( IsRunning )
             {
-                bool tmp = _ctx.NextInstruction();
-                if ( !tmp ) Stop();
+                if ( !_ctx.NextInstruction() ) 
+                {
+                    Stop();
+                }
+                return true;
             }
             else
             {
-                Console.WriteLine( "Calme toi mon gars, ça tourne plus OO OMGGGGGGGG Ooooo" );
-
+                Console.WriteLine( "End of program." );
+                return false;
             }
             
 

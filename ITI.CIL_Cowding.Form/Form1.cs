@@ -52,7 +52,7 @@ namespace ITI.CIL_Cowding
                 {
                     if ((myStream = openFileDialog1.OpenFile()) != null)
                     {
-                        richTextBox.Text = File.ReadAllText(openFileDialog1.FileName);
+                        _richTextBox.Text = File.ReadAllText(openFileDialog1.FileName);
                     }
                 }
                 catch (Exception ex)
@@ -97,7 +97,7 @@ namespace ITI.CIL_Cowding
                 try
                 {
                     //Write the contents of the text box to the stream
-                    writer.Write(richTextBox.Text);
+                    writer.Write(_richTextBox.Text);
                 }
                 catch (IOException ex)
                 {
@@ -114,19 +114,11 @@ namespace ITI.CIL_Cowding
 
         public void UpdateConsole()
         {
-            System.Drawing.Graphics consoleGraphics = pictureBox2.CreateGraphics();
+            System.Drawing.Graphics consoleGraphics = _pictureBox2.CreateGraphics();
             Font drawFont = new Font( "Arial", 12 );
             SolidBrush drawBrush = new SolidBrush( Color.Black );
-
-            
-            
-           // Console.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
             consoleGraphics.DrawString( _stringWriter.ToString(), drawFont, drawBrush, 0, 10 );
 
-
-
-            
-            
         }
 
         /// <summary>
@@ -142,7 +134,7 @@ namespace ITI.CIL_Cowding
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
 
-            pictureBox1.Refresh();
+            _pictureBox1.Refresh();
             string message = "";
             int ligne = 20;     // PX
           
@@ -213,8 +205,10 @@ namespace ITI.CIL_Cowding
 
         #region ButtonManagment
 
-        private void butStepByStep_Click(object sender, EventArgs e)
+        private void StartInit()
         {
+            _pictureBox2.Refresh(); 
+
             _stringWriter = new StringWriter();
             Console.SetOut( _stringWriter );
 
@@ -229,34 +223,54 @@ namespace ITI.CIL_Cowding
 
 
             // Graphique
-            pictureBox1.Refresh();
-            richTextBox.Enabled = false;
+            _pictureBox1.Refresh();
+            _richTextBox.Enabled = false;
 
-            _stackGraphics = pictureBox1.CreateGraphics();
+            _stackGraphics = _pictureBox1.CreateGraphics();
 
-            Font drawFont = new Font("Arial", 10);
-            SolidBrush drawBrush = new SolidBrush(Color.White);
-
-            if (richTextBox.Text != "")
+            Font drawFont = new Font( "Arial", 10 );
+            SolidBrush drawBrush = new SolidBrush( Color.White );
+        }
+        private void butStepByStep_Click(object sender, EventArgs e)
+        {
+            if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
-                butStepByStep.Visible = false;
-                butContinue.Visible = true;
-                butStop.Visible = true;
+                StartInit();
+                _butStepByStep.Visible = false;
+                _butContinue.Visible = true;
+                _butStop.Visible = true;
 
+                // Start engine
+                engine.SourceCode = _richTextBox.Text;
+                engine.Start();
             }
 
-            // Lancement du moteur 
-            pictureBox2.Refresh(); 
-            engine.SourceCode = richTextBox.Text;
-            engine.Start();
+           
 
 
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
+            if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
+            {
+                StartInit();
 
-            //butStop.Visible = true;
+                engine.SourceCode = _richTextBox.Text;
+                engine.Start();
+
+                //  // On lance la prochaine instruction à faire
+                while ( engine.NextInstruction() )
+                {
+                    // Et MaJ de la Stack
+                    if ( engine.IsRunning )
+                    {
+                        UpdateStack( engine.GetStack() );
+                    }
+                    UpdateConsole();
+                }
+                //butStop.Visible = true;
+            }
 
         }
 
@@ -275,10 +289,10 @@ namespace ITI.CIL_Cowding
         
         private void butStop_Click(object sender, EventArgs e)
         {
-            butStepByStep.Visible = true;
-            butContinue.Visible = false;
-            butStop.Visible = false;
-            richTextBox.Enabled = true;
+            _butStepByStep.Visible = true;
+            _butContinue.Visible = false;
+            _butStop.Visible = false;
+            _richTextBox.Enabled = true;
         }
         
         #endregion ButtonManagment
@@ -287,25 +301,25 @@ namespace ITI.CIL_Cowding
         private void DrawLines(Graphics g, int firstLine)
         {
             // Number of text lines
-            int linesCount = richTextBox.Lines.Length;
+            int linesCount = _richTextBox.Lines.Length;
 
             // Last visible line (used to determine numbers panel width)
-            int lastChar = this.richTextBox.GetCharIndexFromPosition(new Point(this.richTextBox.ClientRectangle.Width, this.richTextBox.ClientRectangle.Height));
-            int lastLine = this.richTextBox.GetLineFromCharIndex(lastChar);
+            int lastChar = this._richTextBox.GetCharIndexFromPosition(new Point(this._richTextBox.ClientRectangle.Width, this._richTextBox.ClientRectangle.Height));
+            int lastLine = this._richTextBox.GetLineFromCharIndex(lastChar);
 
             // Line numbers layout (position, width)
             int rightMargin = 2, leftMargin = 5, topMargin = 2, bottomMargin = 15, verticalMargin = 2;
-            SizeF maxTextSize = g.MeasureString(new string((char)48, lastLine.ToString().Length), this.richTextBox.Font);
-            this.panelNum.Width = (int)maxTextSize.Width + leftMargin + rightMargin;
+            SizeF maxTextSize = g.MeasureString(new string((char)48, lastLine.ToString().Length), this._richTextBox.Font);
+            this._panelNum.Width = (int)maxTextSize.Width + leftMargin + rightMargin;
 
             // Clear existing numbers
-            g.Clear(this.panelNum.BackColor);
+            g.Clear(this._panelNum.BackColor);
 
             // First line name
             int lineNumber = firstLine + 1;
 
             // Y position for first line number
-            int firstLineY = this.richTextBox.GetPositionFromCharIndex(this.richTextBox.GetFirstCharIndexFromLine(firstLine)).Y;
+            int firstLineY = this._richTextBox.GetPositionFromCharIndex(this._richTextBox.GetFirstCharIndexFromLine(firstLine)).Y;
             int lineY = topMargin + firstLineY;
 
             // Write all visible line numbers
@@ -313,7 +327,7 @@ namespace ITI.CIL_Cowding
             {
                 // Draw line number string
                 string lineNumberLabel = lineNumber.ToString().PadLeft(lastLine.ToString().Length);
-                g.DrawString(lineNumberLabel, this.richTextBox.Font, Brushes.Black, leftMargin, lineY);
+                g.DrawString(lineNumberLabel, this._richTextBox.Font, Brushes.Black, leftMargin, lineY);
 
                 // Next line
                 lineNumber += 1;
@@ -328,32 +342,32 @@ namespace ITI.CIL_Cowding
         private void panelNum_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             // Update the line numbers
-            int firstChar = this.richTextBox.GetCharIndexFromPosition(new Point(0, 0));
-            int firstLine = this.richTextBox.GetLineFromCharIndex(firstChar);
+            int firstChar = this._richTextBox.GetCharIndexFromPosition(new Point(0, 0));
+            int firstLine = this._richTextBox.GetLineFromCharIndex(firstChar);
 
             DrawLines(e.Graphics, firstLine);
         }
 
         private void richTextBox_SelectionChanged(object sender, System.EventArgs e)
         {
-            this.panelNum.Invalidate(); // Request repaint => line numbers update
+            this._panelNum.Invalidate(); // Request repaint => line numbers update
         }
 
         private void richTextBox_VScroll(object sender, System.EventArgs e)
         {
-            this.panelNum.Invalidate(); // Request repaint => line numbers update
+            this._panelNum.Invalidate(); // Request repaint => line numbers update
         }
 
         private void TextEditor_Load(object sender, EventArgs e)
         {
             // Required properties
-            this.richTextBox.ScrollBars = RichTextBoxScrollBars.Both;
-            this.richTextBox.WordWrap = false;
+            this._richTextBox.ScrollBars = RichTextBoxScrollBars.Both;
+            this._richTextBox.WordWrap = false;
 
             // Required events
-            this.richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
-            this.richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
-            this.panelNum.Paint += new PaintEventHandler(this.panelNum_Paint); 
+            this._richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
+            this._richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
+            this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint); 
         }
 
         #endregion
