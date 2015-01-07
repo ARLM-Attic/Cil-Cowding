@@ -143,7 +143,7 @@ namespace ITI.CIL_Cowding
                             AddError("Ben ... C'est déjà la fin ???");
                         }
 
-                        fct_content.Add(new LocalsInitNode(loc_var));
+                        fct_content.Add( new LocalsInitNode( loc_var, _tokenizer.CurrentLine ) );
 
                     }
                     else
@@ -163,7 +163,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsInteger(out index)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new StlocNode(index));
+                        fct_content.Add( new StlocNode( index, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -180,7 +180,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsInteger(out constante)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new LdcNode(constante));
+                        fct_content.Add( new LdcNode( constante, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -197,7 +197,7 @@ namespace ITI.CIL_Cowding
                     if( _tokenizer.IsInteger( out index ) 
                         && _tokenizer.Match( TokenType.SemiColon ) )
                     {
-                        fct_content.Add(new LdlocNode( index ) );
+                        fct_content.Add( new LdlocNode( index, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -214,7 +214,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsString(out txt)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new LdstrNode(txt));
+                        fct_content.Add( new LdstrNode( txt, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -229,7 +229,7 @@ namespace ITI.CIL_Cowding
                     #region NOP
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new NopNode());
+                        fct_content.Add( new NopNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -244,7 +244,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new CeqNode());
+                        fct_content.Add( new CeqNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -258,7 +258,7 @@ namespace ITI.CIL_Cowding
                     #region CGT
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new CgtNode());
+                        fct_content.Add( new CgtNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -272,7 +272,7 @@ namespace ITI.CIL_Cowding
                     #region CLT
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new CltNode());
+                        fct_content.Add( new CltNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -287,7 +287,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new NotNode());
+                        fct_content.Add( new NotNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -301,7 +301,7 @@ namespace ITI.CIL_Cowding
                     #region OR
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new OrNode());
+                        fct_content.Add( new OrNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -316,7 +316,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new AndNode());
+                        fct_content.Add( new AndNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -334,7 +334,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsIdentifier(out label)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new BrtrueNode(label));
+                        fct_content.Add( new BrtrueNode( label, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -352,7 +352,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsIdentifier(out label)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new BrfalseNode(label));
+                        fct_content.Add( new BrfalseNode( label, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -371,7 +371,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsIdentifier(out label)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new BrNode(label));
+                        fct_content.Add( new BrNode( label, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -389,7 +389,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new AddNode());
+                        fct_content.Add( new AddNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -407,7 +407,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new MulNode());
+                        fct_content.Add( new MulNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -425,7 +425,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new DivNode());
+                        fct_content.Add( new DivNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -443,7 +443,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new SubNode());
+                        fct_content.Add( new SubNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -461,7 +461,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new NegNode());
+                        fct_content.Add( new NegNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -477,7 +477,7 @@ namespace ITI.CIL_Cowding
                     // VAR
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new WriteNode());
+                        fct_content.Add( new WriteNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -495,7 +495,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new ReadNode());
+                        fct_content.Add( new ReadNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -512,7 +512,7 @@ namespace ITI.CIL_Cowding
                     if( _tokenizer.IsIdentifier( out labelNameFct ) &&
                         _tokenizer.Match( TokenType.SemiColon ) )
                     {
-                        fct_content.Add(new CallNode( labelNameFct ) );
+                        fct_content.Add( new CallNode( labelNameFct, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -529,7 +529,7 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new RetNode());
+                        fct_content.Add( new RetNode( _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -549,7 +549,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsInteger(out index)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new LdlocNode(index));
+                        fct_content.Add( new LdlocNode( index, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -569,7 +569,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsInteger(out index)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new LdargNode(index));
+                        fct_content.Add( new LdargNode( index, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -589,7 +589,7 @@ namespace ITI.CIL_Cowding
                     if (_tokenizer.IsInteger(out index)
                         && _tokenizer.Match(TokenType.SemiColon))
                     {
-                        fct_content.Add(new StargNode(index));
+                        fct_content.Add( new StargNode( index, _tokenizer.CurrentLine ) );
                     }
                     else
                     {
@@ -606,7 +606,7 @@ namespace ITI.CIL_Cowding
 
                     if ( _tokenizer.IsIdentifier( out label ) )
                     {
-                        fct_content.Add( new LabelNode( label ) );
+                        fct_content.Add( new LabelNode( label, _tokenizer.CurrentLine ) );
                     }
                     else
                     {

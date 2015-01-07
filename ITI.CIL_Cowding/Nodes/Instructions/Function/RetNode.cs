@@ -7,6 +7,15 @@ namespace ITI.CIL_Cowding
     /// </summary>
     class RetNode : InstructionNode
     {
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
+        public RetNode(int line)
+        {
+            _line = line;
+        }
         public override void Execute(IExecutionContext ctx)
         {
             ctx.Stack.CloseFunction();

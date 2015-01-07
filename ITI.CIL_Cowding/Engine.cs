@@ -26,11 +26,14 @@ namespace ITI.CIL_Cowding
         public event EventHandler SourceCodeChanged;
         string _sourceCode;
 
+        int _currentLine;
+
         public Engine()
         {
             _sourceCode = "";
             _syntaxErrors = new List<IError>();
             // Init SourceCodeChanged
+            _currentLine = 0;
         }
         
         public bool IsRunning 
@@ -84,6 +87,8 @@ namespace ITI.CIL_Cowding
         {
             if ( IsRunning )
             {
+                //InstructionNode a = _pec.CurrentFunction.Code[_pec.CurrentLineInstruction-1];
+               // int b = a.Line;
                 if ( !_ctx.NextInstruction() ) 
                 {
                     Stop();
