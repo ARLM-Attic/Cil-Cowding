@@ -14,6 +14,11 @@ namespace ITI.CIL_Cowding
             _size = StackSizeOf( netType );
             _type = netType;
         }
+
+        public Type RealType
+        {
+            get { return _type; }
+        }
         public bool IsNumeric
         {
             get 

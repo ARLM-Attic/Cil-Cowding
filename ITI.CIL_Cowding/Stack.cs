@@ -11,6 +11,11 @@ namespace ITI.CIL_Cowding
         
 
         #region Properties
+        public bool IsStackContainsSomething
+        {
+            get { return _topFrame.Count > 0; }
+        }
+
         // La frame TMP
         public Stack<IValue> TopFrame
         {

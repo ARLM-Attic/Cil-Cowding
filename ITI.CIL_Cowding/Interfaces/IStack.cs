@@ -29,5 +29,8 @@ namespace ITI.CIL_Cowding
         Stack<IValue> TopFrame { get; }
         List<Container> Frame { get; }
 
+        bool IsStackContainsSomething { get; }
+
+
     }
 }

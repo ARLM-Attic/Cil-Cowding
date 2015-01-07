@@ -12,6 +12,8 @@ namespace ITI.CIL_Cowding
         bool IsNumeric { get; }
 
         bool IsNetType { get; }
+        Type RealType { get; }
+
         /// <summary>
         /// Gets the actual .net type: null if <see cref="IsNetType"/> is false.
         /// </summary>

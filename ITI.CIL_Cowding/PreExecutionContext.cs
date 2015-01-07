@@ -100,8 +100,10 @@ namespace ITI.CIL_Cowding
 
         public FunctionScope SearchFunction(List<string> labels, out Object function)
         {
+            // Verif' null toussa magueule
+
             // We looking for a function at home
-            // On ne gère pas les classes internes (pour le moment).
+            // On ne gère pas les classes internes (pour le moment). VIVE LA FRANCE \o/
 
             if( labels.Count == 1 ) 
             {
@@ -116,7 +118,6 @@ namespace ITI.CIL_Cowding
             }
             
             // We looking for a function which is not at home
-
             string nameType = "";
             for(int i = 0; i < labels.Count-2; i++)
             {
@@ -124,8 +125,7 @@ namespace ITI.CIL_Cowding
             }
 
             Type type = Type.GetType(nameType);
-
-            if (nameType != null)
+            if (type != null)
             {
                 function = type;
                 return FunctionScope.External;
