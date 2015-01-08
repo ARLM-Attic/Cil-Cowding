@@ -25,24 +25,30 @@ namespace ITI.CIL_Cowding.Tests
         [Test]
         public void is_a_string_token()
         {
-            StringTokenizer st = new StringTokenizer("\"\"coucou\"\"");
-            string strToCp;
-            // ""
-            Assert.That(st.IsString(out strToCp));
-            Assert.That(strToCp, Is.EqualTo(""));
-            // coucou
+            StringTokenizer st = new StringTokenizer("\"\"coucou\"a string\" 1454 toto");
+            string s;
+            // we must have ""
+            Assert.That(st.IsString(out s));
+            Assert.That(s, Is.EqualTo(""));
+            // we must have coucou
             Assert.That(st.MatchIdentifier("coucou"));
-            // "" 
-            Assert.That(st.IsString(out strToCp) && strToCp == "");
-        }
+            // we must have "" 
+            Assert.That(st.IsString(out s) && s == "a string");
 
-        [Test]
-        public void is_the_right_string()
-        {
-            StringTokenizer st = new StringTokenizer(@" ""cou""cou"" ");
-            string str;
-            Assert.That(st.IsString(out str));
-            Assert.That(str, Is.EqualTo(@"cou""cou"));
+            Assert.That(st.IsString(out s), Is.False);
+            Assert.That(st.IsIdentifier(out s), Is.False);
+            Assert.That(st.Match(TokenType.OpenCurly), Is.False);
+            Assert.That(st.MatchIdentifier( "b" ), Is.False);
+            int i;
+            Assert.That(st.IsInteger( out i ) && i == 1454 );
+            
+            Assert.That(st.IsString(out s), Is.False);
+            Assert.That(st.IsInteger(out i), Is.False);
+            Assert.That(st.Match(TokenType.SemiColon), Is.False);
+            Assert.That(st.MatchIdentifier("YOYO"), Is.False );
+
+            Assert.That(st.MatchIdentifier( "toto" ) );
+            Assert.That(st.Match(TokenType.EndOfInput));
 
         }
 
@@ -84,6 +90,69 @@ namespace ITI.CIL_Cowding.Tests
             StringTokenizer st = new StringTokenizer("\"cou");
             TokenType tk = st.CurrentToken;
             Assert.That(tk, Is.EqualTo(TokenType.ErrorUnterminatedString));
+        }
+
+        [Test]
+        public void is_an_identifier()
+        {
+            TokenType tk;
+            StringTokenizer strtk = new StringTokenizer("coucou");
+            tk = strtk.CurrentToken;
+            Assert.That(tk == TokenType.Identifier);
+        }
+
+        [Test]
+        public void is_a_string()
+        {
+            TokenType tk;
+            StringTokenizer strtk = new StringTokenizer("\"coucou\"");
+            tk = strtk.CurrentToken;
+            Assert.That(tk == TokenType.String);
+            string valueOfString = strtk.GetValueOfId;
+            Assert.That(valueOfString == "coucou");
+        }
+
+
+       public void full_program()
+        {
+            string s = @"function void main () {
+	locals_init(
+		int fac
+	)
+    write;
+	
+	ldstr ""fin :-)"";
+	write;
+	
+}
+// line 1
+// line 2
+// line 3
+function int fact(int nb) {
+	locals_init(
+		int retour_fct
+	)
+/*
+	ldarg 0;
+	ldc 1;
+	ceq;*/
+	brfalse recur;
+	ldc /*1;
+	ret;
+	
+	
+	#recur
+	ldarg 0;
+	ldc 1;
+	sub;
+	call fact;
+	ldarg 0;
+	mul;
+	ret;
+*/	
+}
+
+";
         }
     }
 }
