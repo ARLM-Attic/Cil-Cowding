@@ -525,6 +525,7 @@ namespace ITI.CIL_Cowding
                         }
                         _tokenizer.Match(TokenType.Dot);
                     }
+
                     if( error == false )
                     {
                         fct_content.Add( new CallNode( identifiers ) );

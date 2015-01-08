@@ -7,9 +7,9 @@ namespace ITI.CIL_Cowding
 
     public enum FunctionScope
     {
+        None,
         Internal,
-        External, 
-        None
+        External
     }
 
     public class CallNode : InstructionNode
@@ -44,6 +44,8 @@ namespace ITI.CIL_Cowding
             {
                 _fctToCall = (Function)function;
                 _externFunction = null;
+                _nameOfMethod = _labels[_labels.Count - 1];
+
             }
             else
             {
