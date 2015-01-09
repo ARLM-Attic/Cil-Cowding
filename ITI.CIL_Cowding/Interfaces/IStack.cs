@@ -1,25 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ITI.CIL_Cowding
 {
     public interface IStack
     {
+        void Push(IValue var);
 
-        Stack<Variable> GetTopFrame ();
+        IValue Pop();
 
-        IFrame GetLastFrame();
-
-        void Push(IVariable var);
-
-        IVariable Pop();
-
-        void CallFonction(IFonction fct);
+        void CallFunction(IFunction fct);
         
-        void CloseFonction();
+        void CloseFunction();
+
+        IValue GetLocalVar(int index);
+
+        void SetLocalVar( IValue var, int index );
+
+        Container LastFrame
+        {
+            get;
+        }
+
+        IValue GetArgVar(int index);
+        void SetArgVar(int index, IValue var);
+
+        Stack<IValue> TopFrame { get; }
+        List<Container> Frame { get; }
+
+        bool IsStackContainsSomething { get; }
 
 
     }
