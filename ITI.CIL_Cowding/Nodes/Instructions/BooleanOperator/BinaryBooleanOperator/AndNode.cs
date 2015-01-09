@@ -7,6 +7,15 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class AndNode : BinaryBooleanOperatorNode
     {
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
+        public AndNode(int line)
+        {
+            _line = line;
+        }
         protected override IValue Operator( IValue value1, IValue value2 )
         {
             IValue result;

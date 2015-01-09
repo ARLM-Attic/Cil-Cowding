@@ -10,9 +10,15 @@ namespace ITI.CIL_Cowding
 
 
         private int _index;
-        public LdlocNode( int index )
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
+        public LdlocNode( int index, int line )
         {
             _index = index;
+            _line = line;
         }
         public override void Execute( IExecutionContext ctx )
         {

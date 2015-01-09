@@ -16,7 +16,7 @@ namespace ITI.CIL_Cowding
 
         int Start();
 
-        void NextInstruction();
+        bool NextInstruction();
 
         void Stop();
         void ClashError(IError error);

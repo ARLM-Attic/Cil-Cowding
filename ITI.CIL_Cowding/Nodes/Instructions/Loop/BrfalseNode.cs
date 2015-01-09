@@ -8,10 +8,16 @@ namespace ITI.CIL_Cowding
     public class BrfalseNode : InstructionNode
     {
         string _label;
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
 
-        public BrfalseNode(string label)
+        public BrfalseNode(string label, int line)
         {
             _label = label;
+            _line = line;
         }
 
         public override void Execute(IExecutionContext ctx)

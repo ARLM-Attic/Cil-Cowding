@@ -7,7 +7,16 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class CgtNode : BinaryComparatorNode
     {
-        protected override IValue Comparator( IValue value1, IValue value2 )
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
+        public CgtNode(int line)
+        {
+            _line = line;
+        }
+        public override IValue Comparator( IValue value1, IValue value2 )
         {
             IValue result;
             if ( (int)value1.Data > (int)value2.Data )

@@ -14,14 +14,19 @@ namespace ITI.CIL_Cowding
 
     public class CallNode : InstructionNode
     {
-        // Fields
-
+        string _name;
+        Function toCall;
         List<string> _labels;
         Function _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
+        }
         
-        public CallNode(List<string> label)
+        /// <summary>
+        /// Call method, described by name
+        /// </summary>
+        /// <param name="name">Function name</param>
+        public CallNode(string name, int line)
         {
             _labels = label;
             _externFunction = null;
