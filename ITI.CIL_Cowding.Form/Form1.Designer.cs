@@ -195,6 +195,7 @@
             this.splitContainer2.Size = new System.Drawing.Size(347, 384);
             this.splitContainer2.SplitterDistance = 157;
             this.splitContainer2.TabIndex = 0;
+            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // groupBox2
             // 
@@ -246,6 +247,7 @@
             this._pictureBox1.Size = new System.Drawing.Size(335, 194);
             this._pictureBox1.TabIndex = 0;
             this._pictureBox1.TabStop = false;
+            this._pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this._pictureBox1_Paint);
             // 
             // textBox2
             // 

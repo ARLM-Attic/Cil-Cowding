@@ -233,12 +233,14 @@ namespace ITI.CIL_Cowding
         }
         private void butStepByStep_Click(object sender, EventArgs e)
         {
+            _butStartAll.Visible = true;
+            _butStepByStep.Visible = false;
+            _butContinue.Visible = true;
+            _butStop.Visible = true;
+
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
-                _butStepByStep.Visible = false;
-                _butContinue.Visible = true;
-                _butStop.Visible = true;
 
                 // Start engine
                 engine.SourceCode = _richTextBox.Text;
@@ -252,6 +254,11 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
+            _butStartAll.Visible = true;
+            _butStepByStep.Visible = false;
+            _butContinue.Visible = false;
+            _butStop.Visible = true;
+
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
@@ -289,6 +296,7 @@ namespace ITI.CIL_Cowding
         
         private void butStop_Click(object sender, EventArgs e)
         {
+            _butStartAll.Visible = true;
             _butStepByStep.Visible = true;
             _butContinue.Visible = false;
             _butStop.Visible = false;
@@ -358,6 +366,20 @@ namespace ITI.CIL_Cowding
             this._panelNum.Invalidate(); // Request repaint => line numbers update
         }
 
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            _pictureBox1.Invalidate();
+            _pictureBox2.Invalidate();
+        }
+        private void _pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if (engine.IsRunning)
+            {
+                UpdateStack(engine.GetStack());
+                UpdateConsole();
+            }
+            
+        }
         private void TextEditor_Load(object sender, EventArgs e)
         {
             // Required properties
@@ -367,12 +389,12 @@ namespace ITI.CIL_Cowding
             // Required events
             this._richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
             this._richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
-            this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint); 
+            this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint);
+            this._pictureBox2.Paint += new PaintEventHandler(this._pictureBox1_Paint);
+            this.splitContainer2.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
         }
 
-        #endregion
-    
-    
+        #endregion    
     }
        
 }
