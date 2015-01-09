@@ -50,6 +50,7 @@
     <Compile Include="Function.cs" />
     <Compile Include="Interfaces\IEngine.cs" />
     <Compile Include="Interfaces\IPreExecutionContext.cs" />
+    <Compile Include="Nodes\DeclarationNode.cs" />
     <Compile Include="Nodes\Instructions\Argument\LdargNode.cs" />
     <Compile Include="Nodes\Instructions\Argument\StargNode.cs" />
     <Compile Include="Nodes\Instructions\Function\CallNode.cs" />
@@ -71,8 +72,8 @@
     <Compile Include="Nodes\Instructions\Load\LdstrNode.cs" />
     <Compile Include="Nodes\Instructions\Operator\BinaryOperator\MulNode.cs" />
     <Compile Include="Nodes\Instructions\Operator\NegNode.cs" />
-    <Compile Include="Nodes\Instructions\Loop\LabelNode.cs" />
-    <Compile Include="Nodes\Instructions\LocalsInitNode.cs" />
+    <Compile Include="Nodes\LabelNode.cs" />
+    <Compile Include="Nodes\LocalsInitNode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Instructions\NopNode.cs" />
     <Compile Include="Nodes\Instructions\IO\ReadNode.cs" />

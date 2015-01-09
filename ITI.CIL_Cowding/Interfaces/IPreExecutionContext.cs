@@ -19,7 +19,7 @@ namespace ITI.CIL_Cowding
             get;
         }
 
-        Function CurrentFunction
+        IFunction CurrentFunction
         {
             get;
         }

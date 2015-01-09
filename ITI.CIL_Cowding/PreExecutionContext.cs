@@ -9,9 +9,9 @@ namespace ITI.CIL_Cowding
         CILTypeManager _typeManager;
         List<IFunction> _myFct;
         List<IError> _errors;
-        List<ICILType> _locvar;
-        Function _currentfct;
-        int _lineInstruction;
+        List<ICILType> _localsVars;
+        IFunction _currentFunction;
+        int _currentLineInstruction;
         IEngine _engine;
 
         #region Properties
@@ -23,8 +23,8 @@ namespace ITI.CIL_Cowding
 
         public List<ICILType> LocalsVar
         {
-            get { return _locvar; }
-            set { _locvar = value; }
+            get { return _localsVars; }
+            set { _localsVars = value; }
         }
 
         public CILTypeManager TypeManager
@@ -32,14 +32,14 @@ namespace ITI.CIL_Cowding
             get { return _typeManager; }
         }
 
-        public Function CurrentFunction
+        public IFunction CurrentFunction
         {
-            get { return _currentfct; }
+            get { return _currentFunction; }
         }
 
         public int CurrentLineInstruction
         {
-            get { return _lineInstruction; }
+            get { return _currentLineInstruction; }
         }
         
         #endregion
@@ -47,10 +47,10 @@ namespace ITI.CIL_Cowding
         {
             _engine = engine;
             _typeManager = new CILTypeManager();
-            _myFct = new List<IFunction>();
+            _myFunctions = new List<IFunction>();
             _errors = new List<IError>();
           //  _errors = new List<string>();
-            _locvar = new List<ICILType>();
+            _localsVars = new List<ICILType>();
         }
 
         /// <summary>
@@ -61,13 +61,15 @@ namespace ITI.CIL_Cowding
   
         public List<IFunction> PreExecut (List<FunctionNode> code)
         {
-            List<IFunction> myFunctions = new List<IFunction>();
 
             foreach(FunctionNode function in code)
             {
-                if (IsSingleFunction(myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
+                if (IsSingleFunction(_myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
                 {
-                    myFunctions.Add(function.PreExecute(this));
+                    _currentFunction = function.PreExecute( this );
+                    _myFunctions.Add( _currentFunction );
+                    // Ici on appel le preExecute des functionsNode, du coup le preExecute des nodes, mais le problème c'est que le preExecute des labels necessite la current function. Et donc si on a pas encore créer la function, on ne peut pas avoir de current function. CQFD
+                    //myFunctions.Add(function.PreExecute(this));
                 }
                 else
                 {
@@ -75,27 +77,22 @@ namespace ITI.CIL_Cowding
                 }
             }
 
-            // Là on a nos fct, donc on le case dans la var
-            _myFct = myFunctions;
-
-            // on parcourt toutes nos fct et on pré-exécute tous les noeuds
-            foreach (Function fct in myFunctions)
+            // on parcours toutes nos fct et on pré-exécute tous les noeuds
+            foreach (Function fct in _myFunctions)
             {
-                _lineInstruction = 0;
+                _currentLineInstruction = 0;
 
-                _currentfct = fct;
-                foreach (InstructionNode IN in fct.Code)
+                _currentFunction = fct;
+                foreach (Node node in fct.Body)
                 {
-                    if(IN is LocalsInitNode) {
-                    }
-                    else
+                    if (node is InstructionNode)
                     {
-                        IN.PreExecute(this);
+                        node.PreExecute( this );
                     }
-                    _lineInstruction++;
+                    _currentLineInstruction++;
                 }
             }
-            return myFunctions;
+            return _myFunctions;
         }
 
         public FunctionScope SearchFunction(List<string> labels, out Object function)

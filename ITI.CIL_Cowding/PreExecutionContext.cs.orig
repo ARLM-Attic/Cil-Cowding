@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace ITI.CIL_Cowding
 {
@@ -7,47 +8,57 @@ namespace ITI.CIL_Cowding
     {
         CILTypeManager _typeManager;
 <<<<<<< HEAD
-        List<ICILType> _localsVar;
-        List<SyntaxError> _errors;
-        Dictionary<string, int> _labels;
+        List<IFunction> _myFct;
+=======
+        List<IFunction> _myFunctions;
+>>>>>>> Interface
+        List<IError> _errors;
+        List<ICILType> _localsVars;
+        IFunction _currentFunction;
+        int _currentLineInstruction;
+        IEngine _engine;
 
         #region Properties
-        public Dictionary<string,int> Labels
-        {
-            get { return _labels; }
-        }
-        public List<SyntaxError> Errors
+       
+        public List<IError> Errors
         {
             get { return _errors; }
         }
-=======
-        List<Function> _mes_fct;
-        List<string> _errors;
-        List<ICILType> _locvar;
->>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
 
         public List<ICILType> LocalsVar
         {
-            get { return _locvar; }
-            set { _locvar = value; }
+            get { return _localsVars; }
+            set { _localsVars = value; }
         }
 
         public CILTypeManager TypeManager
         {
             get { return _typeManager; }
         }
-        #endregion
-        public PreExecutionContext()
+
+        public IFunction CurrentFunction
         {
+            get { return _currentFunction; }
+        }
+
+        public int CurrentLineInstruction
+        {
+            get { return _currentLineInstruction; }
+        }
+        
+        #endregion
+        public PreExecutionContext(IEngine engine)
+        {
+            _engine = engine;
             _typeManager = new CILTypeManager();
 <<<<<<< HEAD
-            _localsVar = new List<ICILType>();
-            _errors = new List<SyntaxError>();
+            _myFct = new List<IFunction>();
 =======
-            _mes_fct = new List<Function>();
-            _errors = new List<string>();
-            _locvar = new List<ICILType>();
->>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
+            _myFunctions = new List<IFunction>();
+>>>>>>> Interface
+            _errors = new List<IError>();
+          //  _errors = new List<string>();
+            _localsVars = new List<ICILType>();
         }
 
         /// <summary>
@@ -55,35 +66,114 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="code">All the source code, therefore the list of function node.</param>
         /// <returns>List of functions ready to execute.</returns>
+  
         public List<IFunction> PreExecut (List<FunctionNode> code)
         {
+<<<<<<< HEAD
             List<IFunction> myFunctions = new List<IFunction>();
+=======
+>>>>>>> Interface
 
             foreach(FunctionNode function in code)
             {
-                if ( IsSingleFunction(myFunctions, function) )
+                if (IsSingleFunction(_myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
                 {
-                    myFunctions.Add( function.PreExecute( this ) );
+                    _currentFunction = function.PreExecute( this );
+                    _myFunctions.Add( _currentFunction );
+                    // Ici on appel le preExecute des functionsNode, du coup le preExecute des nodes, mais le problème c'est que le preExecute des labels necessite la current function. Et donc si on a pas encore créer la function, on ne peut pas avoir de current function. CQFD
+                    //myFunctions.Add(function.PreExecute(this));
+                }
+                else
+                {
+                        // ON en fait rien, c'est déjà géré dans IsSingleFct
                 }
             }
 
+<<<<<<< HEAD
             // Là on a nos fct, donc on le case dans la var
-            _mes_fct = myFunctions;
+            _myFct = myFunctions;
 
             // on parcourt toutes nos fct et on pré-exécute tous les noeuds
             foreach (Function fct in myFunctions)
+=======
+            // on parcours toutes nos fct et on pré-exécute tous les noeuds
+            foreach (Function fct in _myFunctions)
+>>>>>>> Interface
             {
-                foreach (InstructionNode IN in fct.Code)
-                {
-                    IN.PreExecute(this);
-                }
-                
-            }
+                _currentLineInstruction = 0;
 
+                _currentFunction = fct;
+                foreach (Node node in fct.Body)
+                {
+                    if (node is InstructionNode)
+                    {
+<<<<<<< HEAD
+                        IN.PreExecute(this);
+=======
+                        node.PreExecute( this );
+>>>>>>> Interface
+                    }
+                    _currentLineInstruction++;
+                }
+            }
+<<<<<<< HEAD
             return myFunctions;
+=======
+
+            return _myFunctions;
+>>>>>>> Interface
         }
 
+        public FunctionScope SearchFunction(List<string> labels, out Object function)
+        {
 <<<<<<< HEAD
+            // Verif' null toussa magueule
+
+            // We looking for a function at home
+            // On ne gère pas les classes internes (pour le moment). VIVE LA FRANCE \o/
+=======
+                
+            foreach(Function fct in _myFunctions) {
+                    
+                if(fct.Name == nomFct) {
+                    return fct;
+                }
+>>>>>>> Interface
+
+            if( labels.Count == 1 ) 
+            {
+                foreach(Function fct in _myFct) 
+                {
+                    if(fct.Name == labels[0]) 
+                    {
+                        function = fct;
+                        return FunctionScope.Internal;
+                    }
+                }
+            }
+            
+            // We looking for a function which is not at home
+            string nameType = labels[0];
+            
+            for(int i = 1; i < labels.Count-1; i++)
+            {
+                nameType += "." + labels[i];
+            }
+
+            Type type = Type.GetType(nameType);
+            if (type != null)
+            {
+                function = type;
+                return FunctionScope.External;
+            }
+            else
+            {
+                AddError("Function not found.");
+                function = null;
+                return FunctionScope.None;
+            }
+        }
+
         private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
         {
             foreach ( IFunction functionForName in myFunctions )
@@ -95,61 +185,16 @@ namespace ITI.CIL_Cowding
                 }
             }
             return true;
-            
         }
-        private void AddError( string msg )
+        
+        public void AddError( string msg )
         {
-            _errors.Add( new SyntaxError( msg ) );
-        }
-=======
-        public Function SearchFunction(string nomFct)
-        {
-                
-            foreach(Function fct in _mes_fct) {
-                    
-                if(fct.Name == nomFct) {
-                    return fct;
-                }
-
-            }
-
-            AddError("Function not found.");
-            return null;
+            _errors.Add( new SyntaxError( _engine, msg ) );
         }
 
-        public void AddError(string msg)
-        {
-            _errors.Add(msg);
-        }
+       
 
->>>>>>> cce76ca53fcd6815803561480e3b1f4acad534b4
-
-        public void AddLabel(KeyValuePair<string,int> label)
-        {
-            _labels.Add( label.Key, label.Value );
-        }
     }
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Moi j'aime bien tout ce qui est exellent !

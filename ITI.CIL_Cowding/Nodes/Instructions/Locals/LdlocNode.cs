@@ -7,18 +7,11 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class LdlocNode : InstructionNode
     {
-
-
         private int _index;
-        int _line;
-        public override int Line
+      public LdlocNode( int index, int line )
+            : base( line )
         {
-            get { return _line; }
-        }
-        public LdlocNode( int index, int line )
-        {
-            _index = index;
-            _line = line;
+            _index = index;;
         }
         public override void Execute( IExecutionContext ctx )
         {

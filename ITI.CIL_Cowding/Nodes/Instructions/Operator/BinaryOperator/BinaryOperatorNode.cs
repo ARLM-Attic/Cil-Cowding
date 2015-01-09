@@ -4,6 +4,10 @@ namespace ITI.CIL_Cowding
 {
     public abstract class BinaryOperatorNode : InstructionNode
     {
+        public BinaryOperatorNode(int line)
+        : base( line )
+        {
+        }
         protected abstract IValue Operator (IValue value1, IValue value2);
         public override sealed void Execute( IExecutionContext ctx )
         {

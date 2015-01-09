@@ -7,16 +7,11 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class BrtrueNode : InstructionNode
     {
-        string _label;
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
-        public BrtrueNode(string label, int line)
+       string _label;
+       public BrtrueNode(string label, int line)
+            : base( line )
         {
             _label = label;
-            _line = line;
         }
         public override void Execute(IExecutionContext ctx)
         {

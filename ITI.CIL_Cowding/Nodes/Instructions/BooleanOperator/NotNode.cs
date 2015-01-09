@@ -7,14 +7,9 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class NotNode : InstructionNode
     {
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
         public NotNode(int line)
+            : base( line )
         {
-            _line = line;
         }
         public override void Execute( IExecutionContext ctx )
         {

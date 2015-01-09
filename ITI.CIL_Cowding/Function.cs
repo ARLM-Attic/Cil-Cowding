@@ -11,7 +11,7 @@ namespace ITI.CIL_Cowding
         ICILType _returnType;
         List<ICILType> _parameters;
         List<ICILType> _locVar;
-        List<InstructionNode> _code;
+        List<InstructionNode> _body;
         Dictionary<string, int> _labels;
         #endregion
 
@@ -31,9 +31,9 @@ namespace ITI.CIL_Cowding
             get { return _locVar; }
         }
 
-        public List<InstructionNode> Code
+        public List<InstructionNode> Body
         {
-            get { return _code; }
+            get { return _body; }
         }
         public List<ICILType> ArgVar
         {
@@ -43,12 +43,12 @@ namespace ITI.CIL_Cowding
         #endregion
 
         #region Constructor
-        public Function(string nameFct, ICILType returnType, List<ICILType> parameters, List<ICILType> locVar, List<InstructionNode> code)
+        public Function(string nameFct, ICILType returnType, List<ICILType> parameters, List<ICILType> locVar, List<InstructionNode> body)
         {
             _nameFct = nameFct;
             _returnType = returnType;
             _parameters = parameters;
-            _code = code;
+            _body = body;
             _locVar = locVar;
             _labels = new Dictionary<string, int>();
         }
@@ -75,13 +75,13 @@ namespace ITI.CIL_Cowding
 
         public void AddLabel(string label,int index )
         {
-            _labels.Add(label, index);
+            _labels.Add( label, index );
         }
 
         public int GetIndexLabel(string label)
         {
             int index;
-            _labels.TryGetValue(label, out index);
+            _labels.TryGetValue( label, out index );
             return index;
         }
         #endregion

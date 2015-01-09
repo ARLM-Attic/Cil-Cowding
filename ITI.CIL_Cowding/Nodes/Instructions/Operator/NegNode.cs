@@ -7,14 +7,9 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class NegNode : InstructionNode
     {
-        int _line;
-        public override int Line
+       public NegNode(int line)
+            : base( line )
         {
-            get { return _line; }
-        }
-        public NegNode(int line)
-        {
-            _line = line;
         }
         public override void Execute( IExecutionContext ctx )
         {

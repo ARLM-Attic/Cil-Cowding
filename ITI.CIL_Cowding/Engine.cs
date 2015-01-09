@@ -23,7 +23,7 @@ namespace ITI.CIL_Cowding
         IExecutionContext _ctx;
         
         // Gestion du code source
-        public event EventHandler SourceCodeChanged;
+       // public event EventHandler SourceCodeChanged;
         string _sourceCode;
 
         int _currentLine;
@@ -33,7 +33,6 @@ namespace ITI.CIL_Cowding
             _sourceCode = "";
             _syntaxErrors = new List<IError>();
             // Init SourceCodeChanged
-            _currentLine = 0;
         }
         
         public bool IsRunning 
@@ -78,6 +77,8 @@ namespace ITI.CIL_Cowding
                 _code = _pec.PreExecut( _tree );
 
                 _ctx = new ExecutionContext( _code, this );
+                _currentLine = 0;
+
                 return 0;
             }
 
@@ -87,8 +88,8 @@ namespace ITI.CIL_Cowding
         {
             if ( IsRunning )
             {
-                //InstructionNode a = _pec.CurrentFunction.Code[_pec.CurrentLineInstruction-1];
-               // int b = a.Line;
+                InstructionNode a = _pec.CurrentFunction.Body[_pec.CurrentLineInstruction-1];
+                int b = a.Line;
                 if ( !_ctx.NextInstruction() ) 
                 {
                     Stop();

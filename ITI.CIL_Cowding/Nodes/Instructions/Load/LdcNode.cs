@@ -8,15 +8,10 @@ namespace ITI.CIL_Cowding
     public class LdcNode : InstructionNode
     {
         private int _val;
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
-        public LdcNode( int val, int line )
+       public LdcNode( int val, int line )
+            : base( line )
         {
             this._val = val;
-            _line = line;
         }
         public override void Execute( IExecutionContext ctx )
         {

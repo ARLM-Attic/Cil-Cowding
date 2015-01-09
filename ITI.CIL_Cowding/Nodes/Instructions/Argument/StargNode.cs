@@ -7,16 +7,12 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class StargNode : InstructionNode
     {
-        int _line;
         private int _index;
-        public override int Line
-        {
-            get { return _line; }
-        }
+      
         public StargNode( int index, int line )
+            : base( line )
         {
             _index = index;
-            _line = line;
         }
         public override void Execute( IExecutionContext ctx )
         {

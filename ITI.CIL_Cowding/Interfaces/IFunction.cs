@@ -22,7 +22,7 @@ namespace ITI.CIL_Cowding
             get;
         }
 
-        List<InstructionNode> Code
+        List<InstructionNode> Body
         {
             get;
         }
@@ -32,7 +32,7 @@ namespace ITI.CIL_Cowding
         IValue GetLocalVariable(int index);
         IValue SetLocalVariable(IValue var);
         int GetIndexLabel(string label);
-
+        void AddLabel( string label, int index );
         //List<IInstructionNode> GetInstructions();
     }
 }

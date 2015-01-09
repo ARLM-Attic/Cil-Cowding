@@ -3,20 +3,14 @@ using System.Collections.Generic;
 
 namespace ITI.CIL_Cowding
 {
-    public class LocalsInitNode : InstructionNode
+    public class LocalsInitNode : DeclarationNode
     {
         List<ICILType> _localsVars;
         List<string> _types;
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
-
-        public LocalsInitNode(List<string> types, int line)
+      public LocalsInitNode(List<string> types, int line)
+            : base( line )
         {
             _types = types;
-            _line = line;
             _localsVars = new List<ICILType>();
            
         }
@@ -31,10 +25,5 @@ namespace ITI.CIL_Cowding
             pec.LocalsVar = _localsVars;
 
         }
-        public override void Execute(IExecutionContext ctx)
-        {
-            // ON NE FAIT RIEN
-        }
-        
     }
 }

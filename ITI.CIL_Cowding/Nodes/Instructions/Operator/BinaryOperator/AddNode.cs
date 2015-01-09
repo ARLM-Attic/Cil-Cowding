@@ -7,14 +7,9 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class AddNode : BinaryOperatorNode
     {
-        int _line;
-        public override int Line
+      public AddNode(int line)
+            : base( line )
         {
-            get { return _line; }
-        }
-        public AddNode(int line)
-        {
-            _line = line;
         }
       
         protected override IValue Operator( IValue value1, IValue value2 )

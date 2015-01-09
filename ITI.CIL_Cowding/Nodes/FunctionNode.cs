@@ -8,13 +8,14 @@ namespace ITI.CIL_Cowding
         string _namefct;
         string _returnType;
         List<string> _parameters;
-        List<InstructionNode> _code;
+        List<Node> _code;
 
         public string Name
         {
             get { return _namefct; }
         }
-        public FunctionNode(string name, string returnType, List<InstructionNode> code, List<string> parameters)
+        public FunctionNode(string name, string returnType, List<Node> code, List<string> parameters, int line)
+            :base(line)
         {
             _namefct = name;
             _returnType = returnType;
@@ -32,9 +33,11 @@ namespace ITI.CIL_Cowding
             List<ICILType> parameters = new List<ICILType>();
             List<ICILType> locvar = new List<ICILType>();
 
+            List<InstructionNode> code_final = new List<InstructionNode>();
+
 
             // Gestion du type de retour
-            returnType = pec.TypeManager.Find(_returnType);
+            returnType = pec.TypeManager.Find( _returnType );
 
             // Gestion des types de paramètres
             foreach (string str in _parameters)
@@ -42,13 +45,22 @@ namespace ITI.CIL_Cowding
                 parameters.Add( pec.TypeManager.Find( str ) );
             }
 
-            // Gestion des types des locvar
-            if( _code[0] is LocalsInitNode ) 
+            // Body
+            foreach (Node node in _code)
             {
-                _code[0].PreExecute(pec);
+                if ( node is DeclarationNode )
+                {
+                    node.PreExecute( pec );
+                }
+
+                else if ( node is InstructionNode )
+                {
+                    code_final.Add( (InstructionNode)node );
+                }
+                
             }
 
-            return new Function( _namefct, returnType, parameters, pec.LocalsVar,  _code );
+            return new Function( _namefct, returnType, parameters, pec.LocalsVar,  code_final );
         }
 
     }

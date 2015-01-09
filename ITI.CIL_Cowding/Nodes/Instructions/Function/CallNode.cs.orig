@@ -16,26 +16,34 @@ namespace ITI.CIL_Cowding
     {
         string _name;
         Function toCall;
+<<<<<<< HEAD
         List<string> _labels;
         Function _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
-        public override int Line
-        {
-            get { return _line; }
-        }
+        int _line;
         
+        
+=======
+
+>>>>>>> Interface
         /// <summary>
         /// Call method, described by name
         /// </summary>
         /// <param name="name">Function name</param>
+<<<<<<< HEAD
         public CallNode(List<string> label, int line)
-            : base( line )
         {
             _labels = label;
             _externFunction = null;
             _fctToCall = null;
             _line = line;
+=======
+        public CallNode(string name, int line)
+            : base( line )
+        {
+            _name = name;
+>>>>>>> Interface
         }
 
         public override int Line
