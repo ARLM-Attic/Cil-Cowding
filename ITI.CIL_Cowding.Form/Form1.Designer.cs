@@ -35,7 +35,6 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this._richTextBox = new System.Windows.Forms.RichTextBox();
@@ -72,8 +71,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._fileToolStripMenuItem,
-            this._helpToolStripMenuItem});
+            this._fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(608, 24);
@@ -94,6 +92,7 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadToolStripMenuItem.Image = global::ITI.Properties.Resources.ouvrir;
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -103,6 +102,7 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToolStripMenuItem.Image = global::ITI.Properties.Resources.enregistrer;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -112,18 +112,12 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quitToolStripMenuItem.Image = global::ITI.Properties.Resources.fermer;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
-            // 
-            // _helpToolStripMenuItem
-            // 
-            this._helpToolStripMenuItem.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._helpToolStripMenuItem.Name = "_helpToolStripMenuItem";
-            this._helpToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this._helpToolStripMenuItem.Text = "Help ?";
             // 
             // splitContainer1
             // 
@@ -214,7 +208,7 @@
             this.groupBox2.Size = new System.Drawing.Size(339, 149);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Heap";
+            this.groupBox2.Text = "Console";
             // 
             // _pictureBox2
             // 
@@ -263,23 +257,30 @@
             // 
             // _butStepByStep
             // 
+            this._butStepByStep.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this._butStepByStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._butStepByStep.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._butStepByStep.Location = new System.Drawing.Point(107, 0);
+            this._butStepByStep.Image = global::ITI.Properties.Resources.skip_to_start_15px;
+            this._butStepByStep.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._butStepByStep.Location = new System.Drawing.Point(101, 1);
             this._butStepByStep.Name = "_butStepByStep";
-            this._butStepByStep.Size = new System.Drawing.Size(103, 23);
+            this._butStepByStep.Size = new System.Drawing.Size(117, 23);
             this._butStepByStep.TabIndex = 2;
             this._butStepByStep.Text = "Step by step";
+            this._butStepByStep.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this._butStepByStep.UseVisualStyleBackColor = true;
             this._butStepByStep.Click += new System.EventHandler(this.butStepByStep_Click);
             // 
             // _butContinue
             // 
+            this._butContinue.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this._butContinue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._butContinue.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._butContinue.Image = ((System.Drawing.Image)(resources.GetObject("_butContinue.Image")));
             this._butContinue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this._butContinue.Location = new System.Drawing.Point(297, 0);
             this._butContinue.Name = "_butContinue";
-            this._butContinue.Size = new System.Drawing.Size(81, 23);
+            this._butContinue.Size = new System.Drawing.Size(83, 23);
             this._butContinue.TabIndex = 5;
             this._butContinue.Text = "Continue";
             this._butContinue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -289,10 +290,12 @@
             // 
             // _butStop
             // 
+            this._butStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this._butStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._butStop.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._butStop.Image = ((System.Drawing.Image)(resources.GetObject("_butStop.Image")));
             this._butStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this._butStop.Location = new System.Drawing.Point(384, 0);
+            this._butStop.Location = new System.Drawing.Point(386, 0);
             this._butStop.Name = "_butStop";
             this._butStop.Size = new System.Drawing.Size(56, 23);
             this._butStop.TabIndex = 6;
@@ -304,12 +307,17 @@
             // 
             // _butStartAll
             // 
+            this._butStartAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this._butStartAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._butStartAll.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._butStartAll.Location = new System.Drawing.Point(216, 0);
+            this._butStartAll.Image = global::ITI.Properties.Resources.skip_to_start_15px_1_;
+            this._butStartAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._butStartAll.Location = new System.Drawing.Point(224, 0);
             this._butStartAll.Name = "_butStartAll";
-            this._butStartAll.Size = new System.Drawing.Size(75, 23);
+            this._butStartAll.Size = new System.Drawing.Size(67, 23);
             this._butStartAll.TabIndex = 3;
-            this._butStartAll.Text = "Start All";
+            this._butStartAll.Text = "Start";
+            this._butStartAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this._butStartAll.UseVisualStyleBackColor = true;
             this._butStartAll.Click += new System.EventHandler(this.butStartAll_Click);
             // 
@@ -355,7 +363,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem _fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem _helpToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.GroupBox groupBox2;
