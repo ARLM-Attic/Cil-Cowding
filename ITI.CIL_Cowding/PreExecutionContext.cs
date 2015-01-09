@@ -118,10 +118,11 @@ namespace ITI.CIL_Cowding
             }
             
             // We looking for a function which is not at home
-            string nameType = "";
-            for(int i = 0; i < labels.Count-2; i++)
+            string nameType = labels[0];
+            
+            for(int i = 1; i < labels.Count-1; i++)
             {
-                nameType += labels[i];
+                nameType += "." + labels[i];
             }
 
             Type type = Type.GetType(nameType);
