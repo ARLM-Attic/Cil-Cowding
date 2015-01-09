@@ -23,7 +23,7 @@ namespace ITI.CIL_Cowding
         IExecutionContext _ctx;
         
         // Gestion du code source
-        public event EventHandler SourceCodeChanged;
+       // public event EventHandler SourceCodeChanged;
         string _sourceCode;
 
         int _currentLine;

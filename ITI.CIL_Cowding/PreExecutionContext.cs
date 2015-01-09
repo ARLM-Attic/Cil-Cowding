@@ -59,14 +59,13 @@ namespace ITI.CIL_Cowding
         /// <returns>List of functions ready to execute.</returns>
         public List<IFunction> PreExecut (List<FunctionNode> code)
         {
-            List<IFunction> myFunctions = new List<IFunction>();
 
             foreach(FunctionNode function in code)
             {
-                if (IsSingleFunction(myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
+                if (IsSingleFunction(_myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
                 {
                     _currentFunction = function.PreExecute( this );
-                    myFunctions.Add( _currentFunction );
+                    _myFunctions.Add( _currentFunction );
                     // Ici on appel le preExecute des functionsNode, du coup le preExecute des nodes, mais le problème c'est que le preExecute des labels necessite la current function. Et donc si on a pas encore créer la function, on ne peut pas avoir de current function. CQFD
                     //myFunctions.Add(function.PreExecute(this));
                 }
@@ -76,11 +75,8 @@ namespace ITI.CIL_Cowding
                 }
             }
 
-            // Là on a nos fct, donc on le case dans la var
-            _myFunctions = myFunctions;
-
-            // on parcourt toutes nos fct et on pré-exécute tous les noeuds
-            foreach (Function fct in myFunctions)
+            // on parcours toutes nos fct et on pré-exécute tous les noeuds
+            foreach (Function fct in _myFunctions)
             {
                 _currentLineInstruction = 0;
 
@@ -96,7 +92,7 @@ namespace ITI.CIL_Cowding
                 
             }
 
-            return myFunctions;
+            return _myFunctions;
         }
 
         public Function SearchFunction(string nomFct)

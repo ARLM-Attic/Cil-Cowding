@@ -126,7 +126,7 @@ namespace ITI.CIL_Cowding
                 }
                 catch (Exception e)
                 {
-                    _engine.ClashError(new RunTimeError(_engine, "Pas assez de paramètre"));
+                    _engine.ClashError(new RunTimeError(_engine, e.Message + " : Pas assez de paramètre"));
                     return;
                 }
                 // On regarde si le type correspond avec celui de la fct

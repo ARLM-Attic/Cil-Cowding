@@ -525,7 +525,6 @@ namespace ITI.CIL_Cowding
                 {
                     #region RET
                     // VAR
-                    string label;
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {

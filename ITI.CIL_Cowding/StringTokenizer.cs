@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
         int _position;
         int _maxPosition;
         int _currentLine;
-        int _currentColumn;
+        //int _currentColumn;
         double _doubleValue;
         string _idOrStringValue;
         StringBuilder _buffer;
@@ -51,11 +51,11 @@ namespace ITI.CIL_Cowding
             get { return _idOrStringValue; }
         }
 
-        public int CurrentColumn
+   /*     public int CurrentColumn
         {
             get { return _currentColumn; }
         }
-
+        */
         public bool IsWhiteSpace
         {
             get { return _toParse[_position] == ' '; }

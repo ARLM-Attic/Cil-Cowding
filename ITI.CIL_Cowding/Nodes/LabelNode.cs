@@ -14,7 +14,6 @@ namespace ITI.CIL_Cowding
         public override void PreExecute(IPreExecutionContext pec)
         {
             pec.CurrentFunction.AddLabel(_label, pec.CurrentLineInstruction);
-            
         }
     }
 }
