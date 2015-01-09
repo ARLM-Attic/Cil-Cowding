@@ -72,7 +72,7 @@
     <Compile Include="Nodes\Instructions\Operator\BinaryOperator\MulNode.cs" />
     <Compile Include="Nodes\Instructions\Operator\NegNode.cs" />
     <Compile Include="Nodes\Instructions\Loop\LabelNode.cs" />
-    <Compile Include="Nodes\LocalsInitNode.cs" />
+    <Compile Include="Nodes\Instructions\LocalsInitNode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Instructions\NopNode.cs" />
     <Compile Include="Nodes\Instructions\IO\ReadNode.cs" />

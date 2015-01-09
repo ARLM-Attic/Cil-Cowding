@@ -7,11 +7,16 @@ namespace ITI.CIL_Cowding
     {
         List<ICILType> _localsVars;
         List<string> _types;
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
 
-
-        public LocalsInitNode(List<string> types)
+        public LocalsInitNode(List<string> types, int line)
         {
             _types = types;
+            _line = line;
             _localsVars = new List<ICILType>();
            
         }

@@ -7,6 +7,15 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class ReadNode : InstructionNode
     {
+        int _line;
+        public override int Line
+        {
+            get { return _line; }
+        }
+        public ReadNode(int line)
+        {
+            _line = line;
+        }
         public override void Execute( IExecutionContext ctx )
         {
             Console.Write("Input ==> ");
