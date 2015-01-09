@@ -20,17 +20,24 @@ namespace ITI.CIL_Cowding
         Function _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
-        }
+        int _line;
+        
         
         /// <summary>
         /// Call method, described by name
         /// </summary>
         /// <param name="name">Function name</param>
-        public CallNode(string name, int line)
+        public CallNode(List<string> label, int line)
         {
             _labels = label;
             _externFunction = null;
             _fctToCall = null;
+            _line = line;
+        }
+
+        public override int Line
+        {
+            get { return _line; }
         }
 
         public override void PreExecute(IPreExecutionContext pec)

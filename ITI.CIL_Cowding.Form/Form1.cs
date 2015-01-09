@@ -207,19 +207,19 @@ namespace ITI.CIL_Cowding
 
         private void StartInit()
         {
-            _pictureBox2.Refresh(); 
+            _pictureBox2.Refresh();
 
             _stringWriter = new StringWriter();
-            Console.SetOut( _stringWriter );
+            //Console.SetOut( _stringWriter );
 
-            _leTrucALire = "2";
-            Input b = new Input();
-            b.ShowDialog();
-            _leTrucALire = b.Text;
-            Console.WriteLine( _leTrucALire );
+            //_leTrucALire = "2";
+            //Input b = new Input();
+            //b.ShowDialog();
+            //_leTrucALire = b.Text;
+            //Console.WriteLine( _leTrucALire );
 
-            _stringReader = new StringReader( _leTrucALire );
-            Console.SetIn( _stringReader );
+            //_stringReader = new StringReader( _leTrucALire );
+            //Console.SetIn( _stringReader );
 
 
             // Graphique

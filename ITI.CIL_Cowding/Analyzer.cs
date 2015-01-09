@@ -528,7 +528,7 @@ namespace ITI.CIL_Cowding
 
                     if( error == false )
                     {
-                        fct_content.Add( new CallNode( identifiers ) );
+                        fct_content.Add( new CallNode( identifiers, _tokenizer.CurrentLine ) );
                     }
 
                     #endregion CALL
