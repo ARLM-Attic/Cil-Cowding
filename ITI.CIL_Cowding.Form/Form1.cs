@@ -246,10 +246,6 @@ namespace ITI.CIL_Cowding
                 engine.SourceCode = _richTextBox.Text;
                 engine.Start();
             }
-
-           
-
-
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
