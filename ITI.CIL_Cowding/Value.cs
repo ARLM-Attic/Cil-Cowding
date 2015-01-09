@@ -25,10 +25,7 @@ namespace ITI.CIL_Cowding
             _data = data;
         }
 
-        public Object GetRealVar<T>(IValue var) 
-        {
-            throw new NotImplementedException();
-        }
+        
 
         
     }

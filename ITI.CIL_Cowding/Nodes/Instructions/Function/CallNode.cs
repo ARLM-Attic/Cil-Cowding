@@ -51,6 +51,7 @@ namespace ITI.CIL_Cowding
             {
                 pec.AddError( "Error : Function not found." );
             }
+
         }
 
         public override void Execute(IExecutionContext ctx)
@@ -62,28 +63,34 @@ namespace ITI.CIL_Cowding
             } 
             else if (_externFunction != null)
             {
-                List<IValue> parameters = new List<IValue>();
-                List<Type> args = new List<Type>();
 
-                // POP tout les args
+                List<IValue> parameters = new List<IValue>();   // Param CIL_Cowding
+                List<Type> args_type = new List<Type>();        // Types Réel déduit 
+                List<dynamic> variables = new List<dynamic>();    // Véritables variables
+                List<Object> realvar = new List<Object>();
+
+                // POP tout les paramètres qu'envoi l'utilisateur
                 while (ctx.Stack.IsStackContainsSomething) 
                 {
-
                     parameters.Add( ctx.Stack.Pop() );
-
                 }
 
+                // Récupération des vrais Types
                 foreach(var i in parameters) {
-                    args.Add(i.Type.RealType);
+                    args_type.Add(i.Type.RealType);
                 }
-
-                Type[] real_args = args.ToArray();
 
                 // Recup la bonne méthode
-                MethodInfo _method = _externFunction.GetMethod(_nameOfMethod, real_args);
+                MethodInfo _method = _externFunction.GetMethod(_nameOfMethod, args_type.ToArray());
+
+                // Get RealVariables :D
+                foreach(var i in parameters) 
+                {
+                    realvar.Add(i.Data);
+                }
 
                 // SUPER INVOKE OTD !
-                _method.Invoke(null,(Object[])parameters.ToArray());
+                _method.Invoke(null,realvar.ToArray());
 
 
 
