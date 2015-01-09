@@ -35,7 +35,7 @@ namespace ITI.CIL_Cowding
         // Ici, à un moment, ça va péter.
         public InstructionNode CurrentInstruction
         {
-            get { return Fct.Code[_currentInstruction];  }
+            get { return Fct.Body[_currentInstruction]; }
         }
 
         #endregion
@@ -108,7 +108,7 @@ namespace ITI.CIL_Cowding
         {
             _currentInstruction++;
 
-            if (_currentInstruction >= Fct.Code.Count)
+            if (_currentInstruction >= Fct.Body.Count)
             {
                 _stack.CloseFunction();
             }

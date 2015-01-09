@@ -4,6 +4,9 @@ namespace ITI.CIL_Cowding
 {
     public abstract class BinaryComparatorNode : InstructionNode
     {
+        public BinaryComparatorNode(int line)
+            : base( line )
+        { }
         public abstract IValue Comparator( IValue value1, IValue value2 );
         public sealed override void Execute( IExecutionContext ctx )
         {

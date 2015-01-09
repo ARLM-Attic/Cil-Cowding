@@ -89,7 +89,7 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.Match(TokenType.OpenCurly))
                 {
 
-                    FunctionNode fct = new FunctionNode(name, returnType, ParseFunctionBody(), parameters);
+                    FunctionNode fct = new FunctionNode(name, returnType, ParseFunctionBody(), parameters, _tokenizer.CurrentLine);
                     return fct;
                 }
                 else
@@ -104,9 +104,9 @@ namespace ITI.CIL_Cowding
             return null;
         }
 
-        private List<InstructionNode> ParseFunctionBody()
+        private List<Node> ParseFunctionBody()
         {
-            List<InstructionNode> fct_content = new List<InstructionNode>();
+            List<Node> fct_content = new List<Node>();
 
             while(!_tokenizer.Match(TokenType.ClosedCurly) && !_tokenizer.IsEnd)
             {
@@ -143,7 +143,7 @@ namespace ITI.CIL_Cowding
                             AddError("Ben ... C'est déjà la fin ???");
                         }
 
-                        fct_content.Add( new LocalsInitNode( loc_var, _tokenizer.CurrentLine ) );
+                       fct_content.Add( new LocalsInitNode( loc_var, _tokenizer.CurrentLine ) );
 
                     }
                     else
@@ -622,7 +622,6 @@ namespace ITI.CIL_Cowding
                 }
                 #endregion BeginOfSuperIfTribu
             }
-
             return fct_content;
         }
 

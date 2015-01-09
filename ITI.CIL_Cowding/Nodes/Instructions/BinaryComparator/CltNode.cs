@@ -7,14 +7,9 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class CltNode : BinaryComparatorNode
     {
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
         public CltNode(int line)
+            : base( line )
         {
-            _line = line;
         }
         public override IValue Comparator( IValue value1, IValue value2 )
         {

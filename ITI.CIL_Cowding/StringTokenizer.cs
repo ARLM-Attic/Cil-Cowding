@@ -31,6 +31,7 @@ namespace ITI.CIL_Cowding
             _toParse = s;
             _position = startIndex;
             _maxPosition = startIndex + count;
+            _currentLine = 0;
             //init
             GetNextToken();
         }
@@ -70,15 +71,12 @@ namespace ITI.CIL_Cowding
             if ( !IsEnd )
             {
                 char c;
-                do {
+                do 
+                {
                     c = Read();
                 } while( c != '\n' && c != ';' );
 
-                //while ( (c != '\n') || (c != ';' ) ) 
-                //{
-                //    c = Read();
-                //}
-
+                _currentLine++;
                 if( !IsEnd ) GetNextToken();
             }
             else

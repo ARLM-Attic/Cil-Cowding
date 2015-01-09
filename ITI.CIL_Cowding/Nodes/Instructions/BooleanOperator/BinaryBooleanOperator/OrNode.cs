@@ -7,14 +7,9 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class OrNode : BinaryBooleanOperatorNode
     {
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
         public OrNode(int line)
+            : base( line )
         {
-            _line = line;
         }
         protected override IValue Operator( IValue value1, IValue value2 )
         {

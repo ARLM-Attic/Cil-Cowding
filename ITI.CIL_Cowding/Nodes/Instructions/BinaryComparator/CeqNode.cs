@@ -7,14 +7,10 @@ namespace ITI.CIL_Cowding
     /// </summary>
     public class CeqNode : BinaryComparatorNode
     {
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
+       
         public CeqNode(int line)
+            : base( line )
         {
-            _line = line;
         }
         public override IValue Comparator( IValue value1, IValue value2 )
         {
