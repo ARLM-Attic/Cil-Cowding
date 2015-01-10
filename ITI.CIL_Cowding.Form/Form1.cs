@@ -413,6 +413,20 @@ namespace ITI.CIL_Cowding
             splitContainer2.Invalidate();
         }
 
+        /// <summary>
+        /// Resize the window and redraw the stack 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cil_Cowding_Resize(object sender, EventArgs e)
+        {
+            if (engine.IsRunning)
+            {
+                UpdateStack(engine.GetStack());
+                UpdateConsole();
+            }
+        }
+
         private void TextEditor_Load(object sender, EventArgs e)
         {
             // Required properties
@@ -429,14 +443,6 @@ namespace ITI.CIL_Cowding
             
         }
 
-        private void Cil_Cowding_Resize(object sender, EventArgs e)
-        {
-            if (engine.IsRunning)
-            {
-                UpdateStack(engine.GetStack());
-                UpdateConsole();
-            }
-        }
 
 
 
