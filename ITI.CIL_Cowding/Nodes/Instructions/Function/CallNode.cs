@@ -14,16 +14,12 @@ namespace ITI.CIL_Cowding
 
     public class CallNode : InstructionNode
     {
-        string _name;
-        Function toCall;
+        //string _name;
+       // Function toCall;
         List<string> _labels;
         Function _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
-        public override int Line
-        {
-            get { return _line; }
-        }
         
         /// <summary>
         /// Call method, described by name
@@ -35,14 +31,9 @@ namespace ITI.CIL_Cowding
             _labels = label;
             _externFunction = null;
             _fctToCall = null;
-            _line = line;
         }
 
-        public override int Line
-        {
-            get { return _line; }
-        }
-
+      
         public override void PreExecute(IPreExecutionContext pec)
         {
             Object function;

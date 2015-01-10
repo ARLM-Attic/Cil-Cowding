@@ -7,7 +7,7 @@ namespace ITI.CIL_Cowding
     public class PreExecutionContext : IPreExecutionContext
     {
         CILTypeManager _typeManager;
-        List<IFunction> _myFct;
+        List<IFunction> _myFunctions;
         List<IError> _errors;
         List<ICILType> _localsVars;
         IFunction _currentFunction;
@@ -104,7 +104,7 @@ namespace ITI.CIL_Cowding
 
             if( labels.Count == 1 ) 
             {
-                foreach(Function fct in _myFct) 
+                foreach(Function fct in _myFunctions) 
                 {
                     if(fct.Name == labels[0]) 
                     {

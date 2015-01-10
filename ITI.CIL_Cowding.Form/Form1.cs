@@ -14,8 +14,8 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics _stackGraphics;
         private IEngine engine = new Engine();
         StringWriter _stringWriter;
-        StringReader _stringReader;
-        string _leTrucALire;
+       // StringReader _stringReader;
+       // string _leTrucALire;
 
 
         public Form1()
@@ -208,19 +208,19 @@ namespace ITI.CIL_Cowding
         private void StartInit()
         {
             _pictureBox2.Refresh();
-
+            /*
             _stringWriter = new StringWriter();
-            //Console.SetOut( _stringWriter );
+            Console.SetOut( _stringWriter );
 
-            //_leTrucALire = "2";
-            //Input b = new Input();
-            //b.ShowDialog();
-            //_leTrucALire = b.Text;
-            //Console.WriteLine( _leTrucALire );
+            _leTrucALire = "2";
+            Input b = new Input();
+            b.ShowDialog();
+            _leTrucALire = b.Text;
+            Console.WriteLine( _leTrucALire );
 
-            //_stringReader = new StringReader( _leTrucALire );
-            //Console.SetIn( _stringReader );
-
+            _stringReader = new StringReader( _leTrucALire );
+            Console.SetIn( _stringReader );
+            */
 
             // Graphique
             _pictureBox1.Refresh();
@@ -270,7 +270,7 @@ namespace ITI.CIL_Cowding
                     {
                         UpdateStack( engine.GetStack() );
                     }
-                    UpdateConsole();
+                    //UpdateConsole();
                 }
                 //butStop.Visible = true;
             }
@@ -286,7 +286,7 @@ namespace ITI.CIL_Cowding
             {
                 UpdateStack( engine.GetStack() );
             }
-            UpdateConsole();
+          //  UpdateConsole();
 
         }
         
@@ -372,7 +372,7 @@ namespace ITI.CIL_Cowding
             if (engine.IsRunning)
             {
                 UpdateStack(engine.GetStack());
-                UpdateConsole();
+               // UpdateConsole();
             }
             
         }
