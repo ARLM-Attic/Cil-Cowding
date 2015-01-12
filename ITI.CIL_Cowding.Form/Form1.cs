@@ -412,9 +412,8 @@ namespace ITI.CIL_Cowding
             splitContainer1.Invalidate();
             splitContainer2.Invalidate();
         }
-
         /// <summary>
-        /// Resize the window and redraw the stack 
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -442,13 +441,7 @@ namespace ITI.CIL_Cowding
             this.splitContainer1.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             
         }
-
-
-
-
-
-
-          
+       
     }
        
 }
