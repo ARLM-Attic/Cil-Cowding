@@ -1,6 +1,6 @@
 ﻿namespace ITI.CIL_Cowding
 {
-    partial class Form1
+    partial class Cil_Cowding
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cil_Cowding));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +95,7 @@
             this.loadToolStripMenuItem.Image = global::ITI.Properties.Resources.ouvrir;
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -105,7 +105,7 @@
             this.saveToolStripMenuItem.Image = global::ITI.Properties.Resources.enregistrer;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -115,7 +115,7 @@
             this.quitToolStripMenuItem.Image = global::ITI.Properties.Resources.fermer;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -138,6 +138,7 @@
             this.splitContainer1.Size = new System.Drawing.Size(596, 384);
             this.splitContainer1.SplitterDistance = 245;
             this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // groupBox1
             // 
@@ -264,7 +265,7 @@
             this._butStepByStep.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._butStepByStep.Image = global::ITI.Properties.Resources.skip_to_start_15px;
             this._butStepByStep.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this._butStepByStep.Location = new System.Drawing.Point(101, 1);
+            this._butStepByStep.Location = new System.Drawing.Point(101, 0);
             this._butStepByStep.Name = "_butStepByStep";
             this._butStepByStep.Size = new System.Drawing.Size(117, 23);
             this._butStepByStep.TabIndex = 2;
@@ -323,7 +324,7 @@
             this._butStartAll.UseVisualStyleBackColor = true;
             this._butStartAll.Click += new System.EventHandler(this.butStartAll_Click);
             // 
-            // Form1
+            // Cil_Cowding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -336,9 +337,10 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "Cil_Cowding";
             this.Text = "Cil-Cowding";
             this.Load += new System.EventHandler(this.TextEditor_Load);
+            this.Resize += new System.EventHandler(this.Cil_Cowding_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

@@ -9,18 +9,27 @@ using System.Windows.Forms;
 
 namespace ITI.CIL_Cowding
 {
-    public partial class Form1 : Form
+    public partial class Cil_Cowding : Form
     {
         private System.Drawing.Graphics _stackGraphics;
         private IEngine engine = new Engine();
         StringWriter _stringWriter;
-        StringReader _stringReader;
-        string _leTrucALire;
+        //StringReader _stringReader;
+        //string _leTrucALire;
 
 
-        public Form1()
+        public Cil_Cowding()
         {
             InitializeComponent();
+        }
+
+        private void PictureBox1()
+        {
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+
         }
 
         #region Quit
@@ -129,7 +138,7 @@ namespace ITI.CIL_Cowding
         public void UpdateStack(IStack stack)
         {
             int x = 10;
-            int y = 600;
+            int y = 270;
 
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -233,7 +242,7 @@ namespace ITI.CIL_Cowding
         }
         private void butStepByStep_Click(object sender, EventArgs e)
         {
-            _butStartAll.Visible = true;
+            _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
             _butContinue.Visible = true;
             _butStop.Visible = true;
@@ -361,21 +370,62 @@ namespace ITI.CIL_Cowding
         {
             this._panelNum.Invalidate(); // Request repaint => line numbers update
         }
+        #endregion
 
+        /// <summary>
+        /// Split Vertical and redraw in the pictureBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            _pictureBox1.Invalidate();
-            _pictureBox2.Invalidate();
-        }
-        private void _pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (engine.IsRunning)
             {
                 UpdateStack(engine.GetStack());
                 UpdateConsole();
             }
-            
+
         }
+    
+        /// <summary>
+        /// Split Horizontal and redraw in the pictureBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (engine.IsRunning)
+            {
+                UpdateStack(engine.GetStack());
+                UpdateConsole();
+            }
+
+        }
+
+        /// <summary>
+        /// Update the event of split vertical and horizontal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            splitContainer1.Invalidate();
+            splitContainer2.Invalidate();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cil_Cowding_Resize(object sender, EventArgs e)
+        {
+            if (engine.IsRunning)
+            {
+                UpdateStack(engine.GetStack());
+                UpdateConsole();
+            }
+        }
+
         private void TextEditor_Load(object sender, EventArgs e)
         {
             // Required properties
@@ -388,9 +438,10 @@ namespace ITI.CIL_Cowding
             this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint);
             this._pictureBox2.Paint += new PaintEventHandler(this._pictureBox1_Paint);
             this.splitContainer2.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
+            this.splitContainer1.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
+            
         }
-
-        #endregion    
+       
     }
        
 }
