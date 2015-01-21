@@ -242,6 +242,7 @@ namespace ITI.CIL_Cowding
         }
         private void butStepByStep_Click(object sender, EventArgs e)
         {
+            Console.Clear();
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
             _butContinue.Visible = true;
@@ -259,7 +260,8 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-            _butStartAll.Visible = true;
+            Console.Clear();
+            _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
             _butContinue.Visible = false;
             _butStop.Visible = true;
