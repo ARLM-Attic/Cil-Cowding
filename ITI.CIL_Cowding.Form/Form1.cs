@@ -14,6 +14,7 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics _stackGraphics;
         private IEngine engine = new Engine();
         StringWriter _stringWriter;
+        
         //StringReader _stringReader;
         //string _leTrucALire;
 
@@ -21,6 +22,12 @@ namespace ITI.CIL_Cowding
         public Cil_Cowding()
         {
             InitializeComponent();
+
+            API_Canvas.Init(_pictureBox2);
+            API_Canvas.PlacePoint(30,30);
+            API_Canvas.MoveTo(40, 40);
+            
+
         }
 
         private void PictureBox1()
@@ -260,6 +267,17 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
+            /* TEST*/
+
+            API_Canvas.PlacePoint(30, 30);
+            API_Canvas.MoveTo(40, 40);
+            API_Canvas.MoveTo(50, 30);
+            API_Canvas.PlacePoint(30, 30);
+            API_Canvas.MoveTo(20, 40);
+            API_Canvas.MoveTo(10, 40);
+            /* FIN TEST */
+
+
             Console.Clear();
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
@@ -400,8 +418,8 @@ namespace ITI.CIL_Cowding
             {
                 UpdateStack(engine.GetStack());
                 UpdateConsole();
-            }
-
+            }   
+            API_Canvas.ReDraw();
         }
 
         /// <summary>
@@ -438,10 +456,17 @@ namespace ITI.CIL_Cowding
             this._richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
             this._richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
             this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint);
-            this._pictureBox2.Paint += new PaintEventHandler(this._pictureBox1_Paint);
+            this._pictureBox1.Paint += new PaintEventHandler(this._pictureBox1_Paint);
+
             this.splitContainer2.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             this.splitContainer1.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             
+        }
+
+        private void _pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            splitContainer1.Invalidate();
+            splitContainer2.Invalidate();
         }
        
     }

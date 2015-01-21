@@ -222,6 +222,7 @@
             this._pictureBox2.Size = new System.Drawing.Size(334, 136);
             this._pictureBox2.TabIndex = 0;
             this._pictureBox2.TabStop = false;
+            this._pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this._pictureBox2_Paint);
             // 
             // _groupBox3
             // 
