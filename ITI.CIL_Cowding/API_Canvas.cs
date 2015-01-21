@@ -9,15 +9,15 @@ namespace ITI.CIL_Cowding
     static class API_Canvas
     {
 
-        static void DrawLine() { 
-            
+        static void DrawLine() {
 
 
 
+            throw new NotImplementedException();
         }
 
-        static void DrawCircle() { 
-            
+        static void DrawCircle() {
+            throw new NotImplementedException();
 
 
 
