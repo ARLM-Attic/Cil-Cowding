@@ -116,7 +116,6 @@ namespace ITI.CIL_Cowding
 
         public void SetCurrentInstruction(int index)
         {
-
             _currentInstruction = index;
         }
         

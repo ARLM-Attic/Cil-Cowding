@@ -20,7 +20,7 @@ namespace ITI.CIL_Cowding.Tests
             file.Add( new Function( "test", typeManager.Find( "void" ), argvars, new List<ICILType>(), new List<InstructionNode>() ) );
             IExecutionContext ctx = new ExecutionContext( file, engine );
             // ldarg
-            InstructionNode ldarg = new LdargNode( 0 );
+            InstructionNode ldarg = new LdargNode( 0,0 );
             ldarg.Execute( ctx );
 
             // starg

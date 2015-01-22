@@ -27,7 +27,7 @@ namespace ITI.CIL_Cowding
                 _parameters.Add(variable);
             }
         }
-        public Function PreExecute(PreExecutionContext pec)
+        public override void PreExecute(IPreExecutionContext pec)
         {
             ICILType returnType;
             List<ICILType> parameters = new List<ICILType>();
@@ -48,12 +48,8 @@ namespace ITI.CIL_Cowding
             // Body
             foreach (Node node in _code)
             {
-                if ( node is DeclarationNode )
-                {
-                    node.PreExecute( pec );
-                }
-
-                else if ( node is InstructionNode )
+                node.PreExecute( pec );
+                if ( node is InstructionNode )
                 {
                     code_final.Add( (InstructionNode)node );
                 }

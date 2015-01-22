@@ -88,8 +88,6 @@ namespace ITI.CIL_Cowding
         {
             if ( IsRunning )
             {
-                InstructionNode a = _pec.CurrentFunction.Body[_pec.CurrentLineInstruction-1];
-                int b = a.Line;
                 if ( !_ctx.NextInstruction() ) 
                 {
                     Stop();
