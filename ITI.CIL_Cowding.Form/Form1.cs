@@ -276,6 +276,15 @@ namespace ITI.CIL_Cowding
             API_Canvas.MoveTo(20, 40);
             API_Canvas.MoveTo(10, 40);
             /* FIN TEST */
+            // Mon test m@therF@ckerz
+            API_Canvas.DrawLine( 100, 100, 150, 142 );
+            API_Canvas.PenColor = Color.Brown;
+            API_Canvas.PenWidth = 2f;
+            API_Canvas.DrawLine( 50, 50, 50, 100 );
+            API_Canvas.PenWidth = 49;
+            API_Canvas.DrawLine( 0, 0, 100, 0 );
+            // YeY
+
 
 
             Console.Clear();
