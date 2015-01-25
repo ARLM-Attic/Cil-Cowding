@@ -4,11 +4,39 @@ using System.Reflection;
 
 namespace ITI.bacASable
 {
-    public class PreExecutionContext
+    public class PreExecutionContext : ITI.bacASable.IPreExecutionContext
     {
+        readonly CILTypeManager _typeManager;
+
+        Dictionary<string, CILClass> _currentProgramClasses;
+
+        string _currentClassName;
+        Dictionary<string,IFunction> _currentClassFunctions;
+
+        string _currentFunctionName;
+        List<LabelNode> _currentFunctionLabels;
         List<InstructionNode> _currentFunctionBody;
-        Dictionary<string, List<InstructionNode>> _currentClassFunctionBodies;
+        ICILType _currentFunctionReturnType;
+        List<ICILType> _currentFunctionParameters;
+        List<ICILType> _currentFunctionLocalsVariables;
+
+
       
+        public PreExecutionContext( CILTypeManager typeManager )
+        {
+           _typeManager = typeManager;
+           _currentProgramClasses = new Dictionary<string,CILClass>();
+        }
+
+        #region Properties
+        public CILTypeManager TypeManager
+        {
+            get { return _typeManager; }
+        }
+        public bool IsInClass
+        {
+            get { return _currentClassFunctions != null; }
+        }
 
         public bool IsInFunction
         {
@@ -19,24 +47,54 @@ namespace ITI.bacASable
         {
             get { return _currentFunctionBody.Count; }
         }
+        #endregion
 
-        public PreExecutionContext( )
+        public bool AddNewClass( string className )
         {
-           _currentClassFunctionBodies = new Dictionary<string, List<InstructionNode>>();
+            _currentClassName = className;
+            _currentClassFunctions = new Dictionary<string, IFunction>();
+            return true;
         }
 
-        bool AddNewFunctionToCurrentClass( string name )
+        public CILClass EndNewClass()
         {
-            if ( !_currentClassFunctionBodies.ContainsKey( name ) ) 
+            var c = new CILClass( _currentClassFunctions );
+            _currentProgramClasses.Add( _currentClassName, c );
+            _currentClassFunctions = null;
+            return c;
+        }
+
+        public CILProgram GetFinalProgram()
+        {
+            var p = new CILProgram( _currentProgramClasses );
+            return p;
+        }
+
+        public bool AddLabel(LabelNode label)
+        {
+            if ( _currentFunctionLabels.Contains( label ) )
             {
-                _currentFunctionBody = new List<InstructionNode>();
-                _currentClassFunctionBodies.Add( name, _currentFunctionBody );
+                _currentFunctionLabels.Add( label );
                 return true;
             }
-            else
+            return false;            
+        }
+
+        public bool AddNewFunctionToCurrentClass( string name, ICILType returnType, List<ICILType> parameters)
+        {
+            if ( IsInClass && !IsInFunction && !_currentClassFunctions.ContainsKey( name ) ) 
             {
-                return false;
+                _currentFunctionName = name;
+                _currentFunctionReturnType = returnType;
+                _currentFunctionParameters = parameters;
+
+                _currentFunctionBody = new List<InstructionNode>();
+                _currentFunctionLabels = new List<LabelNode>();
+                _currentFunctionLocalsVariables = new List<ICILType>();
+
+                return true;
             }
+            return false;
         }
 
         public bool AddInstructionNodeToCurrentFunction( InstructionNode instruction )
@@ -45,14 +103,22 @@ namespace ITI.bacASable
             return true;
         }
 
-        public List<InstructionNode> EndCurrentFunctionAndGetBody()
+        public IFunction EndCurrentFunction()
         {
-            var body = _currentFunctionBody;
+            IFunction function = new Function( _currentFunctionName, _currentFunctionReturnType, _currentFunctionParameters, _currentFunctionLocalsVariables, _currentFunctionBody );
+
+            _currentClassFunctions.Add( _currentFunctionName, function );
+
+            _currentFunctionName = null;
             _currentFunctionBody = null;
-            return body;
+            _currentFunctionLabels = null;
+            _currentFunctionBody = null;
+            _currentFunctionReturnType = null;
+            _currentFunctionParameters = null;
+            _currentFunctionLocalsVariables = null;
+
+            return function;
         }
-
-
     }
 
 }

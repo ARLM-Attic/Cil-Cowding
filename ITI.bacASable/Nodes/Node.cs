@@ -15,7 +15,7 @@ namespace ITI.bacASable
             get { return _line; }
         }
 
-        public virtual void PreExecute( PreExecutionContext pec )
+        public virtual void PreExecute( IPreExecutionContext pec )
         {
         }
     }

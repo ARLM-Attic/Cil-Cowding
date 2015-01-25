@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8B66493A-19D9-4E26-81FF-AC7E117902CB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ITI.bacASable</RootNamespace>
     <AssemblyName>ITI.bacASable</AssemblyName>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,19 +44,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrNode.cs" />
-    <Compile Include="DeclarationNode.cs" />
-    <Compile Include="InstructionNode.cs" />
-    <Compile Include="LabelNode.cs" />
-    <Compile Include="LdargNode.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="CILClass.cs" />
+    <Compile Include="CILNetType.cs" />
+    <Compile Include="CILTypeManager.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Errors\IError.cs" />
+    <Compile Include="Errors\LogicError.cs" />
+    <Compile Include="Errors\RunTimeError.cs" />
+    <Compile Include="Errors\SyntaxError.cs" />
+    <Compile Include="ExecutionContext.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="Interfaces\ICILType.cs" />
+    <Compile Include="Interfaces\IEngine.cs" />
+    <Compile Include="Interfaces\IExecutionContext.cs" />
+    <Compile Include="Interfaces\IFrame.cs" />
+    <Compile Include="Interfaces\IFunction.cs" />
+    <Compile Include="Interfaces\IHeap.cs" />
+    <Compile Include="Interfaces\IStack.cs" />
+    <Compile Include="Interfaces\ITokenizer.cs" />
+    <Compile Include="Interfaces\IValue.cs" />
+    <Compile Include="Interfaces\IPreExecutionContext.cs" />
+    <Compile Include="Nodes\FunctionNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Argument\LdargNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Argument\StargNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BinaryComparator\BinaryComparatorNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BinaryComparator\CeqNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BinaryComparator\CgtNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BinaryComparator\CltNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BooleanOperator\BinaryBooleanOperator\AndNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BooleanOperator\BinaryBooleanOperator\BinaryBooleanOperatorNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BooleanOperator\BinaryBooleanOperator\OrNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\BooleanOperator\NotNode.cs" />
+    <Compile Include="Nodes\DeclarationNode.cs" />
+    <Compile Include="Nodes\InstructionNode.cs" />
+    <Compile Include="Nodes\DeclarationsNode\LabelNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Function\CallNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Function\RetNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\IO\ReadNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\IO\WriteNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Load\LdcNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Load\LdstrNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Locals\LdlocNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Locals\StlocNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Loop\BrfalseNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Loop\BrNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Loop\BrtrueNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\AddNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\BinaryOperatorNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\DivNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\MulNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\SubNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Operator\NegNode.cs" />
+    <Compile Include="Nodes\Node.cs" />
     <Compile Include="PreExecutionContext.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="CILProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stack.cs" />
+    <Compile Include="StringTokenizer.cs" />
+    <Compile Include="TokenType.cs" />
+    <Compile Include="Value.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

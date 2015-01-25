@@ -8,15 +8,16 @@ namespace ITI.bacASable
     public class BrNode : InstructionNode
     {
         string _label;
-        public BrNode( string label, int line )
+       public BrNode(string label, int line)
             : base( line )
         {
             _label = label;
         }
 
-        public override void Execute(  )
+        public override void Execute(IExecutionContext ctx)
         {
-            
+            int index = ctx.Stack.LastFrame.Fct.GetIndexLabel(_label);
+            ctx.Stack.LastFrame.SetCurrentInstruction(index);
         }
     }
 }

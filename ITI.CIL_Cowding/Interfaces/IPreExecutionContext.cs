@@ -6,18 +6,6 @@ namespace ITI.CIL_Cowding
     public interface IPreExecutionContext
     {
 
-        bool BeginNewClass( string name );
-
-
-        bool AddNewFunctionToCurrentClass( string name );
-
-        bool AddInstructionNodeToCurrentFunction( InstructionNode instr );
-
-        List<InstructionNode> EndCurrentFunction();
-
-        void EndCurrentClass();
-
-
         List<IError> Errors
         {
             get;

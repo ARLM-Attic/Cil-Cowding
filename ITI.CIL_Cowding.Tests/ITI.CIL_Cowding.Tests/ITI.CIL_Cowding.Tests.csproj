@@ -7,7 +7,7 @@
     <ProjectGuid>{244B95AA-1ED9-4DA1-A39E-AEE0C883507A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ITI.CIL_Cowding.Tests</RootNamespace>
+    <RootNamespace>ITI.bacASable.Tests</RootNamespace>
     <AssemblyName>ITI.CIL_Cowding.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -43,18 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NodesTest.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="PreExecutionAndExecutionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ITI.CIL_Cowding.Form\ITI.CIL_Cowding.Form.csproj">
-      <Project>{0184c4e9-12b7-4d1f-abbf-2814a47e7346}</Project>
-      <Name>ITI.CIL_Cowding.Form</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ITI.CIL_Cowding\ITI.CIL_Cowding.csproj">
-      <Project>{2344c694-ad7a-4fd4-9ae1-f7ab806b9819}</Project>
-      <Name>ITI.CIL_Cowding</Name>
+    <ProjectReference Include="..\..\ITI.bacASable\ITI.bacASable.csproj">
+      <Project>{8b66493a-19d9-4e26-81ff-ac7e117902cb}</Project>
+      <Name>ITI.bacASable</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
