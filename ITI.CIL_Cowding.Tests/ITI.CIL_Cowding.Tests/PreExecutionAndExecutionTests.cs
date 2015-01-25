@@ -14,14 +14,20 @@ namespace ITI.Tests
         [Test]
         public void label_is_not_an_instruction()
         {
+            // Initialize components
             PreExecutionContext pec = new PreExecutionContext(new CILTypeManager());
-            CILTypeManager typeManager = new CILTypeManager();
+
+            //Initialize pec
+            Assert.That( pec.AddNewClass( "TheOnlyOneClassInThisOPProgram" ) );
             Assert.That( pec.IsInFunction, Is.False );
-            Assert.That( pec.AddNewFunctionToCurrentClass( "toto", typeManager.Find("int32"), new List<ICILType>() ) );
+            Assert.That( pec.AddNewFunctionToCurrentClass( "toto", pec.TypeManager.Find("int32"), new List<ICILType>() ) );
             Assert.That( pec.IsInFunction );
+
+            //Initialize nodes
             NopNode nop = new NopNode( 0 );
             LabelNode label = new LabelNode( "thelabel", 0 );
 
+            // test it
             nop.PreExecute( pec );
             Assert.That( pec.CurrentLineInstruction == 1 );
 
@@ -31,6 +37,9 @@ namespace ITI.Tests
             IFunction function = pec.EndCurrentFunction();
             Assert.That( function.Body.Count == 1 );
             Assert.That( pec.IsInFunction, Is.False );
+
+            pec.EndNewClass();
+            pec.GetFinalProgram();
         }
 
     }

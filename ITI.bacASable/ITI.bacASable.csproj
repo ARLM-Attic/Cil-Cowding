@@ -79,7 +79,6 @@
     <Compile Include="Nodes\DeclarationNode.cs" />
     <Compile Include="Nodes\InstructionNode.cs" />
     <Compile Include="Nodes\DeclarationsNode\LabelNode.cs" />
-    <Compile Include="Nodes\InstructionsNode\Function\CallNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Function\RetNode.cs" />
     <Compile Include="Nodes\InstructionsNode\IO\ReadNode.cs" />
     <Compile Include="Nodes\InstructionsNode\IO\WriteNode.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="Nodes\InstructionsNode\Loop\BrfalseNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Loop\BrNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Loop\BrtrueNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\NopNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\AddNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\BinaryOperatorNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Operator\BinaryOperator\DivNode.cs" />

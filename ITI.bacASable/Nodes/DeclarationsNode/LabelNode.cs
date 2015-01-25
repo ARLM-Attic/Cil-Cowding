@@ -23,7 +23,10 @@ namespace ITI.bacASable
         public override void PreExecute( IPreExecutionContext pec )
         {
             _instructionLineNumber = pec.CurrentLineInstruction;
-            pec.AddLabel( this );
+            if (!pec.AddLabel( this ))
+            {
+                throw new NotImplementedException( "TODO : Error on label pre execute" );
+            }
         }
     }
 }
