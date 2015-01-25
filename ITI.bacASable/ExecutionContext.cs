@@ -6,7 +6,7 @@ namespace ITI.bacASable
     public class ExecutionContext : IExecutionContext
     {
         Stack _stack;
-        List<IFunction> _code;
+        CILProgram _cilProgram;
         IEngine _engine;
         IError _error;
 
@@ -21,15 +21,15 @@ namespace ITI.bacASable
             get { throw new NotImplementedException(); }
         }
 
-        public ExecutionContext(List<IFunction>code, IEngine engine)
+        public ExecutionContext(CILProgram code, IEngine engine)
         {
             _stack = new Stack(engine);
             _engine = engine;
 
             // Initialisation du code
-            _code = code;
+            _cilProgram = code;
             // Pour le moment on ne lance que la première fct, mais après on lancera la fct Main
-            _stack.CallFunction(_code[0]);
+            _stack.CallFunction( _cilProgram.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions["Main"] );
 
         }
 
