@@ -6,16 +6,26 @@ namespace ITI.bacASable
     {
         CILTypeManager TypeManager { get; }
 
-        bool AddInstructionNodeToCurrentFunction( InstructionNode instruction );
+        bool IsInClass { get; }
+
+        bool IsInFunction { get; }
+
+        int CurrentLineInstruction { get; }
+
+        bool AddNewClass( string className );
+
+        CILClass EndNewClass();
+
+        CILProgram GetFinalProgram();
+
+        bool AddLocalVariable(ICILType localVariable);
 
         bool AddLabel( LabelNode label );
 
         bool AddNewFunctionToCurrentClass( string name, ICILType returnType, List<ICILType> parameters );
 
-        int CurrentLineInstruction { get; }
+        bool AddInstructionNodeToCurrentFunction( InstructionNode instruction );
 
         IFunction EndCurrentFunction();
-
-        bool IsInFunction { get; }
     }
 }

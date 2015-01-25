@@ -64,6 +64,7 @@
     <Compile Include="Interfaces\ITokenizer.cs" />
     <Compile Include="Interfaces\IValue.cs" />
     <Compile Include="Interfaces\IPreExecutionContext.cs" />
+    <Compile Include="Nodes\DeclarationsNode\LocalsInitNode.cs" />
     <Compile Include="Nodes\FunctionNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Argument\LdargNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Argument\StargNode.cs" />

@@ -70,9 +70,19 @@ namespace ITI.bacASable
             return p;
         }
 
+        public bool AddLocalVariable(ICILType localVariable)
+        {
+            if (!_currentFunctionLocalsVariables.Contains(localVariable))
+            {
+                _currentFunctionLocalsVariables.Add( localVariable );
+                return true;
+            } 
+            return false;
+        }
+
         public bool AddLabel(LabelNode label)
         {
-            if ( _currentFunctionLabels.Contains( label ) )
+            if ( !_currentFunctionLabels.Contains( label ) )
             {
                 _currentFunctionLabels.Add( label );
                 return true;
