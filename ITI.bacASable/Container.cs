@@ -12,7 +12,7 @@ namespace ITI.bacASable
         #region Fields
         private List<IValue> _localVars;
         private List<IValue> _args;
-        private IFunction _fct;
+        private IFunction _functionReference;
         private int _currentInstruction;
         private IStack _stack;
         int _currentLine;
@@ -29,7 +29,7 @@ namespace ITI.bacASable
         }
         public IFunction Fct
         {
-            get { return _fct; }
+            get { return _functionReference; }
         }
         
         // Ici, à un moment, ça va péter.
@@ -44,7 +44,7 @@ namespace ITI.bacASable
 		{
 			_localVars = locvar;
             _args = args;
-            _fct = fct_reference;
+            _functionReference = fct_reference;
             _currentInstruction = 0;
              _stack = stack;
         }
@@ -107,7 +107,7 @@ namespace ITI.bacASable
         public void NextInstruction()
         {
             _currentInstruction++;
-
+            // Vérifier si ce if ne cause pas de problème car maintenant les labels ne sont plus dans le body
             if (_currentInstruction >= Fct.Body.Count)
             {
                 _stack.CloseFunction();
