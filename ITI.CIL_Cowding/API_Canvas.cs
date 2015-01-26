@@ -65,7 +65,8 @@ namespace System
         }
 
         public static void DrawPixel(int x, int y) {
-            _graphics.DrawLine(_pen, x, y, x + 1, y + 1);
+            //_graphics.DrawLine(_pen, x, y, x + 1, y + 1);
+            _graphics.DrawRectangle(_pen, x, y, 1, 1);
         }
 
         public static void Clear()
@@ -78,5 +79,6 @@ namespace System
         {
             _canvas.Invalidate();
         }
+    
     }
 }
