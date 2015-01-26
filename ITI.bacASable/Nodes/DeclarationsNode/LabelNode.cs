@@ -15,6 +15,11 @@ namespace ITI.bacASable
             _label = label;
         }
 
+        public string Name
+        {
+            get { return _label; }
+        }
+
         public int InstructionLineNumber
         {
             get { return _instructionLineNumber; }
@@ -22,7 +27,7 @@ namespace ITI.bacASable
 
         public override void PreExecute( IPreExecutionContext pec )
         {
-            _instructionLineNumber = pec.CurrentLineInstruction;
+            _instructionLineNumber = pec.CurrentLineInstruction + 1;
             if (!pec.AddLabel( this ))
             {
                 throw new NotImplementedException( "TODO : Error on label pre execute" );

@@ -53,6 +53,53 @@ namespace ITI.Tests
             pec.GetFinalProgram();
         }
         [Test]
+        public void label_has_correct_instruction_line_number()
+        {
+            // Initialize components
+            PreExecutionContext pec = new PreExecutionContext( new CILTypeManager() );
+
+            //Initialize pec
+            Assert.That( pec.AddNewClass( "test" ) );
+            Assert.That( pec.IsInFunction, Is.False );
+            Assert.That( pec.AddNewFunctionToCurrentClass( "toto", pec.TypeManager.Find( "int32" ), new List<ICILType>() ) );
+            Assert.That( pec.IsInFunction );
+
+            //Initialize nodes
+            NopNode nop = new NopNode( 0 );
+            NopNode nop2 = new NopNode( 0 );
+            NopNode nop3 = new NopNode( 0 );
+            NopNode nop4 = new NopNode( 0 );
+
+            LabelNode label = new LabelNode( "thelabel", 0 );
+            LabelNode label2 = new LabelNode( "thelabel2", 0 );
+
+            // test it
+            nop.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 1 );
+            label.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 1 );
+            nop2.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 2 );
+            nop3.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 3 );
+            label2.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 3 );
+            nop4.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 4 );
+
+            Assert.That( label.InstructionLineNumber == 2 );
+            Assert.That( label2.InstructionLineNumber == 4 );
+            /*
+             * nop     1
+             * label   2
+             * nop     2
+             * nop     3
+             * label   4
+             * nop      4
+             * 
+             * */
+        }
+        [Test]
         public void label_is_not_an_instruction_test_with_program_but_cant_test_know_this_test_is_useless_imo()
         {
             // Initialize components

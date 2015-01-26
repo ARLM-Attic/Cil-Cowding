@@ -95,10 +95,6 @@
       <Project>{8b66493a-19d9-4e26-81ff-ac7e117902cb}</Project>
       <Name>ITI.bacASable</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ITI.CIL_Cowding\ITI.CIL_Cowding.csproj">
-      <Project>{2344c694-ad7a-4fd4-9ae1-f7ab806b9819}</Project>
-      <Name>ITI.CIL_Cowding</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\enregistrer.png" />

@@ -121,6 +121,12 @@ namespace ITI.bacASable
         public IFunction EndCurrentFunction()
         {
             IFunction function = new Function( _currentFunctionName, _currentFunctionReturnType, _currentFunctionParameters, _currentFunctionLocalsVariables, _currentFunctionBody );
+            foreach (LabelNode label in _currentFunctionLabels)
+            {
+                function.AddLabel( label.Name, label.InstructionLineNumber );
+            }
+            
+
 
             _currentClassFunctions.Add( _currentFunctionName, function );
 
