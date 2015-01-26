@@ -24,8 +24,7 @@ namespace ITI.CIL_Cowding
             InitializeComponent();
 
             API_Canvas.Init(_pictureBox2);
-            API_Canvas.PlacePoint(30,30);
-            API_Canvas.MoveTo(40, 40);
+            
             
 
         }
@@ -267,15 +266,16 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-            /* TEST*/
-
+        /* Code pour tester l'AIP_canvas 
+         * 
+            // TEST
             API_Canvas.PlacePoint(30, 30);
             API_Canvas.MoveTo(40, 40);
             API_Canvas.MoveTo(50, 30);
             API_Canvas.PlacePoint(30, 30);
             API_Canvas.MoveTo(20, 40);
             API_Canvas.MoveTo(10, 40);
-            /* FIN TEST */
+            // FIN TEST
             // Mon test m@therF@ckerz
             API_Canvas.DrawLine( 100, 100, 150, 142 );
             API_Canvas.PenColor = Color.Brown;
@@ -284,7 +284,8 @@ namespace ITI.CIL_Cowding
             API_Canvas.PenWidth = 49;
             API_Canvas.DrawLine( 0, 0, 100, 0 );
             // YeY
-
+         * 
+          */
 
 
             Console.Clear();

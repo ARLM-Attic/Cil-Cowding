@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 
 
-namespace ITI.CIL_Cowding
+namespace System
 {
     public static class API_Canvas
     {
@@ -17,7 +17,7 @@ namespace ITI.CIL_Cowding
         static int _x;
         static int _y;
 
-        #region Pen
+        #region Pen_is_my_name
         public static Color PenColor
         {
             set { _pen.Color = value; }
@@ -30,6 +30,8 @@ namespace ITI.CIL_Cowding
 
         public static void Init(PictureBox canvas)
         {
+            _x = 0;
+            _y = 0;
             _canvas = canvas;
             _graphics = _canvas.CreateGraphics();
             _pen = new Pen( Color.Black );
@@ -50,10 +52,7 @@ namespace ITI.CIL_Cowding
         
         public static void MoveTo(int x, int y)
         {
-            // On fait nos petits traits traits
-            Pen p = new Pen( Color.Black, 2f);
-            
-            _graphics.DrawLine(p, _x, _y, x, y);
+            _graphics.DrawLine(_pen, _x, _y, x, y);
 
             // On met à jour nos coordonnées
             _x = x;
@@ -62,12 +61,18 @@ namespace ITI.CIL_Cowding
             // A FINI :D
             // Hum... très étrange cette façon de faire, on dirait qu'on gère un pinceau ^^ 
             // Mais bon carrément chelou otd
+            // What ?? De quoi tu parles mon gars ? xD
+        }
+
+        public static void DrawPixel(int x, int y) {
+            _graphics.DrawLine(_pen, x, y, x + 1, y + 1);
         }
 
         public static void Clear()
         {
             _canvas.Refresh();  // On efface tout // Oui vu le nom de la fonction on peut s'en douter :p
         }
+
 
         public static void ReDraw() 
         {
