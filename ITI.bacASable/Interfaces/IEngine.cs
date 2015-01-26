@@ -9,7 +9,7 @@ namespace ITI.bacASable
     public interface IEngine
     {
       //  event EventHandler SourceCodeChanged;
-
+        IPreExecutionContext Pec { get; }
         string SourceCode {get; set;}
 
         bool IsRunning { get; }

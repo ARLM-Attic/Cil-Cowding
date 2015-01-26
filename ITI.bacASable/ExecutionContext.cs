@@ -29,7 +29,7 @@ namespace ITI.bacASable
             // Initialisation du code
             _cilProgram = code;
             // Pour le moment on ne lance que la première fct, mais après on lancera la fct Main
-            _stack.CallFunction( _cilProgram.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions["Main"] );
+            _stack.CallFunction( "main");
 
         }
 

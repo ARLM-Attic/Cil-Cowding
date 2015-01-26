@@ -7,7 +7,7 @@
     <ProjectGuid>{244B95AA-1ED9-4DA1-A39E-AEE0C883507A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ITI.bacASable.Tests</RootNamespace>
+    <RootNamespace>ITI.CIL_Cowding.Tests</RootNamespace>
     <AssemblyName>ITI.CIL_Cowding.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

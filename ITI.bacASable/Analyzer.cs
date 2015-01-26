@@ -14,6 +14,8 @@ namespace ITI.bacASable
         List<IError> _errors;
         IEngine _engine;
 
+        List<FunctionNode> _methods;
+
         public Analyzer(ITokenizer tokenizer, IEngine engine)
         {
             _tokenizer = tokenizer;
@@ -24,14 +26,14 @@ namespace ITI.bacASable
         public List<FunctionNode> ParseBody()
         {
 
-            List<FunctionNode> methods = new List<FunctionNode>();
+            _methods = new List<FunctionNode>();
             //List<FieldDeclarartionNode> methods = new List<FieldDeclarartionNode>();
 
             while (!_tokenizer.IsEnd)
             {
 
                 FunctionNode f = IsFunction();
-                if (f != null) methods.Add(f);
+                if (f != null) _methods.Add(f);
                 else
                 {
                     //if (HasError) return null;
@@ -53,7 +55,7 @@ namespace ITI.bacASable
                 _engine.ClashError( _errors );
             }
             
-            return methods;
+            return _methods;
         }
 
         FunctionNode IsFunction()
@@ -526,7 +528,7 @@ namespace ITI.bacASable
 
                     if( error == false )
                     {
-                        fct_content.Add( new CallNode( identifiers, _tokenizer.CurrentLine ) );
+                        fct_content.Add( new CallNode( _methods, identifiers, _tokenizer.CurrentLine ) );
                     }
 
                     #endregion CALL

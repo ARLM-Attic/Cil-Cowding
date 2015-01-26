@@ -7,7 +7,7 @@
     <ProjectGuid>{8B66493A-19D9-4E26-81FF-AC7E117902CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ITI.bacASable</RootNamespace>
+    <RootNamespace>ITI.CIL_Cowding</RootNamespace>
     <AssemblyName>ITI.bacASable</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,6 +49,7 @@
     <Compile Include="CILNetType.cs" />
     <Compile Include="CILTypeManager.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Errors\IError.cs" />
     <Compile Include="Errors\LogicError.cs" />
     <Compile Include="Errors\RunTimeError.cs" />

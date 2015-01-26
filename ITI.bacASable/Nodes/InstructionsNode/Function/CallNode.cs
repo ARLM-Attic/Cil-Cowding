@@ -14,10 +14,11 @@ namespace ITI.bacASable
 
     public class CallNode : InstructionNode
     {
+        List<FunctionNode> _methods;
         //string _name;
        // Function toCall;
         List<string> _labels;
-        Function _fctToCall;
+        string _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
         
@@ -25,9 +26,10 @@ namespace ITI.bacASable
         /// Call method, described by name
         /// </summary>
         /// <param name="name">Function name</param>
-        public CallNode(List<string> label, int line)
+        public CallNode(List<FunctionNode> methods, List<string> label, int line)
             : base( line )
         {
+            _methods = methods;
             _labels = label;
             _externFunction = null;
             _fctToCall = null;
@@ -48,7 +50,7 @@ namespace ITI.bacASable
             }
             else if( fcs == FunctionScope.Internal )
             {
-                _fctToCall = (Function)function;
+                _fctToCall = (string)function;
                 _externFunction = null;
                 _nameOfMethod = _labels[_labels.Count - 1];
 
@@ -64,7 +66,7 @@ namespace ITI.bacASable
         {
             if(_fctToCall != null) 
             {
-                ctx.Stack.CallFunction(_fctToCall);
+                ctx.Stack.CallFunction(_fctToCall );
 
             } 
             else if (_externFunction != null)
@@ -116,11 +118,11 @@ namespace ITI.bacASable
 
             if ( labels.Count == 1 )
             {
-                foreach ( Function fct in pec.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions.Values )
+                foreach ( FunctionNode fct in _methods)
                 {
                     if ( fct.Name == labels[0] )
                     {
-                        function = fct;
+                        function = fct.Name;
                         return FunctionScope.Internal;
                     }
                 }

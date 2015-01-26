@@ -12,13 +12,24 @@ namespace ITI.Tests
     public class PreExecutionAndExecutionTests
     {
         [Test]
+        public void engine_preExecute_correctly()
+        {
+            string text = System.IO.File.ReadAllText( @"C:\Users\Aymeric\Dropbox\PI_S3\Codes IL\code_factoriel.il" );
+
+            IEngine engine = new Engine();
+            engine.SourceCode = text;
+            engine.Start();
+            Assert.That( engine.IsRunning );
+            engine.Stop();
+        }
+        [Test]
         public void label_is_not_an_instruction()
         {
             // Initialize components
             PreExecutionContext pec = new PreExecutionContext(new CILTypeManager());
 
             //Initialize pec
-            Assert.That( pec.AddNewClass( "TheOnlyOneClassInThisOPProgram" ) );
+            Assert.That( pec.AddNewClass( "TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs" ) );
             Assert.That( pec.IsInFunction, Is.False );
             Assert.That( pec.AddNewFunctionToCurrentClass( "toto", pec.TypeManager.Find("int32"), new List<ICILType>() ) );
             Assert.That( pec.IsInFunction );

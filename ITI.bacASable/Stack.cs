@@ -102,8 +102,10 @@ namespace ITI.bacASable
 
         #region Frames managment
         
-        public void CallFunction(IFunction fct)
+        public void CallFunction(string functionName)
         {
+            IFunction fct = _engine.Pec.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions[functionName]; 
+            
             List<IValue> locvars = new List<IValue>();
             List<IValue> parameters = new List<IValue>();
 
