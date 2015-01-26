@@ -38,6 +38,7 @@ namespace ITI.bacASable
       
         public override void PreExecute(IPreExecutionContext pec)
         {
+            base.PreExecute( pec );
             Object function;
 
             FunctionScope fcs = SearchFunction(_labels, pec, out function);

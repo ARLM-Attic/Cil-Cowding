@@ -61,7 +61,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Value.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +91,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ITI.bacASable\ITI.bacASable.csproj">
+      <Project>{8b66493a-19d9-4e26-81ff-ac7e117902cb}</Project>
+      <Name>ITI.bacASable</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ITI.CIL_Cowding\ITI.CIL_Cowding.csproj">
       <Project>{2344c694-ad7a-4fd4-9ae1-f7ab806b9819}</Project>
       <Name>ITI.CIL_Cowding</Name>

@@ -6,13 +6,14 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using ITI.bacASable;
 
 namespace ITI.CIL_Cowding
 {
     public partial class Form1 : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        private IEngine engine = new Engine();
+        private ITI.bacASable.IEngine engine = new ITI.bacASable.Engine();
         StringWriter _stringWriter;
        // StringReader _stringReader;
        // string _leTrucALire;
@@ -126,7 +127,7 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="container"></param>
         /// <param name="stack"></param>
-        public void UpdateStack(IStack stack)
+        public void UpdateStack( ITI.bacASable.IStack stack )
         {
             int x = 10;
             int y = 600;
@@ -137,8 +138,8 @@ namespace ITI.CIL_Cowding
             _pictureBox1.Refresh();
             string message = "";
             int ligne = 20;     // PX
-          
-           foreach(Container plouf in stack.Frame )
+
+            foreach ( ITI.bacASable.Container plouf in stack.Frame )
            {
                // Nom de la fct toussa sisi la famille
                
@@ -147,7 +148,8 @@ namespace ITI.CIL_Cowding
                // On affiche les arguments
                message += "Arguments : \n";
                int i = 0;
-               foreach(IValue valeur in plouf.ArgsVars) {
+               foreach ( ITI.bacASable.IValue valeur in plouf.ArgsVars )
+               {
 
                    message += "["+i+"] : "+valeur.Type.FullName+ " " + valeur.Data+"\n";
 
@@ -157,7 +159,7 @@ namespace ITI.CIL_Cowding
                // On affiche les variables locales
                message += "Variables Locales : \n";
                i = 0;
-               foreach (IValue valeur in plouf.LocalVars)
+               foreach ( ITI.bacASable.IValue valeur in plouf.LocalVars )
                {
 
                    message += "[" + i + "] : " + valeur.Type.FullName + " " + valeur.Data + "\n";
