@@ -307,9 +307,13 @@ namespace ITI.CIL_Cowding
                     // Et MaJ de la Stack
                     if ( engine.IsRunning )
                     {
+                        /* TEST perf
                         UpdateStack( engine.GetStack() );
+                         * */
                     }
+                    /* TEST perf
                     UpdateConsole();
+                     * */
                 }
                 //butStop.Visible = true;
             }
