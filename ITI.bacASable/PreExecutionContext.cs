@@ -47,6 +47,11 @@ namespace ITI.bacASable
         {
             get { return _currentFunctionBody.Count; }
         }
+
+        public Dictionary<string,CILClass> Classes
+        {
+            get { return _currentProgramClasses; }
+        }
         #endregion
 
         public bool AddNewClass( string className )

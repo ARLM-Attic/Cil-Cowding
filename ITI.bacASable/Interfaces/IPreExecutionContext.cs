@@ -12,6 +12,8 @@ namespace ITI.bacASable
 
         int CurrentLineInstruction { get; }
 
+        Dictionary<string, CILClass> Classes { get; }
+
         bool AddNewClass( string className );
 
         CILClass EndNewClass();

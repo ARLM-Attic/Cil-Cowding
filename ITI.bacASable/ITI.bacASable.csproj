@@ -79,6 +79,7 @@
     <Compile Include="Nodes\DeclarationNode.cs" />
     <Compile Include="Nodes\InstructionNode.cs" />
     <Compile Include="Nodes\DeclarationsNode\LabelNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Function\CallNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Function\RetNode.cs" />
     <Compile Include="Nodes\InstructionsNode\IO\ReadNode.cs" />
     <Compile Include="Nodes\InstructionsNode\IO\WriteNode.cs" />
