@@ -14,7 +14,7 @@ namespace ITI.Tests
         [Test]
         public void engine_preExecute_correctly()
         {
-            string text = System.IO.File.ReadAllText( @"C:\Users\Aymeric\Dropbox\PI_S3\Codes IL\code_factoriel.il" );
+            string text = System.IO.File.ReadAllText( @"C:\Users\Valentin\Dropbox\PI_S3\Codes IL\code_factoriel.il" );
 
             IEngine engine = new Engine();
             engine.SourceCode = text;
