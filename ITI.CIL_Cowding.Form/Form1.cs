@@ -143,8 +143,12 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack(IStack stack)
         {
+            Bitmap bmp = new Bitmap(_pictureBox1.Width, _pictureBox1.Height);
+            using (Graphics image = Graphics.FromImage(bmp))
+            {
+
             int x = 10;
-            int y = 270;
+            int y = 0;
 
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -189,10 +193,10 @@ namespace ITI.CIL_Cowding
                var taille_fenetre = ligne * nb_ligne;
 
                Rectangle drawRect = new Rectangle(x, y, 500, taille_fenetre);
-               _stackGraphics.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
+               image.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
 
-               _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect);
-               y -= taille_fenetre+50;
+               image.DrawString(message, drawFont, drawBrush, drawRect);
+               y += taille_fenetre+50;
 
            }
            
@@ -212,10 +216,16 @@ namespace ITI.CIL_Cowding
             var taille_fenetre_ = ligne * nb_ligne_;
 
             Rectangle drawRect_ = new Rectangle(x, y, 500, taille_fenetre_);
-            _stackGraphics.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
-            _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect_);
+            image.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
+            image.DrawString(message, drawFont, drawBrush, drawRect_);
+            }
+                _pictureBox1.BackgroundImage = bmp;
+                vScrollBar1.ValueChanged += new EventHandler(vbar_valueChanged);
+        }
 
-
+        private void vbar_valueChanged(Object sender, EventArgs e)
+        {
+            _pictureBox1.Location = new Point(_pictureBox1.Left, vScrollBar1.Value);
         }
 
         #region ButtonManagment
