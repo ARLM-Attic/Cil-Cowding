@@ -40,7 +40,7 @@ namespace ITI.bacASable
             {
                 return false;
             }
-           _stack.LastFrame.CurrentInstruction.Execute(this);
+            _stack.LastFrame.CurrentInstruction.Execute( this );
 
             // On passe à l'instruction suivante si on n'a pas d'erreur
             if(_error != null || _stack.LastFrame == null) 

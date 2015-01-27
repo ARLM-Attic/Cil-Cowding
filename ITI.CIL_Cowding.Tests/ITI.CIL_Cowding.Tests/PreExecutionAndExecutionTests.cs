@@ -14,7 +14,7 @@ namespace ITI.Tests
         [Test]
         public void engine_preExecute_correctly()
         {
-            string text = System.IO.File.ReadAllText( @"C:\Users\Aymeric\Dropbox\PI_S3\Codes IL\code_factoriel.il" );
+            string text = System.IO.File.ReadAllText( @"..\..\..\..\Codes IL\code_factoriel.il" );
 
             IEngine engine = new Engine();
             engine.SourceCode = text;
@@ -53,7 +53,7 @@ namespace ITI.Tests
             pec.GetFinalProgram();
         }
         [Test]
-        public void label_has_correct_instruction_line_number()
+        public void label_pre_execute_has_correct_instruction_line_number()
         {
             // Initialize components
             PreExecutionContext pec = new PreExecutionContext( new CILTypeManager() );
@@ -132,6 +132,7 @@ namespace ITI.Tests
             Assert.That( pec.IsInFunction, Is.False );
 
         }
+
 
     }
 }

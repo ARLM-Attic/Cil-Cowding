@@ -36,6 +36,15 @@ namespace ITI.bacASable
             _syntaxErrors = new List<IError>();
             // Init SourceCodeChanged
         }
+        public CILProgram Code
+        {
+            get { return _code; }
+            set { _code = value; }
+        }
+        public IExecutionContext Ctx
+        {
+            get { return _ctx; }
+        }
 
         public IPreExecutionContext Pec
         {
@@ -67,14 +76,14 @@ namespace ITI.bacASable
             }
         }
 
-        public int Start()
+        public int Build()
         {
-
+            
             _strTok = new StringTokenizer( _sourceCode );
             _analyzer = new Analyzer( _strTok, this );
             _tree = _analyzer.ParseBody();
 
-            if (_syntaxErrors.Count >= 1)
+            if ( _syntaxErrors.Count >= 1 )
             {
                 return -1;
             }
@@ -83,8 +92,8 @@ namespace ITI.bacASable
                 _pec = new PreExecutionContext( _typeManager );
 
                 _pec.AddNewClass( "TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs" );
-                
-                foreach (FunctionNode functionNode in _tree)
+
+                foreach ( FunctionNode functionNode in _tree )
                 {
                     functionNode.PreExecute( _pec );
                 }
@@ -93,12 +102,22 @@ namespace ITI.bacASable
 
                 _code = _pec.GetFinalProgram();
                 // _code = _pec.PreExecut( _tree );
+                return 0;
+            }
+        }
+
+        public int Start()
+        {
+                if (Build() != 0)
+                {
+                    return -1;
+                }
 
                 _ctx = new ExecutionContext( _code, this );
                 _currentLine = 0;
 
                 return 0;
-            }
+            
 
         }
 
