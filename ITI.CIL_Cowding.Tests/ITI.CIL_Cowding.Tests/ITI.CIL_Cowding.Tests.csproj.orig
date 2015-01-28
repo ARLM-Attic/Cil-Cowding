@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InstructionPec.Test.cs" />
+<<<<<<< HEAD
     <Compile Include="EngineTests.cs" />
+=======
+    <Compile Include="InstructionPec.Test.cs" />
+>>>>>>> origin/TU_Val
     <Compile Include="PreExecutionAndExecutionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

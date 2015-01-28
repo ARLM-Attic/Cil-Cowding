@@ -4,7 +4,7 @@ namespace ITI.bacASable
 {
     public abstract class InstructionNode : Node
     {
-        protected InstructionNode( int line )
+        public InstructionNode( int line )
             : base( line )
         {
         }
