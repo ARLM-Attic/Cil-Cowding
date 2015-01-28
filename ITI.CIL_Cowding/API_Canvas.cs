@@ -68,6 +68,11 @@ namespace System
             //_graphics.DrawLine(_pen, x, y, x + 1, y + 1);
             _graphics.DrawRectangle(_pen, x, y, 1, 1);
         }
+        public static void DrawPixel(double x, double y)
+        {
+            //_graphics.DrawLine(_pen, x, y, x + 1, y + 1);
+            _graphics.DrawRectangle(_pen, (int)x, (int)y, 1, 1);
+        }
 
         public static void Clear()
         {

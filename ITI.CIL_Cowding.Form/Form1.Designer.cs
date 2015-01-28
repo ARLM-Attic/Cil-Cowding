@@ -74,7 +74,7 @@
             this._fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(608, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1143, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -135,8 +135,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(596, 384);
-            this.splitContainer1.SplitterDistance = 245;
+            this.splitContainer1.Size = new System.Drawing.Size(1131, 877);
+            this.splitContainer1.SplitterDistance = 464;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -150,7 +150,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(-1, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(246, 380);
+            this.groupBox1.Size = new System.Drawing.Size(465, 873);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit";
@@ -164,7 +164,7 @@
             this._richTextBox.Location = new System.Drawing.Point(39, 13);
             this._richTextBox.Name = "_richTextBox";
             this._richTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this._richTextBox.Size = new System.Drawing.Size(201, 363);
+            this._richTextBox.Size = new System.Drawing.Size(420, 856);
             this._richTextBox.TabIndex = 3;
             this._richTextBox.Text = "";
             // 
@@ -174,7 +174,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this._panelNum.Location = new System.Drawing.Point(4, 13);
             this._panelNum.Name = "_panelNum";
-            this._panelNum.Size = new System.Drawing.Size(30, 363);
+            this._panelNum.Size = new System.Drawing.Size(30, 856);
             this._panelNum.TabIndex = 2;
             // 
             // splitContainer2
@@ -193,8 +193,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this._groupBox3);
             this.splitContainer2.Panel2.Controls.Add(this.textBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(347, 384);
-            this.splitContainer2.SplitterDistance = 157;
+            this.splitContainer2.Size = new System.Drawing.Size(663, 877);
+            this.splitContainer2.SplitterDistance = 358;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
@@ -207,7 +207,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(339, 149);
+            this.groupBox2.Size = new System.Drawing.Size(655, 350);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Console";
@@ -219,7 +219,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this._pictureBox2.Location = new System.Drawing.Point(1, 13);
             this._pictureBox2.Name = "_pictureBox2";
-            this._pictureBox2.Size = new System.Drawing.Size(334, 136);
+            this._pictureBox2.Size = new System.Drawing.Size(650, 337);
+            this._pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._pictureBox2.TabIndex = 0;
             this._pictureBox2.TabStop = false;
             this._pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this._pictureBox2_Paint);
@@ -233,7 +234,7 @@
             this._groupBox3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._groupBox3.Location = new System.Drawing.Point(2, 3);
             this._groupBox3.Name = "_groupBox3";
-            this._groupBox3.Size = new System.Drawing.Size(340, 219);
+            this._groupBox3.Size = new System.Drawing.Size(656, 511);
             this._groupBox3.TabIndex = 1;
             this._groupBox3.TabStop = false;
             this._groupBox3.Text = "Stack";
@@ -246,7 +247,7 @@
             this._pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this._pictureBox1.Location = new System.Drawing.Point(1, 21);
             this._pictureBox1.Name = "_pictureBox1";
-            this._pictureBox1.Size = new System.Drawing.Size(335, 194);
+            this._pictureBox1.Size = new System.Drawing.Size(651, 486);
             this._pictureBox1.TabIndex = 0;
             this._pictureBox1.TabStop = false;
             this._pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this._pictureBox1_Paint);
@@ -329,7 +330,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 408);
+            this.ClientSize = new System.Drawing.Size(1143, 901);
             this.Controls.Add(this._butStop);
             this.Controls.Add(this._butContinue);
             this.Controls.Add(this._butStartAll);
@@ -355,6 +356,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox2)).EndInit();
             this._groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox1)).EndInit();

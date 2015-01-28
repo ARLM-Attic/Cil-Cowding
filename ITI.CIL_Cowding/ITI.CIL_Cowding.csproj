@@ -60,6 +60,7 @@
     <Compile Include="Nodes\Instructions\BooleanOperator\BinaryBooleanOperator\AndNode.cs" />
     <Compile Include="Nodes\Instructions\BooleanOperator\BinaryBooleanOperator\BinaryBooleanOperatorNode.cs" />
     <Compile Include="Nodes\Instructions\BinaryComparator\BinaryComparatorNode.cs" />
+    <Compile Include="Nodes\Instructions\Load\LddNode.cs" />
     <Compile Include="Nodes\Instructions\Operator\BinaryOperator\BinaryOperatorNode.cs" />
     <Compile Include="Nodes\Instructions\Loop\BrfalseNode.cs" />
     <Compile Include="Nodes\Instructions\Loop\BrNode.cs" />

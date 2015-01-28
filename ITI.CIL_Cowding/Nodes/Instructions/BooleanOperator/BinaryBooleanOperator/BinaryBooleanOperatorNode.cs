@@ -9,9 +9,17 @@ namespace ITI.CIL_Cowding
         {
             IValue temp = ctx.Stack.Pop();
             IValue temp2 = ctx.Stack.Pop();
-            if ( temp.Type.FullName == temp2.Type.FullName && ( (int)temp.Data == 0 || (int)temp.Data == 1 ) && ( (int)temp2.Data == 0 || (int)temp2.Data == 1 ) )
-            {
-                ctx.Stack.Push( this.Operator( temp2, temp ) );
+            if ( temp.Type.FullName == temp2.Type.FullName)  
+            {   
+                // TEST DES TYPES :
+                if(temp.Type.IsInt32() && ( (int)temp.Data == 0 || (int)temp.Data == 1 ) && ( (int)temp2.Data == 0 || (int)temp2.Data == 1 )) 
+                {
+                    ctx.Stack.Push( this.Operator( temp2, temp ) );
+                }
+                else if (temp.Type.IsDouble() && ((double)temp.Data == 0.0 || (double)temp.Data == 1.0) && ((double)temp2.Data == 0.0 || (double)temp2.Data == 1.0))
+                {
+                    ctx.Stack.Push( this.Operator( temp2, temp ) );
+                }
             }
             else
             {
