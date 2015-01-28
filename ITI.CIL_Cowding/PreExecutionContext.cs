@@ -77,12 +77,10 @@ namespace ITI.CIL_Cowding
 
         public bool AddLocalVariable(ICILType localVariable)
         {
-            if (!_currentFunctionLocalsVariables.Contains(localVariable))
-            {
-                _currentFunctionLocalsVariables.Add( localVariable );
-                return true;
-            } 
-            return false;
+            
+           _currentFunctionLocalsVariables.Add( localVariable );
+           return true;
+            
         }
 
         public bool AddLabel(LabelNode label)
