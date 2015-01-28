@@ -6,13 +6,15 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using ITI.CIL_Cowding;
+using System.Threading;
 
 namespace ITI.CIL_Cowding
 {
     public partial class Cil_Cowding : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        private IEngine engine = new Engine();
+        private ITI.CIL_Cowding.IEngine engine = new ITI.CIL_Cowding.Engine();
         StringWriter _stringWriter;
         
         //StringReader _stringReader;
@@ -141,7 +143,7 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="container"></param>
         /// <param name="stack"></param>
-        public void UpdateStack(IStack stack)
+        public void UpdateStack( ITI.CIL_Cowding.IStack stack )
         {
             int x = 10;
             int y = 270;
@@ -152,8 +154,8 @@ namespace ITI.CIL_Cowding
             _pictureBox1.Refresh();
             string message = "";
             int ligne = 20;     // PX
-          
-           foreach(Container plouf in stack.Frame )
+
+            foreach ( ITI.CIL_Cowding.Container plouf in stack.Frame )
            {
                // Nom de la fct toussa sisi la famille
                
@@ -162,7 +164,8 @@ namespace ITI.CIL_Cowding
                // On affiche les arguments
                message += "Arguments : \n";
                int i = 0;
-               foreach(IValue valeur in plouf.ArgsVars) {
+               foreach ( ITI.CIL_Cowding.IValue valeur in plouf.ArgsVars )
+               {
 
                    message += "["+i+"] : "+valeur.Type.FullName+ " " + valeur.Data+"\n";
 
@@ -172,7 +175,7 @@ namespace ITI.CIL_Cowding
                // On affiche les variables locales
                message += "Variables Locales : \n";
                i = 0;
-               foreach (IValue valeur in plouf.LocalVars)
+               foreach ( ITI.CIL_Cowding.IValue valeur in plouf.LocalVars )
                {
 
                    message += "[" + i + "] : " + valeur.Type.FullName + " " + valeur.Data + "\n";
@@ -223,19 +226,19 @@ namespace ITI.CIL_Cowding
         private void StartInit()
         {
             _pictureBox2.Refresh();
-
+            /*
             _stringWriter = new StringWriter();
-            //Console.SetOut( _stringWriter );
+            Console.SetOut( _stringWriter );
 
-            //_leTrucALire = "2";
-            //Input b = new Input();
-            //b.ShowDialog();
-            //_leTrucALire = b.Text;
-            //Console.WriteLine( _leTrucALire );
+            _leTrucALire = "2";
+            Input b = new Input();
+            b.ShowDialog();
+            _leTrucALire = b.Text;
+            Console.WriteLine( _leTrucALire );
 
-            //_stringReader = new StringReader( _leTrucALire );
-            //Console.SetIn( _stringReader );
-
+            _stringReader = new StringReader( _leTrucALire );
+            Console.SetIn( _stringReader );
+            */
 
             // Graphique
             _pictureBox1.Refresh();
@@ -301,20 +304,11 @@ namespace ITI.CIL_Cowding
                 engine.SourceCode = _richTextBox.Text;
                 engine.Start();
 
-                //  // On lance la prochaine instruction à faire
-                while ( engine.NextInstruction() )
-                {
-                    // Et MaJ de la Stack
-                    if ( engine.IsRunning )
-                    {
+                while ( engine.NextInstruction() ) ;
                         /* TEST perf
-                        UpdateStack( engine.GetStack() );
                          * */
-                    }
                     /* TEST perf
-                    UpdateConsole();
                      * */
-                }
                 //butStop.Visible = true;
             }
 
@@ -329,7 +323,7 @@ namespace ITI.CIL_Cowding
             {
                 UpdateStack( engine.GetStack() );
             }
-            UpdateConsole();
+          //  UpdateConsole();
 
         }
         
@@ -431,7 +425,7 @@ namespace ITI.CIL_Cowding
             if (engine.IsRunning)
             {
                 UpdateStack(engine.GetStack());
-                UpdateConsole();
+               // UpdateConsole();
             }   
             API_Canvas.ReDraw();
         }

@@ -14,6 +14,6 @@ namespace ITI.CIL_Cowding
         }
 
         bool NextInstruction();
-        void AddError(string msg);
+        void AddError( string msg );
     }
 }

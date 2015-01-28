@@ -1,54 +1,48 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 namespace ITI.CIL_Cowding
 {
     public class FunctionNode : Node
     {
-        string _namefct;
+        string _functionName;
         string _returnType;
-        List<string> _parameters;
-        List<InstructionNode> _code;
+        List<string> _parametersType;
+        List<Node> _code;
 
         public string Name
         {
-            get { return _namefct; }
+            get { return _functionName; }
         }
-        public FunctionNode(string name, string returnType, List<InstructionNode> code, List<string> parameters)
+        public FunctionNode(string name, string returnType, List<Node> code, List<string> parametersType, int line)
+            :base(line)
         {
-            _namefct = name;
+            _functionName = name;
             _returnType = returnType;
             _code = code;
-            _parameters = new List<string>();
-
-            foreach(string variable in parameters) 
-            {
-                _parameters.Add(variable);
-            }
+            _parametersType = new List<string>( parametersType );
         }
-        public Function PreExecute(PreExecutionContext pec)
+        public override void PreExecute(IPreExecutionContext pec)
         {
-            ICILType returnType;
-            List<ICILType> parameters = new List<ICILType>();
-            List<ICILType> locvar = new List<ICILType>();
-
-
-            // Gestion du type de retour
-            returnType = pec.TypeManager.Find(_returnType);
-
-            // Gestion des types de paramètres
-            foreach (string str in _parameters)
+            List<ICILType> parametersType = new List<ICILType>();
+            foreach (string parameter in _parametersType)
             {
-                parameters.Add( pec.TypeManager.Find( str ) );
+                parametersType.Add( pec.TypeManager.Find( parameter ) );
             }
 
-            // Gestion des types des locvar
-            if( _code[0] is LocalsInitNode ) 
+            if( pec.AddNewFunctionToCurrentClass( _functionName, pec.TypeManager.Find( _returnType ), parametersType ) )
             {
-                _code[0].PreExecute(pec);
+                foreach(Node node in _code)
+                {
+                    node.PreExecute( pec );
+                }
+                pec.EndCurrentFunction();
             }
-
-            return new Function( _namefct, returnType, parameters, pec.LocalsVar,  _code );
+            else
+            {
+                throw new NotImplementedException( "TODO: Add error to IPreExecutionContext" );
+            }
         }
 
     }

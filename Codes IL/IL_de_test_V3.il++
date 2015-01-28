@@ -1,0 +1,18 @@
+var int age
+var int reponse
+var int test_egalite
+ldc 20
+ldc 20
+ceq
+stloc test_egalite
+ldc 18
+stloc age
+ldstr "Je suis un texte de test"
+WRITE
+ldstr "1 pour recommencer le text"
+WRITE 
+READ
+brtrue 8
+ldstr "Oki salut !"
+WRITE
+READ

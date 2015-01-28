@@ -4,17 +4,20 @@ namespace ITI.CIL_Cowding
 {
     public abstract class InstructionNode : Node
     {
-        public abstract int Line
+        public InstructionNode( int line )
+            : base( line )
         {
-            get;
         }
+
         public abstract void Execute( IExecutionContext ctx );
-        public virtual void PreExecute(IPreExecutionContext pec)
+
+        public override void PreExecute(IPreExecutionContext pec)
         {
-            // Nothing
+            pec.AddInstructionNodeToCurrentFunction(this);
+
         }
     }
 
-        
+
 
 }

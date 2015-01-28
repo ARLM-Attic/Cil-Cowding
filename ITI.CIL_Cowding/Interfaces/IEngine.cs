@@ -8,11 +8,15 @@ namespace ITI.CIL_Cowding
 {
     public interface IEngine
     {
-        event EventHandler SourceCodeChanged;
-
+      //  event EventHandler SourceCodeChanged;
+        IExecutionContext Ctx { get; }
+        CILProgram Code { get; set; }
+        IPreExecutionContext Pec { get; }
         string SourceCode {get; set;}
 
         bool IsRunning { get; }
+
+        int Build();
 
         int Start();
 

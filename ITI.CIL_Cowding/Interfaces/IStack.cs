@@ -10,7 +10,7 @@ namespace ITI.CIL_Cowding
 
         IValue Pop();
 
-        void CallFunction(IFunction fct);
+        void CallFunction(string fct);
         
         void CloseFunction();
 
