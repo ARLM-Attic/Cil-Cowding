@@ -60,7 +60,7 @@
     <Compile Include="Errors\SyntaxError.cs" />
     <Compile Include="ExecutionContext.cs" />
     <Compile Include="Function.cs" />
-    <Compile Include="Nodes\Instructions\Load\LddNode.cs" />
+    <Compile Include="Nodes\InstructionsNode\Load\LddNode.cs" />
     <Compile Include="Interfaces\ICILType.cs" />
     <Compile Include="Interfaces\IEngine.cs" />
     <Compile Include="Interfaces\IExecutionContext.cs" />
