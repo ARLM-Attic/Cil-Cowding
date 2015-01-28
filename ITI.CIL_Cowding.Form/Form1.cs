@@ -15,20 +15,12 @@ namespace ITI.CIL_Cowding
     {
         private System.Drawing.Graphics _stackGraphics;
         private ITI.CIL_Cowding.IEngine engine = new ITI.CIL_Cowding.Engine();
-        StringWriter _stringWriter;
-        
-        //StringReader _stringReader;
-        //string _leTrucALire;
-
 
         public Cil_Cowding()
         {
             InitializeComponent();
 
             API_Canvas.Init(_pictureBox2);
-            
-            
-
         }
 
         private void PictureBox1()
@@ -129,14 +121,6 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
-        public void UpdateConsole()
-        {
-            System.Drawing.Graphics consoleGraphics = _pictureBox2.CreateGraphics();
-            Font drawFont = new Font( "Arial", 12 );
-            SolidBrush drawBrush = new SolidBrush( Color.Black );
-            consoleGraphics.DrawString( _stringWriter.ToString(), drawFont, drawBrush, 0, 10 );
-
-        }
 
         /// <summary>
         /// Update the stack
@@ -226,28 +210,10 @@ namespace ITI.CIL_Cowding
         private void StartInit()
         {
             _pictureBox2.Refresh();
-            /*
-            _stringWriter = new StringWriter();
-            Console.SetOut( _stringWriter );
-
-            _leTrucALire = "2";
-            Input b = new Input();
-            b.ShowDialog();
-            _leTrucALire = b.Text;
-            Console.WriteLine( _leTrucALire );
-
-            _stringReader = new StringReader( _leTrucALire );
-            Console.SetIn( _stringReader );
-            */
-
-            // Graphique
             _pictureBox1.Refresh();
             _richTextBox.Enabled = false;
 
             _stackGraphics = _pictureBox1.CreateGraphics();
-
-            Font drawFont = new Font( "Arial", 10 );
-            SolidBrush drawBrush = new SolidBrush( Color.White );
         }
         private void butStepByStep_Click(object sender, EventArgs e)
         {
@@ -269,28 +235,6 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-        /* Code pour tester l'AIP_canvas 
-         * 
-            // TEST
-            API_Canvas.PlacePoint(30, 30);
-            API_Canvas.MoveTo(40, 40);
-            API_Canvas.MoveTo(50, 30);
-            API_Canvas.PlacePoint(30, 30);
-            API_Canvas.MoveTo(20, 40);
-            API_Canvas.MoveTo(10, 40);
-            // FIN TEST
-            // Mon test m@therF@ckerz
-            API_Canvas.DrawLine( 100, 100, 150, 142 );
-            API_Canvas.PenColor = Color.Brown;
-            API_Canvas.PenWidth = 2f;
-            API_Canvas.DrawLine( 50, 50, 50, 100 );
-            API_Canvas.PenWidth = 49;
-            API_Canvas.DrawLine( 0, 0, 100, 0 );
-            // YeY
-         * 
-          */
-
-
             Console.Clear();
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
@@ -305,11 +249,6 @@ namespace ITI.CIL_Cowding
                 engine.Start();
 
                 while ( engine.NextInstruction() ) ;
-                        /* TEST perf
-                         * */
-                    /* TEST perf
-                     * */
-                //butStop.Visible = true;
             }
 
         }
@@ -323,7 +262,8 @@ namespace ITI.CIL_Cowding
             {
                 UpdateStack( engine.GetStack() );
             }
-          //  UpdateConsole();
+
+            // HighLight current instruction support
 
         }
         
@@ -410,7 +350,6 @@ namespace ITI.CIL_Cowding
             if (engine.IsRunning)
             {
                 UpdateStack(engine.GetStack());
-                UpdateConsole();
             }
 
         }
@@ -425,7 +364,6 @@ namespace ITI.CIL_Cowding
             if (engine.IsRunning)
             {
                 UpdateStack(engine.GetStack());
-               // UpdateConsole();
             }   
             API_Canvas.ReDraw();
         }
@@ -450,7 +388,6 @@ namespace ITI.CIL_Cowding
             if (engine.IsRunning)
             {
                 UpdateStack(engine.GetStack());
-                UpdateConsole();
             }
         }
 
