@@ -17,28 +17,28 @@ namespace ITI.CIL_Cowding
         public override void Execute(IExecutionContext ctx)
         {
             IValue temp = ctx.Stack.Pop();
-            if ( (temp.Type.IsInt32()||temp.Type.IsDouble()) )
+            if ( temp.Type.IsInt32() || temp.Type.IsDouble() )
             {
-                if (temp.Type.IsDouble() && ((double)temp.Data == 0 || (double)temp.Data == 1))
+                if (temp.Type.IsDouble() && ( (double)temp.Data == 0 || (double)temp.Data == 1) )
                 {
-                    if ((double)temp.Data == 1)// Pay attention, int atm, bool for next
+                    if ((double)temp.Data == 0)// Pay attention, int atm, bool for next
                     {
                         int index = ctx.Stack.LastFrame.Fct.GetIndexLabel(_label);
                         ctx.Stack.LastFrame.SetCurrentInstruction(index);
                     }
-                    else if ((double)temp.Data == 0)
+                    else if ((double)temp.Data == 1)
                     {
                         // don't branch
                     }
                 }
-                else if (temp.Type.IsInt32() && ((int)temp.Data == 0 || (int)temp.Data == 1))
+                else if (temp.Type.IsInt32() && ( (int)temp.Data == 0 || (int)temp.Data == 1) )
                 {
-                    if ((int)temp.Data == 1)// Pay attention, int atm, bool for next
+                    if ( (int)temp.Data == 0 )// Pay attention, int atm, bool for next
                     {
-                        int index = ctx.Stack.LastFrame.Fct.GetIndexLabel(_label);
-                        ctx.Stack.LastFrame.SetCurrentInstruction(index);
+                        int index = ctx.Stack.LastFrame.Fct.GetIndexLabel( _label );
+                        ctx.Stack.LastFrame.SetCurrentInstruction( index );
                     }
-                    else if ((int)temp.Data == 0)
+                    else if ( (int)temp.Data == 1 )
                     {
                         // don't branch
                     }
