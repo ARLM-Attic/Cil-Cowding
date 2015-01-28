@@ -1,0 +1,50 @@
+﻿using System;
+
+namespace ITI.CIL_Cowding
+{
+    public enum TokenType
+    {
+        None,
+        Var,
+        Nop,
+        Ldc,
+        Ldstr,
+        Stloc,
+        Ldloc,
+        Ceq,
+        Cgt,
+        Clt,
+        Not,
+        Or,
+        And,
+        Brtrue,
+        Brfalse,
+        Br,
+        Add,
+        Mul,
+        Div,
+        Sub,
+        Neg,
+        Number,
+        String,
+        BeginString,
+        EndOfString,
+        Write,
+        Read,
+        Ret,
+        Error,
+        Text,
+        Function,
+        Class,
+        Identifier,
+<<<<<<< HEAD
+        IsVarType,
+        EndOfLine,
+        ErrorUnterminatedString,
+        EndOfInput,s
+=======
+        EndOfInput,
+        EndOfLine
+>>>>>>> 47599a76db74513a274c887179fabdb3f213fd1a
+    }
+}

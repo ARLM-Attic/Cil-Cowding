@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ITI.CIL_Cowding
+{
+    public abstract class InstructionNode
+    {
+        public abstract void Execute( IExecutionContext ctx )
+        {
+
+        }
+    }
+<<<<<<< HEAD:ITI.CIL_Cowding/Instructions/InstructionNode.cs
+=======
+
+    public class StlocNode : InstructionNode
+    {
+        
+
+    }
+>>>>>>> 03d6238868abe6b2e4a29b78d0a83c1f1873b60f:ITI.CIL_Cowding/InstructionNode.cs
+}
