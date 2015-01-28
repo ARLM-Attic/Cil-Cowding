@@ -8,15 +8,11 @@ namespace ITI.CIL_Cowding
     public class LddNode : InstructionNode
     {
         private double _val;
-        int _line;
-        public override int Line
-        {
-            get { return _line; }
-        }
+
         public LddNode(double val, int line)
+            :base(line)
         {
             this._val = val;
-            _line = line;
         }
         public override void Execute(IExecutionContext ctx)
         {

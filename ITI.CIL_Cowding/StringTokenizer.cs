@@ -9,7 +9,7 @@ namespace ITI.CIL_Cowding
         int _position;
         int _maxPosition;
         int _currentLine;
-        //int _currentColumn;
+        int _currentColumn;
         double _doubleValue;
         string _idOrStringValue;
         readonly StringBuilder _buffer;
