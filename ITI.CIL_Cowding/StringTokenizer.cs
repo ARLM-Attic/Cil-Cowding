@@ -227,7 +227,7 @@ namespace ITI.CIL_Cowding
                     }
                 default:
                     // We look if the thing that we are receiving is a number
-                    if (char.IsDigit(c))
+                    if ( char.IsDigit( c ) )
                     {
                         #region Number
                         _currentToken = TokenType.Number;
@@ -238,7 +238,26 @@ namespace ITI.CIL_Cowding
                             Forward();
                             _currentColumn++;
                         }
-                        _doubleValue = val;
+
+                        if (c == ',')
+                        {
+                            _buffer.Append('0');
+                            _buffer.Append(c);
+                            Forward();
+                            while (!IsEnd && Char.IsDigit(c = Peek()))
+                            {
+                                _buffer.Append(c);
+                                Forward();
+                            }
+
+                            _idOrStringValue = _buffer.ToString();
+                            double tmp = Convert.ToDouble(_idOrStringValue);
+                            _doubleValue = (double)val + tmp;
+                        }
+                        else
+                        {
+                            _doubleValue = val;
+                        }
                         #endregion Number
                     }
                     // Else look if the thing that we are receiving is a letter or _, then it's an identifier

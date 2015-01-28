@@ -254,5 +254,18 @@ namespace ITI.CIL_Cowding.Tests
             tkt = st.CurrentToken;
             Assert.That(tkt, Is.EqualTo(TokenType.Identifier));
         }
+
+        [Test]
+        public void number_double()
+        {
+            double i;
+            string s = "52,5";
+            TokenType tkt;
+            StringTokenizer tokenizer = new StringTokenizer(s);
+            tkt = tokenizer.CurrentToken;
+
+            Assert.That(tkt == TokenType.Number);
+            Assert.That(tokenizer.IsDouble(out i) && i == 52.5);
+        }
     }
 }
