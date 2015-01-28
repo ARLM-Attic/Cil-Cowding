@@ -133,8 +133,9 @@ namespace ITI.CIL_Cowding
             Font drawFont = new Font( "Arial", 12 );
             SolidBrush drawBrush = new SolidBrush( Color.Black );
             consoleGraphics.DrawString( _stringWriter.ToString(), drawFont, drawBrush, 0, 10 );
-
         }
+
+        
 
         /// <summary>
         /// Update the stack
@@ -143,12 +144,12 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack(IStack stack)
         {
-            Bitmap bmp = new Bitmap(_pictureBox1.Width, _pictureBox1.Height);
+            Bitmap bmp = new Bitmap(_pictureBox1.Width, Height);
             using (Graphics image = Graphics.FromImage(bmp))
             {
 
             int x = 10;
-            int y = 0;
+            int y = 10;
 
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -219,13 +220,16 @@ namespace ITI.CIL_Cowding
             image.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
             image.DrawString(message, drawFont, drawBrush, drawRect_);
             }
+                _pictureBox1.Size = bmp.Size;
+
                 _pictureBox1.BackgroundImage = bmp;
-                vScrollBar1.ValueChanged += new EventHandler(vbar_valueChanged);
+                //vScrollBar1.ValueChanged += new EventHandler(vbar_valueChanged);
         }
 
         private void vbar_valueChanged(Object sender, EventArgs e)
         {
-            _pictureBox1.Location = new Point(_pictureBox1.Left, vScrollBar1.Value);
+            //_pictureBox1.Location = new Point(_pictureBox1.Left, -vScrollBar1.Value);
+            _pictureBox1.Height += 50;
         }
 
         #region ButtonManagment
@@ -477,7 +481,6 @@ namespace ITI.CIL_Cowding
             this._richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
             this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint);
             this._pictureBox1.Paint += new PaintEventHandler(this._pictureBox1_Paint);
-
             this.splitContainer2.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             this.splitContainer1.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             
