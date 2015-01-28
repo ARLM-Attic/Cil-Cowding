@@ -32,6 +32,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzer.cs" />
+    <Compile Include="API_Canvas.cs" />
     <Compile Include="CILNetType.cs" />
     <Compile Include="CILTypeManager.cs" />
     <Compile Include="Engine.cs" />
@@ -56,6 +60,7 @@
     <Compile Include="Nodes\Instructions\BooleanOperator\BinaryBooleanOperator\AndNode.cs" />
     <Compile Include="Nodes\Instructions\BooleanOperator\BinaryBooleanOperator\BinaryBooleanOperatorNode.cs" />
     <Compile Include="Nodes\Instructions\BinaryComparator\BinaryComparatorNode.cs" />
+    <Compile Include="Nodes\Instructions\Load\LddNode.cs" />
     <Compile Include="Nodes\Instructions\Operator\BinaryOperator\BinaryOperatorNode.cs" />
     <Compile Include="Nodes\Instructions\Loop\BrfalseNode.cs" />
     <Compile Include="Nodes\Instructions\Loop\BrNode.cs" />

@@ -19,14 +19,33 @@ namespace ITI.CIL_Cowding
         public override IValue Comparator( IValue value1, IValue value2 )
         {
             IValue result;
-            if ( (int)value1.Data < (int)value2.Data )
-            {
-                result = new Value( value1.Type, 1 );
+            if (value1.Type.FullName == "System.Int32") 
+            { 
+                if ( (int)value1.Data < (int)value2.Data )
+                {
+                    result = new Value( value1.Type, 1 );
+                }
+                else
+                {
+                    result = new Value( value1.Type, 0 );
+                }
             }
-            else
+            else if (value1.Type.FullName == "System.Double")
             {
-                result = new Value( value1.Type, 0 );
+                if ((double)value1.Data < (double)value2.Data)
+                {
+                    result = new Value(value1.Type, 1.0);
+                }
+                else
+                {
+                    result = new Value(value1.Type, 0.0);
+                }
             }
+            else 
+            {
+                result = new Value(value1.Type, 0);
+            }
+            
             return result;
         }
     }

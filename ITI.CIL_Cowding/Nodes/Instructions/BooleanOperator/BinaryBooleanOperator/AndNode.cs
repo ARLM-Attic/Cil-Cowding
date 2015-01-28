@@ -21,11 +21,25 @@ namespace ITI.CIL_Cowding
             IValue result;
             if ( Convert.ToBoolean( value1.Data ) && Convert.ToBoolean( value2.Data ) )
             {
-                result = new Value( value1.Type, 1 );
+                if (value1.Type.IsDouble())
+                {
+                    result = new Value(value1.Type, 1.0);
+                }
+                else {
+                    result = new Value(value1.Type, 1);
+                }
+                
             }
             else
             {
-                result = new Value( value1.Type, 0 );
+                if (value1.Type.IsDouble())
+                {
+                    result = new Value(value1.Type, 0.0);
+                }
+                else
+                {
+                    result = new Value(value1.Type, 0);
+                }
             }
             return result;
         }

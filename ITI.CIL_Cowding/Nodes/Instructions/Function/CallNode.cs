@@ -78,7 +78,6 @@ namespace ITI.CIL_Cowding
 
                 List<IValue> parameters = new List<IValue>();   // Param CIL_Cowding
                 List<Type> args_type = new List<Type>();        // Types Réel déduit 
-                List<dynamic> variables = new List<dynamic>();    // Véritables variables
                 List<Object> realvar = new List<Object>();
 
                 // POP tout les paramètres qu'envoi l'utilisateur

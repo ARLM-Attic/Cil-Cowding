@@ -15,8 +15,8 @@ namespace ITI.CIL_Cowding
         readonly StringBuilder _buffer;
         TokenType _currentToken;
 
-        public StringTokenizer( string s )
-        : this( s, 0, s.Length )
+        public StringTokenizer(string s)
+            : this(s, 0, s.Length)
         {
         }
 
@@ -25,14 +25,16 @@ namespace ITI.CIL_Cowding
         {
         }
 
-        public StringTokenizer( string s, int startIndex, int count )
+        public StringTokenizer(string s, int startIndex, int count)
         {
             _currentToken = TokenType.None;
             _toParse = s;
             _position = startIndex;
             _maxPosition = startIndex + count;
+            _currentLine = 1;
+            _currentColumn = 1;
             _buffer = new StringBuilder();
-            
+
             // Beginning
             GetNextToken();
         }
@@ -90,14 +92,16 @@ namespace ITI.CIL_Cowding
         /// </summary>
         public void ForwardToNextLine()
         {
-            if ( !IsEnd )
+            if (!IsEnd)
             {
                 char c;
-                do {
+                do
+                {
                     c = Read();
-                } while( c != '\n' && c != ';' );
-
-                if( !IsEnd ) GetNextToken();
+                } while (c != '\n' && c != ';');
+                ++_currentLine;
+                _currentColumn = 1;
+                if (!IsEnd) GetNextToken();
             }
             else
             {
@@ -138,23 +142,35 @@ namespace ITI.CIL_Cowding
         public TokenType GetNextToken()
         {
             _buffer.Clear();
-            if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
+            if (IsEnd) return _currentToken = TokenType.EndOfInput;
             char c = Read();
-            while ( char.IsWhiteSpace( c ) )
+            if (c == '\n')
+            {
+                ++_currentLine;
+                _currentColumn = 1;
+            }
+            _currentColumn++;
+            while (char.IsWhiteSpace(c))
             {
                 c = Read();
-                if ( IsEnd ) return _currentToken = TokenType.EndOfInput;
+                if (c == '\n')
+                {
+                    _currentLine++;
+                    _currentColumn = 1;
+                }
+                _currentColumn++;
+                if (IsEnd) return _currentToken = TokenType.EndOfInput;
             }
 
-            switch( c )
+            switch (c)
             {
                 // Terminal chars
                 case '-': _currentToken = TokenType.Minus; break;
                 case '(': _currentToken = TokenType.OpenPar; break;
                 case ')': _currentToken = TokenType.ClosedPar; break;
-                case '[': _currentToken = TokenType.OpenBracket ; break;
-                case ']': _currentToken = TokenType.ClosedBracket ; break;
-                case '{': _currentToken = TokenType.OpenCurly ; break;
+                case '[': _currentToken = TokenType.OpenBracket; break;
+                case ']': _currentToken = TokenType.ClosedBracket; break;
+                case '{': _currentToken = TokenType.OpenCurly; break;
                 case '}': _currentToken = TokenType.ClosedCurly; break;
                 case '.': _currentToken = TokenType.Dot; break;
                 case ';': _currentToken = TokenType.SemiColon; break;
@@ -162,9 +178,10 @@ namespace ITI.CIL_Cowding
                 case '#': _currentToken = TokenType.HashTag; break;
                 case ':':
                     {
-                        if( !IsEnd && Peek() == ':' )
+                        if (!IsEnd && Peek() == ':')
                         {
                             Forward();
+                            _currentColumn++;
                             _currentToken = TokenType.DoubleColon;
                         }
                         else _currentToken = TokenType.Colon;
@@ -172,11 +189,11 @@ namespace ITI.CIL_Cowding
                     }
                 case '/':
                     {
-                        if( IsEnd ) _currentToken = TokenType.Error;
+                        if (IsEnd) _currentToken = TokenType.Error;
                         else
                         {
                             c = Peek();
-                            if ( c == '/') // Slash Comments 
+                            if (c == '/') // Slash Comments 
                             {
                                 ForwardToNextLine();
                             }
@@ -184,18 +201,22 @@ namespace ITI.CIL_Cowding
                             {
                                 #region block comments
                                 Forward();
-                                while ( !IsEnd )
+                                _currentColumn++;
+                                while (!IsEnd)
                                 {
-                                    if( Peek() == '*' )
+                                    if (Peek() == '*')
                                     {
                                         Forward();
+                                        _currentColumn++;
                                         if (Peek() == '/')
                                         {
                                             Forward();
+                                            _currentColumn++;
                                             break;
                                         }
                                     }
                                     else Forward();
+                                    _currentColumn++;
                                 }
                                 #endregion block comments
                                 return GetNextToken();
@@ -206,17 +227,37 @@ namespace ITI.CIL_Cowding
                     }
                 default:
                     // We look if the thing that we are receiving is a number
-                    if (char.IsDigit(c))
+                    if ( char.IsDigit( c ) )
                     {
                         #region Number
                         _currentToken = TokenType.Number;
                         double val = (int)(c - '0');
-                        while (!IsEnd && Char.IsDigit( (c = Peek()) ))
+                        while (!IsEnd && Char.IsDigit((c = Peek())))
                         {
                             val = val * 10 + (int)(c - '0');
                             Forward();
+                            _currentColumn++;
                         }
-                        _doubleValue = val;
+
+                        if (c == ',')
+                        {
+                            _buffer.Append('0');
+                            _buffer.Append(c);
+                            Forward();
+                            while (!IsEnd && Char.IsDigit(c = Peek()))
+                            {
+                                _buffer.Append(c);
+                                Forward();
+                            }
+
+                            _idOrStringValue = _buffer.ToString();
+                            double tmp = Convert.ToDouble(_idOrStringValue);
+                            _doubleValue = (double)val + tmp;
+                        }
+                        else
+                        {
+                            _doubleValue = val;
+                        }
                         #endregion Number
                     }
                     // Else look if the thing that we are receiving is a letter or _, then it's an identifier
@@ -225,10 +266,11 @@ namespace ITI.CIL_Cowding
                         #region Identifier
                         _currentToken = TokenType.Identifier;
                         _buffer.Append(c);
-                        while (!IsEnd && (Char.IsLetterOrDigit( c = Peek() ) || c == '_'))
+                        while (!IsEnd && (Char.IsLetterOrDigit(c = Peek()) || c == '_'))
                         {
                             _buffer.Append(c);
                             Forward();
+                            _currentColumn++;
                         }
                         _idOrStringValue = _buffer.ToString();
                         #endregion Identifier
@@ -238,18 +280,25 @@ namespace ITI.CIL_Cowding
                     {
                         #region String
                         _currentToken = TokenType.String;
-                        while ( !IsEnd && (c = Peek()) != '"' )
+                        while (!IsEnd && (c = Peek()) != '"')
                         {
                             if (c == '\\')
                             {
                                 c = Read();
+                                _currentColumn++;
                                 if (IsEnd) return _currentToken = TokenType.ErrorUnterminatedString;
                                 if (c == 'r') c = '\r';
-                                else if (c == 'n') c = '\n';
+                                else if (c == 'n')
+                                {
+                                    c = '\n';
+                                    ++_currentLine;
+                                    _currentColumn = 1;
+                                }
                                 else if (c == 't') c = '\t';
                                 else if (c == 'u')
                                 {
                                     c = Read();
+                                    _currentColumn++;
                                     if (IsEnd) return _currentToken = TokenType.ErrorUnterminatedString;
                                     bool atLeastOne = false;
                                     int val = (int)(c - '0');
@@ -258,6 +307,7 @@ namespace ITI.CIL_Cowding
                                         atLeastOne = true;
                                         val = val * 10 + (int)(c - '0');
                                         Forward();
+                                        _currentColumn++;
                                     }
                                     if (!atLeastOne) return _currentToken = TokenType.ErrorUnterminatedString;
                                     if (val >= (int)char.MaxValue) return _currentToken = TokenType.ErrorInvalidUnicodeInString;
@@ -265,17 +315,19 @@ namespace ITI.CIL_Cowding
                                 }
                             }
                             else Forward();
+                            _currentColumn++;
                             _buffer.Append(c);
                         }
                         if (IsEnd) return _currentToken = TokenType.ErrorUnterminatedString;
                         Forward();
+                        _currentColumn++;
                         _idOrStringValue = _buffer.ToString();
                         #endregion String
                     }
                     // Else, Error...
                     else _currentToken = TokenType.Error;
                     break;
-            }        
+            }
             return _currentToken;
         }
 
@@ -284,9 +336,9 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="identifier">The value of the identifier</param>
         /// <returns>True if the value of the identifier is the the same getted.</returns>
-        public bool MatchIdentifier( string identifier )
+        public bool MatchIdentifier(string identifier)
         {
-            if( _currentToken == TokenType.Identifier && _idOrStringValue == identifier )
+            if (_currentToken == TokenType.Identifier && _idOrStringValue == identifier)
             {
                 GetNextToken();
                 return true;
@@ -299,7 +351,7 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="id">The value of the identifier.</param>
         /// <returns></returns>
-        public bool IsIdentifier( out string id )
+        public bool IsIdentifier(out string id)
         {
             if (_currentToken == TokenType.Identifier)
             {
@@ -316,9 +368,9 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="value">The value of the integer</param>
         /// <returns>True if we have a Type "number" as a token.</returns>
-        public bool IsInteger( out int value )
+        public bool IsInteger(out int value)
         {
-            if ( _currentToken == TokenType.Number )
+            if (_currentToken == TokenType.Number)
             {
                 value = (int)_doubleValue;
                 GetNextToken();
@@ -333,9 +385,9 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="value">The value of the double.</param>
         /// <returns>True if we have a type "number" as a token.</returns>
-        public bool IsDouble( out double value )
+        public bool IsDouble(out double value)
         {
-            if ( _currentToken == TokenType.Number )
+            if (_currentToken == TokenType.Number)
             {
                 value = _doubleValue;
                 GetNextToken();
@@ -350,9 +402,9 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="value">value of the string.</param>
         /// <returns>True if we have a string and affects it's value to <paramref name="value"/>.</returns>
-        public bool IsString( out string value )
+        public bool IsString(out string value)
         {
-            if ( _currentToken == TokenType.String )
+            if (_currentToken == TokenType.String)
             {
                 value = _idOrStringValue;
                 GetNextToken();
@@ -367,9 +419,9 @@ namespace ITI.CIL_Cowding
         /// </summary>
         /// <param name="t">The token type given.</param>
         /// <returns>True if the token type given is the same as the current token.</returns>
-        public bool Match( TokenType t )
+        public bool Match(TokenType t)
         {
-            if ( _currentToken == t )
+            if (_currentToken == t)
             {
                 GetNextToken();
                 return true;

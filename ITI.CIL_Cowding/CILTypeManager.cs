@@ -25,7 +25,7 @@ namespace ITI.CIL_Cowding
             Add( new CILNetType( typeof( UInt16 ) ) );
             Add( new CILNetType( typeof( SByte ) ) );
             Add( new CILNetType( typeof( Byte ) ) );
-            Add( new CILNetType( typeof( Double ) ) );
+            Add( new CILNetType( typeof( Double ) ), "double" );
             Add( new CILNetType( typeof( Single ) ) );
             Add( new CILNetType( typeof( Boolean ) ) );
             Add( new CILNetType( typeof( DateTime ) ) );

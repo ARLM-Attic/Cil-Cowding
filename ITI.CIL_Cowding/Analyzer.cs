@@ -189,6 +189,22 @@ namespace ITI.CIL_Cowding
                     }
                     #endregion LDC
                 }
+                else if (_tokenizer.MatchIdentifier("ldd"))
+                {
+                    #region LDD
+                    double constante;
+                    if (_tokenizer.IsDouble(out constante)
+                        && _tokenizer.Match(TokenType.SemiColon))
+                    {
+                        fct_content.Add(new LddNode(constante, _tokenizer.CurrentLine));
+                    }
+                    else
+                    {
+                        AddError("Ldd need double value or semi-colon is missing");
+                        _tokenizer.ForwardToNextLine();
+                    }
+                    #endregion LDD
+                }
 
                 else if( _tokenizer.MatchIdentifier( "ldloc" ) )
                 {
