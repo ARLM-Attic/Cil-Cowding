@@ -76,7 +76,7 @@ namespace ITI.Tests
 
 
             // test it
-            label.PreExecute( pec );
+            label3.PreExecute( pec );
             Assert.That( pec.CurrentLineInstruction == 0 );
             nop.PreExecute( pec );
             Assert.That( pec.CurrentLineInstruction == 1 );
@@ -93,6 +93,7 @@ namespace ITI.Tests
 
             Assert.That( label.InstructionLineNumber == 0 );
             Assert.That( label2.InstructionLineNumber == 2 );
+            Assert.That( label3.InstructionLineNumber == -1 );
             /*
              * nop     1
              * label   2

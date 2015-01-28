@@ -115,13 +115,14 @@ namespace ITI.bacASable
             // Variables locales, que l'on trouve dans la définition de la fct
             foreach(var locvar in fct.LocVar) 
             {
-                locvars.Add(new Value(locvar , null));
+                locvars.Add( new Value( locvar, null ) );
             }
 
             // Paramètres, que l'on trouve sur la stack
             int i = 0;
 
-            while(i < fct_param.Count) {
+            while ( i < fct_param.Count )
+            {
 
                 // On choppe le paramètre
                 IValue tmp;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ITI.bacASable
+namespace Secret
 {
     public static class Musique
     {
@@ -121,7 +121,7 @@ namespace ITI.bacASable
                 }
                 Console.Beep( 783, 1800 );  //sol
             }
-            static public void Go()
+            static public void StarWars()
             {
                 //repetimos la primera parte 2 veces
                 //asi esta en la partitura :)

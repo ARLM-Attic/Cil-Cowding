@@ -15,17 +15,17 @@ namespace ITI.bacASable
         private IFunction _functionReference;
         private int _currentInstruction;
         private IStack _stack;
-        int _currentLine;
+       // int _currentLine;
         #endregion
 
         #region Properties
         public List<IValue> LocalVars
 		{
-			get {return _localVars;}
+            get { return _localVars; }
 		}
         public List<IValue> ArgsVars
         {
-            get { return _args;}
+            get { return _args; }
         }
         public IFunction Fct
         {
@@ -49,16 +49,16 @@ namespace ITI.bacASable
              _stack = stack;
         }
 
-        #region CurrentLine managment
-        public void NextLine()
-        {
-            _currentLine++;
-        }
-        public void Branch( int label )
-        {
-            _currentLine = label;
-        }
-        #endregion
+        //#region CurrentLine managment
+        //public void NextLine()
+        //{
+        //    _currentLine++;
+        //}
+        //public void Branch( int label )
+        //{
+        //    _currentLine = label;
+        //}
+        //#endregion
 
 
         #region Locals variables managment
@@ -107,7 +107,6 @@ namespace ITI.bacASable
         public void NextInstruction()
         {
             _currentInstruction++;
-            // Vérifier si ce if ne cause pas de problème car maintenant les labels ne sont plus dans le body
             if (_currentInstruction >= Fct.Body.Count)
             {
                 _stack.CloseFunction();

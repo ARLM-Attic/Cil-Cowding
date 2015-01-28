@@ -17,7 +17,7 @@ namespace ITI.bacASable
         List<FunctionNode> _methods;
         //string _name;
        // Function toCall;
-        List<string> _labels;
+        List<string> _names;
         string _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
@@ -26,11 +26,11 @@ namespace ITI.bacASable
         /// Call method, described by name
         /// </summary>
         /// <param name="name">Function name</param>
-        public CallNode(List<FunctionNode> methods, List<string> label, int line)
+        public CallNode(List<FunctionNode> methods, List<string> names, int line)
             : base( line )
         {
             _methods = methods;
-            _labels = label;
+            _names = names;
             _externFunction = null;
             _fctToCall = null;
         }
@@ -41,19 +41,19 @@ namespace ITI.bacASable
             base.PreExecute( pec );
             Object function;
 
-            FunctionScope fcs = SearchFunction(_labels, pec, out function);
+            FunctionScope fcs = SearchFunction(_names, pec, out function);
 
             if( fcs == FunctionScope.External )
             {
                 _fctToCall = null;
                 _externFunction = (Type)function;
-                _nameOfMethod = _labels[_labels.Count - 1];
+                _nameOfMethod = _names[_names.Count - 1];
             }
             else if( fcs == FunctionScope.Internal )
             {
                 _fctToCall = (string)function;
                 _externFunction = null;
-                _nameOfMethod = _labels[_labels.Count - 1];
+                _nameOfMethod = _names[_names.Count - 1];
 
             }
             else
