@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using System;
 using System.IO;
-using ITI.bacASable;
+using ITI.CIL_Cowding;
 using System.Collections.Generic;
 
-namespace ITI.bacASable.Tests
+namespace ITI.CIL_Cowding.Tests
 {
 
     [TestFixture]

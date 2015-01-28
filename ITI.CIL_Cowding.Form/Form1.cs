@@ -6,15 +6,15 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using ITI.bacASable;
+using ITI.CIL_Cowding;
 using System.Threading;
 
-namespace ITI.bacASable
+namespace ITI.CIL_Cowding
 {
     public partial class Form1 : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        private ITI.bacASable.IEngine engine = new ITI.bacASable.Engine();
+        private ITI.CIL_Cowding.IEngine engine = new ITI.CIL_Cowding.Engine();
         StringWriter _stringWriter;
        // StringReader _stringReader;
        // string _leTrucALire;
@@ -129,7 +129,7 @@ namespace ITI.bacASable
         /// </summary>
         /// <param name="container"></param>
         /// <param name="stack"></param>
-        public void UpdateStack( ITI.bacASable.IStack stack )
+        public void UpdateStack( ITI.CIL_Cowding.IStack stack )
         {
             int x = 10;
             int y = 600;
@@ -141,7 +141,7 @@ namespace ITI.bacASable
             string message = "";
             int ligne = 20;     // PX
 
-            foreach ( ITI.bacASable.Container plouf in stack.Frame )
+            foreach ( ITI.CIL_Cowding.Container plouf in stack.Frame )
            {
                // Nom de la fct toussa sisi la famille
                
@@ -150,7 +150,7 @@ namespace ITI.bacASable
                // On affiche les arguments
                message += "Arguments : \n";
                int i = 0;
-               foreach ( ITI.bacASable.IValue valeur in plouf.ArgsVars )
+               foreach ( ITI.CIL_Cowding.IValue valeur in plouf.ArgsVars )
                {
 
                    message += "["+i+"] : "+valeur.Type.FullName+ " " + valeur.Data+"\n";
@@ -161,7 +161,7 @@ namespace ITI.bacASable
                // On affiche les variables locales
                message += "Variables Locales : \n";
                i = 0;
-               foreach ( ITI.bacASable.IValue valeur in plouf.LocalVars )
+               foreach ( ITI.CIL_Cowding.IValue valeur in plouf.LocalVars )
                {
 
                    message += "[" + i + "] : " + valeur.Type.FullName + " " + valeur.Data + "\n";

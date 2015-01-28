@@ -14,10 +14,11 @@ namespace ITI.CIL_Cowding
 
     public class CallNode : InstructionNode
     {
+        List<FunctionNode> _methods;
         //string _name;
        // Function toCall;
-        List<string> _labels;
-        Function _fctToCall;
+        List<string> _names;
+        string _fctToCall;
         Type _externFunction;
         string _nameOfMethod;
         
@@ -25,10 +26,11 @@ namespace ITI.CIL_Cowding
         /// Call method, described by name
         /// </summary>
         /// <param name="name">Function name</param>
-        public CallNode(List<string> label, int line)
+        public CallNode(List<FunctionNode> methods, List<string> names, int line)
             : base( line )
         {
-            _labels = label;
+            _methods = methods;
+            _names = names;
             _externFunction = null;
             _fctToCall = null;
         }
@@ -36,26 +38,27 @@ namespace ITI.CIL_Cowding
       
         public override void PreExecute(IPreExecutionContext pec)
         {
+            base.PreExecute( pec );
             Object function;
 
-            FunctionScope fcs = pec.SearchFunction(_labels, out function);
+            FunctionScope fcs = SearchFunction(_names, pec, out function);
 
             if( fcs == FunctionScope.External )
             {
                 _fctToCall = null;
                 _externFunction = (Type)function;
-                _nameOfMethod = _labels[_labels.Count - 1];
+                _nameOfMethod = _names[_names.Count - 1];
             }
             else if( fcs == FunctionScope.Internal )
             {
-                _fctToCall = (Function)function;
+                _fctToCall = (string)function;
                 _externFunction = null;
-                _nameOfMethod = _labels[_labels.Count - 1];
+                _nameOfMethod = _names[_names.Count - 1];
 
             }
             else
             {
-                pec.AddError( "Error : Function not found." );
+                throw new NotImplementedException( "TODO : Adderror function not found" );
             }
 
         }
@@ -64,7 +67,7 @@ namespace ITI.CIL_Cowding
         {
             if(_fctToCall != null) 
             {
-                ctx.Stack.CallFunction(_fctToCall);
+                ctx.Stack.CallFunction(_fctToCall );
 
             } 
             else if (_externFunction != null)
@@ -100,12 +103,52 @@ namespace ITI.CIL_Cowding
 
 
 
-
             } else {
                 throw new Exception("fcttoCall and externFunction are both null ???");
             }
         }
-    
+
+
+        public FunctionScope SearchFunction( List<string> labels, IPreExecutionContext pec, out Object function )
+        {
+            // Verif' null toussa magueule
+
+            // We looking for a function at home
+            // On ne gère pas les classes internes (pour le moment). VIVE LA FRANCE \o/
+
+            if ( labels.Count == 1 )
+            {
+                foreach ( FunctionNode fct in _methods)
+                {
+                    if ( fct.Name == labels[0] )
+                    {
+                        function = fct.Name;
+                        return FunctionScope.Internal;
+                    }
+                }
+            }
+
+            // We looking for a function which is not at home
+            string nameType = labels[0];
+
+            for ( int i = 1 ; i < labels.Count - 1 ; i++ )
+            {
+                nameType += "." + labels[i];
+            }
+
+            Type type = Type.GetType( nameType );
+            if ( type != null )
+            {
+                function = type;
+                return FunctionScope.External;
+            }
+            else
+            {
+                // Add error
+                function = null;
+                return FunctionScope.None;
+            }
+        }
     
     }
 }

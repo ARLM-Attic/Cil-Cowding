@@ -1,39 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace ITI.CIL_Cowding
 {
     public interface IPreExecutionContext
     {
+        CILTypeManager TypeManager { get; }
 
-        List<IError> Errors
-        {
-            get;
-        }
-        CILTypeManager TypeManager
-        { get; }
+        bool IsInClass { get; }
 
-        List<ICILType> LocalsVar
-        {
-            set;
-            get;
-        }
+        bool IsInFunction { get; }
 
-        IFunction CurrentFunction
-        {
-            get;
-        }
+        int CurrentLineInstruction { get; }
 
-        int CurrentLineInstruction
-        {
-            get;
-        }
+        Dictionary<string, CILClass> Classes { get; }
 
+        bool AddNewClass( string className );
 
-        List<IFunction> PreExecut( List<FunctionNode> code );
+        CILClass EndNewClass();
 
-        FunctionScope SearchFunction(List<string> labels, out Object function);
+        CILProgram GetFinalProgram();
 
-        void AddError(string p);
+        bool AddLocalVariable(ICILType localVariable);
+
+        bool AddLabel( LabelNode label );
+
+        bool AddNewFunctionToCurrentClass( string name, ICILType returnType, List<ICILType> parameters );
+
+        bool AddInstructionNodeToCurrentFunction( InstructionNode instruction );
+
+        IFunction EndCurrentFunction();
     }
 }

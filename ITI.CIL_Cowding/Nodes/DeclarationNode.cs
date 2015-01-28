@@ -8,8 +8,8 @@ namespace ITI.CIL_Cowding
 {
     public class DeclarationNode : Node
     {
-        public DeclarationNode(int line)
-            :base(line)
+        public DeclarationNode( int line )
+            : base( line )
         { }
     }
 }

@@ -91,9 +91,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ITI.bacASable\ITI.bacASable.csproj">
+    <ProjectReference Include="..\ITI.CIL_Cowding\ITI.CIL_Cowding.csproj">
       <Project>{8b66493a-19d9-4e26-81ff-ac7e117902cb}</Project>
-      <Name>ITI.bacASable</Name>
+      <Name>ITI.CIL_Cowding</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,6 @@ namespace ITI.CIL_Cowding
 
         public virtual void PreExecute( IPreExecutionContext pec )
         {
-            // Nothing
         }
     }
 

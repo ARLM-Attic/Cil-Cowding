@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8A2D37
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.bacASable", "ITI.bacASable\ITI.bacASable.csproj", "{8B66493A-19D9-4E26-81FF-AC7E117902CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.CIL_Cowding", "ITI.CIL_Cowding\ITI.CIL_Cowding.csproj", "{8B66493A-19D9-4E26-81FF-AC7E117902CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

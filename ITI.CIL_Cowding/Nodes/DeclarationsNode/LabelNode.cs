@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ITI.bacASable
+namespace ITI.CIL_Cowding
 
 {
     public class LabelNode : DeclarationNode

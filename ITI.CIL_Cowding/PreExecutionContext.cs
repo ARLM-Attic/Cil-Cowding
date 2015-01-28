@@ -4,158 +4,142 @@ using System.Reflection;
 
 namespace ITI.CIL_Cowding
 {
-    public class PreExecutionContext : IPreExecutionContext
+    public class PreExecutionContext : ITI.CIL_Cowding.IPreExecutionContext
     {
-        CILTypeManager _typeManager;
-        List<IFunction> _myFunctions;
-        List<IError> _errors;
-        List<ICILType> _localsVars;
-        IFunction _currentFunction;
-        int _currentLineInstruction;
-        IEngine _engine;
+        readonly CILTypeManager _typeManager;
+
+        Dictionary<string, CILClass> _currentProgramClasses;
+
+        string _currentClassName;
+        Dictionary<string,IFunction> _currentClassFunctions;
+
+        string _currentFunctionName;
+        List<LabelNode> _currentFunctionLabels;
+        List<InstructionNode> _currentFunctionBody;
+        ICILType _currentFunctionReturnType;
+        List<ICILType> _currentFunctionParameters;
+        List<ICILType> _currentFunctionLocalsVariables;
+
+
+      
+        public PreExecutionContext( CILTypeManager typeManager )
+        {
+           _typeManager = typeManager;
+           _currentProgramClasses = new Dictionary<string,CILClass>();
+        }
 
         #region Properties
-       
-        public List<IError> Errors
-        {
-            get { return _errors; }
-        }
-
-        public List<ICILType> LocalsVar
-        {
-            get { return _localsVars; }
-            set { _localsVars = value; }
-        }
-
         public CILTypeManager TypeManager
         {
             get { return _typeManager; }
         }
-
-        public IFunction CurrentFunction
+        public bool IsInClass
         {
-            get { return _currentFunction; }
+            get { return _currentClassFunctions != null; }
+        }
+
+        public bool IsInFunction
+        {
+            get { return _currentFunctionBody != null; }
         }
 
         public int CurrentLineInstruction
         {
-            get { return _currentLineInstruction; }
+            get { return _currentFunctionBody.Count; }
         }
-        
+
+        public Dictionary<string,CILClass> Classes
+        {
+            get { return _currentProgramClasses; }
+        }
         #endregion
-        public PreExecutionContext(IEngine engine)
+
+        public bool AddNewClass( string className )
         {
-            _engine = engine;
-            _typeManager = new CILTypeManager();
-            _myFunctions = new List<IFunction>();
-            _errors = new List<IError>();
-          //  _errors = new List<string>();
-            _localsVars = new List<ICILType>();
-        }
-
-        /// <summary>
-        /// Create all functions from functionNode.
-        /// </summary>
-        /// <param name="code">All the source code, therefore the list of function node.</param>
-        /// <returns>List of functions ready to execute.</returns>
-  
-        public List<IFunction> PreExecut (List<FunctionNode> code)
-        {
-
-            foreach(FunctionNode function in code)
-            {
-                if (IsSingleFunction(_myFunctions, function))    // On regarde si la fct n'as pas le même nom qu'une autre
-                {
-                    _currentFunction = function.PreExecute( this );
-                    _myFunctions.Add( _currentFunction );
-                    // Ici on appel le preExecute des functionsNode, du coup le preExecute des nodes, mais le problème c'est que le preExecute des labels necessite la current function. Et donc si on a pas encore créer la function, on ne peut pas avoir de current function. CQFD
-                    //myFunctions.Add(function.PreExecute(this));
-                }
-                else
-                {
-                        // ON en fait rien, c'est déjà géré dans IsSingleFct
-                }
-            }
-
-            // on parcours toutes nos fct et on pré-exécute tous les noeuds
-            foreach (Function fct in _myFunctions)
-            {
-                _currentLineInstruction = 0;
-
-                _currentFunction = fct;
-                foreach (Node node in fct.Body)
-                {
-                    if (node is InstructionNode)
-                    {
-                        node.PreExecute( this );
-                    }
-                    _currentLineInstruction++;
-                }
-            }
-            return _myFunctions;
-        }
-
-        public FunctionScope SearchFunction(List<string> labels, out Object function)
-        {
-            // Verif' null toussa magueule
-
-            // We looking for a function at home
-            // On ne gère pas les classes internes (pour le moment). VIVE LA FRANCE \o/
-
-            if( labels.Count == 1 ) 
-            {
-                foreach(Function fct in _myFunctions) 
-                {
-                    if(fct.Name == labels[0]) 
-                    {
-                        function = fct;
-                        return FunctionScope.Internal;
-                    }
-                }
-            }
-            
-            // We looking for a function which is not at home
-            string nameType = labels[0];
-            
-            for(int i = 1; i < labels.Count-1; i++)
-            {
-                nameType += "." + labels[i];
-            }
-
-            Type type = Type.GetType(nameType);
-            if (type != null)
-            {
-                function = type;
-                return FunctionScope.External;
-            }
-            else
-            {
-                AddError("Function not found.");
-                function = null;
-                return FunctionScope.None;
-            }
-        }
-
-        private bool IsSingleFunction (List<IFunction> myFunctions, FunctionNode function)
-        {
-            foreach ( IFunction functionForName in myFunctions )
-            {
-                if ( functionForName.Name == function.Name )
-                {
-                    AddError( "Function " + function.Name + " already exist" );
-                    return false;
-                }
-            }
+            _currentClassName = className;
+            _currentClassFunctions = new Dictionary<string, IFunction>();
             return true;
         }
-        
-        public void AddError( string msg )
+
+        public CILClass EndNewClass()
         {
-            _errors.Add( new SyntaxError( _engine, msg ) );
+            var c = new CILClass( _currentClassFunctions );
+            _currentProgramClasses.Add( _currentClassName, c );
+            _currentClassFunctions = null;
+            return c;
         }
 
-       
+        public CILProgram GetFinalProgram()
+        {
+            var p = new CILProgram( _currentProgramClasses );
+            return p;
+        }
 
+        public bool AddLocalVariable(ICILType localVariable)
+        {
+            if (!_currentFunctionLocalsVariables.Contains(localVariable))
+            {
+                _currentFunctionLocalsVariables.Add( localVariable );
+                return true;
+            } 
+            return false;
+        }
+
+        public bool AddLabel(LabelNode label)
+        {
+            if ( !_currentFunctionLabels.Contains( label ) )
+            {
+                _currentFunctionLabels.Add( label );
+                return true;
+            }
+            return false;            
+        }
+
+        public bool AddNewFunctionToCurrentClass( string name, ICILType returnType, List<ICILType> parameters)
+        {
+            if ( IsInClass && !IsInFunction && !_currentClassFunctions.ContainsKey( name ) ) 
+            {
+                _currentFunctionName = name;
+                _currentFunctionReturnType = returnType;
+                _currentFunctionParameters = parameters;
+
+                _currentFunctionBody = new List<InstructionNode>();
+                _currentFunctionLabels = new List<LabelNode>();
+                _currentFunctionLocalsVariables = new List<ICILType>();
+
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddInstructionNodeToCurrentFunction( InstructionNode instruction )
+        {
+            _currentFunctionBody.Add( instruction );
+            return true;
+        }
+
+        public IFunction EndCurrentFunction()
+        {
+            IFunction function = new Function( _currentFunctionName, _currentFunctionReturnType, _currentFunctionParameters, _currentFunctionLocalsVariables, _currentFunctionBody );
+            foreach (LabelNode label in _currentFunctionLabels)
+            {
+                function.AddLabel( label.Name, label.InstructionLineNumber );
+            }
+            
+
+
+            _currentClassFunctions.Add( _currentFunctionName, function );
+
+            _currentFunctionName = null;
+            _currentFunctionBody = null;
+            _currentFunctionLabels = null;
+            _currentFunctionBody = null;
+            _currentFunctionReturnType = null;
+            _currentFunctionParameters = null;
+            _currentFunctionLocalsVariables = null;
+
+            return function;
+        }
     }
 
 }
