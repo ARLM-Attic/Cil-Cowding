@@ -21,6 +21,7 @@ namespace ITI.CIL_Cowding
             InitializeComponent();
 
             API_Canvas.Init(_pictureBox2);
+            _richTextBox.AcceptsTab = true;
         }
 
         private void PictureBox1()
@@ -264,7 +265,7 @@ namespace ITI.CIL_Cowding
             }
 
             // HighLight current instruction support
-
+            
         }
         
         private void butStop_Click(object sender, EventArgs e)
