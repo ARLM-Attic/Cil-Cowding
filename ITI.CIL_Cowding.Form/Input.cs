@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ITI.CIL_Cowding
+namespace ITI.bacASable
 {
     public partial class Input : Form
     {

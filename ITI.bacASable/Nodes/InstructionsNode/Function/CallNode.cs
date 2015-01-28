@@ -103,7 +103,6 @@ namespace ITI.bacASable
 
 
 
-
             } else {
                 throw new Exception("fcttoCall and externFunction are both null ???");
             }

@@ -7,8 +7,9 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using ITI.bacASable;
+using System.Threading;
 
-namespace ITI.CIL_Cowding
+namespace ITI.bacASable
 {
     public partial class Form1 : Form
     {
@@ -22,6 +23,7 @@ namespace ITI.CIL_Cowding
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         #region Quit
@@ -264,16 +266,7 @@ namespace ITI.CIL_Cowding
                 engine.SourceCode = _richTextBox.Text;
                 engine.Start();
 
-                //  // On lance la prochaine instruction à faire
-                while ( engine.NextInstruction() )
-                {
-                    // Et MaJ de la Stack
-                    if ( engine.IsRunning )
-                    {
-                        UpdateStack( engine.GetStack() );
-                    }
-                    //UpdateConsole();
-                }
+                while ( engine.NextInstruction() ) ;
                 //butStop.Visible = true;
             }
 

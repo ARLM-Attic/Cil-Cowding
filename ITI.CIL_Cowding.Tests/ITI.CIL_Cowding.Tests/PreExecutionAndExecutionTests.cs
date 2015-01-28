@@ -72,8 +72,12 @@ namespace ITI.Tests
 
             LabelNode label = new LabelNode( "thelabel", 0 );
             LabelNode label2 = new LabelNode( "thelabel2", 0 );
+            LabelNode label3 = new LabelNode( "thelabel2", 0 );
+
 
             // test it
+            label.PreExecute( pec );
+            Assert.That( pec.CurrentLineInstruction == 0 );
             nop.PreExecute( pec );
             Assert.That( pec.CurrentLineInstruction == 1 );
             label.PreExecute( pec );
@@ -87,8 +91,8 @@ namespace ITI.Tests
             nop4.PreExecute( pec );
             Assert.That( pec.CurrentLineInstruction == 4 );
 
-            Assert.That( label.InstructionLineNumber == 2 );
-            Assert.That( label2.InstructionLineNumber == 4 );
+            Assert.That( label.InstructionLineNumber == 0 );
+            Assert.That( label2.InstructionLineNumber == 2 );
             /*
              * nop     1
              * label   2

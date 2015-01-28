@@ -7,7 +7,7 @@
     <ProjectGuid>{8B66493A-19D9-4E26-81FF-AC7E117902CB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ITI.CIL_Cowding</RootNamespace>
+    <RootNamespace>ITI.bacASable</RootNamespace>
     <AssemblyName>ITI.bacASable</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -66,6 +66,7 @@
     <Compile Include="Interfaces\ITokenizer.cs" />
     <Compile Include="Interfaces\IValue.cs" />
     <Compile Include="Interfaces\IPreExecutionContext.cs" />
+    <Compile Include="Musique.cs" />
     <Compile Include="Nodes\DeclarationsNode\LocalsInitNode.cs" />
     <Compile Include="Nodes\FunctionNode.cs" />
     <Compile Include="Nodes\InstructionsNode\Argument\LdargNode.cs" />
@@ -110,9 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-    <None Include="ClassDiagram3.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

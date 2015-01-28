@@ -89,7 +89,6 @@ namespace ITI.bacASable
         public void Push(IValue var)
         {
             _topFrame.Push(var);
-            // C'est tout ?
         }
 
         public IValue Pop()

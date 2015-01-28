@@ -4,7 +4,7 @@ using System.IO;
 using ITI.bacASable;
 using System.Collections.Generic;
 
-namespace ITI.CIL_Cowding.Tests
+namespace ITI.bacASable.Tests
 {
 
     [TestFixture]
