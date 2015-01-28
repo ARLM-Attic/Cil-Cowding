@@ -37,6 +37,28 @@ namespace System
             _pen = new Pen( Color.Black );
         }
 
+        public static void ChangeColor(string color)
+        {
+            switch(color) 
+            {
+                case "black":
+                    _pen.Color = Color.Black;
+                    break;
+                case "blue1" :
+                    _pen.Color = Color.Blue;
+                    break;
+                case "blue2":
+                    _pen.Color = Color.DarkBlue;
+                    break;
+                case "blue3":
+                    _pen.Color = Color.LightSkyBlue;
+                    break;
+                
+
+            }
+
+        }
+
         
         public static void DrawLine(int x1, int y1, int x2, int y2)
         {
