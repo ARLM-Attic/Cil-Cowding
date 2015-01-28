@@ -6,7 +6,7 @@ namespace ITI.CIL_Cowding
     public class ExecutionContext : IExecutionContext
     {
         Stack _stack;
-        List<IFunction> _code;
+        CILProgram _cilProgram;
         IEngine _engine;
         IError _error;
 
@@ -21,15 +21,15 @@ namespace ITI.CIL_Cowding
             get { throw new NotImplementedException(); }
         }
 
-        public ExecutionContext(List<IFunction>code, IEngine engine)
+        public ExecutionContext(CILProgram code, IEngine engine)
         {
             _stack = new Stack(engine);
             _engine = engine;
 
             // Initialisation du code
-            _code = code;
+            _cilProgram = code;
             // Pour le moment on ne lance que la première fct, mais après on lancera la fct Main
-            _stack.CallFunction(_code[0]);
+            _stack.CallFunction( "main");
 
         }
 
@@ -40,7 +40,7 @@ namespace ITI.CIL_Cowding
             {
                 return false;
             }
-           _stack.LastFrame.CurrentInstruction.Execute(this);
+            _stack.LastFrame.CurrentInstruction.Execute( this );
 
             // On passe à l'instruction suivante si on n'a pas d'erreur
             if(_error != null || _stack.LastFrame == null) 

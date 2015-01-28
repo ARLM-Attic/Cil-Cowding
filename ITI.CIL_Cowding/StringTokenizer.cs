@@ -34,6 +34,7 @@ namespace ITI.CIL_Cowding
             _currentLine = 1;
             _currentColumn = 1;
             _buffer = new StringBuilder();
+            _currentLine = 0;
 
             // Beginning
             GetNextToken();
@@ -63,14 +64,13 @@ namespace ITI.CIL_Cowding
             get { return _idOrStringValue; }
         }
 
-        /// <summary>
+   /*     public int CurrentColumn
         /// Gets the current column.
         /// </summary>
-        public int CurrentColumn
         {
             get { return _currentColumn; }
         }
-
+        */
         /// <summary>
         /// Tests if the current character is a white space.
         /// </summary>

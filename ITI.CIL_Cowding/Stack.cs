@@ -89,7 +89,6 @@ namespace ITI.CIL_Cowding
         public void Push(IValue var)
         {
             _topFrame.Push(var);
-            // C'est tout ?
         }
 
         public IValue Pop()
@@ -102,8 +101,10 @@ namespace ITI.CIL_Cowding
 
         #region Frames managment
         
-        public void CallFunction(IFunction fct)
+        public void CallFunction(string functionName)
         {
+            IFunction fct = _engine.Pec.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions[functionName]; 
+            
             List<IValue> locvars = new List<IValue>();
             List<IValue> parameters = new List<IValue>();
 
@@ -114,13 +115,14 @@ namespace ITI.CIL_Cowding
             // Variables locales, que l'on trouve dans la définition de la fct
             foreach(var locvar in fct.LocVar) 
             {
-                locvars.Add(new Value(locvar , null));
+                locvars.Add( new Value( locvar, null ) );
             }
 
             // Paramètres, que l'on trouve sur la stack
             int i = 0;
 
-            while(i < fct_param.Count) {
+            while ( i < fct_param.Count )
+            {
 
                 // On choppe le paramètre
                 IValue tmp;
@@ -131,7 +133,7 @@ namespace ITI.CIL_Cowding
                 }
                 catch (Exception e)
                 {
-                    _engine.ClashError(new RunTimeError(_engine, "Pas assez de paramètre"));
+                    _engine.ClashError(new RunTimeError(_engine, e.Message + " : Pas assez de paramètre"));
                     return;
                 }
                 // On regarde si le type correspond avec celui de la fct

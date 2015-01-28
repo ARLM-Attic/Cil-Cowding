@@ -14,6 +14,8 @@ namespace ITI.CIL_Cowding
         List<IError> _errors;
         IEngine _engine;
 
+        List<FunctionNode> _methods;
+
         public Analyzer(ITokenizer tokenizer, IEngine engine)
         {
             _tokenizer = tokenizer;
@@ -24,14 +26,14 @@ namespace ITI.CIL_Cowding
         public List<FunctionNode> ParseBody()
         {
 
-            List<FunctionNode> methods = new List<FunctionNode>();
+            _methods = new List<FunctionNode>();
             //List<FieldDeclarartionNode> methods = new List<FieldDeclarartionNode>();
 
             while (!_tokenizer.IsEnd)
             {
 
                 FunctionNode f = IsFunction();
-                if (f != null) methods.Add(f);
+                if (f != null) _methods.Add(f);
                 else
                 {
                     //if (HasError) return null;
@@ -53,7 +55,7 @@ namespace ITI.CIL_Cowding
                 _engine.ClashError( _errors );
             }
             
-            return methods;
+            return _methods;
         }
 
         FunctionNode IsFunction()
@@ -89,7 +91,7 @@ namespace ITI.CIL_Cowding
                 if (_tokenizer.Match(TokenType.OpenCurly))
                 {
 
-                    FunctionNode fct = new FunctionNode(name, returnType, ParseFunctionBody(), parameters);
+                    FunctionNode fct = new FunctionNode(name, returnType, ParseFunctionBody(), parameters, _tokenizer.CurrentLine);
                     return fct;
                 }
                 else
@@ -104,9 +106,9 @@ namespace ITI.CIL_Cowding
             return null;
         }
 
-        private List<InstructionNode> ParseFunctionBody()
+        private List<Node> ParseFunctionBody()
         {
-            List<InstructionNode> fct_content = new List<InstructionNode>();
+            List<Node> fct_content = new List<Node>();
 
             while(!_tokenizer.Match(TokenType.ClosedCurly) && !_tokenizer.IsEnd)
             {
@@ -121,19 +123,17 @@ namespace ITI.CIL_Cowding
 
                     if (_tokenizer.Match(TokenType.OpenPar))
                     {
-                        
-                        while(!_tokenizer.Match(TokenType.ClosedPar) && !_tokenizer.IsEnd)
+
+                        while ( !_tokenizer.Match( TokenType.ClosedPar ) && !_tokenizer.IsEnd )
                         {
                             if (_tokenizer.IsIdentifier(out type)
                                 && _tokenizer.IsIdentifier(out tmp))
                             {
-
                                 loc_var.Add(type);
-
                             }
                             else
                             {
-                                AddError("Bug au niveau de la déclaration d'une variable");
+                                AddError( "Bug au niveau de la déclaration d'une variable" );
                             }
                             _tokenizer.Match(TokenType.Comma);
 
@@ -143,7 +143,7 @@ namespace ITI.CIL_Cowding
                             AddError("Ben ... C'est déjà la fin ???");
                         }
 
-                        fct_content.Add( new LocalsInitNode( loc_var, _tokenizer.CurrentLine ) );
+                       fct_content.Add( new LocalsInitNode( loc_var, _tokenizer.CurrentLine ) );
 
                     }
                     else
@@ -544,7 +544,7 @@ namespace ITI.CIL_Cowding
 
                     if( error == false )
                     {
-                        fct_content.Add( new CallNode( identifiers, _tokenizer.CurrentLine ) );
+                        fct_content.Add( new CallNode( _methods, identifiers, _tokenizer.CurrentLine ) );
                     }
 
                     #endregion CALL
@@ -553,7 +553,6 @@ namespace ITI.CIL_Cowding
                 {
                     #region RET
                     // VAR
-                    string label;
 
                     if (_tokenizer.Match(TokenType.SemiColon))
                     {
@@ -650,7 +649,6 @@ namespace ITI.CIL_Cowding
                 }
                 #endregion BeginOfSuperIfTribu
             }
-
             return fct_content;
         }
 

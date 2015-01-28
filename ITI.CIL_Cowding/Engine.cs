@@ -10,12 +10,13 @@ namespace ITI.CIL_Cowding
 {
     public class Engine : IEngine
     {
+        CILTypeManager _typeManager;
         // Fields
         // Support exec
         StringTokenizer _strTok;    
         Analyzer _analyzer;
         List<FunctionNode> _tree;
-        List<IFunction> _code;
+        CILProgram _code;
         List<IError> _syntaxErrors;
 
         // Execution
@@ -23,17 +24,31 @@ namespace ITI.CIL_Cowding
         IExecutionContext _ctx;
         
         // Gestion du code source
-        public event EventHandler SourceCodeChanged;
+       // public event EventHandler SourceCodeChanged;
         string _sourceCode;
 
         int _currentLine;
 
         public Engine()
         {
+            _typeManager = new CILTypeManager();
             _sourceCode = "";
             _syntaxErrors = new List<IError>();
             // Init SourceCodeChanged
-            _currentLine = 0;
+        }
+        public CILProgram Code
+        {
+            get { return _code; }
+            set { _code = value; }
+        }
+        public IExecutionContext Ctx
+        {
+            get { return _ctx; }
+        }
+
+        public IPreExecutionContext Pec
+        {
+            get { return _pec; }
         }
         
         public bool IsRunning 
@@ -61,25 +76,48 @@ namespace ITI.CIL_Cowding
             }
         }
 
-        public int Start()
+        public int Build()
         {
-
+            
             _strTok = new StringTokenizer( _sourceCode );
             _analyzer = new Analyzer( _strTok, this );
             _tree = _analyzer.ParseBody();
 
-            if (_syntaxErrors.Count >= 1)
+            if ( _syntaxErrors.Count >= 1 )
             {
                 return -1;
             }
             else
             {
-                _pec = new PreExecutionContext( this );
-                _code = _pec.PreExecut( _tree );
+                _pec = new PreExecutionContext( _typeManager );
 
-                _ctx = new ExecutionContext( _code, this );
+                _pec.AddNewClass( "TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs" );
+
+                foreach ( FunctionNode functionNode in _tree )
+                {
+                    functionNode.PreExecute( _pec );
+                }
+
+                _pec.EndNewClass();
+
+                _code = _pec.GetFinalProgram();
+                // _code = _pec.PreExecut( _tree );
                 return 0;
             }
+        }
+
+        public int Start()
+        {
+                if (Build() != 0)
+                {
+                    return -1;
+                }
+
+                _ctx = new ExecutionContext( _code, this );
+                _currentLine = 0;
+
+                return 0;
+            
 
         }
 
@@ -87,8 +125,6 @@ namespace ITI.CIL_Cowding
         {
             if ( IsRunning )
             {
-                //InstructionNode a = _pec.CurrentFunction.Code[_pec.CurrentLineInstruction-1];
-               // int b = a.Line;
                 if ( !_ctx.NextInstruction() ) 
                 {
                     Stop();

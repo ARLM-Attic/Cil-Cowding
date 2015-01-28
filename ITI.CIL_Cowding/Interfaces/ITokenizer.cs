@@ -17,7 +17,7 @@ namespace ITI.CIL_Cowding
         /// <summary>
         /// Gets the zero-based column number of the current token.
         /// </summary>
-        int CurrentColumn { get; }
+       // int CurrentColumn { get; }
 
         /// <summary>
         /// Tests if the current character is a white space.
