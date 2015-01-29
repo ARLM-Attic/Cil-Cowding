@@ -53,6 +53,10 @@
             this._butStop = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this._butStartAll = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this._buttonBreak = new System.Windows.Forms.Button();
+            this._buttonContinueRun = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -88,6 +92,7 @@
             this.quitToolStripMenuItem});
             this._fileToolStripMenuItem.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._fileToolStripMenuItem.Name = "_fileToolStripMenuItem";
+            this._fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this._fileToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this._fileToolStripMenuItem.Text = "File";
             // 
@@ -137,7 +142,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1131, 718);
+            this.splitContainer1.Size = new System.Drawing.Size(1131, 709);
             this.splitContainer1.SplitterDistance = 464;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -152,10 +157,10 @@
             this.groupBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(-1, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(465, 714);
+            this.groupBox1.Size = new System.Drawing.Size(465, 705);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Edit";
+            this.groupBox1.Text = "Source Code";
             // 
             // _richTextBox
             // 
@@ -163,10 +168,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._richTextBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._richTextBox.Location = new System.Drawing.Point(39, 13);
+            this._richTextBox.Location = new System.Drawing.Point(44, 13);
             this._richTextBox.Name = "_richTextBox";
             this._richTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this._richTextBox.Size = new System.Drawing.Size(420, 697);
+            this._richTextBox.Size = new System.Drawing.Size(415, 688);
             this._richTextBox.TabIndex = 3;
             this._richTextBox.Text = "";
             // 
@@ -176,7 +181,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this._panelNum.Location = new System.Drawing.Point(4, 13);
             this._panelNum.Name = "_panelNum";
-            this._panelNum.Size = new System.Drawing.Size(30, 697);
+            this._panelNum.Size = new System.Drawing.Size(38, 688);
             this._panelNum.TabIndex = 2;
             // 
             // splitContainer2
@@ -195,8 +200,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this._groupBox3);
             this.splitContainer2.Panel2.Controls.Add(this.textBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(663, 718);
-            this.splitContainer2.SplitterDistance = 293;
+            this.splitContainer2.Size = new System.Drawing.Size(663, 709);
+            this.splitContainer2.SplitterDistance = 289;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
@@ -209,10 +214,10 @@
             this.groupBox2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(655, 285);
+            this.groupBox2.Size = new System.Drawing.Size(655, 281);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Console";
+            this.groupBox2.Text = "Canvas";
             // 
             // _pictureBox2
             // 
@@ -222,7 +227,7 @@
             this._pictureBox2.BackColor = System.Drawing.SystemColors.Control;
             this._pictureBox2.Location = new System.Drawing.Point(0, 21);
             this._pictureBox2.Name = "_pictureBox2";
-            this._pictureBox2.Size = new System.Drawing.Size(650, 258);
+            this._pictureBox2.Size = new System.Drawing.Size(654, 259);
             this._pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._pictureBox2.TabIndex = 0;
             this._pictureBox2.TabStop = false;
@@ -237,10 +242,10 @@
             this._groupBox3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._groupBox3.Location = new System.Drawing.Point(2, 3);
             this._groupBox3.Name = "_groupBox3";
-            this._groupBox3.Size = new System.Drawing.Size(656, 417);
+            this._groupBox3.Size = new System.Drawing.Size(656, 412);
             this._groupBox3.TabIndex = 1;
             this._groupBox3.TabStop = false;
-            this._groupBox3.Text = "Stack";
+            this._groupBox3.Text = "Call Stack";
             // 
             // panel1
             // 
@@ -251,7 +256,7 @@
             this.panel1.Controls.Add(this._pictureBox1);
             this.panel1.Location = new System.Drawing.Point(6, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(644, 390);
+            this.panel1.Size = new System.Drawing.Size(644, 385);
             this.panel1.TabIndex = 0;
             // 
             // _pictureBox1
@@ -296,7 +301,7 @@
             this._butContinue.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._butContinue.Image = ((System.Drawing.Image)(resources.GetObject("_butContinue.Image")));
             this._butContinue.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this._butContinue.Location = new System.Drawing.Point(297, 0);
+            this._butContinue.Location = new System.Drawing.Point(135, 0);
             this._butContinue.Name = "_butContinue";
             this._butContinue.Size = new System.Drawing.Size(83, 23);
             this._butContinue.TabIndex = 5;
@@ -313,7 +318,7 @@
             this._butStop.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._butStop.Image = ((System.Drawing.Image)(resources.GetObject("_butStop.Image")));
             this._butStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this._butStop.Location = new System.Drawing.Point(386, 0);
+            this._butStop.Location = new System.Drawing.Point(235, 1);
             this._butStop.Name = "_butStop";
             this._butStop.Size = new System.Drawing.Size(56, 23);
             this._butStop.TabIndex = 6;
@@ -339,11 +344,48 @@
             this._butStartAll.UseVisualStyleBackColor = true;
             this._butStartAll.Click += new System.EventHandler(this.butStartAll_Click);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 10;
+            // 
+            // _buttonBreak
+            // 
+            this._buttonBreak.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonBreak.Font = new System.Drawing.Font("Consolas", 9F);
+            this._buttonBreak.ForeColor = System.Drawing.Color.Black;
+            this._buttonBreak.Image = ((System.Drawing.Image)(resources.GetObject("_buttonBreak.Image")));
+            this._buttonBreak.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._buttonBreak.Location = new System.Drawing.Point(319, 1);
+            this._buttonBreak.Name = "_buttonBreak";
+            this._buttonBreak.Size = new System.Drawing.Size(75, 23);
+            this._buttonBreak.TabIndex = 7;
+            this._buttonBreak.Text = "Break";
+            this._buttonBreak.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this._buttonBreak.UseVisualStyleBackColor = true;
+            this._buttonBreak.Click += new System.EventHandler(this._buttonBreak_Click);
+            // 
+            // _buttonContinueRun
+            // 
+            this._buttonContinueRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._buttonContinueRun.Font = new System.Drawing.Font("Consolas", 9F);
+            this._buttonContinueRun.Image = global::ITI.Properties.Resources.start_all_15px;
+            this._buttonContinueRun.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._buttonContinueRun.Location = new System.Drawing.Point(297, 0);
+            this._buttonContinueRun.Name = "_buttonContinueRun";
+            this._buttonContinueRun.Size = new System.Drawing.Size(112, 23);
+            this._buttonContinueRun.TabIndex = 8;
+            this._buttonContinueRun.Text = "Continue Run";
+            this._buttonContinueRun.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this._buttonContinueRun.UseVisualStyleBackColor = true;
+            this._buttonContinueRun.Click += new System.EventHandler(this._buttonContinueRun_Click);
+            // 
             // Cil_Cowding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1143, 742);
+            this.ClientSize = new System.Drawing.Size(1143, 733);
+            this.Controls.Add(this._buttonContinueRun);
+            this.Controls.Add(this._buttonBreak);
             this.Controls.Add(this._butStop);
             this.Controls.Add(this._butContinue);
             this.Controls.Add(this._butStartAll);
@@ -404,6 +446,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button _butStartAll;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button _buttonBreak;
+        private System.Windows.Forms.Button _buttonContinueRun;
     }
 }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using System.Threading;
 
 namespace ITI.CIL_Cowding
 {
@@ -123,7 +122,6 @@ namespace ITI.CIL_Cowding
             catch (Exception e)
             {
                 Console.WriteLine( "Error on Tokenizer.Read(). " + e.ToString() );
-                Thread.CurrentThread.Abort();
                 return '1';
             }
             

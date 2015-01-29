@@ -16,11 +16,20 @@ namespace ITI.CIL_Cowding
         private System.Drawing.Graphics _stackGraphics;
         private ITI.CIL_Cowding.IEngine _engine;
 
+        // Timer
+        static System.Windows.Forms.Timer _myTimer;
+
         public Cil_Cowding()
         {
             InitializeComponent();
+            _buttonContinueRun.Visible = false;
+            _buttonBreak.Visible = false;
             API_Canvas.Init(_pictureBox2);
+            _stackGraphics = _pictureBox1.CreateGraphics();
             _engine = new ITI.CIL_Cowding.Engine();
+            _myTimer = new System.Windows.Forms.Timer();
+            _myTimer.Tick += new EventHandler( TimerEventProcessor );
+            _myTimer.Interval = 1;
         }
 
         private void PictureBox1()
@@ -218,73 +227,53 @@ namespace ITI.CIL_Cowding
 
         private void StartInit()
         {
-            _pictureBox2.Refresh();
-            _pictureBox1.Refresh();
             _richTextBox.Enabled = false;
-
-            _stackGraphics = _pictureBox1.CreateGraphics();
-        }
-        private void butStepByStep_Click(object sender, EventArgs e)
-        {
-            Console.Clear();
+            _butStop.Visible = true;
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
+            _buttonBreak.Visible = true;
+        }
+
+        private void butStepByStep_Click(object sender, EventArgs e)
+        {
             _butContinue.Visible = true;
-            _butStop.Visible = true;
-            _richTextBox.Enabled = false;
 
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
-
                 // Start engine
                 _engine.SourceCode = _richTextBox.Text;
-                try
-                {
-                    _engine.Start();
-                }
-                catch (Exception fatalError)
-                {
-                    List<IError> runtimeError = new List<IError>();
-                    runtimeError.Add( new RunTimeError( _engine, "Critical runtime error. " + fatalError.ToString() ) );
-                    _engine.ClashError( runtimeError );
-                }
+                _engine.Start();
             }
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-            Console.Clear();
-            _butStartAll.Visible = false;
-            _butStepByStep.Visible = false;
-            _butContinue.Visible = false;
-            _butStop.Visible = true;
-            _richTextBox.Enabled = false;
-
-            if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
+            if( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
-
                 // Start engine
                 _engine.SourceCode = _richTextBox.Text;
-
-                 _engine.Start();
-
-                 StartInstructions();
-
+                _engine.Start();
+                _myTimer.Start();
             }
 
         }
 
-    
-        private void StartInstructions()
+        void TimerEventProcessor( Object myObject, EventArgs myEventArgs )
         {
-            while ( _engine.NextInstruction() ) ;
+            for ( int i = 0 ; i < 3000 ; ++i )
+            {
+                if ( !_engine.NextInstruction() || !_engine.IsRunning )
+                {
+                    EndExecution();                    
+                    break;
+                }
+            }
         }
 
         private void butContinue_Click(object sender, EventArgs e)
         {           
-            // On lance la prochaine instruction à faire
             _engine.NextInstruction();
             // Et MaJ de la Stack
             if (_engine.IsRunning)
@@ -293,17 +282,27 @@ namespace ITI.CIL_Cowding
             }
 
             // HighLight current instruction support
-            
         }
         
         private void butStop_Click(object sender, EventArgs e)
+        {
+            EndExecution();
+        }
+        private void EndExecution()
         {
             _butStartAll.Visible = true;
             _butStepByStep.Visible = true;
             _butContinue.Visible = false;
             _butStop.Visible = false;
+            _buttonContinueRun.Visible = false;
+            _buttonBreak.Visible = false;
+            _buttonBreak.Visible = false;
             _richTextBox.Enabled = true;
+            _pictureBox2.Refresh();
+            _pictureBox1.Refresh();
+            _myTimer.Stop();
             _engine.Stop();
+            Console.Clear();
         }
         
         #endregion ButtonManagment
@@ -375,6 +374,8 @@ namespace ITI.CIL_Cowding
             this._panelNum.Invalidate(); // Request repaint => line numbers update
         }
         #endregion
+
+        #region Graphics managment
 
         /// <summary>
         /// Split Vertical and redraw in the pictureBox
@@ -452,7 +453,23 @@ namespace ITI.CIL_Cowding
             splitContainer1.Invalidate();
             splitContainer2.Invalidate();
         }
-       
+        #endregion
+
+        private void _buttonBreak_Click( object sender, EventArgs e )
+        {
+            _myTimer.Stop();
+            _buttonBreak.Visible = false;
+            _butContinue.Visible = true;
+            _buttonContinueRun.Visible = true;
+        }
+
+        private void _buttonContinueRun_Click( object sender, EventArgs e )
+        {
+            _buttonBreak.Visible = true;
+            _buttonContinueRun.Visible = false;
+            _butContinue.Visible = false;
+            _myTimer.Start();
+        }
     }
        
 }
