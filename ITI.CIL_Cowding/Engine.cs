@@ -11,17 +11,18 @@ namespace ITI.CIL_Cowding
     public class Engine : IEngine
     {
         CILTypeManager _typeManager;
-        // Fields
-        // Support exec
+
         StringTokenizer _strTok;    
         Analyzer _analyzer;
+        
+        IPreExecutionContext _pec;
         List<FunctionNode> _tree;
         CILProgram _code;
+
         List<IError> _syntaxErrors;
         List<IError> _runtimeErrors;
 
         // Execution
-        IPreExecutionContext _pec;
         IExecutionContext _ctx;
         
         // Gestion du code source
@@ -136,8 +137,6 @@ namespace ITI.CIL_Cowding
                 Console.WriteLine( "End of program." );
                 return false;
             }
-            
-
         }
 
         public void Stop()
