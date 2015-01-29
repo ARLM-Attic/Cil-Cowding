@@ -14,15 +14,13 @@ namespace ITI.CIL_Cowding
     public partial class Cil_Cowding : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        private ITI.CIL_Cowding.IEngine _engine = new ITI.CIL_Cowding.Engine();
-        Thread _engineThread;
+        private ITI.CIL_Cowding.IEngine _engine;
 
         public Cil_Cowding()
         {
             InitializeComponent();
             API_Canvas.Init(_pictureBox2);
-            _richTextBox.AcceptsTab = true;
-            
+            _engine = new ITI.CIL_Cowding.Engine();
         }
 
         private void PictureBox1()
@@ -243,12 +241,7 @@ namespace ITI.CIL_Cowding
                 _engine.SourceCode = _richTextBox.Text;
                 try
                 {
-                    // Creation du thread de l'engine
-                    _engineThread = new Thread( _engine.Start );
-                    // On démarre l'engine
-                    _engineThread.Start();
-                    // On attend que l'engine ai finit son job
-                    _engineThread.Join();                    
+                    _engine.Start();
                 }
                 catch (Exception fatalError)
                 {
@@ -261,12 +254,6 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-            // Je ne sais pas a quoi ça sert, mais il me semble que ces lignes doivent virer
-//            string a = "aaaaaaaaaaaaaaaaaaaaaaa";
-//            _richTextBox.SelectionColor = Color.Green;
-//            _richTextBox.Lines[6] = a;
-//            _richTextBox.AppendText( a );
-
             Console.Clear();
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
@@ -281,31 +268,18 @@ namespace ITI.CIL_Cowding
                 // Start engine
                 _engine.SourceCode = _richTextBox.Text;
 
-                // Creation du thread de l'engine
-                _engineThread = new Thread( _engine.Start );
-                // On démarre l'engine
-                _engineThread.Start();
-                // On attend que l'engine ai finit son job
-                _engineThread.Join();
-                // l'engine est prêt, on éxecute les instructions
-                _engineThread = new Thread( CreateThreadStartInstructions );
-                _engineThread.Start();
-                _engineThread.Join();
+                 _engine.Start();
+
+                 StartInstructions();
+
             }
 
         }
 
-        private void CreateThreadStartInstructions()
+    
+        private void StartInstructions()
         {
-            System.Threading.ThreadPool.QueueUserWorkItem( new System.Threading.WaitCallback( StartInstructions ) );
-        }
-        private void StartInstructions(Object state)
-        {
-            while ( _engine.NextInstruction() )
-            {
-                if ( _engineThread == null )
-                    break;
-            }
+            while ( _engine.NextInstruction() ) ;
         }
 
         private void butContinue_Click(object sender, EventArgs e)
@@ -330,8 +304,6 @@ namespace ITI.CIL_Cowding
             _butStop.Visible = false;
             _richTextBox.Enabled = true;
             _engine.Stop();
-            _engineThread.Abort();
-            _engineThread = null;
         }
         
         #endregion ButtonManagment
@@ -457,6 +429,7 @@ namespace ITI.CIL_Cowding
             // Required properties
             this._richTextBox.ScrollBars = RichTextBoxScrollBars.Both;
             this._richTextBox.WordWrap = false;
+            _richTextBox.AcceptsTab = true;
 
             // Required events
             this._richTextBox.SelectionChanged += new System.EventHandler(this.richTextBox_SelectionChanged);
