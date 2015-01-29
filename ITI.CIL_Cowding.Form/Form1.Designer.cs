@@ -137,7 +137,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1131, 877);
+            this.splitContainer1.Size = new System.Drawing.Size(1131, 718);
             this.splitContainer1.SplitterDistance = 464;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -152,7 +152,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(-1, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(465, 873);
+            this.groupBox1.Size = new System.Drawing.Size(465, 714);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit";
@@ -166,7 +166,7 @@
             this._richTextBox.Location = new System.Drawing.Point(39, 13);
             this._richTextBox.Name = "_richTextBox";
             this._richTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this._richTextBox.Size = new System.Drawing.Size(420, 856);
+            this._richTextBox.Size = new System.Drawing.Size(420, 697);
             this._richTextBox.TabIndex = 3;
             this._richTextBox.Text = "";
             // 
@@ -176,7 +176,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this._panelNum.Location = new System.Drawing.Point(4, 13);
             this._panelNum.Name = "_panelNum";
-            this._panelNum.Size = new System.Drawing.Size(30, 856);
+            this._panelNum.Size = new System.Drawing.Size(30, 697);
             this._panelNum.TabIndex = 2;
             // 
             // splitContainer2
@@ -195,8 +195,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this._groupBox3);
             this.splitContainer2.Panel2.Controls.Add(this.textBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(663, 877);
-            this.splitContainer2.SplitterDistance = 358;
+            this.splitContainer2.Size = new System.Drawing.Size(663, 718);
+            this.splitContainer2.SplitterDistance = 293;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
@@ -209,7 +209,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(655, 350);
+            this.groupBox2.Size = new System.Drawing.Size(655, 285);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Console";
@@ -222,7 +222,7 @@
             this._pictureBox2.BackColor = System.Drawing.SystemColors.Control;
             this._pictureBox2.Location = new System.Drawing.Point(0, 21);
             this._pictureBox2.Name = "_pictureBox2";
-            this._pictureBox2.Size = new System.Drawing.Size(650, 337);
+            this._pictureBox2.Size = new System.Drawing.Size(650, 258);
             this._pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._pictureBox2.TabIndex = 0;
             this._pictureBox2.TabStop = false;
@@ -237,7 +237,7 @@
             this._groupBox3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._groupBox3.Location = new System.Drawing.Point(2, 3);
             this._groupBox3.Name = "_groupBox3";
-            this._groupBox3.Size = new System.Drawing.Size(656, 511);
+            this._groupBox3.Size = new System.Drawing.Size(656, 417);
             this._groupBox3.TabIndex = 1;
             this._groupBox3.TabStop = false;
             this._groupBox3.Text = "Stack";
@@ -249,18 +249,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this._pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(7, 21);
+            this.panel1.Location = new System.Drawing.Point(6, 21);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(416, 221);
+            this.panel1.Size = new System.Drawing.Size(644, 390);
             this.panel1.TabIndex = 0;
             // 
             // _pictureBox1
             // 
-            this._pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this._pictureBox1.BackColor = System.Drawing.SystemColors.Control;
             this._pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this._pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this._pictureBox1.Location = new System.Drawing.Point(3, 0);
             this._pictureBox1.Name = "_pictureBox1";
-            this._pictureBox1.Size = new System.Drawing.Size(651, 486);
+            this._pictureBox1.Size = new System.Drawing.Size(641, 387);
             this._pictureBox1.TabIndex = 0;
             this._pictureBox1.TabStop = false;
             this._pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this._pictureBox1_Paint);
@@ -343,7 +343,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1143, 901);
+            this.ClientSize = new System.Drawing.Size(1143, 742);
             this.Controls.Add(this._butStop);
             this.Controls.Add(this._butContinue);
             this.Controls.Add(this._butStartAll);
