@@ -20,7 +20,6 @@ namespace ITI.CIL_Cowding
         public Cil_Cowding()
         {
             InitializeComponent();
-
             API_Canvas.Init(_pictureBox2);
             _richTextBox.AcceptsTab = true;
             
@@ -125,6 +124,8 @@ namespace ITI.CIL_Cowding
         #endregion
 
 
+        
+
         /// <summary>
         /// Update the stack
         /// </summary>
@@ -132,8 +133,12 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack( ITI.CIL_Cowding.IStack stack )
         {
+            Bitmap bmp = new Bitmap(_pictureBox1.Width, 10000);
+            using (Graphics image = Graphics.FromImage(bmp))
+            {
+
             int x = 10;
-            int y = 270;
+            int y = 10;
 
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -179,10 +184,10 @@ namespace ITI.CIL_Cowding
                var taille_fenetre = ligne * nb_ligne;
 
                Rectangle drawRect = new Rectangle(x, y, 500, taille_fenetre);
-               _stackGraphics.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
+               image.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
 
-               _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect);
-               y -= taille_fenetre+50;
+               image.DrawString(message, drawFont, drawBrush, drawRect);
+               y += taille_fenetre+50;
 
            }
            
@@ -202,11 +207,14 @@ namespace ITI.CIL_Cowding
             var taille_fenetre_ = ligne * nb_ligne_;
 
             Rectangle drawRect_ = new Rectangle(x, y, 500, taille_fenetre_);
-            _stackGraphics.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
-            _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect_);
-
-
+            image.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
+            image.DrawString(message, drawFont, drawBrush, drawRect_);
+            }
+                //_pictureBox1.Size = bmp.Size;
+                _pictureBox1.Height = bmp.Height;
+                _pictureBox1.BackgroundImage = bmp;
         }
+
 
         #region ButtonManagment
 
@@ -435,6 +443,9 @@ namespace ITI.CIL_Cowding
             {
                 UpdateStack(_engine.GetStack());
             }
+            _pictureBox1.Width = panel1.Width;
+            _pictureBox1.Height = panel1.Height;
+            
         }
 
         private void TextEditor_Load(object sender, EventArgs e)
@@ -448,7 +459,6 @@ namespace ITI.CIL_Cowding
             this._richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
             this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint);
             this._pictureBox1.Paint += new PaintEventHandler(this._pictureBox1_Paint);
-
             this.splitContainer2.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             this.splitContainer1.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             

@@ -43,6 +43,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this._pictureBox2 = new System.Windows.Forms.PictureBox();
             this._groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this._pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this._butStepByStep = new System.Windows.Forms.Button();
@@ -65,6 +66,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox2)).BeginInit();
             this._groupBox3.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,7 +219,8 @@
             this._pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this._pictureBox2.Location = new System.Drawing.Point(1, 13);
+            this._pictureBox2.BackColor = System.Drawing.SystemColors.Control;
+            this._pictureBox2.Location = new System.Drawing.Point(0, 21);
             this._pictureBox2.Name = "_pictureBox2";
             this._pictureBox2.Size = new System.Drawing.Size(650, 337);
             this._pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -230,7 +233,7 @@
             this._groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this._groupBox3.Controls.Add(this._pictureBox1);
+            this._groupBox3.Controls.Add(this.panel1);
             this._groupBox3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._groupBox3.Location = new System.Drawing.Point(2, 3);
             this._groupBox3.Name = "_groupBox3";
@@ -239,13 +242,23 @@
             this._groupBox3.TabStop = false;
             this._groupBox3.Text = "Stack";
             // 
-            // _pictureBox1
+            // panel1
             // 
-            this._pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this._pictureBox1);
+            this.panel1.Location = new System.Drawing.Point(7, 21);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(416, 221);
+            this.panel1.TabIndex = 0;
+            // 
+            // _pictureBox1
+            // 
+            this._pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this._pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this._pictureBox1.Location = new System.Drawing.Point(1, 21);
+            this._pictureBox1.Location = new System.Drawing.Point(3, 3);
             this._pictureBox1.Name = "_pictureBox1";
             this._pictureBox1.Size = new System.Drawing.Size(651, 486);
             this._pictureBox1.TabIndex = 0;
@@ -359,6 +372,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox2)).EndInit();
             this._groupBox3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -389,6 +403,7 @@
         private System.Windows.Forms.Panel _panelNum;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button _butStartAll;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

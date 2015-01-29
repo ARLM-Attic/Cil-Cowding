@@ -14,27 +14,15 @@ namespace ITI.CIL_Cowding
     public partial class Cil_Cowding : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        private ITI.CIL_Cowding.IEngine engine = new ITI.CIL_Cowding.Engine();
-        StringWriter _stringWriter;
-<<<<<<< HEAD
-        
-        //StringReader _stringReader;
-        //string _leTrucALire;
-=======
-       // StringReader _stringReader;
-       // string _leTrucALire;
->>>>>>> origin/RefactoPreExecuter
-
+        private ITI.CIL_Cowding.IEngine _engine = new ITI.CIL_Cowding.Engine();
+        Thread _engineThread;
 
         public Cil_Cowding()
         {
             InitializeComponent();
-<<<<<<< HEAD
-
             API_Canvas.Init(_pictureBox2);
+            _richTextBox.AcceptsTab = true;
             
-            
-
         }
 
         private void PictureBox1()
@@ -44,9 +32,6 @@ namespace ITI.CIL_Cowding
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.UserPaint, true);
 
-=======
-            
->>>>>>> origin/RefactoPreExecuter
         }
 
         #region Quit
@@ -138,14 +123,18 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
+<<<<<<< HEAD
+=======
         public void UpdateConsole()
         {
             System.Drawing.Graphics consoleGraphics = _pictureBox2.CreateGraphics();
             Font drawFont = new Font( "Arial", 12 );
             SolidBrush drawBrush = new SolidBrush( Color.Black );
             consoleGraphics.DrawString( _stringWriter.ToString(), drawFont, drawBrush, 0, 10 );
-
         }
+>>>>>>> origin/Scroll_Interface
+
+        
 
         /// <summary>
         /// Update the stack
@@ -154,8 +143,12 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack( ITI.CIL_Cowding.IStack stack )
         {
+            Bitmap bmp = new Bitmap(_pictureBox1.Width, 10000);
+            using (Graphics image = Graphics.FromImage(bmp))
+            {
+
             int x = 10;
-            int y = 270;
+            int y = 10;
 
             Font drawFont = new Font("Arial",12);
             SolidBrush drawBrush = new SolidBrush(Color.White);
@@ -201,10 +194,10 @@ namespace ITI.CIL_Cowding
                var taille_fenetre = ligne * nb_ligne;
 
                Rectangle drawRect = new Rectangle(x, y, 500, taille_fenetre);
-               _stackGraphics.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
+               image.FillRectangle(Brushes.Green, x, y, 500, taille_fenetre);
 
-               _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect);
-               y -= taille_fenetre+50;
+               image.DrawString(message, drawFont, drawBrush, drawRect);
+               y += taille_fenetre+50;
 
            }
            
@@ -224,39 +217,24 @@ namespace ITI.CIL_Cowding
             var taille_fenetre_ = ligne * nb_ligne_;
 
             Rectangle drawRect_ = new Rectangle(x, y, 500, taille_fenetre_);
-            _stackGraphics.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
-            _stackGraphics.DrawString(message, drawFont, drawBrush, drawRect_);
-
-
+            image.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
+            image.DrawString(message, drawFont, drawBrush, drawRect_);
+            }
+                //_pictureBox1.Size = bmp.Size;
+                _pictureBox1.Height = bmp.Height;
+                _pictureBox1.BackgroundImage = bmp;
         }
+
 
         #region ButtonManagment
 
         private void StartInit()
         {
             _pictureBox2.Refresh();
-            /*
-            _stringWriter = new StringWriter();
-            Console.SetOut( _stringWriter );
-
-            _leTrucALire = "2";
-            Input b = new Input();
-            b.ShowDialog();
-            _leTrucALire = b.Text;
-            Console.WriteLine( _leTrucALire );
-
-            _stringReader = new StringReader( _leTrucALire );
-            Console.SetIn( _stringReader );
-            */
-
-            // Graphique
             _pictureBox1.Refresh();
             _richTextBox.Enabled = false;
 
             _stackGraphics = _pictureBox1.CreateGraphics();
-
-            Font drawFont = new Font( "Arial", 10 );
-            SolidBrush drawBrush = new SolidBrush( Color.White );
         }
         private void butStepByStep_Click(object sender, EventArgs e)
         {
@@ -265,88 +243,89 @@ namespace ITI.CIL_Cowding
             _butStepByStep.Visible = false;
             _butContinue.Visible = true;
             _butStop.Visible = true;
+            _richTextBox.Enabled = false;
 
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
 
                 // Start engine
-                engine.SourceCode = _richTextBox.Text;
-                engine.Start();
+                _engine.SourceCode = _richTextBox.Text;
+                try
+                {
+                    _engine.Start();
+                    
+                }
+                catch (Exception fatalError)
+                {
+                    List<IError> runtimeError = new List<IError>();
+                    runtimeError.Add( new RunTimeError( _engine, "Critical runtime error. " + fatalError.ToString() ) );
+                    _engine.ClashError( runtimeError );
+                }
             }
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-        /* Code pour tester l'AIP_canvas 
-         * 
-            // TEST
-            API_Canvas.PlacePoint(30, 30);
-            API_Canvas.MoveTo(40, 40);
-            API_Canvas.MoveTo(50, 30);
-            API_Canvas.PlacePoint(30, 30);
-            API_Canvas.MoveTo(20, 40);
-            API_Canvas.MoveTo(10, 40);
-            // FIN TEST
-            // Mon test m@therF@ckerz
-            API_Canvas.DrawLine( 100, 100, 150, 142 );
-            API_Canvas.PenColor = Color.Brown;
-            API_Canvas.PenWidth = 2f;
-            API_Canvas.DrawLine( 50, 50, 50, 100 );
-            API_Canvas.PenWidth = 49;
-            API_Canvas.DrawLine( 0, 0, 100, 0 );
-            // YeY
-         * 
-          */
-
+            // Je ne sais pas a quoi ça sert, mais il me semble que ces lignes doivent virer
+//            string a = "aaaaaaaaaaaaaaaaaaaaaaa";
+//            _richTextBox.SelectionColor = Color.Green;
+//            _richTextBox.Lines[6] = a;
+//            _richTextBox.AppendText( a );
 
             Console.Clear();
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
             _butContinue.Visible = false;
             _butStop.Visible = true;
+            _richTextBox.Enabled = false;
 
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
 
-                engine.SourceCode = _richTextBox.Text;
-                engine.Start();
+                // Start engine
+                _engine.SourceCode = _richTextBox.Text;
 
-<<<<<<< HEAD
-                //  // On lance la prochaine instruction à faire
-                while ( engine.NextInstruction() )
-                {
-                    // Et MaJ de la Stack
-                    if ( engine.IsRunning )
-                    {
-                        /* TEST perf
-                        UpdateStack( engine.GetStack() );
-                         * */
-                    }
-                    /* TEST perf
-                    UpdateConsole();
-                     * */
-                }
-=======
-                while ( engine.NextInstruction() ) ;
->>>>>>> origin/RefactoPreExecuter
-                //butStop.Visible = true;
+                // Creation du thread de l'engine
+                _engineThread = new Thread( _engine.Start );
+                // On démarre l'engine
+                _engineThread.Start();
+                // On attend que l'engine ai finit son job
+                _engineThread.Join();
+                // l'engine est prêt, on éxecute les instructions
+                _engineThread = new Thread( autreTrest );
+                _engineThread.Start();
+                _engineThread.Join();
             }
 
+        }
+
+        private void autreTrest()
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem( new System.Threading.WaitCallback( testThreadOMG ) );
+        }
+        private void testThreadOMG(Object state)
+        {
+            while ( _engine.NextInstruction() )
+            {
+                if ( _engineThread == null )
+                    break;
+            }
         }
 
         private void butContinue_Click(object sender, EventArgs e)
         {           
             // On lance la prochaine instruction à faire
-            engine.NextInstruction();
+            _engine.NextInstruction();
             // Et MaJ de la Stack
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack( engine.GetStack() );
+                UpdateStack( _engine.GetStack() );
             }
-          //  UpdateConsole();
 
+            // HighLight current instruction support
+            
         }
         
         private void butStop_Click(object sender, EventArgs e)
@@ -356,6 +335,9 @@ namespace ITI.CIL_Cowding
             _butContinue.Visible = false;
             _butStop.Visible = false;
             _richTextBox.Enabled = true;
+            _engine.Stop();
+            _engineThread.Abort();
+            _engineThread = null;
         }
         
         #endregion ButtonManagment
@@ -429,10 +411,9 @@ namespace ITI.CIL_Cowding
         /// <param name="e"></param>
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());
-                UpdateConsole();
+                UpdateStack(_engine.GetStack());
             }
 
         }
@@ -444,10 +425,9 @@ namespace ITI.CIL_Cowding
         /// <param name="e"></param>
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());
-                UpdateConsole();
+                UpdateStack(_engine.GetStack());
             }   
             API_Canvas.ReDraw();
         }
@@ -469,11 +449,13 @@ namespace ITI.CIL_Cowding
         /// <param name="e"></param>
         private void Cil_Cowding_Resize(object sender, EventArgs e)
         {
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());
-               // UpdateConsole();
+                UpdateStack(_engine.GetStack());
             }
+            _pictureBox1.Width = panel1.Width;
+            _pictureBox1.Height = panel1.Height;
+            
         }
 
         private void TextEditor_Load(object sender, EventArgs e)
@@ -487,7 +469,6 @@ namespace ITI.CIL_Cowding
             this._richTextBox.VScroll += new System.EventHandler(this.richTextBox_VScroll);
             this._panelNum.Paint += new PaintEventHandler(this.panelNum_Paint);
             this._pictureBox1.Paint += new PaintEventHandler(this._pictureBox1_Paint);
-
             this.splitContainer2.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             this.splitContainer1.SplitterMoved += new SplitterEventHandler(this.splitContainer2_SplitterMoved);
             
