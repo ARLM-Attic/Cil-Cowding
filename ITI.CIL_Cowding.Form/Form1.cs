@@ -22,7 +22,6 @@ namespace ITI.CIL_Cowding
         public Cil_Cowding()
         {
             InitializeComponent();
-
             API_Canvas.Init(_pictureBox2);
             
             
@@ -144,7 +143,7 @@ namespace ITI.CIL_Cowding
         /// <param name="stack"></param>
         public void UpdateStack(IStack stack)
         {
-            Bitmap bmp = new Bitmap(_pictureBox1.Width, Height);
+            Bitmap bmp = new Bitmap(_pictureBox1.Width, 10000);
             using (Graphics image = Graphics.FromImage(bmp))
             {
 
@@ -220,17 +219,11 @@ namespace ITI.CIL_Cowding
             image.FillRectangle(Brushes.DarkRed, x, y, 500, taille_fenetre_);
             image.DrawString(message, drawFont, drawBrush, drawRect_);
             }
-                _pictureBox1.Size = bmp.Size;
-
+                //_pictureBox1.Size = bmp.Size;
+                _pictureBox1.Height = bmp.Height;
                 _pictureBox1.BackgroundImage = bmp;
-                //vScrollBar1.ValueChanged += new EventHandler(vbar_valueChanged);
         }
 
-        private void vbar_valueChanged(Object sender, EventArgs e)
-        {
-            //_pictureBox1.Location = new Point(_pictureBox1.Left, -vScrollBar1.Value);
-            _pictureBox1.Height += 50;
-        }
 
         #region ButtonManagment
 
@@ -468,6 +461,9 @@ namespace ITI.CIL_Cowding
                 UpdateStack(engine.GetStack());
                 UpdateConsole();
             }
+            _pictureBox1.Width = panel1.Width;
+            _pictureBox1.Height = panel1.Height;
+            
         }
 
         private void TextEditor_Load(object sender, EventArgs e)
