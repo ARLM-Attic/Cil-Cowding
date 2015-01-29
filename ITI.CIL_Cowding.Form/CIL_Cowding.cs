@@ -337,14 +337,14 @@ namespace ITI.CIL_Cowding
             {
                 // Draw line number string
                 string lineNumberLabel = lineNumber.ToString().PadLeft(lastLine.ToString().Length);
-                if ( _engine.IsRunning && lineNumber == _engine.Ctx.Stack.LastFrame.CurrentInstruction.Line )
-                {
-                    g.DrawString( "->", this._richTextBox.Font, Brushes.Black, leftMargin, lineY );
-                }
-                else
-                {
+               // if ( _engine.IsRunning && lineNumber == _engine.Ctx.Stack.LastFrame.CurrentInstruction.Line )
+                //{
+                  //  g.DrawString( "->", this._richTextBox.Font, Brushes.Black, leftMargin, lineY );
+                //}
+                //else
+                //{
                     g.DrawString( lineNumberLabel, this._richTextBox.Font, Brushes.Black, leftMargin, lineY );
-                }
+                //}
                 // Next line
                 lineNumber += 1;
                 lineY += Font.Height + verticalMargin;
