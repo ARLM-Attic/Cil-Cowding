@@ -103,8 +103,11 @@ namespace ITI.CIL_Cowding
         
         public void CallFunction(string functionName)
         {
-            IFunction fct = _engine.Pec.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions[functionName]; 
-            
+            IFunction fct;
+            try
+            {
+                fct = _engine.Pec.Classes["TheOnlyOneClassInThisOPProgramBecauseWeAreNoobs"].Functions[functionName];
+
             List<IValue> locvars = new List<IValue>();
             List<IValue> parameters = new List<IValue>();
 
@@ -151,7 +154,13 @@ namespace ITI.CIL_Cowding
             
             _frame.Add(new Container(locvars, parameters, fct, this));
 
-
+            }
+            catch ( Exception e )
+            {
+                List<IError> runtimeError = new List<IError>();
+                runtimeError.Add( new RunTimeError( _engine, "Stack.CallFunction : Function not found. " + e.ToString() ) );
+                _engine.ClashError( runtimeError );
+            }
 
         }
         

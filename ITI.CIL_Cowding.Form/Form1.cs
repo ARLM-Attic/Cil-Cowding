@@ -14,7 +14,8 @@ namespace ITI.CIL_Cowding
     public partial class Cil_Cowding : Form
     {
         private System.Drawing.Graphics _stackGraphics;
-        private ITI.CIL_Cowding.IEngine engine = new ITI.CIL_Cowding.Engine();
+        private ITI.CIL_Cowding.IEngine _engine = new ITI.CIL_Cowding.Engine();
+        Thread _engineThread;
 
         public Cil_Cowding()
         {
@@ -22,6 +23,7 @@ namespace ITI.CIL_Cowding
 
             API_Canvas.Init(_pictureBox2);
             _richTextBox.AcceptsTab = true;
+            
         }
 
         private void PictureBox1()
@@ -223,45 +225,84 @@ namespace ITI.CIL_Cowding
             _butStepByStep.Visible = false;
             _butContinue.Visible = true;
             _butStop.Visible = true;
+            _richTextBox.Enabled = false;
 
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
 
                 // Start engine
-                engine.SourceCode = _richTextBox.Text;
-                engine.Start();
+                _engine.SourceCode = _richTextBox.Text;
+                try
+                {
+                    _engine.Start();
+                    
+                }
+                catch (Exception fatalError)
+                {
+                    List<IError> runtimeError = new List<IError>();
+                    runtimeError.Add( new RunTimeError( _engine, "Critical runtime error. " + fatalError.ToString() ) );
+                    _engine.ClashError( runtimeError );
+                }
             }
         }
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
+            string a = "aaaaaaaaaaaaaaaaaaaaaaa";
+            _richTextBox.SelectionColor = Color.Green;
+//            _richTextBox.Lines[6] = a;
+            _richTextBox.AppendText( a );
+
             Console.Clear();
             _butStartAll.Visible = false;
             _butStepByStep.Visible = false;
             _butContinue.Visible = false;
             _butStop.Visible = true;
+            _richTextBox.Enabled = false;
 
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
 
-                engine.SourceCode = _richTextBox.Text;
-                engine.Start();
+                // Start engine
+                _engine.SourceCode = _richTextBox.Text;
 
-                while ( engine.NextInstruction() ) ;
+                // Creation du thread de l'engine
+                _engineThread = new Thread( _engine.Start );
+                // On démarre l'engine
+                _engineThread.Start();
+                // On attend que l'engine ai finit son job
+                _engineThread.Join();
+                // l'engine est prêt, on éxecute les instructions
+                _engineThread = new Thread( autreTrest );
+                _engineThread.Start();
+                _engineThread.Join();
             }
 
+        }
+
+        private void autreTrest()
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem( new System.Threading.WaitCallback( testThreadOMG ) );
+        }
+        private void testThreadOMG(Object state)
+        {
+            while ( _engine.NextInstruction() )
+            {
+                if ( _engineThread == null )
+                    break;
+            }
         }
 
         private void butContinue_Click(object sender, EventArgs e)
         {           
             // On lance la prochaine instruction à faire
-            engine.NextInstruction();
+            _engine.NextInstruction();
             // Et MaJ de la Stack
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack( engine.GetStack() );
+                UpdateStack( _engine.GetStack() );
             }
 
             // HighLight current instruction support
@@ -275,6 +316,9 @@ namespace ITI.CIL_Cowding
             _butContinue.Visible = false;
             _butStop.Visible = false;
             _richTextBox.Enabled = true;
+            _engine.Stop();
+            _engineThread.Abort();
+            _engineThread = null;
         }
         
         #endregion ButtonManagment
@@ -348,9 +392,9 @@ namespace ITI.CIL_Cowding
         /// <param name="e"></param>
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());
+                UpdateStack(_engine.GetStack());
             }
 
         }
@@ -362,9 +406,9 @@ namespace ITI.CIL_Cowding
         /// <param name="e"></param>
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());
+                UpdateStack(_engine.GetStack());
             }   
             API_Canvas.ReDraw();
         }
@@ -386,9 +430,9 @@ namespace ITI.CIL_Cowding
         /// <param name="e"></param>
         private void Cil_Cowding_Resize(object sender, EventArgs e)
         {
-            if (engine.IsRunning)
+            if (_engine.IsRunning)
             {
-                UpdateStack(engine.GetStack());
+                UpdateStack(_engine.GetStack());
             }
         }
 

@@ -18,6 +18,7 @@ namespace ITI.CIL_Cowding
         List<FunctionNode> _tree;
         CILProgram _code;
         List<IError> _syntaxErrors;
+        List<IError> _runtimeErrors;
 
         // Execution
         IPreExecutionContext _pec;
@@ -34,6 +35,7 @@ namespace ITI.CIL_Cowding
             _typeManager = new CILTypeManager();
             _sourceCode = "";
             _syntaxErrors = new List<IError>();
+            _runtimeErrors = new List<IError>();
             // Init SourceCodeChanged
         }
         public CILProgram Code
@@ -106,19 +108,17 @@ namespace ITI.CIL_Cowding
             }
         }
 
-        public int Start()
+        public void Start()
         {
-                if (Build() != 0)
+                if ( Build() != -1 )
                 {
-                    return -1;
+                    _ctx = new ExecutionContext( _code, this );
+                    _currentLine = 0;
                 }
-
-                _ctx = new ExecutionContext( _code, this );
-                _currentLine = 0;
-
-                return 0;
-            
-
+                else
+                {
+                    Stop();
+                }
         }
 
         public bool NextInstruction()
@@ -148,7 +148,7 @@ namespace ITI.CIL_Cowding
             _tree = null;
             _ctx = null;
             _pec = null;
-
+            _currentLine = 0;
             // Là on pète un event END_RUNNING
 
         }
@@ -160,10 +160,18 @@ namespace ITI.CIL_Cowding
         }
         public void ClashError(List<IError> errors)
         {
-            _syntaxErrors = errors;
             foreach (IError error in errors)
             {
                 error.Write();
+
+                if (error is SyntaxError)
+                {
+                    _syntaxErrors.Add( error );
+                }
+                else if (error is RunTimeError)
+                {
+                    _runtimeErrors.Add( error );
+                }
             }
 
             Stop();

@@ -18,7 +18,7 @@ namespace ITI.CIL_Cowding
 
         int Build();
 
-        int Start();
+        void Start();
 
         bool NextInstruction();
 

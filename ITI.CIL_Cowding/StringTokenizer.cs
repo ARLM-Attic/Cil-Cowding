@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
 
 namespace ITI.CIL_Cowding
 {
@@ -115,7 +116,17 @@ namespace ITI.CIL_Cowding
         /// <returns>The current character and ups.</returns>
         char Read()
         {
-            return _toParse[_position++];
+            try
+            {
+                return _toParse[_position++];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine( "Error on Tokenizer.Read(). " + e.ToString() );
+                Thread.CurrentThread.Abort();
+                return '1';
+            }
+            
         }
 
         /// <summary>

@@ -53,19 +53,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Input.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Input.Designer.cs">
-      <DependentUpon>Input.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Input.resx">
-      <DependentUpon>Input.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -91,12 +82,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ITI.CIL_Cowding\ITI.CIL_Cowding.csproj">
-      <Project>{8b66493a-19d9-4e26-81ff-ac7e117902cb}</Project>
-      <Name>ITI.CIL_Cowding</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\enregistrer.png" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\start_all_15px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ITI.CIL_Cowding\ITI.CIL_Cowding.csproj">
+      <Project>{8b66493a-19d9-4e26-81ff-ac7e117902cb}</Project>
+      <Name>ITI.CIL_Cowding</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
