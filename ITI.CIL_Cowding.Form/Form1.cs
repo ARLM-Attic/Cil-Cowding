@@ -243,8 +243,12 @@ namespace ITI.CIL_Cowding
                 _engine.SourceCode = _richTextBox.Text;
                 try
                 {
-                    _engine.Start();
-                    
+                    // Creation du thread de l'engine
+                    _engineThread = new Thread( _engine.Start );
+                    // On démarre l'engine
+                    _engineThread.Start();
+                    // On attend que l'engine ai finit son job
+                    _engineThread.Join();                    
                 }
                 catch (Exception fatalError)
                 {
@@ -284,18 +288,18 @@ namespace ITI.CIL_Cowding
                 // On attend que l'engine ai finit son job
                 _engineThread.Join();
                 // l'engine est prêt, on éxecute les instructions
-                _engineThread = new Thread( autreTrest );
+                _engineThread = new Thread( CreateThreadStartInstructions );
                 _engineThread.Start();
                 _engineThread.Join();
             }
 
         }
 
-        private void autreTrest()
+        private void CreateThreadStartInstructions()
         {
-            System.Threading.ThreadPool.QueueUserWorkItem( new System.Threading.WaitCallback( testThreadOMG ) );
+            System.Threading.ThreadPool.QueueUserWorkItem( new System.Threading.WaitCallback( StartInstructions ) );
         }
-        private void testThreadOMG(Object state)
+        private void StartInstructions(Object state)
         {
             while ( _engine.NextInstruction() )
             {
