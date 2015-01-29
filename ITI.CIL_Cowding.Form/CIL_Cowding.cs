@@ -236,11 +236,11 @@ namespace ITI.CIL_Cowding
 
         private void butStepByStep_Click(object sender, EventArgs e)
         {
-            _butContinue.Visible = true;
-
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
+                _butContinue.Visible = true;
+
                 // Start engine
                 _engine.SourceCode = _richTextBox.Text;
                 _engine.Start();
@@ -262,7 +262,9 @@ namespace ITI.CIL_Cowding
 
         void TimerEventProcessor( Object myObject, EventArgs myEventArgs )
         {
-            for ( int i = 0 ; i < 3000 ; ++i )
+            // Tiens Kév c'est ici qu'il faut ajuster. Le 6000 tu le fais varier pour changer la vitesse.
+            //Garde le le plus bas possible, mais assez haut pour augmenter la vitesse.
+            for ( int i = 0 ; i < 6000 ; ++i )
             {
                 if ( !_engine.NextInstruction() || !_engine.IsRunning )
                 {
@@ -283,10 +285,27 @@ namespace ITI.CIL_Cowding
 
             // HighLight current instruction support
         }
+
+        private void _buttonBreak_Click( object sender, EventArgs e )
+        {
+            _myTimer.Stop();
+            _buttonBreak.Visible = false;
+            _butContinue.Visible = true;
+            _buttonContinueRun.Visible = true;
+        }
+
+        private void _buttonContinueRun_Click( object sender, EventArgs e )
+        {
+            _buttonBreak.Visible = true;
+            _buttonContinueRun.Visible = false;
+            _butContinue.Visible = false;
+            _myTimer.Start();
+        }
         
         private void butStop_Click(object sender, EventArgs e)
         {
             EndExecution();
+            _pictureBox2.Refresh();
         }
         private void EndExecution()
         {
@@ -298,7 +317,6 @@ namespace ITI.CIL_Cowding
             _buttonBreak.Visible = false;
             _buttonBreak.Visible = false;
             _richTextBox.Enabled = true;
-            _pictureBox2.Refresh();
             _pictureBox1.Refresh();
             _myTimer.Stop();
             _engine.Stop();
@@ -455,21 +473,7 @@ namespace ITI.CIL_Cowding
         }
         #endregion
 
-        private void _buttonBreak_Click( object sender, EventArgs e )
-        {
-            _myTimer.Stop();
-            _buttonBreak.Visible = false;
-            _butContinue.Visible = true;
-            _buttonContinueRun.Visible = true;
-        }
 
-        private void _buttonContinueRun_Click( object sender, EventArgs e )
-        {
-            _buttonBreak.Visible = true;
-            _buttonContinueRun.Visible = false;
-            _butContinue.Visible = false;
-            _myTimer.Start();
-        }
     }
        
 }
