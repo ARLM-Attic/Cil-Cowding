@@ -249,10 +249,11 @@ namespace ITI.CIL_Cowding
 
         private void butStartAll_Click(object sender, EventArgs e)
         {
-            string a = "aaaaaaaaaaaaaaaaaaaaaaa";
-            _richTextBox.SelectionColor = Color.Green;
+            // Je ne sais pas a quoi ça sert, mais il me semble que ces lignes doivent virer
+//            string a = "aaaaaaaaaaaaaaaaaaaaaaa";
+//            _richTextBox.SelectionColor = Color.Green;
 //            _richTextBox.Lines[6] = a;
-            _richTextBox.AppendText( a );
+//            _richTextBox.AppendText( a );
 
             Console.Clear();
             _butStartAll.Visible = false;

@@ -41,6 +41,9 @@ namespace System
         {
             switch(color) 
             {
+                case "white" :
+                    _pen.Color = Color.White;
+                    break;
                 case "black":
                     _pen.Color = Color.Black;
                     break;
@@ -53,6 +56,14 @@ namespace System
                 case "blue3":
                     _pen.Color = Color.LightSkyBlue;
                     break;
+                case "red1":
+                    _pen.Color = Color.Red;
+                    break;
+                case "red2":
+                    _pen.Color = Color.DarkRed;
+                    break;
+                
+                       
                 
 
             }
