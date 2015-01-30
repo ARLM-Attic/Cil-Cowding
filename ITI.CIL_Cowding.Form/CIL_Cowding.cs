@@ -71,6 +71,8 @@ namespace ITI.CIL_Cowding
                     if ((myStream = openFileDialog1.OpenFile()) != null)
                     {
                         _richTextBox.Text = File.ReadAllText(openFileDialog1.FileName);
+                        _pictureBox2.Refresh();
+                        _pictureBox1.Refresh();
                     }
                 }
                 catch (Exception ex)
@@ -263,7 +265,7 @@ namespace ITI.CIL_Cowding
 
         void TimerEventProcessor( Object myObject, EventArgs myEventArgs )
         {
-            for ( int i = 0 ; i < 6000 ; ++i )
+            for ( int i = 0 ; i < 8000 ; ++i )
             {
                 if ( !_engine.NextInstruction() || !_engine.IsRunning )
                 {
@@ -274,18 +276,16 @@ namespace ITI.CIL_Cowding
         }
 
         private void butContinue_Click(object sender, EventArgs e)
-        {           
-            _currentLineTextBox.Text = "Current Instruction " + _engine.Ctx.Stack.LastFrame.CurrentInstruction.ToString() + " at line " + _engine.Ctx.Stack.LastFrame.CurrentInstruction.Line;
+        {
+            string[] currentInstructionString = _engine.Ctx.Stack.LastFrame.CurrentInstruction.ToString().Split('.');
+            _currentLineTextBox.Text = "Current Instruction " + currentInstructionString[2] + " at line " + _engine.Ctx.Stack.LastFrame.CurrentInstruction.Line;
             
             _engine.NextInstruction();
             
-            // Et MaJ de la Stack
             if (_engine.IsRunning)
             {
                 UpdateStack( _engine.GetStack() );
             }
-
-            // HighLight current instruction support
         }
 
         private void _buttonBreak_Click( object sender, EventArgs e )
