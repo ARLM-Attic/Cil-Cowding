@@ -239,6 +239,7 @@ namespace ITI.CIL_Cowding
             if ( !String.IsNullOrWhiteSpace( _richTextBox.Text ) )
             {
                 StartInit();
+                _currentLineTextBox.Visible = true;
                 _butContinue.Visible = true;
 
                 // Start engine
@@ -262,8 +263,6 @@ namespace ITI.CIL_Cowding
 
         void TimerEventProcessor( Object myObject, EventArgs myEventArgs )
         {
-            // Tiens Kév c'est ici qu'il faut ajuster. Le 6000 tu le fais varier pour changer la vitesse.
-            //Garde le le plus bas possible, mais assez haut pour augmenter la vitesse.
             for ( int i = 0 ; i < 6000 ; ++i )
             {
                 if ( !_engine.NextInstruction() || !_engine.IsRunning )
@@ -276,7 +275,10 @@ namespace ITI.CIL_Cowding
 
         private void butContinue_Click(object sender, EventArgs e)
         {           
+            _currentLineTextBox.Text = "Current Instruction " + _engine.Ctx.Stack.LastFrame.CurrentInstruction.ToString() + " at line " + _engine.Ctx.Stack.LastFrame.CurrentInstruction.Line;
+            
             _engine.NextInstruction();
+            
             // Et MaJ de la Stack
             if (_engine.IsRunning)
             {
@@ -292,6 +294,7 @@ namespace ITI.CIL_Cowding
             _buttonBreak.Visible = false;
             _butContinue.Visible = true;
             _buttonContinueRun.Visible = true;
+            _currentLineTextBox.Visible = true;
         }
 
         private void _buttonContinueRun_Click( object sender, EventArgs e )
@@ -299,6 +302,7 @@ namespace ITI.CIL_Cowding
             _buttonBreak.Visible = true;
             _buttonContinueRun.Visible = false;
             _butContinue.Visible = false;
+            _currentLineTextBox.Visible = false;
             _myTimer.Start();
         }
         
@@ -317,6 +321,7 @@ namespace ITI.CIL_Cowding
             _buttonBreak.Visible = false;
             _buttonBreak.Visible = false;
             _richTextBox.Enabled = true;
+            _currentLineTextBox.Visible = false;
             _pictureBox1.Refresh();
             _myTimer.Stop();
             _engine.Stop();

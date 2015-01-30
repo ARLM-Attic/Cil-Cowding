@@ -57,6 +57,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this._buttonBreak = new System.Windows.Forms.Button();
             this._buttonContinueRun = new System.Windows.Forms.Button();
+            this._currentLineTextBox = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -152,6 +153,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this._currentLineTextBox);
             this.groupBox1.Controls.Add(this._richTextBox);
             this.groupBox1.Controls.Add(this._panelNum);
             this.groupBox1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -167,7 +169,9 @@
             this._richTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._richTextBox.BackColor = System.Drawing.Color.White;
             this._richTextBox.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._richTextBox.ForeColor = System.Drawing.Color.Black;
             this._richTextBox.Location = new System.Drawing.Point(44, 13);
             this._richTextBox.Name = "_richTextBox";
             this._richTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
@@ -227,7 +231,7 @@
             this._pictureBox2.BackColor = System.Drawing.SystemColors.Control;
             this._pictureBox2.Location = new System.Drawing.Point(0, 21);
             this._pictureBox2.Name = "_pictureBox2";
-            this._pictureBox2.Size = new System.Drawing.Size(654, 259);
+            this._pictureBox2.Size = new System.Drawing.Size(656, 260);
             this._pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this._pictureBox2.TabIndex = 0;
             this._pictureBox2.TabStop = false;
@@ -379,6 +383,18 @@
             this._buttonContinueRun.UseVisualStyleBackColor = true;
             this._buttonContinueRun.Click += new System.EventHandler(this._buttonContinueRun_Click);
             // 
+            // _currentLineTextBox
+            // 
+            this._currentLineTextBox.BackColor = System.Drawing.Color.Black;
+            this._currentLineTextBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this._currentLineTextBox.Enabled = false;
+            this._currentLineTextBox.ForeColor = System.Drawing.Color.LimeGreen;
+            this._currentLineTextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this._currentLineTextBox.Location = new System.Drawing.Point(48, 672);
+            this._currentLineTextBox.Name = "_currentLineTextBox";
+            this._currentLineTextBox.Size = new System.Drawing.Size(405, 22);
+            this._currentLineTextBox.TabIndex = 4;
+            // 
             // Cil_Cowding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,6 +421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.Panel2.PerformLayout();
@@ -450,6 +467,7 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button _buttonBreak;
         private System.Windows.Forms.Button _buttonContinueRun;
+        private System.Windows.Forms.TextBox _currentLineTextBox;
     }
 }
 
