@@ -21,6 +21,7 @@ function void main () {
 	
 	ldstr "fin :-)";
 	write;
+	read;
 	
 	
 }

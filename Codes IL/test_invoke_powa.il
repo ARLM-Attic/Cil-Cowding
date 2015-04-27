@@ -1,9 +1,0 @@
-function void main () {
-locals_init()
-
-ldstr "Hello !";
-call System.Console.Write;
-
-
-}
-

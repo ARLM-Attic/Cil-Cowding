@@ -10,73 +10,63 @@ function void main () {
 
 function void Fractale() {
 	locals_init(
-		int x1,					// 0
-		int x2,					// 1
-		int y1,					// 2
-		int y2,					// 3
-		int zoom,				// 4
-		int iteration_max,		// 5
-		int image_x,			// 6
-		int image_y,			// 7
-		int c_r,				// 8
-		int c_i,				// 9
-		int z_r,				// 10
-		int z_i,				// 11
-		int i,					// 12
-		int tmp,					// 13
-		int x,					// 14
-		int y					// 15
+		double x1,					// 0
+		double x2,					// 1
+		double y1,					// 2
+		double y2,					// 3
+		double zoom,				// 4
+		double iteration_max,		// 5
+		double image_x,			// 6
+		double image_y,			// 7
+		double c_r,				// 8
+		double c_i,				// 9
+		double z_r,				// 10
+		double z_i,				// 11
+		double i,					// 12
+		double tmp,					// 13
+		double x,					// 14
+		double y					// 15
 	)
 	// on définit la zone que l'on dessine. Ici, la fractale en entière
 	// X1
-	ldc 2;
-	ldc 1;
-	ldc 10;
-	div;
-	add;
+	nop;
+	ldd 2,1;
 	neg;
 	stloc 0;
 	// X2
-	ldc 2;
+	ldd 0,6;
 	stloc 1;
 	// Y1
-	ldc 0;
+	ldd 1,2;
+	neg;
 	stloc 2;
 	// Y2
-	ldc 2;
+	ldd 1,2;
 	stloc 3;
 	// Zoom
-	ldc 10;
+	ldd 100,0;
 	stloc 4;
 	// iteration_max
-	ldc 5;
+	ldd 50,0;
 	stloc 5;
 	
 	// on calcule la taille de l'image :
 	// image_x
-	ldloc 1;
-	ldloc 0;
-	sub;
-	ldloc 4;
-	mul;
+	ldd 300,0;
 	stloc 6;
 	// image_y
-	ldloc 3;
-	ldloc 2;
-	sub;
-	ldloc 4;
-	mul;
+	ldd 300,0;
 	stloc 7;
 	
 	// Boucle for
-	ldc 0;
+	ldd 0,0;
 	stloc 14;
 	#boucle_for_1
 	
 		// Contenu boucle_for_1
 		
 		// Boucle FOR numero2
-		ldc 0;
+		ldd 0,0;
 		stloc 15;
 		#boucle_for_2
 		
@@ -97,13 +87,13 @@ function void Fractale() {
 			add;
 			stloc 9;
 			//définir z_r = 0
-			ldc 0;
+			ldd 0,0;
 			stloc 10;
 			//définir z_i = 0
-			ldc 0;
+			ldd 0,0;
 			stloc 11;
 			//définir i = 0
-			ldc 0;
+			ldd 0,0;
 			stloc 12;
 			
 			// Boucle DO WHILE
@@ -123,7 +113,7 @@ function void Fractale() {
 				add;
 				stloc 10;
 				//z_i = 2*z_i*tmp + c_i
-				ldc 2;
+				ldd 2,0;
 				ldloc 11;
 				mul;
 				ldloc 13;
@@ -133,7 +123,7 @@ function void Fractale() {
 				stloc 11;
 				//i = i+1
 				ldloc 12;
-				ldc 1;
+				ldd 1,0;
 				add;
 				stloc 12;
 			// Fin boucle DO WHILE
@@ -144,8 +134,8 @@ function void Fractale() {
 			ldloc 11;
 			ldloc 11;
 			mul;
-			sub;
-			ldc 4;
+			add;
+			ldd 4,0;
 			clt;
 			
 			// i < iteration_max
@@ -160,20 +150,53 @@ function void Fractale() {
 			ldloc 12;
 			ldloc 5;
 			ceq;
-			brfalse et_bah_non;
+			brtrue et_bah_non;
 			
-			ldstr "Je dois dessiner";
-			call System.Console.WriteLine;
+			ldloc 12;
+			ldloc 5;
+			sub;
+			ldd 10,0;
+			sub;
+			ldd 3,0;
+			cgt;
 			
+			brtrue et_bah_non_2;
+			
+			ldstr "O";
+			call System.Console.Write;
+			
+			ldstr "white";
+			call System.API_Canvas.ChangeColor;
 			ldloc 14;
 			ldloc 15;
 			call System.API_Canvas.DrawPixel;
+			br fin;
 			
+			// Dessin de la vraie fractale
 			#et_bah_non
+			ldstr "X";
+			call System.Console.Write;
+			ldstr "black";
+			call System.API_Canvas.ChangeColor;
+			ldloc 14;
+			ldloc 15;
+			call System.API_Canvas.DrawPixel;
+			br fin;
+			
+			// TEst gestion des contours
+			#et_bah_non_2
+			ldstr "red1";
+			call System.API_Canvas.ChangeColor;
+			ldloc 14;
+			ldloc 15;
+			call System.API_Canvas.DrawPixel;
+			br fin;
+			
+			#fin
 		
 		// Fin boucle_for_2
 		// Incremente Y de 1
-		ldc 1;
+		ldd 1,0;
 		ldloc 15;
 		add;
 		stloc 15;
@@ -186,7 +209,7 @@ function void Fractale() {
 		
 	
 	// Fin boucle_for_1
-	ldc 1;
+	ldd 1,0;
 	ldloc 14;
 	add;
 	stloc 14;

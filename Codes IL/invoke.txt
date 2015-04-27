@@ -1,7 +1,0 @@
-function void main () {
-locals_init()
-
-ldstr "CUCU";
-call System.Console.Write;
-ret;
-}
